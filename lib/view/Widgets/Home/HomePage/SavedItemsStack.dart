@@ -70,7 +70,7 @@ class SavedItemsStack extends StatelessWidget {
                   ),
                   Text(
                     name,
-                    style: AppTheme.arabicTheme.textTheme.bodyText1!
+                    style: AppTheme.arabicTheme.textTheme.bodyText2!
                         .copyWith(fontSize: 16),
                   ),
                   const SizedBox(
@@ -78,7 +78,7 @@ class SavedItemsStack extends StatelessWidget {
                   ),
                   Text(
                     '\$$price',
-                    style: AppTheme.arabicTheme.textTheme.headline4!
+                    style: AppTheme.arabicTheme.textTheme.bodyText1!
                         .copyWith(fontSize: 18),
                   ),
                 ],

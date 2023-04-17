@@ -1,12 +1,14 @@
+import 'package:ebuy/Controller/Detailes/detailesController.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:get/get.dart';
 
 import '../../../core/constant/Colors.dart';
 
 import '../../../core/theme/theme.dart';
 import '../../../data/dataSource/Static/UINumbers.dart';
 
-class ProductDetailesCard extends StatelessWidget {
+class ProductDetailesCard extends GetView<DetailesControllerImp> {
   const ProductDetailesCard({
     Key? key,
   }) : super(key: key);
@@ -26,7 +28,7 @@ class ProductDetailesCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Women\'s hoodie ',
+                "${controller.product.itemsName}",
                 style: AppTheme.arabicTheme.textTheme.bodyText1!
                     .copyWith(fontSize: 18),
               ),
@@ -39,7 +41,8 @@ class ProductDetailesCard extends StatelessWidget {
                         ignoreGestures: true,
                         unratedColor: AppColors.grey,
                         itemSize: 25,
-                        initialRating: 4.9,
+                        initialRating:
+                            double.parse(controller.product.itemsRate!),
                         minRating: 1,
                         direction: Axis.horizontal,
                         allowHalfRating: true,
@@ -52,13 +55,13 @@ class ProductDetailesCard extends StatelessWidget {
                         onRatingUpdate: (rating) {},
                       ),
                       Text(
-                        '  4.9',
+                        controller.product.itemsRate!,
                         style: AppTheme.arabicTheme.textTheme.bodyText1,
                       )
                     ],
                   ),
                   Text(
-                    '\$27.00',
+                    "${controller.product.itemsPrice!}\$",
                     style: AppTheme.arabicTheme.textTheme.bodyText1,
                   )
                 ],

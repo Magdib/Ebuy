@@ -9,6 +9,9 @@ class Products {
   String? itemsActive;
   String? itemsPrice;
   String? itemsDiscount;
+  String? itemsRate;
+  String? itemsDeliveryRefund;
+  String? itemsSizeGuide;
   String? itemsDate;
   String? itemsCat;
   String? itemsBrand;
@@ -33,6 +36,9 @@ class Products {
       this.itemsActive,
       this.itemsPrice,
       this.itemsDiscount,
+      this.itemsRate,
+      this.itemsDeliveryRefund,
+      this.itemsSizeGuide,
       this.itemsDate,
       this.itemsCat,
       this.itemsBrand,
@@ -57,6 +63,9 @@ class Products {
     itemsActive = json['items_active'];
     itemsPrice = json['items_price'];
     itemsDiscount = json['items_discount'];
+    itemsRate = json['items_rate'];
+    itemsDeliveryRefund = json['items_delivery_refund'];
+    itemsSizeGuide = json['items_size_guide'];
     itemsDate = json['items_date'];
     itemsCat = json['items_cat'];
     itemsBrand = json['items_brand'];
@@ -83,6 +92,9 @@ class Products {
     data['items_active'] = this.itemsActive;
     data['items_price'] = this.itemsPrice;
     data['items_discount'] = this.itemsDiscount;
+    data['items_rate'] = this.itemsRate;
+    data['items_delivery_refund'] = this.itemsDeliveryRefund;
+    data['items_size_guide'] = this.itemsSizeGuide;
     data['items_date'] = this.itemsDate;
     data['items_cat'] = this.itemsCat;
     data['items_brand'] = this.itemsBrand;

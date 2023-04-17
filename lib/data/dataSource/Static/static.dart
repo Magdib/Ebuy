@@ -20,20 +20,20 @@ List<OnBoardingModel> onBoardingdata = [
           'You can see the product with all angles, true and convenient'.tr),
   OnBoardingModel(
       image: AppImagesAssets.onBoardingImageTow,
-      title: 'Find products easily'.tr,
+      title: 'Find TProducts easily'.tr,
       subtitle:
-          'You just need to take a photo or upload and we will find similar products for you.'
+          'You just need to take a photo or upload and we will find similar TProducts for you.'
               .tr),
   OnBoardingModel(
       image: AppImagesAssets.onBoardingImageThree,
       title: 'Payment is easy'.tr,
       subtitle:
-          'You just need to take a photo or upload and we will find similar products for you.'
+          'You just need to take a photo or upload and we will find similar TProducts for you.'
               .tr),
 ];
 
 List<String> brands = [
-  "All",
+  "Frost",
   'Nike',
   'Adidas',
   'Vans',
@@ -49,8 +49,8 @@ List<String> brands = [
   'Tommy Hilfger',
   'Lascolate'
 ];
-List<Products> userStyles = [
-  Products(
+List<TProducts> userStyles = [
+  TProducts(
       size: null,
       title: 'Fortnite T-shirt',
       subtitle: 'Just add kicks',
@@ -60,7 +60,7 @@ List<Products> userStyles = [
       disliked: false,
       price: 36,
       category: "T-shirt"),
-  Products(
+  TProducts(
       size: null,
       title: 'black Short',
       subtitle: 'Just add kicks',
@@ -71,8 +71,8 @@ List<Products> userStyles = [
       price: 98,
       category: 'Short')
 ];
-List<Products> newTrend = [
-  Products(
+List<TProducts> newTrend = [
+  TProducts(
       size: null,
       title: 'White Hand bag',
       subtitle: 'just and kicks',
@@ -82,7 +82,7 @@ List<Products> newTrend = [
       color: AppColors.black,
       price: 102,
       category: 'handBag'),
-  Products(
+  TProducts(
       size: null,
       title: 'Summer co-ords',
       subtitle: 'Just add kicks',
@@ -92,7 +92,7 @@ List<Products> newTrend = [
       color: AppColors.black,
       category: "Dress",
       price: 87),
-  Products(
+  TProducts(
       size: null,
       title: 'blue shoes',
       subtitle: 'stay cool',
@@ -102,7 +102,7 @@ List<Products> newTrend = [
       color: AppColors.black,
       price: 201,
       category: 'Shoes'),
-  Products(
+  TProducts(
       size: null,
       title: 'black Short',
       subtitle: 'Just add kicks',
@@ -113,8 +113,8 @@ List<Products> newTrend = [
       color: AppColors.black,
       category: 'Short')
 ];
-List<Products> savedItems = [
-  Products(
+List<TProducts> savedItems = [
+  TProducts(
     size: null,
     title: 'White Hand bag',
     subtitle: 'just and kicks',
@@ -125,7 +125,7 @@ List<Products> savedItems = [
     price: 102,
     color: AppColors.primaryColor,
   ),
-  Products(
+  TProducts(
     size: 'XL',
     title: 'Fortnite T-shirt',
     subtitle: 'Just add kicks',
@@ -136,7 +136,7 @@ List<Products> savedItems = [
     category: "T-shirt",
     color: AppColors.grey,
   ),
-  Products(
+  TProducts(
     size: 'M',
     title: 'black Short',
     subtitle: 'Just add kicks',

@@ -16,15 +16,14 @@ class SavedItemsTextRow extends GetView<MainContrllerImp> {
       children: [
         Text(
           'Saved items',
-          style:
-              AppTheme.arabicTheme.textTheme.headline4!.copyWith(fontSize: 18),
+          style: Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 18),
         ),
         TextButton(
           onPressed: () => controller.changePage(3),
           child: Text(
             'View all',
-            style: AppTheme.arabicTheme.textTheme.headline2!
-                .copyWith(fontSize: 12),
+            style:
+                Theme.of(context).textTheme.headline2!.copyWith(fontSize: 12),
           ),
         )
       ],

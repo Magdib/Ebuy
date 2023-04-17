@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 
 import '../../../../core/theme/theme.dart';
 import '../../../../data/model/HomePageModels/itemsModel.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class ProductsGridView extends GetView<HomePageControllerImp> {
   const ProductsGridView({
@@ -28,7 +29,8 @@ class ProductsGridView extends GetView<HomePageControllerImp> {
         itemCount: controller.products.length,
         itemBuilder: (context, index) {
           return GestureDetector(
-            onTap: () => Get.toNamed(AppRoutes.detailsPageRoute),
+            onTap: () => Get.toNamed(AppRoutes.detailsPageRoute,
+                arguments: {"Product": controller.products[index]}),
             child: Stack(
               children: [
                 const SizedBox(
@@ -41,8 +43,10 @@ class ProductsGridView extends GetView<HomePageControllerImp> {
                 Positioned(
                   top: 0,
                   right: 10,
-                  child: SvgPicture.network(
-                    "${AppServer.itemsImages}${controller.products[index].itemsImage!}",
+                  child: CachedNetworkImage(
+                    imageUrl:
+                        "${AppServer.itemsImages}${controller.products[index].itemsImage!}",
+                    height: 100,
                   ),
                 ),
                 Positioned(

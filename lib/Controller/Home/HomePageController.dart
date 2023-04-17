@@ -9,6 +9,8 @@ import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
+import '../../core/function/SnackBars.dart';
+import '../../core/function/checkInternet.dart';
 import '../../data/dataSource/Static/HiveKeys.dart';
 import '../../data/model/HomePageModels/BannersModel.dart';
 import '../../data/model/HomePageModels/itemsModel.dart';
@@ -16,7 +18,8 @@ import '../../data/model/HomePageModels/itemsModel.dart';
 abstract class HomePageController extends GetxController {
   void sortProducts(int index);
   void changePriceRange(SfRangeValues range);
-  void getData();
+  getData(bool showLoading);
+  refreshPage();
 }
 
 class HomePageControllerImp extends HomePageController {
@@ -34,15 +37,20 @@ class HomePageControllerImp extends HomePageController {
   List<Banners> banners = [];
   StatusRequest statusRequest = StatusRequest.none;
   @override
-  void getData() async {
-    statusRequest = StatusRequest.loading;
+  getData(bool showLoading) async {
+    if (showLoading == true) {
+      statusRequest = StatusRequest.loading;
+      update();
+    }
     var response = await homeData.getData();
     statusRequest = handlingData(response);
+    print(response);
     if (StatusRequest.success == statusRequest) {
       if (response['status'] == "success") {
         List itemsList = response['items'];
         List bannersList = response['banners'];
         categories.addAll(response['categories']);
+
         products.addAll(itemsList.map((e) => Products.fromJson(e)));
         banners.addAll(bannersList.map((e) => Banners.fromJson(e)));
       } else {
@@ -77,8 +85,22 @@ class HomePageControllerImp extends HomePageController {
   }
 
   @override
+  refreshPage() async {
+    if (await checkinternet()) {
+      products.clear();
+      categories.clear();
+      banners.clear();
+      await getData(false);
+    } else {
+      errorSnackBar(
+          "No internet connection", "Please check your internet and try again");
+    }
+  }
+
+  @override
   void onInit() {
-    getData();
+    getData(true);
+
     super.onInit();
   }
 }

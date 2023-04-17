@@ -1,11 +1,12 @@
 import 'package:ebuy/core/constant/Colors.dart';
 import 'package:ebuy/data/dataSource/Static/static.dart';
-import 'package:ebuy/data/model/ProductModels/ProductModel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../core/constant/Images.dart';
 import '../../data/dataSource/Static/UINumbers.dart';
+import '../../data/model/HomePageModels/itemsModel.dart';
+import '../../data/model/ProductModels/ProductModel.dart';
 import '../../data/model/ProductModels/RateModel.dart';
 
 abstract class DetailesController extends GetxController {
@@ -17,6 +18,7 @@ abstract class DetailesController extends GetxController {
 class DetailesControllerImp extends DetailesController {
   ScrollController? scrollController;
   bool hideSliverAppBar = true;
+  late Products product;
   List<RateModel> usersRate = [
     RateModel(
         username: 'Jack Bibber',
@@ -48,8 +50,8 @@ class DetailesControllerImp extends DetailesController {
     update();
   }
 
-  List<Products> suggestions = [
-    Products(
+  List<TProducts> suggestions = [
+    TProducts(
         title: 'Yellow hoodie',
         subtitle: 'subtitle',
         image: AppImagesAssets.youMightAlsoLike1,
@@ -59,7 +61,7 @@ class DetailesControllerImp extends DetailesController {
         category: '',
         color: Colors.yellow,
         size: ''),
-    Products(
+    TProducts(
         title: 'Black hoodie',
         subtitle: 'subtitle',
         image: AppImagesAssets.youMightAlsoLike2,
@@ -72,6 +74,7 @@ class DetailesControllerImp extends DetailesController {
   ];
   @override
   void onInit() {
+    product = Get.arguments['Product'];
     scrollController = ScrollController()
       ..addListener(() {
         scrollController!.offset > UINumber.deviceHeight / 6

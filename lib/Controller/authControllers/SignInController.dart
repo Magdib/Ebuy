@@ -9,7 +9,7 @@ import 'package:hive/hive.dart';
 
 import '../../core/class/StatusRequest.dart';
 import '../../core/function/handleData.dart';
-import '../../core/function/DataSnackBar.dart';
+import '../../core/function/SnackBars.dart';
 import '../../data/dataSource/remote/auth/CheckEmailData.dart';
 import '../../data/dataSource/remote/auth/CodeVerificationData.dart';
 import '../../data/dataSource/remote/auth/NewPasswordData.dart';
@@ -62,7 +62,7 @@ class SignInControllerImp extends SigninController {
       } else {
         signInStatusRequest = StatusRequest.failure;
         update();
-        invalidAuthSnackBar('Invalid Email Or Password: '.tr,
+        errorSnackBar('Invalid Email Or Password: '.tr,
             'Email Not Found Or Password is wrong'.tr);
       }
     }
@@ -139,7 +139,7 @@ class SignInControllerImp extends SigninController {
       } else {
         emailCheckStatusRequest = StatusRequest.failure;
         update();
-        invalidAuthSnackBar('Invalid Email: '.tr, 'Email Not Found'.tr);
+        errorSnackBar('Invalid Email: '.tr, 'Email Not Found'.tr);
       }
     }
   }
@@ -166,7 +166,7 @@ class SignInControllerImp extends SigninController {
       } else {
         forgotPasswordStatusRequest = StatusRequest.failure;
         update();
-        invalidAuthSnackBar(
+        errorSnackBar(
             'Invalid code: '.tr,
             'Verification Code does not match the code we send to you please recheck your email and write the correct code'
                 .tr);

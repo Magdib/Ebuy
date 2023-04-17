@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class Products {
+class TProducts {
   final String title, subtitle, image, category;
   bool liked, disliked;
   final int price;
   final Color color;
   final String? size;
-  Products(
+  TProducts(
       {required this.title,
       required this.subtitle,
       required this.image,

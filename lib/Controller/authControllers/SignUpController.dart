@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../core/function/handleData.dart';
-import '../../core/function/DataSnackBar.dart';
+import '../../core/function/SnackBars.dart';
 import '../../data/dataSource/remote/auth/EmailVerificationData.dart';
 import '../../data/dataSource/remote/auth/signupData.dart';
 import '../../data/model/authModels/EmailLikedModel.dart';
@@ -108,7 +108,7 @@ class SignUpControllerImp extends SignUpController {
       } else {
         signUpStatusRequest = StatusRequest.failure;
         update();
-        invalidAuthSnackBar('Invalid Email: '.tr, 'Email already exist'.tr);
+        errorSnackBar('Invalid Email: '.tr, 'Email already exist'.tr);
       }
     }
   }
@@ -283,7 +283,7 @@ class SignUpControllerImp extends SignUpController {
       } else {
         verifyEmailStatusRequest = StatusRequest.failure;
         update();
-        invalidAuthSnackBar(
+        errorSnackBar(
             'Invalid code: '.tr,
             'Verification Code does not match the code with send to you please recheck your email and write the correct code'
                 .tr);
@@ -293,14 +293,15 @@ class SignUpControllerImp extends SignUpController {
 
   @override
   void onInit() {
-    dayListContent();
-    monthListContent();
-    yearListContent();
-    signUpStateCheck();
     email = TextEditingController();
     firstName = TextEditingController();
     lastName = TextEditingController();
     password = TextEditingController();
+    dayListContent();
+    monthListContent();
+    yearListContent();
+    signUpStateCheck();
+
     super.onInit();
   }
 

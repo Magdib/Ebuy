@@ -30,7 +30,7 @@ class HandlingDataRequest extends GetView<SignUpControllerImp> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Lottie.asset(AppImagesAssets.lottieoffline,
-                        height: 250, width: 250),
+                        height: 250, width: 250, repeat: false),
                     RetryAuthButton(onPressed: onPressed)
                   ],
                 ),
@@ -40,9 +40,8 @@ class HandlingDataRequest extends GetView<SignUpControllerImp> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Lottie.asset(
-                          AppImagesAssets.lottieError,
-                        ),
+                        Lottie.asset(AppImagesAssets.lottieError,
+                            repeat: false),
                         RetryAuthButton(onPressed: onPressed)
                       ],
                     ),

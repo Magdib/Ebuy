@@ -1,7 +1,8 @@
+import 'package:ebuy/core/constant/Colors.dart';
 import 'package:ebuy/core/constant/Images.dart';
 import 'package:ebuy/core/constant/Server.dart';
 import 'package:flutter/material.dart';
-
+import 'package:cached_network_image/cached_network_image.dart';
 import '../../../../core/theme/theme.dart';
 import '../../../../data/dataSource/Static/UINumbers.dart';
 import '../../../../data/model/HomePageModels/BannersModel.dart';
@@ -38,8 +39,8 @@ class BannerCardWithRichText extends StatelessWidget {
                     style: AppTheme.arabicTheme.textTheme.bodyText1)
               ]),
             ),
-            Image.network(
-              '${AppServer.bannersImages}/${banner.bannerImage}',
+            CachedNetworkImage(
+              imageUrl: '${AppServer.bannersImages}/${banner.bannerImage}',
               width: 120,
               height: 164,
               fit: BoxFit.fitHeight,
