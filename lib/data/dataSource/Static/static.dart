@@ -167,19 +167,10 @@ List<FilterModel> filterList = [
   FilterModel(title: 'Brand', type: brands),
   FilterModel(title: 'Size', type: ['All', 'Medium', 'Large', 'X Large']),
 ];
-List<ProductDetailesModel> detailesPageTitleSubtitle = [
-  ProductDetailesModel(
-      title: 'Description',
-      subtitle:
-          'Nike, originally known as Blue Ribbon Sports (BRS), was founded by University of Oregon track athlete Phil Knight and his coach, Bill Bowerman, on January 25, 1964.[11] The company initially operated in Eugene, Oregon as a distributor for Japanese shoe maker Onitsuka Tiger, making most sales at track meets out of Knight\'s '),
-  ProductDetailesModel(
-      title: 'Free delivery & returns',
-      subtitle:
-          'Nike, originally known as Blue Ribbon Sports (BRS), was founded by University of Oregon track athlete Phil Knight and his coach, Bill Bowerman '),
-  ProductDetailesModel(
-      title: 'Size guide',
-      subtitle:
-          'In a company public announcement on March 15, 2018, Nike CEO Mark Parker said Trevor Edwards, a top Nike executive who was seen as a potential successor to the chief executive, was ')
+List<String> detailesTitles = [
+  'Description',
+  'Free delivery & returns',
+  'Size guide',
 ];
 List<String> productImages = [
   AppImagesAssets.detailes1,

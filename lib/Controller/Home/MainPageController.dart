@@ -32,6 +32,7 @@ class MainContrllerImp extends MainController {
   @override
   void onReady() async {
     await Hive.openBox(HiveBoxes.authBox);
+
     super.onReady();
   }
 }

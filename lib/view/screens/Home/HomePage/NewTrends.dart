@@ -19,7 +19,7 @@ class NewTrendPage extends StatelessWidget {
       child: Scaffold(
         body: SingleChildScrollView(
             child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
           child: Column(
             children: [
               PageHeadersWithCartIcon(

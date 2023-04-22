@@ -5,6 +5,9 @@ class Products {
   String? itemsDesc;
   String? itemsDescAr;
   String? itemsImage;
+  String? itemsImage2;
+  String? itemsImage3;
+  String? itemsImage4;
   String? itemsCount;
   String? itemsActive;
   String? itemsPrice;
@@ -12,6 +15,7 @@ class Products {
   String? itemsRate;
   String? itemsDeliveryRefund;
   String? itemsSizeGuide;
+  String? isNewTrend;
   String? itemsDate;
   String? itemsCat;
   String? itemsBrand;
@@ -24,6 +28,7 @@ class Products {
   String? categoriesName;
   String? categoriesNameAr;
   String? categoriesDatetime;
+  String? favourite;
 
   Products(
       {this.itemsId,
@@ -32,6 +37,9 @@ class Products {
       this.itemsDesc,
       this.itemsDescAr,
       this.itemsImage,
+      this.itemsImage2,
+      this.itemsImage3,
+      this.itemsImage4,
       this.itemsCount,
       this.itemsActive,
       this.itemsPrice,
@@ -39,6 +47,7 @@ class Products {
       this.itemsRate,
       this.itemsDeliveryRefund,
       this.itemsSizeGuide,
+      this.isNewTrend,
       this.itemsDate,
       this.itemsCat,
       this.itemsBrand,
@@ -50,7 +59,8 @@ class Products {
       this.categoriesId,
       this.categoriesName,
       this.categoriesNameAr,
-      this.categoriesDatetime});
+      this.categoriesDatetime,
+      this.favourite});
 
   Products.fromJson(Map<String, dynamic> json) {
     itemsId = json['items_id'];
@@ -59,6 +69,9 @@ class Products {
     itemsDesc = json['items_desc'];
     itemsDescAr = json['items_desc_ar'];
     itemsImage = json['items_image'];
+    itemsImage2 = json['items_image_2'];
+    itemsImage3 = json['items_image_3'];
+    itemsImage4 = json['items_image_4'];
     itemsCount = json['items_count'];
     itemsActive = json['items_active'];
     itemsPrice = json['items_price'];
@@ -66,6 +79,7 @@ class Products {
     itemsRate = json['items_rate'];
     itemsDeliveryRefund = json['items_delivery_refund'];
     itemsSizeGuide = json['items_size_guide'];
+    isNewTrend = json['isNewTrend'];
     itemsDate = json['items_date'];
     itemsCat = json['items_cat'];
     itemsBrand = json['items_brand'];
@@ -78,6 +92,7 @@ class Products {
     categoriesName = json['categories_name'];
     categoriesNameAr = json['categories_name_ar'];
     categoriesDatetime = json['categories_datetime'];
+    favourite = json["favourite"];
   }
 
   Map<String, dynamic> toJson() {
@@ -88,6 +103,9 @@ class Products {
     data['items_desc'] = this.itemsDesc;
     data['items_desc_ar'] = this.itemsDescAr;
     data['items_image'] = this.itemsImage;
+    data['items_image_2'] = this.itemsImage2;
+    data['items_image_3'] = this.itemsImage3;
+    data['items_image_4'] = this.itemsImage4;
     data['items_count'] = this.itemsCount;
     data['items_active'] = this.itemsActive;
     data['items_price'] = this.itemsPrice;
@@ -95,6 +113,7 @@ class Products {
     data['items_rate'] = this.itemsRate;
     data['items_delivery_refund'] = this.itemsDeliveryRefund;
     data['items_size_guide'] = this.itemsSizeGuide;
+    data['isNewTrend'] = this.isNewTrend;
     data['items_date'] = this.itemsDate;
     data['items_cat'] = this.itemsCat;
     data['items_brand'] = this.itemsBrand;
@@ -107,6 +126,7 @@ class Products {
     data['categories_name'] = this.categoriesName;
     data['categories_name_ar'] = this.categoriesNameAr;
     data['categories_datetime'] = this.categoriesDatetime;
+    data["favourite"] = this.favourite;
     return data;
   }
 }

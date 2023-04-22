@@ -16,10 +16,8 @@ class AppImagesAssets {
   static const String product4 = "$imagesAssetFolder/tn9.svg";
   static const String srippers = "$imagesAssetFolder/tn7.png";
   static const String summersea = "$imagesAssetFolder/TN6.svg";
-  static const String saveditems1 =
-      "$imagesAssetFolder/IMGBIN_handbag-louis-vuitton-png_PcVb0c2B.png";
-  static const String saveditems2 =
-      "$imagesAssetFolder/IMGBIN_t-shirt-hoodie-sleeve-clothing-png_H93t0HGJ.png";
+  static const String saveditems1 = "$imagesAssetFolder/BrownhandBag.png";
+  static const String saveditems2 = "$imagesAssetFolder/orangeT-Shirt.png";
 
   static const String yourType1 = "$imagesAssetFolder/tn8.svg";
   static const String yourType2 = "$imagesAssetFolder/tn11.svg";

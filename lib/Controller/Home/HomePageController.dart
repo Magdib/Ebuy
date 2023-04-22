@@ -1,8 +1,7 @@
-import 'dart:math';
-
 import 'package:ebuy/core/class/StatusRequest.dart';
 import 'package:ebuy/core/function/handleData.dart';
 import 'package:ebuy/core/services/intialServices.dart';
+import 'package:ebuy/data/dataSource/Static/HiveKeys.dart';
 import 'package:ebuy/data/dataSource/remote/home/homeData.dart';
 import 'package:ebuy/data/model/HomePageModels/ProductsSortModel.dart';
 import 'package:get/get.dart';
@@ -11,7 +10,6 @@ import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 import '../../core/function/SnackBars.dart';
 import '../../core/function/checkInternet.dart';
-import '../../data/dataSource/Static/HiveKeys.dart';
 import '../../data/model/HomePageModels/BannersModel.dart';
 import '../../data/model/HomePageModels/itemsModel.dart';
 
@@ -23,6 +21,7 @@ abstract class HomePageController extends GetxController {
 }
 
 class HomePageControllerImp extends HomePageController {
+  late Box userDataBox;
   //SavedItems
   List<ProductsSort> productsSort = [
     ProductsSort(type: 'Recommended', choosenSort: true),
@@ -32,26 +31,29 @@ class HomePageControllerImp extends HomePageController {
   ];
   MyServices myServices = Get.find();
   HomeData homeData = HomeData(Get.find());
-  List categories = [];
   List<Products> products = [];
+  List<Products> newTrend = [];
   List<Banners> banners = [];
-  StatusRequest statusRequest = StatusRequest.none;
+  StatusRequest statusRequest = StatusRequest.loading;
   @override
   getData(bool showLoading) async {
     if (showLoading == true) {
       statusRequest = StatusRequest.loading;
       update();
     }
-    var response = await homeData.getData();
+    var response = await homeData.getData("36");
     statusRequest = handlingData(response);
-    print(response);
     if (StatusRequest.success == statusRequest) {
       if (response['status'] == "success") {
+        print(response);
         List itemsList = response['items'];
         List bannersList = response['banners'];
-        categories.addAll(response['categories']);
-
-        products.addAll(itemsList.map((e) => Products.fromJson(e)));
+        products.addAll(itemsList
+            .map((e) => Products.fromJson(e))
+            .where((product) => product.itemsMainPW != null));
+        newTrend.addAll(itemsList
+            .map((e) => Products.fromJson(e))
+            .where((product) => product.isNewTrend == "1"));
         banners.addAll(bannersList.map((e) => Banners.fromJson(e)));
       } else {
         statusRequest = StatusRequest.failure;
@@ -88,7 +90,6 @@ class HomePageControllerImp extends HomePageController {
   refreshPage() async {
     if (await checkinternet()) {
       products.clear();
-      categories.clear();
       banners.clear();
       await getData(false);
     } else {
@@ -98,9 +99,8 @@ class HomePageControllerImp extends HomePageController {
   }
 
   @override
-  void onInit() {
-    getData(true);
-
-    super.onInit();
+  void onReady() async {
+    getData(false);
+    super.onReady();
   }
 }

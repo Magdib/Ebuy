@@ -1,24 +1,36 @@
+import 'dart:io';
+
 import 'package:ebuy/core/constant/Colors.dart';
+import 'package:ebuy/core/constant/Server.dart';
+import 'package:ebuy/core/function/SnackBars.dart';
 import 'package:ebuy/data/dataSource/Static/static.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:share_plus/share_plus.dart';
+import 'package:path_provider/path_provider.dart';
 import '../../core/constant/Images.dart';
 import '../../data/dataSource/Static/UINumbers.dart';
 import '../../data/model/HomePageModels/itemsModel.dart';
 import '../../data/model/ProductModels/ProductModel.dart';
 import '../../data/model/ProductModels/RateModel.dart';
 
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+
 abstract class DetailesController extends GetxController {
   addToFavourite();
   likediLikeComment(int index);
   addItemsToFavourtie(int index);
+  void handleProductImages();
+  void shareProduct();
 }
 
 class DetailesControllerImp extends DetailesController {
-  ScrollController? scrollController;
+  PageController? pageController;
+  DefaultCacheManager? caheManger;
   bool hideSliverAppBar = true;
   late Products product;
+  late List<String> productDesc;
+  List<String> productImages = [];
   List<RateModel> usersRate = [
     RateModel(
         username: 'Jack Bibber',
@@ -37,7 +49,7 @@ class DetailesControllerImp extends DetailesController {
         rateTime: '14:30 - 06/09/2020')
   ];
   bool isFavourite = false;
-  PageController pageController = PageController();
+
   @override
   addToFavourite() {
     isFavourite = !isFavourite;
@@ -73,27 +85,55 @@ class DetailesControllerImp extends DetailesController {
         size: '')
   ];
   @override
+  addItemsToFavourtie(int index) {
+    suggestions[index].liked = !suggestions[index].liked;
+    update();
+  }
+
+  @override
+  void handleProductImages() {
+    productImages.add(product.itemsImage!);
+    if (product.itemsImage2 != null) {
+      productImages.add(product.itemsImage2!);
+    }
+    if (product.itemsImage3 != null) {
+      productImages.add(product.itemsImage3!);
+    }
+    if (product.itemsImage4 != null) {
+      productImages.add(product.itemsImage4!);
+    }
+  }
+
+  @override
+  void shareProduct() async {
+    File image = await caheManger!.getSingleFile(
+        "${AppServer.itemsImages}${productImages[pageController!.page!.toInt()]}");
+
+    Share.shareXFiles(
+      [XFile(image.path)],
+      text: "${product.itemsName}\n price is: ${product.itemsPrice}\$",
+    );
+  }
+
+  @override
   void onInit() {
     product = Get.arguments['Product'];
-    scrollController = ScrollController()
-      ..addListener(() {
-        scrollController!.offset > UINumber.deviceHeight / 6
-            ? hideSliverAppBar = false
-            : hideSliverAppBar = true;
-        update();
-      });
+    productDesc = [
+      product.itemsDesc!,
+      product.itemsDeliveryRefund!,
+      product.itemsSizeGuide!
+    ];
+    pageController = PageController();
+    caheManger = DefaultCacheManager();
+
+    handleProductImages();
     super.onInit();
   }
 
   @override
   void onClose() {
-    scrollController!.dispose();
+    pageController!.dispose();
+    caheManger!.dispose();
     super.onClose();
-  }
-
-  @override
-  addItemsToFavourtie(int index) {
-    suggestions[index].liked = !suggestions[index].liked;
-    update();
   }
 }

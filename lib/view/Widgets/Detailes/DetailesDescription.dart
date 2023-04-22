@@ -1,11 +1,13 @@
+import 'package:ebuy/Controller/Detailes/detailesController.dart';
 import 'package:ebuy/data/dataSource/Static/UINumbers.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../core/theme/theme.dart';
 import '../../../data/dataSource/Static/static.dart';
 import '../Home/HomePage/NewTrend/FilterPageWidgets/GreyDivider.dart';
 
-class DetailesDescription extends StatelessWidget {
+class DetailesDescription extends GetView<DetailesControllerImp> {
   const DetailesDescription({
     Key? key,
   }) : super(key: key);
@@ -25,7 +27,7 @@ class DetailesDescription extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  detailesPageTitleSubtitle[index].title,
+                  detailesTitles[index],
                   style: AppTheme.arabicTheme.textTheme.bodyText1!
                       .copyWith(fontSize: 18),
                 ),
@@ -33,7 +35,7 @@ class DetailesDescription extends StatelessWidget {
                   height: 20,
                 ),
                 Text(
-                  detailesPageTitleSubtitle[index].subtitle,
+                  controller.productDesc[index],
                   style: AppTheme.arabicTheme.textTheme.headline6!
                       .copyWith(fontSize: 14),
                 )

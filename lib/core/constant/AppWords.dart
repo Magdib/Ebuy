@@ -170,7 +170,7 @@ class AppWords {
     'First name': 'الاسم الأول',
     'Enter first name': 'أدخل الاسم الأول',
     'Last name': 'اسم العائلة',
-    'Enter last name': 'ادخل اسم العائلة',
+    'Enter last name': 'أدخل اسم العائلة',
     'Must be 6 or more characters': 'يجب أن تكون ست أحرف أو أكثر',
     'Date of birth': 'تاريخ الميلاد',
     'You need to be 16 or over to use Ebuy':

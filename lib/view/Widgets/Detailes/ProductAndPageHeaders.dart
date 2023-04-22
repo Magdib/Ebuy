@@ -1,10 +1,11 @@
 import 'package:ebuy/Controller/Detailes/detailesController.dart';
-import 'package:ebuy/data/dataSource/Static/static.dart';
+import 'package:ebuy/core/constant/Server.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../../core/constant/Colors.dart';
 import '../../../data/dataSource/Static/UINumbers.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class ProductAndPageHeaders extends GetView<DetailesControllerImp> {
   const ProductAndPageHeaders({
@@ -28,10 +29,16 @@ class ProductAndPageHeaders extends GetView<DetailesControllerImp> {
               height: UINumber.deviceHeight / 3,
               child: PageView.builder(
                 controller: controller.pageController,
-                itemCount: productImages.length,
-                itemBuilder: (context, index) => Image.asset(
-                  productImages[index],
-                  fit: BoxFit.scaleDown,
+                itemCount: controller.productImages.length,
+                itemBuilder: (context, index) => Hero(
+                  tag: controller.product.itemsImage!,
+                  child: CachedNetworkImage(
+                    imageUrl:
+                        "${AppServer.itemsImages}${controller.productImages[index]}",
+                    cacheManager: controller.caheManger,
+                    height: UINumber.deviceHeight / 3,
+                    fit: BoxFit.contain,
+                  ),
                 ),
               ),
             ),
@@ -39,27 +46,8 @@ class ProductAndPageHeaders extends GetView<DetailesControllerImp> {
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                      splashRadius: 22,
-                      onPressed: () => Get.back(),
-                      icon: const Icon(
-                        Icons.arrow_back,
-                        color: AppColors.grey,
-                      )),
-                  IconButton(
-                      splashRadius: 22,
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.share,
-                        color: AppColors.grey,
-                      )),
-                ],
-              ),
-              const SizedBox(
-                height: 50,
+              SizedBox(
+                height: UINumber.deviceHeight / 6,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -71,8 +59,8 @@ class ProductAndPageHeaders extends GetView<DetailesControllerImp> {
                         dotHeight: 5,
                         dotWidth: 5,
                       ),
-                      controller: controller.pageController,
-                      count: 4),
+                      controller: controller.pageController!,
+                      count: controller.productImages.length),
                   GestureDetector(
                     onTap: () => controller.addToFavourite(),
                     child: Container(

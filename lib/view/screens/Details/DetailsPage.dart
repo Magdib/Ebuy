@@ -26,42 +26,27 @@ class DetailsPage extends GetView<DetailesControllerImp> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              padding: const EdgeInsets.only(left: 15, right: 15),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               height: UINumber.deviceHeight / 1.13,
               child: CustomScrollView(
-                controller: controller.scrollController,
                 slivers: [
                   GetBuilder<DetailesControllerImp>(
                     builder: (controller) => SliverAppBar(
-                      toolbarHeight: 30,
-                      automaticallyImplyLeading: false,
+                      toolbarHeight: 45,
                       shadowColor: AppColors.white,
-                      elevation: 0,
+                      actions: [
+                        IconButton(
+                            splashRadius: 14,
+                            onPressed: () {
+                              controller.shareProduct();
+                            },
+                            icon: const Icon(
+                              Icons.share,
+                              color: AppColors.black,
+                            ))
+                      ],
                       floating: true,
                       backgroundColor: AppColors.white,
-                      flexibleSpace: FlexibleSpaceBar(
-                          collapseMode: CollapseMode.parallax,
-                          background: Offstage(
-                            offstage: controller.hideSliverAppBar,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                IconButton(
-                                    onPressed: () => Get.back(),
-                                    icon: const Icon(
-                                      Icons.arrow_back,
-                                      color: AppColors.black,
-                                    )),
-                                IconButton(
-                                    splashRadius: 14,
-                                    onPressed: () {},
-                                    icon: const Icon(
-                                      Icons.share,
-                                      color: AppColors.black,
-                                    )),
-                              ],
-                            ),
-                          )),
                     ),
                   ),
                   SliverList(
