@@ -21,7 +21,7 @@ abstract class HomePageController extends GetxController {
 }
 
 class HomePageControllerImp extends HomePageController {
-  late Box userDataBox;
+  late Box authBox;
   //SavedItems
   List<ProductsSort> productsSort = [
     ProductsSort(type: 'Recommended', choosenSort: true),
@@ -29,11 +29,15 @@ class HomePageControllerImp extends HomePageController {
     ProductsSort(type: 'Price: High to low', choosenSort: false),
     ProductsSort(type: 'Price: Low to high', choosenSort: false)
   ];
-  MyServices myServices = Get.find();
   HomeData homeData = HomeData(Get.find());
   List<Products> products = [];
+  List<Products> homeProducts = [];
   List<Products> newTrend = [];
   List<Banners> banners = [];
+  List<Products> savedItems = [];
+  List<Products> newProducts = [];
+  late List<Products> sortedProducts;
+  int lastSortIndex = 0;
   StatusRequest statusRequest = StatusRequest.loading;
   @override
   getData(bool showLoading) async {
@@ -41,20 +45,27 @@ class HomePageControllerImp extends HomePageController {
       statusRequest = StatusRequest.loading;
       update();
     }
-    var response = await homeData.getData("36");
+    var response = await homeData.getData(authBox.get(HiveKeys.userid));
     statusRequest = handlingData(response);
     if (StatusRequest.success == statusRequest) {
       if (response['status'] == "success") {
-        print(response);
         List itemsList = response['items'];
         List bannersList = response['banners'];
-        products.addAll(itemsList
+        products.addAll(itemsList.map((e) => Products.fromJson(e)));
+        homeProducts.addAll(itemsList
             .map((e) => Products.fromJson(e))
             .where((product) => product.itemsMainPW != null));
         newTrend.addAll(itemsList
             .map((e) => Products.fromJson(e))
             .where((product) => product.isNewTrend == "1"));
+        newProducts.addAll(itemsList
+            .map((e) => Products.fromJson(e))
+            .where((product) => product.itemsIsNew == "1"));
         banners.addAll(bannersList.map((e) => Banners.fromJson(e)));
+        savedItems.addAll(itemsList
+            .map((e) => Products.fromJson(e))
+            .where((product) => product.favourite == "1"));
+        sortedProducts = newTrend;
       } else {
         statusRequest = StatusRequest.failure;
       }
@@ -65,15 +76,34 @@ class HomePageControllerImp extends HomePageController {
   @override
   sortProducts(int index) async {
     productsSort[index].choosenSort = true;
-    for (int i = 0; i < 4; i++) {
-      if (i == index) {
-        continue;
-      }
-      productsSort[i].choosenSort = false;
+    productsSort[lastSortIndex].choosenSort = false;
+    lastSortIndex = index;
+    switch (index) {
+      case 0:
+        sortedProducts = newTrend;
+        break;
+      case 1:
+        sortedProducts = newProducts;
+        break;
+      case 2:
+        sortedProducts = products;
+        sortedProducts.sort(
+          (a, b) => double.parse(b.itemsPrice!)
+              .compareTo(double.parse(a.itemsPrice!)),
+        );
+        break;
+      case 3:
+        sortedProducts = products;
+        sortedProducts.sort(
+          (a, b) => double.parse(a.itemsPrice!)
+              .compareTo(double.parse(b.itemsPrice!)),
+        );
+        break;
+      default:
     }
-
     update();
-    await Future.delayed(const Duration(milliseconds: 250));
+    await Future.delayed(const Duration(milliseconds: 500));
+
     Get.back();
   }
 
@@ -90,16 +120,20 @@ class HomePageControllerImp extends HomePageController {
   refreshPage() async {
     if (await checkinternet()) {
       products.clear();
+      homeProducts.clear();
       banners.clear();
-      await getData(false);
+      sortedProducts.clear();
+      savedItems.clear();
+      await getData(true);
     } else {
-      errorSnackBar(
-          "No internet connection", "Please check your internet and try again");
+      noInternetSnackBar();
     }
   }
 
   @override
   void onReady() async {
+    authBox = await Hive.openBox(HiveBoxes.authBox);
+
     getData(false);
     super.onReady();
   }

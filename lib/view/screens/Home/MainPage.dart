@@ -62,14 +62,13 @@ class MainPage extends StatelessWidget {
                   unselectedItemColor: AppColors.grey,
                   enableFeedback: false,
                   selectedFontSize: 0,
-                  currentIndex:
-                      mainContrllerImp.bottomNavigationBarCurrentIndex,
+                  currentIndex: mainContrllerImp.bottomBarIndex,
                   selectedItemColor: AppColors.primaryColor,
                   onTap: (page) => mainContrllerImp.changePage(page)),
             ],
           ),
-          body: mainContrllerImp.bottomNavigationBarPages[
-              mainContrllerImp.bottomNavigationBarCurrentIndex],
+          body: mainContrllerImp
+              .bottomNavigationBarPages[mainContrllerImp.bottomBarIndex],
         ),
       ),
     );

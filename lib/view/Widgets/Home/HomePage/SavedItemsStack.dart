@@ -1,19 +1,18 @@
 import 'package:ebuy/core/constant/Colors.dart';
+import 'package:ebuy/core/constant/Server.dart';
+import 'package:ebuy/data/model/HomePageModels/itemsModel.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/theme/theme.dart';
 import '../../../../data/dataSource/Static/UINumbers.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class SavedItemsStack extends StatelessWidget {
   const SavedItemsStack({
     Key? key,
-    required this.name,
-    required this.price,
-    required this.image,
+    required this.product,
   }) : super(key: key);
-  final String name;
-  final int price;
-  final String image;
+  final Products product;
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -53,8 +52,8 @@ class SavedItemsStack extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.max,
             children: [
-              Image.asset(
-                image,
+              CachedNetworkImage(
+                imageUrl: "${AppServer.itemsImages}${product.itemsImage!}",
                 height: 85,
                 width: 87,
               ),
@@ -69,7 +68,7 @@ class SavedItemsStack extends StatelessWidget {
                     height: 30,
                   ),
                   Text(
-                    name,
+                    product.itemsName!,
                     style: AppTheme.arabicTheme.textTheme.bodyText2!
                         .copyWith(fontSize: 16),
                   ),
@@ -77,7 +76,7 @@ class SavedItemsStack extends StatelessWidget {
                     height: 5,
                   ),
                   Text(
-                    '\$$price',
+                    '\$${product.itemsPrice}',
                     style: AppTheme.arabicTheme.textTheme.bodyText1!
                         .copyWith(fontSize: 18),
                   ),

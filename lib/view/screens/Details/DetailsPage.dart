@@ -18,7 +18,6 @@ class DetailsPage extends GetView<DetailesControllerImp> {
   @override
   Widget build(BuildContext context) {
     Get.put(DetailesControllerImp());
-
     return SafeArea(
       child: Scaffold(
         backgroundColor: AppColors.white,
@@ -26,7 +25,7 @@ class DetailsPage extends GetView<DetailesControllerImp> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 5),
               height: UINumber.deviceHeight / 1.13,
               child: CustomScrollView(
                 slivers: [

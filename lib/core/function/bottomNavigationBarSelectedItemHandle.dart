@@ -5,13 +5,13 @@ import '../../data/dataSource/Static/UINumbers.dart';
 
 EdgeInsets bottomNavigationBarSelectedItemHandle(
     MainContrllerImp mainContrllerImp) {
-  return mainContrllerImp.bottomNavigationBarCurrentIndex == 0
+  return mainContrllerImp.bottomBarIndex == 0
       ? EdgeInsets.only(left: (UINumber.deviceWidth / 15))
-      : mainContrllerImp.bottomNavigationBarCurrentIndex == 1
+      : mainContrllerImp.bottomBarIndex == 1
           ? EdgeInsets.only(left: (UINumber.deviceWidth / 4))
-          : mainContrllerImp.bottomNavigationBarCurrentIndex == 2
+          : mainContrllerImp.bottomBarIndex == 2
               ? EdgeInsets.only(left: (UINumber.deviceWidth / 2.3))
-              : mainContrllerImp.bottomNavigationBarCurrentIndex == 3
+              : mainContrllerImp.bottomBarIndex == 3
                   ? EdgeInsets.only(left: (UINumber.deviceWidth / 1.61))
                   : EdgeInsets.only(left: (UINumber.deviceWidth / 1.25));
 }

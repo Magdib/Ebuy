@@ -15,3 +15,5 @@ SnackbarController succesSnackBar(String title, String messageBody) =>
         backgroundColor: AppColors.primaryColor,
         colorText: AppColors.white,
         duration: const Duration(seconds: 20));
+SnackbarController noInternetSnackBar() => errorSnackBar(
+    "No internet connection", "Please check your internet and try again");

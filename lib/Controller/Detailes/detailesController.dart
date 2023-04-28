@@ -1,15 +1,22 @@
 import 'dart:io';
 
+import 'package:ebuy/Controller/Home/HomePageController.dart';
+import 'package:ebuy/core/class/StatusRequest.dart';
 import 'package:ebuy/core/constant/Colors.dart';
 import 'package:ebuy/core/constant/Server.dart';
 import 'package:ebuy/core/function/SnackBars.dart';
+import 'package:ebuy/core/function/handleData.dart';
+import 'package:ebuy/core/services/intialServices.dart';
+import 'package:ebuy/data/dataSource/Static/HiveKeys.dart';
 import 'package:ebuy/data/dataSource/Static/static.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:path_provider/path_provider.dart';
 import '../../core/constant/Images.dart';
 import '../../data/dataSource/Static/UINumbers.dart';
+import '../../data/dataSource/remote/Favourite/FavouriteAddData.dart';
+import '../../data/dataSource/remote/Favourite/favouriteRemoveData.dart';
 import '../../data/model/HomePageModels/itemsModel.dart';
 import '../../data/model/ProductModels/ProductModel.dart';
 import '../../data/model/ProductModels/RateModel.dart';
@@ -17,7 +24,7 @@ import '../../data/model/ProductModels/RateModel.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
 abstract class DetailesController extends GetxController {
-  addToFavourite();
+  changeFavouriteState();
   likediLikeComment(int index);
   addItemsToFavourtie(int index);
   void handleProductImages();
@@ -25,11 +32,15 @@ abstract class DetailesController extends GetxController {
 }
 
 class DetailesControllerImp extends DetailesController {
+  Box authBox = Hive.box(HiveBoxes.authBox);
   PageController? pageController;
   DefaultCacheManager? caheManger;
   bool hideSliverAppBar = true;
   late Products product;
   late List<String> productDesc;
+  FavouriteAddData favouriteAddData = FavouriteAddData(Get.find());
+  FavouriteRemoveData favouriteRemoveData = FavouriteRemoveData(Get.find());
+  StatusRequest statusRequest = StatusRequest.none;
   List<String> productImages = [];
   List<RateModel> usersRate = [
     RateModel(
@@ -51,9 +62,36 @@ class DetailesControllerImp extends DetailesController {
   bool isFavourite = false;
 
   @override
-  addToFavourite() {
-    isFavourite = !isFavourite;
-    update();
+  changeFavouriteState() async {
+    if (product.favourite == "0") {
+      var response = await favouriteAddData.addToFavourite(
+          authBox.get(HiveKeys.userid), product.itemsId!);
+      statusRequest = handlingData(response);
+      if (statusRequest == StatusRequest.success) {
+        if (response['status'] == "success") {
+          product.favourite = "1";
+          update();
+        }
+      } else if (statusRequest == StatusRequest.offlinefailure) {
+        noInternetSnackBar();
+      } else {
+        errorSnackBar('ُFailed', "Something went wrong please try again later");
+      }
+    } else {
+      var response = await favouriteRemoveData.removeFromFavourite(
+          authBox.get(HiveKeys.userid), product.itemsId!);
+      statusRequest = handlingData(response);
+      if (statusRequest == StatusRequest.success) {
+        if (response['status'] == "success") {
+          product.favourite = "0";
+          update();
+        }
+      } else if (statusRequest == StatusRequest.offlinefailure) {
+        noInternetSnackBar();
+      } else {
+        errorSnackBar('ُFailed', "Something went wrong please try again later");
+      }
+    }
   }
 
   @override
@@ -127,13 +165,13 @@ class DetailesControllerImp extends DetailesController {
     caheManger = DefaultCacheManager();
 
     handleProductImages();
+
     super.onInit();
   }
 
   @override
   void onClose() {
     pageController!.dispose();
-    caheManger!.dispose();
     super.onClose();
   }
 }

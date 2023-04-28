@@ -1,5 +1,6 @@
 import 'package:ebuy/Controller/Detailes/detailesController.dart';
 import 'package:ebuy/core/constant/Server.dart';
+import 'package:ebuy/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -30,14 +31,21 @@ class ProductAndPageHeaders extends GetView<DetailesControllerImp> {
               child: PageView.builder(
                 controller: controller.pageController,
                 itemCount: controller.productImages.length,
-                itemBuilder: (context, index) => Hero(
-                  tag: controller.product.itemsImage!,
-                  child: CachedNetworkImage(
-                    imageUrl:
-                        "${AppServer.itemsImages}${controller.productImages[index]}",
-                    cacheManager: controller.caheManger,
-                    height: UINumber.deviceHeight / 3,
-                    fit: BoxFit.contain,
+                itemBuilder: (context, index) => GestureDetector(
+                  onTap: () => Get.toNamed(AppRoutes.detailsImagesview,
+                      arguments: {
+                        "image":
+                            "${AppServer.itemsImages}${controller.productImages[index]}"
+                      }),
+                  child: Hero(
+                    tag: controller.product.itemsImage!,
+                    child: CachedNetworkImage(
+                      imageUrl:
+                          "${AppServer.itemsImages}${controller.productImages[index]}",
+                      cacheManager: controller.caheManger,
+                      height: UINumber.deviceHeight / 3,
+                      fit: BoxFit.contain,
+                    ),
                   ),
                 ),
               ),
@@ -62,7 +70,7 @@ class ProductAndPageHeaders extends GetView<DetailesControllerImp> {
                       controller: controller.pageController!,
                       count: controller.productImages.length),
                   GestureDetector(
-                    onTap: () => controller.addToFavourite(),
+                    onTap: () => controller.changeFavouriteState(),
                     child: Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
@@ -77,7 +85,7 @@ class ProductAndPageHeaders extends GetView<DetailesControllerImp> {
                       child: GetBuilder<DetailesControllerImp>(
                         builder: (controller) => Icon(
                           Icons.favorite,
-                          color: controller.isFavourite == true
+                          color: controller.product.favourite == "1"
                               ? AppColors.red
                               : AppColors.grey,
                         ),

@@ -1,3 +1,5 @@
+import 'package:ebuy/Controller/Home/HomePageController.dart';
+import 'package:ebuy/Controller/Home/favouritePageController.dart';
 import 'package:ebuy/data/dataSource/Static/HiveKeys.dart';
 import 'package:ebuy/view/screens/Home/Cart.dart';
 import 'package:ebuy/view/screens/Home/Favourite.dart';
@@ -13,7 +15,9 @@ abstract class MainController extends GetxController {
 }
 
 class MainContrllerImp extends MainController {
-  int bottomNavigationBarCurrentIndex = 0;
+  int bottomBarIndex = 0;
+
+  bool somthingChange = false;
   static double scrollOffset = 0;
   List<Widget> bottomNavigationBarPages = const [
     HomePage(),
@@ -25,14 +29,12 @@ class MainContrllerImp extends MainController {
 
   @override
   changePage(int page) {
-    bottomNavigationBarCurrentIndex = page;
+    if (page == 0 && somthingChange == true) {
+      HomePageControllerImp homeController = Get.find();
+      homeController.refreshPage();
+      somthingChange = false;
+    }
+    bottomBarIndex = page;
     update();
-  }
-
-  @override
-  void onReady() async {
-    await Hive.openBox(HiveBoxes.authBox);
-
-    super.onReady();
   }
 }

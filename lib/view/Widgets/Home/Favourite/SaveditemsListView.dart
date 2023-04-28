@@ -1,11 +1,19 @@
+import 'package:ebuy/Controller/Home/HomePageController.dart';
+import 'package:ebuy/Controller/Home/favouritePageController.dart';
+import 'package:ebuy/core/class/HandlingDataRequest.dart';
+import 'package:ebuy/core/constant/Server.dart';
+import 'package:ebuy/core/function/StringToColors.dart';
+import 'package:ebuy/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
 import '../../../../core/constant/Colors.dart';
 
 import '../../../../core/theme/theme.dart';
 import '../../../../data/dataSource/Static/UINumbers.dart';
-import '../../../../data/dataSource/Static/static.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+
+import 'FavouriteCard.dart';
 
 class SaveditemsListView extends StatelessWidget {
   const SaveditemsListView({
@@ -14,96 +22,100 @@ class SaveditemsListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        itemExtent: 180,
-        itemCount: savedItems.length,
-        itemBuilder: (context, index) => Stack(
-              children: [
-                SizedBox(
-                    height: 160,
-                    width: UINumber.deviceWidth,
-                    child: Card(
-                      elevation: 10,
-                      margin:
-                          const EdgeInsets.only(top: 20, left: 46, right: 5),
-                      child: Padding(
-                        padding: EdgeInsets.only(
-                            left: UINumber.deviceWidth / 1.7, top: 85),
-                        child: IconButton(
-                            splashRadius: 14,
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.shopping_cart,
-                              color: AppColors.grey,
-                            )),
-                      ),
-                    )),
-                SizedBox(
-                  height: 170,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      SvgPicture.asset(
-                        savedItems[index].image,
-                        height: 85,
-                        width: 87,
-                      ),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(
-                            height: 35,
+    return GetBuilder<FavouriteControllerImp>(
+      builder: (controller) => HandlingDataRequest(
+        onPressed: () => controller.getData(),
+        statusRequest: controller.statusRequest,
+        widget: RefreshIndicator(
+          onRefresh: () => controller.refreshData(),
+          color: AppColors.primaryColor,
+          child: ListView.builder(
+            padding: const EdgeInsets.only(left: 5, right: 5, top: 10),
+            itemCount: controller.favouriteItems.length,
+            itemBuilder: (context, index) => GestureDetector(
+              onTap: () => controller.goToDetaielsPage(index),
+              child: Stack(
+                children: [
+                  const FavouriteCard(),
+                  SizedBox(
+                    height: 170,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Hero(
+                          tag: controller.favouriteItems[index].itemsImage!,
+                          child: CachedNetworkImage(
+                            imageUrl:
+                                "${AppServer.itemsImages}${controller.favouriteItems[index].itemsImage}",
+                            height: 85,
+                            width: 87,
                           ),
-                          Text(
-                            savedItems[index].title,
-                            style: AppTheme.arabicTheme.textTheme.bodyText1!
-                                .copyWith(fontSize: 16),
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                'Color:   ',
-                                style: AppTheme.arabicTheme.textTheme.headline6!
-                                    .copyWith(fontSize: 14),
-                              ),
-                              Container(
-                                height: 20,
-                                width: 20,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    color: savedItems[index].color),
-                              )
-                            ],
-                          ),
-                          Visibility(
-                            replacement: const SizedBox(
-                              height: 15,
+                        ),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(
+                              height: 35,
                             ),
-                            visible:
-                                savedItems[index].size != null ? true : false,
-                            child: Text(
-                              'Size:  XL',
+                            Text(
+                              controller.favouriteItems[index].itemsName!,
+                              style: AppTheme.arabicTheme.textTheme.bodyText1!
+                                  .copyWith(fontSize: 16),
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  'Color:   ',
+                                  style: AppTheme
+                                      .arabicTheme.textTheme.headline6!
+                                      .copyWith(fontSize: 14),
+                                ),
+                                Container(
+                                  height: 20,
+                                  width: 20,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      color: stringToColor(controller
+                                          .favouriteItems[index].itemsColor!)),
+                                )
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            Text(
+                              'Size:  ${controller.favouriteItems[index].itemsSize}',
                               style: AppTheme.arabicTheme.textTheme.headline6!
                                   .copyWith(fontSize: 14),
                             ),
-                          ),
-                          Text(
-                            '\$${savedItems[index].price}',
-                            style: AppTheme.arabicTheme.textTheme.bodyText1!
-                                .copyWith(fontSize: 18),
-                          )
-                        ],
-                      ),
-                    ],
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            Text(
+                              '\$${controller.favouriteItems[index].itemsPrice}',
+                              style: AppTheme.arabicTheme.textTheme.bodyText1!
+                                  .copyWith(fontSize: 18),
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            ));
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:ebuy/core/middleware/middleware.dart';
+import 'package:ebuy/view/screens/Details/DetailsImagesview.dart';
 import 'package:ebuy/view/screens/Home/Cart.dart';
 import 'package:ebuy/view/screens/Home/Favourite.dart';
 import 'package:ebuy/view/screens/Home/HomePage/NewTrends.dart';
@@ -30,6 +31,7 @@ class AppRoutes {
   static const String favouriteRoute = "/favourite";
   static const String accoutSettingsRoute = "/accountSettings";
   static const String detailsPageRoute = "/DetailsPage";
+  static const String detailsImagesview = "/DetailsImagesview";
 }
 
 List<GetPage<dynamic>>? routes = [
@@ -55,4 +57,6 @@ List<GetPage<dynamic>>? routes = [
   GetPage(name: AppRoutes.searchRoute, page: () => const SearchPage()),
   GetPage(name: AppRoutes.cartRoute, page: () => const FavouritePage()),
   GetPage(name: AppRoutes.detailsPageRoute, page: () => const DetailsPage()),
+  GetPage(
+      name: AppRoutes.detailsImagesview, page: () => const DetailsImagesview()),
 ];

@@ -10,10 +10,10 @@ import '../../../../core/theme/theme.dart';
 import '../../../Widgets/Home/HomePage/BannerCard.dart';
 import '../../../Widgets/Home/HomePage/BannersListView.dart';
 import '../../../Widgets/Home/HomePage/BrandsGridView.dart';
+import '../../../Widgets/Home/HomePage/HomeSavedItems.dart';
 import '../../../Widgets/Home/HomePage/ProductsGridView.dart';
 import '../../../Widgets/Home/HomePage/RecentlyViewedText.dart';
 import '../../../Widgets/Home/HomePage/SavedItemsStack.dart';
-import '../../../Widgets/Home/HomePage/SavedItemsTextRow.dart';
 import '../../../Widgets/Home/HomePage/UserStyleGridView.dart';
 import '../../../Widgets/Home/HomePage/RecentlyGridView.dart';
 
@@ -55,22 +55,9 @@ class HomePage extends GetView<MainContrllerImp> {
                   height: 20,
                 ),
                 const RecentlyGridView(),
-                const SavedItemsTextRow(),
-                const SavedItemsStack(
-                  name: 'Handbag LV',
-                  price: 225,
-                  image: AppImagesAssets.saveditems1,
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const SavedItemsStack(
-                    name: 'T-shirt',
-                    price: 123,
-                    image: AppImagesAssets.saveditems2),
-                const SizedBox(
-                  height: 20,
-                ),
+                controller.savedItems.length > 1
+                    ? const HomeSavedItems()
+                    : const SizedBox(),
                 Text(
                   'Brands you  may like',
                   style: AppTheme.arabicTheme.textTheme.bodyText1!

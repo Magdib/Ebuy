@@ -71,83 +71,7 @@ List<TProducts> userStyles = [
       price: 98,
       category: 'Short')
 ];
-List<TProducts> newTrend = [
-  TProducts(
-      size: null,
-      title: 'White Hand bag',
-      subtitle: 'just and kicks',
-      image: AppImagesAssets.newTrend1,
-      liked: true,
-      disliked: false,
-      color: AppColors.black,
-      price: 102,
-      category: 'handBag'),
-  TProducts(
-      size: null,
-      title: 'Summer co-ords',
-      subtitle: 'Just add kicks',
-      image: AppImagesAssets.product1,
-      disliked: false,
-      liked: false,
-      color: AppColors.black,
-      category: "Dress",
-      price: 87),
-  TProducts(
-      size: null,
-      title: 'blue shoes',
-      subtitle: 'stay cool',
-      image: AppImagesAssets.newTrend2,
-      liked: false,
-      disliked: false,
-      color: AppColors.black,
-      price: 201,
-      category: 'Shoes'),
-  TProducts(
-      size: null,
-      title: 'black Short',
-      subtitle: 'Just add kicks',
-      image: AppImagesAssets.yourType2,
-      liked: true,
-      disliked: false,
-      price: 98,
-      color: AppColors.black,
-      category: 'Short')
-];
-List<TProducts> savedItems = [
-  TProducts(
-    size: null,
-    title: 'White Hand bag',
-    subtitle: 'just and kicks',
-    image: AppImagesAssets.newTrend1,
-    liked: true,
-    disliked: false,
-    category: 'handBag',
-    price: 102,
-    color: AppColors.primaryColor,
-  ),
-  TProducts(
-    size: 'XL',
-    title: 'Fortnite T-shirt',
-    subtitle: 'Just add kicks',
-    image: AppImagesAssets.yourType1,
-    liked: true,
-    disliked: false,
-    price: 36,
-    category: "T-shirt",
-    color: AppColors.grey,
-  ),
-  TProducts(
-    size: 'M',
-    title: 'black Short',
-    subtitle: 'Just add kicks',
-    image: AppImagesAssets.yourType2,
-    liked: false,
-    disliked: false,
-    price: 98,
-    category: 'Short',
-    color: AppColors.black,
-  ),
-];
+
 List<FilterModel> filterList = [
   FilterModel(title: 'Gender', type: ['All', 'Male', 'Female']),
   FilterModel(
@@ -172,12 +96,7 @@ List<String> detailesTitles = [
   'Free delivery & returns',
   'Size guide',
 ];
-List<String> productImages = [
-  AppImagesAssets.detailes1,
-  AppImagesAssets.detailes2,
-  AppImagesAssets.detailes3,
-  AppImagesAssets.detailes4
-];
+
 List<AccountListTileModel> accountPageUpperList = [
   AccountListTileModel(leadingIcon: CustomIcons.boxIcon, text: 'My order'),
   AccountListTileModel(

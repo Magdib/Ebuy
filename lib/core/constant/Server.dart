@@ -14,4 +14,6 @@ class AppServer {
   static const String images = "${server}upload";
   static const String bannersImages = "$images/banners";
   static const String itemsImages = "$images/items/";
+  static const String favourite = "${server}favourite/";
+  static const String favouriteItems = "${favourite}getFavouriteItems.php";
 }

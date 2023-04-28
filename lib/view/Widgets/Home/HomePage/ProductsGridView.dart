@@ -26,11 +26,11 @@ class ProductsGridView extends GetView<HomePageControllerImp> {
             crossAxisSpacing: 10,
             mainAxisSpacing: 20,
             childAspectRatio: 0.9),
-        itemCount: controller.products.length,
+        itemCount: controller.homeProducts.length,
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () => Get.toNamed(AppRoutes.detailsPageRoute,
-                arguments: {"Product": controller.products[index]}),
+                arguments: {"Product": controller.homeProducts[index]}),
             child: Stack(
               children: [
                 const SizedBox(
@@ -45,7 +45,7 @@ class ProductsGridView extends GetView<HomePageControllerImp> {
                   right: 10,
                   child: CachedNetworkImage(
                     imageUrl:
-                        "${AppServer.itemsImages}${controller.products[index].itemsImage!}",
+                        "${AppServer.itemsImages}${controller.homeProducts[index].itemsImage!}",
                     height: 100,
                   ),
                 ),
@@ -53,7 +53,7 @@ class ProductsGridView extends GetView<HomePageControllerImp> {
                   bottom: 40,
                   left: 20,
                   child: Text(
-                    controller.products[index].itemsCatDetailes!,
+                    controller.homeProducts[index].itemsCatDetailes!,
                     style: AppTheme.arabicTheme.textTheme.bodyText1,
                   ),
                 ),
@@ -61,7 +61,7 @@ class ProductsGridView extends GetView<HomePageControllerImp> {
                   bottom: 15,
                   left: 20,
                   child: Text(
-                    controller.products[index].itemsMainPW!,
+                    controller.homeProducts[index].itemsMainPW!,
                     style: AppTheme.arabicTheme.textTheme.headline6!
                         .copyWith(fontSize: 14),
                   ),

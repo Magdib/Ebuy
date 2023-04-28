@@ -1,6 +1,3 @@
-import 'package:ebuy/core/constant/Colors.dart';
-
-import 'package:ebuy/data/dataSource/Static/UINumbers.dart';
 import 'package:ebuy/view/screens/Home/HomePage/filterPage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,7 +16,7 @@ class NewTrendPage extends StatelessWidget {
       child: Scaffold(
         body: SingleChildScrollView(
             child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
           child: Column(
             children: [
               PageHeadersWithCartIcon(
