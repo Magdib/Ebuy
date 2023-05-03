@@ -26,7 +26,7 @@ class SignUpCustomButton extends StatelessWidget {
           color: AppColors.primaryColor,
           disabledColor: AppColors.grey,
           onPressed: controller.signUpState == true ? onPressed : null,
-          child: Text(text, style: AppTheme.arabicTheme.textTheme.headline3),
+          child: Text(text, style: Theme.of(context).textTheme.headline3),
         ),
       ),
     );

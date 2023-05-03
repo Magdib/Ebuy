@@ -17,14 +17,14 @@ class SeeAllTextRow extends StatelessWidget {
       children: [
         Text(
           title,
-          style: AppTheme.arabicTheme.textTheme.bodyText1,
+          style: Theme.of(context).textTheme.bodyText1,
         ),
         InkWell(
           onTap: onTap,
           child: Text(
             'See all',
-            style: AppTheme.arabicTheme.textTheme.headline2!
-                .copyWith(fontSize: 12),
+            style:
+                Theme.of(context).textTheme.headline2!.copyWith(fontSize: 12),
           ),
         )
       ],

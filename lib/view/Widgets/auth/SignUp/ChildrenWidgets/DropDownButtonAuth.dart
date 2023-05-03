@@ -34,12 +34,11 @@ class DropDownButtonAuth extends GetView<SignUpControllerImp> {
           borderRadius: BorderRadius.circular(UINumber.borderRadius)),
       child: DropdownButtonHideUnderline(
         child: DropdownButton(
-          style:
-              AppTheme.arabicTheme.textTheme.headline6!.copyWith(fontSize: 14),
+          style: Theme.of(context).textTheme.headline6!.copyWith(fontSize: 14),
           hint: Text(
             hint,
             textAlign: TextAlign.end,
-            style: AppTheme.arabicTheme.textTheme.headline4!,
+            style: Theme.of(context).textTheme.headline4!,
           ),
           menuMaxHeight: 150,
           borderRadius: BorderRadius.circular(UINumber.borderRadius),

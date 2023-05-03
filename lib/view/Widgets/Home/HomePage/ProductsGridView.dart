@@ -29,8 +29,10 @@ class ProductsGridView extends GetView<HomePageControllerImp> {
         itemCount: controller.homeProducts.length,
         itemBuilder: (context, index) {
           return GestureDetector(
-            onTap: () => Get.toNamed(AppRoutes.detailsPageRoute,
-                arguments: {"Product": controller.homeProducts[index]}),
+            onTap: () => Get.toNamed(AppRoutes.detailsPageRoute, arguments: {
+              "Product": controller.homeProducts[index],
+              "ProductsList": controller.products
+            }),
             child: Stack(
               children: [
                 const SizedBox(
@@ -43,10 +45,13 @@ class ProductsGridView extends GetView<HomePageControllerImp> {
                 Positioned(
                   top: 0,
                   right: 10,
-                  child: CachedNetworkImage(
-                    imageUrl:
-                        "${AppServer.itemsImages}${controller.homeProducts[index].itemsImage!}",
-                    height: 100,
+                  child: Hero(
+                    tag: controller.homeProducts[index].itemsImage!,
+                    child: CachedNetworkImage(
+                      imageUrl:
+                          "${AppServer.itemsImages}${controller.homeProducts[index].itemsImage!}",
+                      height: 100,
+                    ),
                   ),
                 ),
                 Positioned(
@@ -54,7 +59,7 @@ class ProductsGridView extends GetView<HomePageControllerImp> {
                   left: 20,
                   child: Text(
                     controller.homeProducts[index].itemsCatDetailes!,
-                    style: AppTheme.arabicTheme.textTheme.bodyText1,
+                    style: Theme.of(context).textTheme.bodyText1,
                   ),
                 ),
                 Positioned(
@@ -62,7 +67,9 @@ class ProductsGridView extends GetView<HomePageControllerImp> {
                   left: 20,
                   child: Text(
                     controller.homeProducts[index].itemsMainPW!,
-                    style: AppTheme.arabicTheme.textTheme.headline6!
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline6!
                         .copyWith(fontSize: 14),
                   ),
                 ),

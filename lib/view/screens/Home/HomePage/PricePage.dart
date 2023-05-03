@@ -54,7 +54,7 @@ class PricePage extends StatelessWidget {
                                 thumbRadius: 13,
                                 tooltipBackgroundColor: AppColors.primaryColor,
                                 tooltipTextStyle:
-                                    AppTheme.arabicTheme.textTheme.headline3,
+                                    Theme.of(context).textTheme.headline3,
                                 activeTrackHeight: 2,
                                 inactiveTrackHeight: 2),
                             child: SfRangeSlider(

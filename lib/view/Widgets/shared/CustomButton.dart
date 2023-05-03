@@ -25,7 +25,7 @@ class CustomButton extends StatelessWidget {
         onPressed: onPressed,
         child: Text(
           text,
-          style: AppTheme.arabicTheme.textTheme.headline3,
+          style: Theme.of(context).textTheme.headline3,
         ),
       ),
     );

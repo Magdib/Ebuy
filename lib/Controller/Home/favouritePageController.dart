@@ -67,7 +67,10 @@ class FavouriteControllerImp extends FavouriteController
     HomePageControllerImp homeController = Get.find();
     Products product = homeController.products.firstWhere(
         (product) => product.itemsId!.contains(favouriteItems[index].itemsId!));
-    Get.toNamed(AppRoutes.detailsPageRoute, arguments: {"Product": product});
+    Get.toNamed(AppRoutes.detailsPageRoute, arguments: {
+      "Product": product,
+      "ProductsList": homeController.products
+    });
   }
 
   @override

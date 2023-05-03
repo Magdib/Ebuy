@@ -38,6 +38,7 @@ class Products {
   String? categoriesNameAr;
   String? categoriesDatetime;
   String? favourite;
+  String? recent;
 
   Products(
       {this.itemsId,
@@ -78,7 +79,8 @@ class Products {
       this.categoriesName,
       this.categoriesNameAr,
       this.categoriesDatetime,
-      this.favourite});
+      this.favourite,
+      this.recent});
 
   Products.fromJson(Map<String, dynamic> json) {
     itemsId = json['items_id'];
@@ -120,6 +122,7 @@ class Products {
     categoriesNameAr = json['categories_name_ar'];
     categoriesDatetime = json['categories_datetime'];
     favourite = json["favourite"];
+    recent = json['recents'];
   }
 
   Map<String, dynamic> toJson() {
@@ -163,6 +166,7 @@ class Products {
     data['categories_name_ar'] = this.categoriesNameAr;
     data['categories_datetime'] = this.categoriesDatetime;
     data["favourite"] = this.favourite;
+    data['recents'] = this.recent;
     return data;
   }
 }

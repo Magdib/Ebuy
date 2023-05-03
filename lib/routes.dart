@@ -5,6 +5,7 @@ import 'package:ebuy/view/screens/Home/Favourite.dart';
 import 'package:ebuy/view/screens/Home/HomePage/NewTrends.dart';
 import 'package:ebuy/view/screens/Home/MainPage.dart';
 import 'package:ebuy/view/screens/Home/Search.dart';
+import 'package:ebuy/view/screens/Products/ProductsPage.dart';
 import 'package:ebuy/view/screens/auth/CheckEmail.dart';
 import 'package:ebuy/view/screens/auth/setNewPassword.dart';
 import 'package:ebuy/view/screens/auth/SignIn.dart';
@@ -31,7 +32,8 @@ class AppRoutes {
   static const String favouriteRoute = "/favourite";
   static const String accoutSettingsRoute = "/accountSettings";
   static const String detailsPageRoute = "/DetailsPage";
-  static const String detailsImagesview = "/DetailsImagesview";
+  static const String productImagesRoute = "/productImagesRoute";
+  static const String productsPageRoute = "/productsPageRoute";
 }
 
 List<GetPage<dynamic>>? routes = [
@@ -58,5 +60,7 @@ List<GetPage<dynamic>>? routes = [
   GetPage(name: AppRoutes.cartRoute, page: () => const FavouritePage()),
   GetPage(name: AppRoutes.detailsPageRoute, page: () => const DetailsPage()),
   GetPage(
-      name: AppRoutes.detailsImagesview, page: () => const DetailsImagesview()),
+      name: AppRoutes.productImagesRoute,
+      page: () => const ProductImagesView()),
+  GetPage(name: AppRoutes.productsPageRoute, page: () => const ProductsPage())
 ];

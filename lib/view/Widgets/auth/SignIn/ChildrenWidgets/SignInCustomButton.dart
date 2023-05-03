@@ -25,7 +25,7 @@ class SignInCustomButton extends GetView<SignInControllerImp> {
               controller.signInState == true ? () => controller.signin() : null,
           child: Text(
             'Sign In'.tr,
-            style: AppTheme.arabicTheme.textTheme.headline3,
+            style: Theme.of(context).textTheme.headline3,
           ),
         ),
       ),

@@ -1,13 +1,16 @@
+import 'package:ebuy/Controller/Home/HomePageController.dart';
 import 'package:ebuy/core/constant/Colors.dart';
 import 'package:ebuy/core/constant/Server.dart';
 import 'package:ebuy/data/model/HomePageModels/itemsModel.dart';
+import 'package:ebuy/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../../core/theme/theme.dart';
 import '../../../../data/dataSource/Static/UINumbers.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-class SavedItemsStack extends StatelessWidget {
+class SavedItemsStack extends GetView<HomePageControllerImp> {
   const SavedItemsStack({
     Key? key,
     required this.product,
@@ -37,7 +40,11 @@ class SavedItemsStack extends StatelessWidget {
                   child: IconButton(
                       padding: const EdgeInsets.all(0),
                       splashRadius: 14,
-                      onPressed: () {},
+                      onPressed: () => Get.toNamed(AppRoutes.detailsPageRoute,
+                              arguments: {
+                                "Product": product,
+                                "ProductsList": controller.products
+                              }),
                       icon: const Icon(
                         Icons.arrow_forward,
                         color: AppColors.primaryColor,
@@ -52,10 +59,13 @@ class SavedItemsStack extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.max,
             children: [
-              CachedNetworkImage(
-                imageUrl: "${AppServer.itemsImages}${product.itemsImage!}",
-                height: 85,
-                width: 87,
+              Hero(
+                tag: product.itemsImage!,
+                child: CachedNetworkImage(
+                  imageUrl: "${AppServer.itemsImages}${product.itemsImage!}",
+                  height: 85,
+                  width: 87,
+                ),
               ),
               const SizedBox(
                 width: 20,
@@ -69,7 +79,9 @@ class SavedItemsStack extends StatelessWidget {
                   ),
                   Text(
                     product.itemsName!,
-                    style: AppTheme.arabicTheme.textTheme.bodyText2!
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText2!
                         .copyWith(fontSize: 16),
                   ),
                   const SizedBox(
@@ -77,7 +89,9 @@ class SavedItemsStack extends StatelessWidget {
                   ),
                   Text(
                     '\$${product.itemsPrice}',
-                    style: AppTheme.arabicTheme.textTheme.bodyText1!
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText1!
                         .copyWith(fontSize: 18),
                   ),
                 ],

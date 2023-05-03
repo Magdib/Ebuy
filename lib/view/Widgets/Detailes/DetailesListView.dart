@@ -37,7 +37,9 @@ class DetailesListView extends GetView<DetailesControllerImp> {
               children: [
                 Text(
                   controller.usersRate[index].username,
-                  style: AppTheme.arabicTheme.textTheme.headline6!
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline6!
                       .copyWith(fontSize: 14),
                 ),
                 Row(
@@ -59,7 +61,9 @@ class DetailesListView extends GetView<DetailesControllerImp> {
                     ),
                     Text(
                       '  ${controller.usersRate[index].rate}',
-                      style: AppTheme.arabicTheme.textTheme.bodyText1!
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyText1!
                           .copyWith(fontSize: 13),
                     )
                   ],
@@ -93,7 +97,7 @@ class DetailesListView extends GetView<DetailesControllerImp> {
           width: UINumber.deviceWidth / 1.7,
           child: Text(
             controller.usersRate[index].comment,
-            style: AppTheme.arabicTheme.textTheme.headline1,
+            style: Theme.of(context).textTheme.headline1,
             textAlign: TextAlign.start,
           ),
         ),
@@ -113,8 +117,8 @@ class DetailesListView extends GetView<DetailesControllerImp> {
             ),
             Text(
               controller.usersRate[index].rateTime,
-              style: AppTheme.arabicTheme.textTheme.headline6!
-                  .copyWith(fontSize: 12),
+              style:
+                  Theme.of(context).textTheme.headline6!.copyWith(fontSize: 12),
             ),
             SizedBox(
               width: 40,

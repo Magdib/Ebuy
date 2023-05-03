@@ -26,8 +26,8 @@ class SignUpTextFields extends GetView<SignUpControllerImp> {
               onChanged: (val) => controller.signUpStateCheck()),
           Text(
             'We\'ll send your order confirmation here'.tr,
-            style: AppTheme.arabicTheme.textTheme.headline6!
-                .copyWith(fontSize: 12),
+            style:
+                Theme.of(context).textTheme.headline6!.copyWith(fontSize: 12),
           ),
           CustomTextFromFieldWithUpperText(
               label: 'First name'.tr,
@@ -52,8 +52,8 @@ class SignUpTextFields extends GetView<SignUpControllerImp> {
               onChanged: (val) => controller.signUpStateCheck()),
           Text(
             'Must be 6 or more characters'.tr,
-            style: AppTheme.arabicTheme.textTheme.headline6!
-                .copyWith(fontSize: 12),
+            style:
+                Theme.of(context).textTheme.headline6!.copyWith(fontSize: 12),
           ),
         ],
       ),

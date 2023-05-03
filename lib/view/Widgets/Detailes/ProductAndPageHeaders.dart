@@ -32,7 +32,7 @@ class ProductAndPageHeaders extends GetView<DetailesControllerImp> {
                 controller: controller.pageController,
                 itemCount: controller.productImages.length,
                 itemBuilder: (context, index) => GestureDetector(
-                  onTap: () => Get.toNamed(AppRoutes.detailsImagesview,
+                  onTap: () => Get.toNamed(AppRoutes.productImagesRoute,
                       arguments: {
                         "image":
                             "${AppServer.itemsImages}${controller.productImages[index]}"

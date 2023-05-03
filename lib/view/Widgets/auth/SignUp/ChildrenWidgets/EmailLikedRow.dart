@@ -27,7 +27,7 @@ class EmailLikedRow extends GetView<SignUpControllerImp> {
           children: [
             Text(
               title,
-              style: AppTheme.arabicTheme.textTheme.bodyText1,
+              style: Theme.of(context).textTheme.bodyText1,
             ),
             InkWell(
               onTap: onTap,

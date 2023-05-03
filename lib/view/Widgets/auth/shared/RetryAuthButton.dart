@@ -23,8 +23,7 @@ class RetryAuthButton extends StatelessWidget {
         minWidth: MediaQuery.of(context).size.width / 4,
         color: AppColors.primaryColor,
         onPressed: onPressed,
-        child:
-            Text('Retry'.tr, style: AppTheme.arabicTheme.textTheme.headline3),
+        child: Text('Retry'.tr, style: Theme.of(context).textTheme.headline3),
       ),
     );
   }

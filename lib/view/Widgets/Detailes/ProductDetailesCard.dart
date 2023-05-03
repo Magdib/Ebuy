@@ -29,7 +29,9 @@ class ProductDetailesCard extends GetView<DetailesControllerImp> {
             children: [
               Text(
                 "${controller.product.itemsName}",
-                style: AppTheme.arabicTheme.textTheme.bodyText1!
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1!
                     .copyWith(fontSize: 18),
               ),
               Row(
@@ -56,13 +58,13 @@ class ProductDetailesCard extends GetView<DetailesControllerImp> {
                       ),
                       Text(
                         controller.product.itemsRate!,
-                        style: AppTheme.arabicTheme.textTheme.bodyText1,
+                        style: Theme.of(context).textTheme.bodyText1,
                       )
                     ],
                   ),
                   Text(
                     "${controller.product.itemsPrice!}\$",
-                    style: AppTheme.arabicTheme.textTheme.bodyText1,
+                    style: Theme.of(context).textTheme.bodyText1,
                   )
                 ],
               )

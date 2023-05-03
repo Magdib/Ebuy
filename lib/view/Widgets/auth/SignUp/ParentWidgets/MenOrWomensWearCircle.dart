@@ -33,7 +33,7 @@ class MenOrWomensWearCircle extends GetView<SignUpControllerImp> {
           ),
           Text(
             'Womenswear'.tr,
-            style: AppTheme.arabicTheme.textTheme.bodyText1,
+            style: Theme.of(context).textTheme.bodyText1,
           ),
           const SizedBox(
             width: 50,
@@ -51,7 +51,7 @@ class MenOrWomensWearCircle extends GetView<SignUpControllerImp> {
           ),
           Text(
             'Menswear'.tr,
-            style: AppTheme.arabicTheme.textTheme.bodyText1,
+            style: Theme.of(context).textTheme.bodyText1,
           )
         ],
       ),

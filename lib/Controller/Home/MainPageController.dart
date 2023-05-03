@@ -19,7 +19,7 @@ class MainContrllerImp extends MainController {
 
   bool somthingChange = false;
   static double scrollOffset = 0;
-  List<Widget> bottomNavigationBarPages = const [
+  List<Widget> bottomBarPages = const [
     HomePage(),
     SearchPage(),
     CartPage(),

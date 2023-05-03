@@ -27,10 +27,10 @@ class OnBoardingPageView extends GetView<OnBoardingControllerImp> {
               const SizedBox(height: 80),
               Text(
                 onBoardingdata[index].title,
-                style: AppTheme.arabicTheme.textTheme.headline2!.copyWith(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 20,
-                ),
+                style: Theme.of(context).textTheme.headline2!.copyWith(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 20,
+                    ),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(
@@ -38,7 +38,9 @@ class OnBoardingPageView extends GetView<OnBoardingControllerImp> {
               ),
               Text(
                 onBoardingdata[index].subtitle,
-                style: AppTheme.arabicTheme.textTheme.headline6!
+                style: Theme.of(context)
+                    .textTheme
+                    .headline6!
                     .copyWith(fontSize: 14),
                 textAlign: TextAlign.center,
               ),

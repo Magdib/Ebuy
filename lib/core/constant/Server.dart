@@ -10,7 +10,11 @@ class AppServer {
       "${server}forgetpassword/verifycode.php";
   static const String setNewPassword =
       "${server}forgetpassword/resetpassword.php";
-  static const String home = "${server}home.php";
+
+  static const String homeFolder = "${server}Home/";
+  static const String home = "${homeFolder}home.php";
+  static const String recentAdd = "${homeFolder}addToRecent.php";
+  static const String recentRemove = "${homeFolder}removeFromRecent.php";
   static const String images = "${server}upload";
   static const String bannersImages = "$images/banners";
   static const String itemsImages = "$images/items/";

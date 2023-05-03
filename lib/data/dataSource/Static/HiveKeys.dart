@@ -8,4 +8,7 @@ class HiveKeys {
   static const String username = "username";
   static const String email = "email";
   static const String userid = "userid";
+  //Recent id's
+  static const String firstRecentId = 'firstRecentId';
+  static const String lastRecentId = "lastRecentId";
 }

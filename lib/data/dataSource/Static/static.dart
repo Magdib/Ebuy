@@ -32,65 +32,6 @@ List<OnBoardingModel> onBoardingdata = [
               .tr),
 ];
 
-List<String> brands = [
-  "Frost",
-  'Nike',
-  'Adidas',
-  'Vans',
-  'The North face',
-  'Collusion',
-  'Calvin Klein',
-  'Champion',
-  'Fred Perry',
-  'Fila',
-  'Carhartt Wip',
-  'Puma',
-  'Levi\'s',
-  'Tommy Hilfger',
-  'Lascolate'
-];
-List<TProducts> userStyles = [
-  TProducts(
-      size: null,
-      title: 'Fortnite T-shirt',
-      subtitle: 'Just add kicks',
-      image: AppImagesAssets.yourType1,
-      liked: true,
-      color: AppColors.black,
-      disliked: false,
-      price: 36,
-      category: "T-shirt"),
-  TProducts(
-      size: null,
-      title: 'black Short',
-      subtitle: 'Just add kicks',
-      image: AppImagesAssets.yourType2,
-      liked: false,
-      disliked: false,
-      color: AppColors.black,
-      price: 98,
-      category: 'Short')
-];
-
-List<FilterModel> filterList = [
-  FilterModel(title: 'Gender', type: ['All', 'Male', 'Female']),
-  FilterModel(
-      title: 'Product type',
-      type: ['All', 'Shoes', 'Dress', 'Short', 'T-Shirt']),
-  FilterModel(title: 'Style', type: ['All']),
-  FilterModel(title: 'Color', type: [
-    'All',
-    'Black',
-    'White',
-    'Cyan',
-    'Red',
-    'Brown',
-    'Orange',
-    'Grey'
-  ]),
-  FilterModel(title: 'Brand', type: brands),
-  FilterModel(title: 'Size', type: ['All', 'Medium', 'Large', 'X Large']),
-];
 List<String> detailesTitles = [
   'Description',
   'Free delivery & returns',

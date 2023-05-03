@@ -25,13 +25,15 @@ class FilterItemsContent extends StatelessWidget {
         children: [
           Text(
             title,
-            style: AppTheme.arabicTheme.textTheme.bodyText1,
+            style: Theme.of(context).textTheme.bodyText1,
           ),
           TextButton(
               onPressed: onPressed,
               child: Text(
                 type,
-                style: AppTheme.arabicTheme.textTheme.headline6!
+                style: Theme.of(context)
+                    .textTheme
+                    .headline6!
                     .copyWith(fontSize: 14),
               ))
         ],

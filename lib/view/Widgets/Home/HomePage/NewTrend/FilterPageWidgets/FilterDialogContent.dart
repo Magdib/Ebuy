@@ -1,11 +1,13 @@
+import 'package:ebuy/Controller/Home/HomePageController.dart';
 import 'package:ebuy/data/dataSource/Static/static.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../../../../core/constant/Colors.dart';
 
 import '../../../../../../core/theme/theme.dart';
 
-class FilterDialogContent extends StatelessWidget {
+class FilterDialogContent extends GetView<HomePageControllerImp> {
   const FilterDialogContent({
     Key? key,
     required this.filterIndex,
@@ -17,7 +19,7 @@ class FilterDialogContent extends StatelessWidget {
       itemExtent: 40,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      itemCount: filterList[filterIndex].type.length,
+      itemCount: controller.filterList[filterIndex].type.length,
       itemBuilder: (context, index) => Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -34,11 +36,11 @@ class FilterDialogContent extends StatelessWidget {
             width: 10,
           ),
           Text(
-            filterList[filterIndex].type[index],
-            style: AppTheme.arabicTheme.textTheme.headline2!.copyWith(
-              fontWeight: FontWeight.w600,
-              fontSize: 20,
-            ),
+            controller.filterList[filterIndex].type[index],
+            style: Theme.of(context).textTheme.headline2!.copyWith(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 20,
+                ),
           ),
         ],
       ),

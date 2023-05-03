@@ -1,3 +1,4 @@
+import 'package:ebuy/Controller/Home/HomePageController.dart';
 import 'package:ebuy/data/dataSource/Static/UINumbers.dart';
 import 'package:ebuy/data/dataSource/Static/static.dart';
 
@@ -14,7 +15,7 @@ import '../../../Widgets/Home/HomePage/NewTrend/FilterPageWidgets/GreyDivider.da
 import '../../../Widgets/shared/CustomButton.dart';
 import 'PricePage.dart';
 
-class FilterPage extends StatelessWidget {
+class FilterPage extends GetView<HomePageControllerImp> {
   const FilterPage({Key? key}) : super(key: key);
 
   @override
@@ -47,10 +48,10 @@ class FilterPage extends StatelessWidget {
                         physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         itemBuilder: (context, index) => FilterItemsContent(
-                              title: filterList[index].title,
+                              title: controller.filterList[index].title,
                               type: 'All',
                               onPressed: () => Get.defaultDialog(
-                                  title: filterList[index].title,
+                                  title: controller.filterList[index].title,
                                   titleStyle: AppTheme
                                       .arabicTheme.textTheme.bodyText1!
                                       .copyWith(fontSize: 20),
@@ -60,7 +61,7 @@ class FilterPage extends StatelessWidget {
                             ),
                         separatorBuilder: (context, index) =>
                             const GreyDivider(),
-                        itemCount: filterList.length),
+                        itemCount: controller.filterList.length),
                     const GreyDivider(),
                     FilterItemsContent(
                         title: 'Price',

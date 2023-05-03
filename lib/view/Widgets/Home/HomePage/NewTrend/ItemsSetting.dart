@@ -36,8 +36,8 @@ class ItemsSetting extends GetView<HomePageControllerImp> {
             ),
             Text(
               title,
-              style: AppTheme.arabicTheme.textTheme.headline2!
-                  .copyWith(fontSize: 12),
+              style:
+                  Theme.of(context).textTheme.headline2!.copyWith(fontSize: 12),
             )
           ],
         ),

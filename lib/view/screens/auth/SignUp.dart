@@ -47,7 +47,9 @@ class Signup extends StatelessWidget {
                       ),
                       Text(
                         'Date of birth'.tr,
-                        style: AppTheme.arabicTheme.textTheme.headline6!
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline6!
                             .copyWith(fontSize: 14),
                       ),
                       const DropDownButtonsRow(),
@@ -55,7 +57,9 @@ class Signup extends StatelessWidget {
                         height: 10,
                       ),
                       Text('You need to be 16 or over to use Ebuy'.tr,
-                          style: AppTheme.arabicTheme.textTheme.headline6!
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline6!
                               .copyWith(fontSize: 12)),
                       const SizedBox(
                         height: 20,
@@ -69,7 +73,9 @@ class Signup extends StatelessWidget {
                       const SizedBox(height: 5),
                       Text(
                         'Tell us which email you\'d like:'.tr,
-                        style: AppTheme.arabicTheme.textTheme.headline6!
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline6!
                             .copyWith(fontSize: 14),
                       ),
                       const SizedBox(height: 40),
@@ -78,14 +84,18 @@ class Signup extends StatelessWidget {
                         onTap: () {},
                         child: Text(
                           'Tell me more about these'.tr,
-                          style: AppTheme.arabicTheme.textTheme.headline6!
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline6!
                               .copyWith(fontSize: 14),
                         ),
                       ),
                       const SizedBox(height: 15),
                       Text(
                         'By creating your account, you agree to our '.tr,
-                        style: AppTheme.arabicTheme.textTheme.headline6!
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline6!
                             .copyWith(fontSize: 14),
                       ),
                       const SizedBox(height: 7.5),
@@ -93,7 +103,9 @@ class Signup extends StatelessWidget {
                         onTap: () {},
                         child: Text(
                           'Terms and Conditions & Privacy Policy'.tr,
-                          style: AppTheme.arabicTheme.textTheme.headline2!
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline2!
                               .copyWith(
                                   fontSize: 12, fontWeight: FontWeight.w600),
                         ),

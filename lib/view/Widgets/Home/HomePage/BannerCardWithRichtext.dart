@@ -32,11 +32,13 @@ class BannerCardWithRichText extends StatelessWidget {
               text: TextSpan(children: <TextSpan>[
                 TextSpan(
                     text: '\n${banner.bannerTitle}\n',
-                    style: AppTheme.arabicTheme.textTheme.bodyText1!
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText1!
                         .copyWith(fontSize: 24)),
                 TextSpan(
                     text: '${banner.bannerSubtitile}',
-                    style: AppTheme.arabicTheme.textTheme.bodyText1)
+                    style: Theme.of(context).textTheme.bodyText1)
               ]),
             ),
             CachedNetworkImage(

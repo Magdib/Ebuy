@@ -13,12 +13,10 @@ class MostlyIntersetedRichText extends StatelessWidget {
         text: TextSpan(children: <TextSpan>[
       TextSpan(
           text: 'Mostly interested in '.tr,
-          style:
-              AppTheme.arabicTheme.textTheme.headline6!.copyWith(fontSize: 14)),
+          style: Theme.of(context).textTheme.headline6!.copyWith(fontSize: 14)),
       TextSpan(
           text: '(Optional):'.tr,
-          style:
-              AppTheme.arabicTheme.textTheme.headline6!.copyWith(fontSize: 12))
+          style: Theme.of(context).textTheme.headline6!.copyWith(fontSize: 12))
     ]));
   }
 }

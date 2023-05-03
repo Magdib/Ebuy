@@ -28,7 +28,9 @@ class DetailesDescription extends GetView<DetailesControllerImp> {
               children: [
                 Text(
                   detailesTitles[index],
-                  style: AppTheme.arabicTheme.textTheme.bodyText1!
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyText1!
                       .copyWith(fontSize: 18),
                 ),
                 const SizedBox(
@@ -36,7 +38,9 @@ class DetailesDescription extends GetView<DetailesControllerImp> {
                 ),
                 Text(
                   controller.productDesc[index],
-                  style: AppTheme.arabicTheme.textTheme.headline6!
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline6!
                       .copyWith(fontSize: 14),
                 )
               ],

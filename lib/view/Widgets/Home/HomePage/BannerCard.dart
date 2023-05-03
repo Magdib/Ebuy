@@ -1,3 +1,4 @@
+import 'package:ebuy/core/constant/Server.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -5,15 +6,13 @@ import '../../../../core/constant/Images.dart';
 
 import '../../../../core/theme/theme.dart';
 import '../../../../data/dataSource/Static/UINumbers.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
-class BannerCard extends StatelessWidget {
-  const BannerCard({
+class NewTrendBanner extends StatelessWidget {
+  const NewTrendBanner({
     Key? key,
-    required this.title,
-    required this.image,
   }) : super(key: key);
-  final String title;
-  final String image;
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -30,11 +29,15 @@ class BannerCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Text(
-              title,
-              style: AppTheme.arabicTheme.textTheme.bodyText1!
-                  .copyWith(fontSize: 24),
+              "NEW TREND",
+              style:
+                  Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 24),
             ),
-            SvgPicture.asset(image)
+            CachedNetworkImage(
+              imageUrl: "${AppServer.bannersImages}/NewTrendImage.png",
+              height: 164,
+              fit: BoxFit.fitHeight,
+            )
           ],
         ),
       ],

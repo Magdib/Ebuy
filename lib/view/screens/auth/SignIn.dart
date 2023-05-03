@@ -44,8 +44,7 @@ class SignIn extends GetView<SignInControllerImp> {
                                     Get.toNamed(AppRoutes.checkEmailRoute),
                                 child: Text(
                                   'Forgot Password'.tr,
-                                  style:
-                                      AppTheme.arabicTheme.textTheme.headline5,
+                                  style: Theme.of(context).textTheme.headline5,
                                 ),
                               ),
                               SizedBox(

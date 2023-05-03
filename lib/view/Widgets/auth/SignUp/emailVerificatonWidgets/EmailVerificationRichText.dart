@@ -15,19 +15,17 @@ class EmailVerificationRichText extends StatelessWidget {
         text: TextSpan(children: <TextSpan>[
       TextSpan(
           text: 'We have send your email verify code to\n'.tr,
-          style:
-              AppTheme.arabicTheme.textTheme.headline4!.copyWith(fontSize: 16)),
+          style: Theme.of(context).textTheme.headline4!.copyWith(fontSize: 16)),
       TextSpan(
         text: '$email \n\n',
-        style: AppTheme.arabicTheme.textTheme.headline2!.copyWith(
-          fontWeight: FontWeight.w600,
-          fontSize: 20,
-        ),
+        style: Theme.of(context).textTheme.headline2!.copyWith(
+              fontWeight: FontWeight.w600,
+              fontSize: 20,
+            ),
       ),
       TextSpan(
           text: 'please enter it down here: '.tr,
-          style:
-              AppTheme.arabicTheme.textTheme.headline4!.copyWith(fontSize: 16)),
+          style: Theme.of(context).textTheme.headline4!.copyWith(fontSize: 16)),
     ]));
   }
 }

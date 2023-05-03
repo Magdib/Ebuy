@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import '../../Controller/Home/MainPageController.dart';
 import '../../data/dataSource/Static/UINumbers.dart';
 
-EdgeInsets bottomNavigationBarSelectedItemHandle(
-    MainContrllerImp mainContrllerImp) {
+EdgeInsets bottomBarHandle(MainContrllerImp mainContrllerImp) {
   return mainContrllerImp.bottomBarIndex == 0
       ? EdgeInsets.only(left: (UINumber.deviceWidth / 15))
       : mainContrllerImp.bottomBarIndex == 1

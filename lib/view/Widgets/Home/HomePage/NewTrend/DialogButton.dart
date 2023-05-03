@@ -28,7 +28,7 @@ class DialogButton extends StatelessWidget {
                 children: [
                   Text(
                     controller.productsSort[index].type,
-                    style: AppTheme.arabicTheme.textTheme.bodyText1,
+                    style: Theme.of(context).textTheme.bodyText1,
                   ),
                   Visibility(
                     visible: controller.productsSort[index].choosenSort,

@@ -26,8 +26,7 @@ class PageHeadersWithCartIcon extends StatelessWidget {
             icon: const Icon(Icons.arrow_back, color: AppColors.deepGrey)),
         Text(
           title,
-          style:
-              AppTheme.arabicTheme.textTheme.bodyText1!.copyWith(fontSize: 20),
+          style: Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 20),
         ),
         IconButton(
             onPressed: cartFunction,

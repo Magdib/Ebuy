@@ -20,14 +20,15 @@ class HaveAccountAuth extends StatelessWidget {
       children: [
         Text(
           authText,
-          style:
-              AppTheme.arabicTheme.textTheme.headline6!.copyWith(fontSize: 14),
+          style: Theme.of(context).textTheme.headline6!.copyWith(fontSize: 14),
         ),
         InkWell(
           onTap: onTap,
           child: Text(
             authType,
-            style: AppTheme.arabicTheme.textTheme.headline2!
+            style: Theme.of(context)
+                .textTheme
+                .headline2!
                 .copyWith(fontSize: 12, fontWeight: FontWeight.w600),
           ),
         ),

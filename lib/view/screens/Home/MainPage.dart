@@ -5,7 +5,7 @@ import 'package:ebuy/data/dataSource/Static/UINumbers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../core/function/bottomNavigationBarSelectedItemHandle.dart';
+import '../../../core/function/bottomBarHandle.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -22,7 +22,7 @@ class MainPage extends StatelessWidget {
             children: [
               AnimatedContainer(
                 //the place of the upper Container of the selected item
-                margin: bottomNavigationBarSelectedItemHandle(mainContrllerImp),
+                margin: bottomBarHandle(mainContrllerImp),
                 height: 4,
                 width: UINumber.deviceWidth / 8,
                 color: AppColors.primaryColor,
@@ -67,8 +67,8 @@ class MainPage extends StatelessWidget {
                   onTap: (page) => mainContrllerImp.changePage(page)),
             ],
           ),
-          body: mainContrllerImp
-              .bottomNavigationBarPages[mainContrllerImp.bottomBarIndex],
+          body:
+              mainContrllerImp.bottomBarPages[mainContrllerImp.bottomBarIndex],
         ),
       ),
     );
