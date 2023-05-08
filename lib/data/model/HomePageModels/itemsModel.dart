@@ -25,11 +25,17 @@ class Products {
   String? itemsColor2;
   String? itemsColor3;
   String? itemsColor4;
+  String? itemsColorAr;
+  String? itemsColor2Ar;
+  String? itemsColor3Ar;
+  String? itemsColor4Ar;
   String? itemsDate;
   String? itemsCat;
   String? itemsBrand;
   String? itemsCatDetailes;
   String? itemsBrandAr;
+  String? itemsGender;
+  String? itemsGenderAr;
   String? itemsCatDetailesAr;
   String? itemsMainPW;
   String? itemsMainPWAr;
@@ -66,6 +72,12 @@ class Products {
       this.itemsColor2,
       this.itemsColor3,
       this.itemsColor4,
+      this.itemsColorAr,
+      this.itemsColor2Ar,
+      this.itemsColor3Ar,
+      this.itemsColor4Ar,
+      this.itemsGender,
+      this.itemsGenderAr,
       this.itemsDate,
       this.itemsIsNew,
       this.itemsCat,
@@ -105,6 +117,12 @@ class Products {
     itemsColor2 = json['items_Color2'];
     itemsColor3 = json['items_Color3'];
     itemsColor4 = json['items_Color4'];
+    itemsColorAr = json['items_Color_ar'];
+    itemsColor2Ar = json['items_Color2_ar'];
+    itemsColor3Ar = json['items_Color3_ar'];
+    itemsColor4Ar = json['items_Color4_ar'];
+    itemsGender = json['items_gender'];
+    itemsGenderAr = json['items_gender_ar'];
     itemsDeliveryRefund = json['items_delivery_refund'];
     itemsSizeGuide = json['items_size_guide'];
     isNewTrend = json['isNewTrend'];
@@ -153,6 +171,12 @@ class Products {
     data['items_Color2'] = this.itemsColor2;
     data['items_Color3'] = this.itemsColor3;
     data['items_Color4'] = this.itemsColor4;
+    data['items_Color_ar'] = this.itemsColorAr;
+    data['items_Color2_ar'] = this.itemsColor2Ar;
+    data['items_Color3_ar'] = this.itemsColor3Ar;
+    data['items_Color4_ar'] = this.itemsColor4Ar;
+    data['items_gender'] = this.itemsGender;
+    data['items_gender_ar'] = this.itemsGenderAr;
     data['items_date'] = this.itemsDate;
     data['items_cat'] = this.itemsCat;
     data['items_brand'] = this.itemsBrand;

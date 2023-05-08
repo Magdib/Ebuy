@@ -1,7 +1,6 @@
 class AppServer {
   static const server = "https://ebuycv.000webhostapp.com/";
   //auth
-
   static const String signup = "${server}auth/signup.php";
   static const String emailVerification = "${server}auth/verfiycode.php";
   static const String signin = "${server}auth/login.php";
@@ -10,7 +9,6 @@ class AppServer {
       "${server}forgetpassword/verifycode.php";
   static const String setNewPassword =
       "${server}forgetpassword/resetpassword.php";
-
   static const String homeFolder = "${server}Home/";
   static const String home = "${homeFolder}home.php";
   static const String recentAdd = "${homeFolder}addToRecent.php";

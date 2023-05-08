@@ -5,13 +5,11 @@ import 'package:ebuy/core/constant/Colors.dart';
 import 'package:ebuy/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../../core/theme/theme.dart';
 import '../../../Widgets/Home/HomePage/BannerCard.dart';
 import '../../../Widgets/Home/HomePage/BannersListView.dart';
 import '../../../Widgets/Home/HomePage/BrandsGridView.dart';
 import '../../../Widgets/Home/HomePage/HomeSavedItems.dart';
 import '../../../Widgets/Home/HomePage/ProductsGridView.dart';
-import '../../../Widgets/Home/HomePage/RecentlyViewedText.dart';
 import '../../../Widgets/Home/HomePage/UserStyleGridView.dart';
 import '../../../Widgets/Home/HomePage/RecentlyGridView.dart';
 
@@ -29,7 +27,7 @@ class HomePage extends GetView<MainContrllerImp> {
           onRefresh: () => controller.refreshPage(),
           color: AppColors.primaryColor,
           child: ListView(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 15),
               children: [
                 GestureDetector(
                   onTap: () => Get.toNamed(

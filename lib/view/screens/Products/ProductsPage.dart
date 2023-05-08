@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../Controller/products/ProductsController.dart';
+import '../../../core/constant/ArgumentsNames.dart';
 import '../../../core/constant/Server.dart';
 import '../../../core/theme/theme.dart';
 
@@ -40,11 +41,11 @@ class ProductsPage extends StatelessWidget {
               itemCount: controller.products.length,
               itemBuilder: (context, index) {
                 return GestureDetector(
-                  onTap: () => Get.toNamed(AppRoutes.detailsPageRoute,
-                      arguments: {
-                        "Product": controller.products[index],
-                        "ProductsList": controller.allProducts
-                      }),
+                  onTap: () =>
+                      Get.toNamed(AppRoutes.detailsPageRoute, arguments: {
+                    ArgumentsNames.productD: controller.products[index],
+                    ArgumentsNames.productListD: controller.allProducts
+                  }),
                   child: Stack(
                     children: [
                       const SizedBox(

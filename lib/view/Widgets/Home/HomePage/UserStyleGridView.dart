@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
+import '../../../../core/constant/ArgumentsNames.dart';
 import '../../../../core/constant/Colors.dart';
 
 import '../../../../core/theme/theme.dart';
@@ -47,11 +48,11 @@ class UserStyleGridView extends GetView<HomePageControllerImp> {
                       mainAxisExtent: 190,
                       crossAxisSpacing: 20),
                   itemBuilder: (context, index) => GestureDetector(
-                    onTap: () => Get.toNamed(AppRoutes.detailsPageRoute,
-                        arguments: {
-                          "Product": controller.userStyle[index],
-                          "ProductsList": controller.products
-                        }),
+                    onTap: () =>
+                        Get.toNamed(AppRoutes.detailsPageRoute, arguments: {
+                      ArgumentsNames.productD: controller.userStyle[index],
+                      ArgumentsNames.productListD: controller.products
+                    }),
                     child: Stack(
                       clipBehavior: Clip.none,
                       children: [

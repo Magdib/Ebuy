@@ -1,13 +1,15 @@
+import 'package:ebuy/Controller/Home/HomePageController.dart';
 import 'package:ebuy/view/screens/Home/HomePage/filterPage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../../core/constant/ArgumentsNames.dart';
 import '../../../../routes.dart';
 import '../../../Widgets/Home/HomePage/NewTrend/DialogButton.dart';
 import '../../../Widgets/Home/HomePage/NewTrend/ItemsSetting.dart';
 import '../../../Widgets/Home/HomePage/shared/PageHeadersWithCartIcon.dart';
 import '../../../Widgets/Home/HomePage/NewTrend/NewTrendItemsGridView.dart';
 
-class NewTrendPage extends StatelessWidget {
+class NewTrendPage extends GetView<HomePageControllerImp> {
   const NewTrendPage({Key? key}) : super(key: key);
 
   @override
@@ -41,7 +43,12 @@ class NewTrendPage extends StatelessWidget {
                   ItemsSetting(
                     title: "Filter",
                     icon: Icons.filter_alt_outlined,
-                    onTap: () => Get.dialog(const FilterPage()),
+                    onTap: () => Get.dialog(const FilterPage(), arguments: {
+                      ArgumentsNames.productListF: controller.products,
+                      ArgumentsNames.brandsList: controller.brands,
+                      ArgumentsNames.categoriesList: controller.categories,
+                      ArgumentsNames.colorsList: controller.colors
+                    }),
                   ),
                 ],
               ),

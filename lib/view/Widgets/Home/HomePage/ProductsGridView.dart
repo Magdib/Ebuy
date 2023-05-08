@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
+import '../../../../core/constant/ArgumentsNames.dart';
 import '../../../../core/theme/theme.dart';
 import '../../../../data/model/HomePageModels/itemsModel.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -30,8 +31,8 @@ class ProductsGridView extends GetView<HomePageControllerImp> {
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () => Get.toNamed(AppRoutes.detailsPageRoute, arguments: {
-              "Product": controller.homeProducts[index],
-              "ProductsList": controller.products
+              ArgumentsNames.productD: controller.homeProducts[index],
+              ArgumentsNames.productListD: controller.products
             }),
             child: Stack(
               children: [

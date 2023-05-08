@@ -24,7 +24,7 @@ class SaveditemsListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<FavouriteControllerImp>(
       builder: (controller) => HandlingDataRequest(
-        onPressed: () => controller.getData(),
+        onPressed: () => controller.getData(true),
         statusRequest: controller.statusRequest,
         widget: RefreshIndicator(
           onRefresh: () => controller.refreshData(),

@@ -1,4 +1,5 @@
 import 'package:ebuy/core/class/StatusRequest.dart';
+import 'package:ebuy/core/constant/ArgumentsNames.dart';
 import 'package:ebuy/data/dataSource/remote/home/homeData.dart';
 import 'package:ebuy/data/model/HomePageModels/itemsModel.dart';
 import 'package:get/get.dart';
@@ -18,7 +19,7 @@ class ProductsControllerimp extends ProductsController {
   late String brandName;
   StatusRequest statusRequest = StatusRequest.loading;
   HomeData homeData = HomeData(Get.find());
-
+  late bool isProductsFilter;
   @override
   getData(bool showLoading) async {
     if (showLoading == true) {
@@ -35,17 +36,24 @@ class ProductsControllerimp extends ProductsController {
         statusRequest = StatusRequest.failure;
       }
     }
-
     update();
   }
 
   @override
   void onReady() async {
-    await getData(false);
-    brandName = Get.arguments['brandName'];
-    products = allProducts
-        .where((product) => product.itemsBrand!.contains(brandName))
-        .toList();
+    isProductsFilter = Get.arguments[ArgumentsNames.isProductsFilterd];
+    if (isProductsFilter == false) {
+      await getData(false);
+      brandName = Get.arguments[ArgumentsNames.brandName];
+      products = allProducts
+          .where((product) => product.itemsBrand!.contains(brandName))
+          .toList();
+    } else {
+      allProducts = Get.arguments[ArgumentsNames.productListF];
+      products = Get.arguments[ArgumentsNames.filterdProducts];
+      statusRequest = StatusRequest.none;
+      update();
+    }
     super.onReady();
   }
 }

@@ -3,6 +3,7 @@ import 'package:ebuy/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../core/constant/ArgumentsNames.dart';
 import '../../../../core/constant/Colors.dart';
 
 import '../../../../data/dataSource/Static/UINumbers.dart';
@@ -27,7 +28,8 @@ class BrandsGridView extends GetView<HomePageControllerImp> {
         itemBuilder: (context, index) => MaterialButton(
           elevation: 0,
           onPressed: () => Get.toNamed(AppRoutes.productsPageRoute, arguments: {
-            "brandName": controller.brands[index].brandName!,
+            ArgumentsNames.brandName: controller.brands[index].brandName!,
+            ArgumentsNames.isProductsFilterd: false
           }),
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(UINumber.borderRadius)),

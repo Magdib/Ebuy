@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:share_plus/share_plus.dart';
+import '../../core/constant/ArgumentsNames.dart';
 import '../../core/constant/Images.dart';
 import '../../data/dataSource/remote/Favourite/FavouriteAddData.dart';
 import '../../data/dataSource/remote/Favourite/favouriteRemoveData.dart';
@@ -18,19 +19,22 @@ import '../../data/model/ProductModels/RateModel.dart';
 
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
+import '../../routes.dart';
+
 abstract class DetailesController extends GetxController {
   changeFavouriteState();
   likediLikeComment(int index);
   void handleProductImages();
   void shareProduct();
+  void handleSimilarProduct();
   void similarProductFavState(int index);
+  void goToSimilarProduct(int index);
 }
 
 class DetailesControllerImp extends DetailesController {
   Box authBox = Hive.box(HiveBoxes.authBox);
   PageController? pageController;
   DefaultCacheManager? caheManger;
-  // bool hideSliverAppBar = true;
   late List<Products> products;
   late Products product;
   late List<String> productDesc;
@@ -61,12 +65,6 @@ class DetailesControllerImp extends DetailesController {
   @override
   changeFavouriteState() async {
     await handleFavourite(product);
-    update();
-  }
-
-  @override
-  void similarProductFavState(index) async {
-    await handleFavourite(similarProducts[index]);
     update();
   }
 
@@ -102,26 +100,16 @@ class DetailesControllerImp extends DetailesController {
   }
 
   @override
-  void onInit() {
-    product = Get.arguments['Product'];
-    products = Get.arguments["ProductsList"];
-    productDesc = [
-      product.itemsDesc!,
-      product.itemsDeliveryRefund!,
-      product.itemsSizeGuide!
-    ];
-    pageController = PageController();
-    caheManger = DefaultCacheManager();
+  void handleSimilarProduct() {
     handleProductImages();
+    products.removeWhere((currentProduct) =>
+        currentProduct.itemsName!.contains(product.itemsName!));
+    products.shuffle();
     similarProducts = products
         .where((similarProduct) =>
             similarProduct.itemsColor!.contains(product.itemsColor!))
         .toList();
-    for (int i = 0; i < similarProducts.length; i++) {
-      if (similarProducts[i].itemsName!.contains(product.itemsName!)) {
-        similarProducts.removeAt(i);
-      }
-    }
+
     if (similarProducts.length < 2) {
       similarProducts.addAll(products.where((similarProduct) =>
           similarProduct.categoriesName!.contains(product.categoriesName!)));
@@ -136,6 +124,34 @@ class DetailesControllerImp extends DetailesController {
       }
     }
     similarProducts.removeRange(2, similarProducts.length);
+  }
+
+  @override
+  void similarProductFavState(index) async {
+    await handleFavourite(similarProducts[index]);
+    update();
+  }
+
+  @override
+  void goToSimilarProduct(int index) {
+    product = similarProducts[index];
+    similarProducts.clear();
+    handleSimilarProduct();
+    update();
+  }
+
+  @override
+  void onInit() {
+    product = Get.arguments[ArgumentsNames.productD];
+    products = Get.arguments[ArgumentsNames.productListD];
+    productDesc = [
+      product.itemsDesc!,
+      product.itemsDeliveryRefund!,
+      product.itemsSizeGuide!
+    ];
+    pageController = PageController();
+    caheManger = DefaultCacheManager();
+    handleSimilarProduct();
 
     super.onInit();
   }

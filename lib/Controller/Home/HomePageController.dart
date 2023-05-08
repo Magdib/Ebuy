@@ -4,11 +4,14 @@ import 'package:ebuy/core/function/handleData.dart';
 import 'package:ebuy/core/function/handleFavourite.dart';
 import 'package:ebuy/data/dataSource/Static/HiveKeys.dart';
 import 'package:ebuy/data/dataSource/remote/home/homeData.dart';
+import 'package:ebuy/data/model/HomePageModels/CategoriesModel.dart';
+import 'package:ebuy/data/model/HomePageModels/ColorsModel.dart';
 import 'package:ebuy/data/model/HomePageModels/ProductsSortModel.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 import 'package:flutter/material.dart';
+import '../../core/constant/ArgumentsNames.dart';
 import '../../core/function/SnackBars.dart';
 import '../../core/function/checkInternet.dart';
 import '../../core/function/getProductIndex.dart';
@@ -21,7 +24,6 @@ import '../../routes.dart';
 
 abstract class HomePageController extends GetxController {
   void sortProducts(int index);
-  void changePriceRange(SfRangeValues range);
   getData(bool showLoading);
   refreshPage();
   void goToDetailes(int index);
@@ -55,9 +57,10 @@ class HomePageControllerImp extends HomePageController {
   List<BrandsModel> brands = [];
   List<Products> recentProduct = [];
   List<Products> userStyle = [];
+  List<ColorsModel> colors = [];
+  List<Categories> categories = [];
   late List<Products> sortedProducts;
 
-  late List<FilterModel> filterList;
   int lastSortIndex = 0;
   StatusRequest statusRequest = StatusRequest.loading;
   @override
@@ -73,6 +76,8 @@ class HomePageControllerImp extends HomePageController {
         List itemsList = response['items'];
         List bannersList = response['banners'];
         List brandsList = response['brands'];
+        List colorsList = response['Colors'];
+        List categoriesList = response['categories'];
         if (response['recent'] != "failure") {
           List recentList = response['recent'];
           recentProduct.addAll(recentList.map((e) => Products.fromJson(e)));
@@ -94,11 +99,20 @@ class HomePageControllerImp extends HomePageController {
             .where((product) => product.favourite == "1"));
         sortedProducts = newTrend;
         brands.addAll(brandsList.map((e) => BrandsModel.fromJson(e)));
+        colors.addAll(colorsList.map((e) => ColorsModel.fromJson(e)));
+        categories.addAll(categoriesList.map((e) => Categories.fromJson(e)));
+        savedItems.shuffle();
+        handleRecentFavourite();
+        if (savedItems.length > 2) {
+          userStyle.add(savedItems[2]);
+        }
+        if (recentProduct.isNotEmpty) {
+          userStyle.add(products[4]);
+        }
       } else {
         statusRequest = StatusRequest.failure;
       }
     }
-    savedItems.shuffle();
 
     update();
   }
@@ -136,15 +150,6 @@ class HomePageControllerImp extends HomePageController {
     Get.back();
   }
 
-  //Price Range
-  SfRangeValues priceRang = const SfRangeValues(8, 385);
-
-  @override
-  changePriceRange(SfRangeValues range) {
-    priceRang = range;
-    update();
-  }
-
   @override
   refreshPage() async {
     if (await checkinternet()) {
@@ -156,6 +161,7 @@ class HomePageControllerImp extends HomePageController {
       recentProduct.clear();
       newTrend.clear();
       brands.clear();
+      userStyle.clear();
       productsSort[lastSortIndex].choosenSort = false;
       productsSort[0].choosenSort = true;
       await getData(true);
@@ -184,21 +190,32 @@ class HomePageControllerImp extends HomePageController {
     Get.back();
     if (response['status'] == 'success') {
       Get.toNamed(AppRoutes.detailsPageRoute, arguments: {
-        "Product": sortedProducts[index],
-        "ProductsList": products
+        ArgumentsNames.productD: sortedProducts[index],
+        ArgumentsNames.productListD: products
       });
     }
   }
 
   @override
   void goToDetailes(index) async {
-    if (recentProduct.length == 2) {
-      if (recentProduct[0].itemsId == sortedProducts[index].itemsId ||
-          recentProduct[1].itemsId == sortedProducts[index].itemsId) {
-        Get.toNamed(AppRoutes.detailsPageRoute, arguments: {
-          "Product": sortedProducts[index],
-          "ProductsList": products
-        });
+    if (await checkinternet()) {
+      if (recentProduct.length == 2) {
+        if (recentProduct[0].itemsId == sortedProducts[index].itemsId ||
+            recentProduct[1].itemsId == sortedProducts[index].itemsId) {
+          Get.toNamed(AppRoutes.detailsPageRoute, arguments: {
+            ArgumentsNames.productD: sortedProducts[index],
+            ArgumentsNames.productListD: products
+          });
+        } else {
+          Get.dialog(
+              const Center(
+                child: CircularProgressIndicator(
+                  color: AppColors.primaryColor,
+                ),
+              ),
+              barrierDismissible: false,
+              arguments: {handleRecents(index)});
+        }
       } else {
         Get.dialog(
             const Center(
@@ -209,17 +226,10 @@ class HomePageControllerImp extends HomePageController {
             barrierDismissible: false,
             arguments: {handleRecents(index)});
       }
+      handleRecentFavourite();
     } else {
-      Get.dialog(
-          const Center(
-            child: CircularProgressIndicator(
-              color: AppColors.primaryColor,
-            ),
-          ),
-          barrierDismissible: false,
-          arguments: {handleRecents(index)});
+      noInternetSnackBar();
     }
-    handleRecentFavourite();
   }
 
   @override
@@ -251,14 +261,14 @@ class HomePageControllerImp extends HomePageController {
     switch (index) {
       case 0:
         Get.toNamed(AppRoutes.detailsPageRoute, arguments: {
-          "Product": products[firstRecentIndex],
-          "ProductsList": products
+          ArgumentsNames.productD: products[firstRecentIndex],
+          ArgumentsNames.productListD: products
         });
         break;
       case 1:
         Get.toNamed(AppRoutes.detailsPageRoute, arguments: {
-          "Product": products[secondeRecentIndex],
-          "ProductsList": products
+          ArgumentsNames.productD: products[secondeRecentIndex],
+          ArgumentsNames.productListD: products
         });
         break;
       default:
@@ -274,40 +284,7 @@ class HomePageControllerImp extends HomePageController {
   @override
   void onReady() async {
     authBox = await Hive.openBox(HiveBoxes.authBox);
-
     await getData(false);
-    handleRecentFavourite();
-    if (savedItems.length > 2) {
-      userStyle.add(savedItems[2]);
-    }
-    if (recentProduct.isNotEmpty) {
-      userStyle.add(products[4]);
-    }
-    List<String> brandsEnglish = [];
-    List<String> brandsarabic = [];
-    for (int i = 0; i < brands.length; i++) {
-      brandsEnglish.add(brands[i].brandName!);
-      brandsarabic.add(brands[i].brandNameAr!);
-    }
-    filterList = [
-      FilterModel(title: 'Gender', type: ['All', 'Male', 'Female']),
-      FilterModel(
-          title: 'Product type',
-          type: ['All', 'Shoes', 'Dress', 'Short', 'T-Shirt']),
-      FilterModel(title: 'Style', type: ['All']),
-      FilterModel(title: 'Color', type: [
-        'All',
-        'Black',
-        'White',
-        'Cyan',
-        'Red',
-        'Brown',
-        'Orange',
-        'Grey'
-      ]),
-      FilterModel(title: 'Brand', type: brandsEnglish),
-      FilterModel(title: 'Size', type: ['All', 'Medium', 'Large', 'X Large']),
-    ];
     super.onReady();
   }
 }

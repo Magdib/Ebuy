@@ -6,6 +6,7 @@ import 'package:ebuy/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../core/constant/ArgumentsNames.dart';
 import '../../../../core/theme/theme.dart';
 import '../../../../data/dataSource/Static/UINumbers.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -40,11 +41,11 @@ class SavedItemsStack extends GetView<HomePageControllerImp> {
                   child: IconButton(
                       padding: const EdgeInsets.all(0),
                       splashRadius: 14,
-                      onPressed: () => Get.toNamed(AppRoutes.detailsPageRoute,
-                              arguments: {
-                                "Product": product,
-                                "ProductsList": controller.products
-                              }),
+                      onPressed: () =>
+                          Get.toNamed(AppRoutes.detailsPageRoute, arguments: {
+                            ArgumentsNames.productD: product,
+                            ArgumentsNames.productListD: controller.products
+                          }),
                       icon: const Icon(
                         Icons.arrow_forward,
                         color: AppColors.primaryColor,

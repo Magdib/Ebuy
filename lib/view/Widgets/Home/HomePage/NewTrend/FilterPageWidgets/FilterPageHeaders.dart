@@ -1,3 +1,4 @@
+import 'package:ebuy/Controller/Home/FilterPageController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -5,7 +6,7 @@ import '../../../../../../core/constant/Colors.dart';
 
 import '../../../../../../core/theme/theme.dart';
 
-class FilterPageHeaders extends StatelessWidget {
+class FilterPageHeaders extends GetView<FilterPageControllerimp> {
   const FilterPageHeaders({
     Key? key,
     required this.title,
@@ -17,7 +18,7 @@ class FilterPageHeaders extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         IconButton(
-            onPressed: () => Get.back(),
+            onPressed: () => controller.onWillPop(),
             icon: const Icon(
               Icons.close,
               color: AppColors.grey,

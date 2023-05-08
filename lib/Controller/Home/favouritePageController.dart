@@ -11,12 +11,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
+import '../../core/constant/ArgumentsNames.dart';
 import '../../core/function/SnackBars.dart';
 import '../../core/function/checkInternet.dart';
 import '../../data/dataSource/remote/Favourite/getFavouriteData.dart';
 
 abstract class FavouriteController extends GetxController {
-  getData();
+  getData(bool showLoading);
   refreshData();
   void goToDetaielsPage(int index);
 }
@@ -37,7 +38,11 @@ class FavouriteControllerImp extends FavouriteController
   List<Favourite> favouriteItems = [];
 
   @override
-  getData() async {
+  getData(bool showLoading) async {
+    if (showLoading == true) {
+      statusRequest = StatusRequest.loading;
+      update();
+    }
     var response =
         await favouriteData.getFavouriteData(authBox.get(HiveKeys.userid));
     statusRequest = handlingData(response);
@@ -54,7 +59,7 @@ class FavouriteControllerImp extends FavouriteController
   refreshData() async {
     if (await checkinternet()) {
       favouriteItems.clear();
-      await getData();
+      await getData(true);
     } else {
       noInternetSnackBar();
     }
@@ -68,8 +73,8 @@ class FavouriteControllerImp extends FavouriteController
     Products product = homeController.products.firstWhere(
         (product) => product.itemsId!.contains(favouriteItems[index].itemsId!));
     Get.toNamed(AppRoutes.detailsPageRoute, arguments: {
-      "Product": product,
-      "ProductsList": homeController.products
+      ArgumentsNames.productD: product,
+      ArgumentsNames.productListD: homeController.products
     });
   }
 
@@ -77,7 +82,7 @@ class FavouriteControllerImp extends FavouriteController
   void onInit() {
     tabController = TabController(length: tabs.length, vsync: this);
     pageController = PageController();
-    getData();
+    getData(false);
     super.onInit();
   }
 
