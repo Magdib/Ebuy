@@ -1,5 +1,5 @@
 import 'package:ebuy/Controller/authControllers/SignUpController.dart';
-import 'package:ebuy/core/class/StatusRequest.dart';
+import 'package:ebuy/core/class/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';

@@ -38,7 +38,8 @@ class DropDownButtonAuth extends GetView<SignUpControllerImp> {
           hint: Text(
             hint,
             textAlign: TextAlign.end,
-            style: Theme.of(context).textTheme.headline4!,
+            style:
+                Theme.of(context).textTheme.headline4!.copyWith(fontSize: 16),
           ),
           menuMaxHeight: 150,
           borderRadius: BorderRadius.circular(UINumber.borderRadius),

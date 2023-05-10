@@ -22,7 +22,7 @@ class SignUpCustomButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(UINumber.borderRadius),
         child: MaterialButton(
           padding: const EdgeInsets.symmetric(vertical: 17),
-          minWidth: MediaQuery.of(context).size.width / 1.2,
+          minWidth: UINumber.deviceWidth,
           color: AppColors.primaryColor,
           disabledColor: AppColors.grey,
           onPressed: controller.signUpState == true ? onPressed : null,

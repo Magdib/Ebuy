@@ -1,4 +1,4 @@
-import 'package:ebuy/core/class/StatusRequest.dart';
+import 'package:ebuy/core/class/enums.dart';
 
 handlingData(response) {
   if (response is StatusRequest) {

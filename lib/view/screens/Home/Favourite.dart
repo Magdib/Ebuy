@@ -1,13 +1,8 @@
 import 'package:ebuy/Controller/Home/MainPageController.dart';
 import 'package:ebuy/Controller/Home/favouritePageController.dart';
-import 'package:ebuy/core/class/HandlingDataRequest.dart';
 import 'package:ebuy/core/constant/Colors.dart';
-
-import 'package:ebuy/data/dataSource/Static/UINumbers.dart';
-import 'package:ebuy/view/Widgets/Home/HomePage/shared/PageHeadersWithCartIcon.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../core/theme/theme.dart';
 import '../../Widgets/Home/Favourite/SaveditemsListView.dart';
 
 class FavouritePage extends GetView<MainContrllerImp> {
@@ -38,6 +33,7 @@ class FavouritePage extends GetView<MainContrllerImp> {
             padding: const EdgeInsets.symmetric(
               horizontal: 10,
             ),
+            indicatorWeight: 4,
             labelColor: AppColors.primaryColor,
             unselectedLabelColor: AppColors.grey,
             controller: favouriteControllerImp.tabController,
@@ -50,7 +46,18 @@ class FavouritePage extends GetView<MainContrllerImp> {
       ),
       body: TabBarView(
           controller: favouriteControllerImp.tabController,
-          children: [const SaveditemsListView(), Column()]),
+          children: [
+            GetBuilder<FavouriteControllerImp>(
+              builder: (controller) => SaveditemsListView(
+                favouriteList: controller.favouriteItems,
+              ),
+            ),
+            GetBuilder<FavouriteControllerImp>(
+              builder: (controller) => SaveditemsListView(
+                favouriteList: favouriteControllerImp.favouriteRecents,
+              ),
+            ),
+          ]),
     );
   }
 }

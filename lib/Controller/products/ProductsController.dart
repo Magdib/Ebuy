@@ -1,4 +1,4 @@
-import 'package:ebuy/core/class/StatusRequest.dart';
+import 'package:ebuy/core/class/enums.dart';
 import 'package:ebuy/core/constant/ArgumentsNames.dart';
 import 'package:ebuy/data/dataSource/remote/home/homeData.dart';
 import 'package:ebuy/data/model/HomePageModels/itemsModel.dart';

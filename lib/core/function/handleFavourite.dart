@@ -1,4 +1,4 @@
-import 'package:ebuy/core/class/StatusRequest.dart';
+import 'package:ebuy/core/class/enums.dart';
 import 'package:ebuy/data/dataSource/Static/HiveKeys.dart';
 import 'package:ebuy/data/dataSource/remote/Favourite/FavouriteAddData.dart';
 import 'package:ebuy/data/dataSource/remote/Favourite/favouriteRemoveData.dart';

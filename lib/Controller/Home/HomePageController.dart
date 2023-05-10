@@ -1,4 +1,4 @@
-import 'package:ebuy/core/class/StatusRequest.dart';
+import 'package:ebuy/core/class/enums.dart';
 import 'package:ebuy/core/constant/Colors.dart';
 import 'package:ebuy/core/function/handleData.dart';
 import 'package:ebuy/core/function/handleFavourite.dart';
@@ -234,7 +234,10 @@ class HomePageControllerImp extends HomePageController {
 
   @override
   void handleRecentFavourite() {
-    if (recentProduct.isNotEmpty) {
+    if (recentProduct.length == 1) {
+      firstRecentIndex = getProductIndex(products, recentProduct, 0);
+      recentProduct[0].favourite = products[firstRecentIndex].favourite;
+    } else if (recentProduct.length == 2) {
       firstRecentIndex = getProductIndex(products, recentProduct, 0);
       secondeRecentIndex = getProductIndex(products, recentProduct, 1);
       recentProduct[0].favourite = products[firstRecentIndex].favourite;

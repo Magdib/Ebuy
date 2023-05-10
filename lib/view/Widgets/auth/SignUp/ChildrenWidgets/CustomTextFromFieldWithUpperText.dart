@@ -48,7 +48,10 @@ class CustomTextFromFieldWithUpperText extends GetView<SignUpControllerImp> {
             obscureText: obscure,
             cursorColor: AppColors.deepGrey,
             decoration: InputDecoration(
-                hintStyle: Theme.of(context).textTheme.headline4!,
+                hintStyle: Theme.of(context)
+                    .textTheme
+                    .headline4!
+                    .copyWith(fontSize: 16),
                 hintText: hint,
                 border: OutlineInputBorder(
                     borderSide: const BorderSide(color: AppColors.grey),

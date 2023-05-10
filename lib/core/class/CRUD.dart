@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
-import 'package:ebuy/core/class/StatusRequest.dart';
+import 'package:ebuy/core/class/enums.dart';
 import 'package:ebuy/core/function/checkInternet.dart';
 import 'package:http/http.dart' as http;
 

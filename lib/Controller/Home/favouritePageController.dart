@@ -1,6 +1,6 @@
 import 'package:ebuy/Controller/Home/HomePageController.dart';
 import 'package:ebuy/Controller/Home/MainPageController.dart';
-import 'package:ebuy/core/class/StatusRequest.dart';
+import 'package:ebuy/core/class/enums.dart';
 import 'package:ebuy/core/function/handleData.dart';
 import 'package:ebuy/core/services/intialServices.dart';
 import 'package:ebuy/data/dataSource/Static/HiveKeys.dart';
@@ -19,6 +19,7 @@ import '../../data/dataSource/remote/Favourite/getFavouriteData.dart';
 abstract class FavouriteController extends GetxController {
   getData(bool showLoading);
   refreshData();
+  void handlePageList();
   void goToDetaielsPage(int index);
 }
 
@@ -27,7 +28,7 @@ class FavouriteControllerImp extends FavouriteController
   final List<Tab> tabs = [
     const Tab(text: "All Items"),
     const Tab(
-      text: "Boards",
+      text: "Recents",
     )
   ];
   TabController? tabController;
@@ -36,7 +37,7 @@ class FavouriteControllerImp extends FavouriteController
   GetFavouriteData favouriteData = GetFavouriteData(Get.find());
   StatusRequest statusRequest = StatusRequest.loading;
   List<Favourite> favouriteItems = [];
-
+  List<Favourite> favouriteRecents = [];
   @override
   getData(bool showLoading) async {
     if (showLoading == true) {
@@ -50,6 +51,7 @@ class FavouriteControllerImp extends FavouriteController
       if (response['status'] == "success") {
         List favouriteList = response['data'];
         favouriteItems.addAll(favouriteList.map((e) => Favourite.fromJson(e)));
+        handlePageList();
       }
     }
     update();
@@ -66,16 +68,33 @@ class FavouriteControllerImp extends FavouriteController
   }
 
   @override
+  void handlePageList() {
+    favouriteRecents = favouriteItems.reversed.toList();
+    if (favouriteRecents.length > 2) {
+      favouriteRecents.removeRange(2, favouriteRecents.length);
+    }
+  }
+
+  @override
   void goToDetaielsPage(int index) {
     MainContrllerImp mainContrller = Get.find();
     mainContrller.somthingChange = true;
     HomePageControllerImp homeController = Get.find();
-    Products product = homeController.products.firstWhere(
-        (product) => product.itemsId!.contains(favouriteItems[index].itemsId!));
-    Get.toNamed(AppRoutes.detailsPageRoute, arguments: {
-      ArgumentsNames.productD: product,
-      ArgumentsNames.productListD: homeController.products
-    });
+    if (tabController!.index == 0) {
+      Products product = homeController.products.firstWhere((product) =>
+          product.itemsId!.contains(favouriteItems[index].itemsId!));
+      Get.toNamed(AppRoutes.detailsPageRoute, arguments: {
+        ArgumentsNames.productD: product,
+        ArgumentsNames.productListD: homeController.products
+      });
+    } else {
+      Products product = homeController.products.firstWhere((product) =>
+          product.itemsId!.contains(favouriteRecents[index].itemsId!));
+      Get.toNamed(AppRoutes.detailsPageRoute, arguments: {
+        ArgumentsNames.productD: product,
+        ArgumentsNames.productListD: homeController.products
+      });
+    }
   }
 
   @override
@@ -83,6 +102,7 @@ class FavouriteControllerImp extends FavouriteController
     tabController = TabController(length: tabs.length, vsync: this);
     pageController = PageController();
     getData(false);
+
     super.onInit();
   }
 

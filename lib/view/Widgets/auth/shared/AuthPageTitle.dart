@@ -24,9 +24,6 @@ class AuthPageTitle extends StatelessWidget {
               color: AppColors.deepGrey,
               size: 24,
             )),
-        Text(title,
-            style:
-                Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 20)),
         const SizedBox(
           width: 20,
         )

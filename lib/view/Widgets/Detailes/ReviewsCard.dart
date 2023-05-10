@@ -26,18 +26,20 @@ class ReviewsCard extends GetView<DetailesControllerImp> {
                 const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 10),
             child: SeeAllTextRow(title: 'Review', onTap: () {}),
           ),
-          Divider(
+          const Divider(
             color: AppColors.grey,
             thickness: 0.7,
           ),
-          ListView.separated(
-            itemCount: controller.usersRate.length,
-            padding: const EdgeInsets.only(top: 10, left: 15, bottom: 20),
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemBuilder: (context, index) => DetailesListView(index: index),
-            separatorBuilder: (context, index) => const SizedBox(
-              height: 140,
+          GetBuilder<DetailesControllerImp>(
+            builder: (controller) => ListView.separated(
+              itemCount: controller.usersRate.length,
+              padding: const EdgeInsets.only(top: 10, left: 15, bottom: 20),
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemBuilder: (context, index) => DetailesListView(index: index),
+              separatorBuilder: (context, index) => const SizedBox(
+                height: 140,
+              ),
             ),
           )
         ],

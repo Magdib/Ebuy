@@ -20,15 +20,15 @@ List<OnBoardingModel> onBoardingdata = [
           'You can see the product with all angles, true and convenient'.tr),
   OnBoardingModel(
       image: AppImagesAssets.onBoardingImageTow,
-      title: 'Find TProducts easily'.tr,
+      title: 'Find Products easily'.tr,
       subtitle:
-          'You just need to take a photo or upload and we will find similar TProducts for you.'
+          'You just need to take a photo or upload and we will find similar Products for you.'
               .tr),
   OnBoardingModel(
       image: AppImagesAssets.onBoardingImageThree,
       title: 'Payment is easy'.tr,
       subtitle:
-          'You just need to take a photo or upload and we will find similar TProducts for you.'
+          'You just need to take a photo or upload and we will find similar Products for you.'
               .tr),
 ];
 

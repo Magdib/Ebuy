@@ -3,6 +3,7 @@ import 'package:ebuy/Controller/Home/favouritePageController.dart';
 import 'package:ebuy/core/class/HandlingDataRequest.dart';
 import 'package:ebuy/core/constant/Server.dart';
 import 'package:ebuy/core/function/StringToColors.dart';
+import 'package:ebuy/data/model/favouriteModel/favouriteModel.dart';
 import 'package:ebuy/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,8 +19,9 @@ import 'FavouriteCard.dart';
 class SaveditemsListView extends StatelessWidget {
   const SaveditemsListView({
     Key? key,
+    required this.favouriteList,
   }) : super(key: key);
-
+  final List<Favourite> favouriteList;
   @override
   Widget build(BuildContext context) {
     return GetBuilder<FavouriteControllerImp>(
@@ -31,7 +33,7 @@ class SaveditemsListView extends StatelessWidget {
           color: AppColors.primaryColor,
           child: ListView.builder(
             padding: const EdgeInsets.only(left: 5, right: 5, top: 10),
-            itemCount: controller.favouriteItems.length,
+            itemCount: favouriteList.length,
             itemBuilder: (context, index) => GestureDetector(
               onTap: () => controller.goToDetaielsPage(index),
               child: Stack(
@@ -45,10 +47,10 @@ class SaveditemsListView extends StatelessWidget {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Hero(
-                          tag: controller.favouriteItems[index].itemsImage!,
+                          tag: favouriteList[index].itemsImage!,
                           child: CachedNetworkImage(
                             imageUrl:
-                                "${AppServer.itemsImages}${controller.favouriteItems[index].itemsImage}",
+                                "${AppServer.itemsImages}${favouriteList[index].itemsImage}",
                             height: 85,
                             width: 87,
                           ),
@@ -64,7 +66,7 @@ class SaveditemsListView extends StatelessWidget {
                               height: 35,
                             ),
                             Text(
-                              controller.favouriteItems[index].itemsName!,
+                              favouriteList[index].itemsName!,
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyText1!
@@ -86,8 +88,8 @@ class SaveditemsListView extends StatelessWidget {
                                   width: 20,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(20),
-                                      color: stringToColor(controller
-                                          .favouriteItems[index].itemsColor!)),
+                                      color: stringToColor(
+                                          favouriteList[index].itemsColor!)),
                                 )
                               ],
                             ),
@@ -95,7 +97,7 @@ class SaveditemsListView extends StatelessWidget {
                               height: 5,
                             ),
                             Text(
-                              'Size:  ${controller.favouriteItems[index].itemsSize}',
+                              'Size:  ${favouriteList[index].itemsSize}',
                               style: Theme.of(context)
                                   .textTheme
                                   .headline6!
@@ -105,7 +107,7 @@ class SaveditemsListView extends StatelessWidget {
                               height: 20,
                             ),
                             Text(
-                              '\$${controller.favouriteItems[index].itemsPrice}',
+                              '\$${favouriteList[index].itemsPrice}',
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyText1!

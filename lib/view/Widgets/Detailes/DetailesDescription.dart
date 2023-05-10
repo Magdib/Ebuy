@@ -7,7 +7,7 @@ import '../../../core/theme/theme.dart';
 import '../../../data/dataSource/Static/static.dart';
 import '../Home/HomePage/NewTrend/FilterPageWidgets/GreyDivider.dart';
 
-class DetailesDescription extends GetView<DetailesControllerImp> {
+class DetailesDescription extends StatelessWidget {
   const DetailesDescription({
     Key? key,
   }) : super(key: key);
@@ -36,12 +36,14 @@ class DetailesDescription extends GetView<DetailesControllerImp> {
                 const SizedBox(
                   height: 20,
                 ),
-                Text(
-                  controller.productDesc[index],
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline6!
-                      .copyWith(fontSize: 14),
+                GetBuilder<DetailesControllerImp>(
+                  builder: (controller) => Text(
+                    controller.productDesc[index],
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline6!
+                        .copyWith(fontSize: 14),
+                  ),
                 )
               ],
             ),

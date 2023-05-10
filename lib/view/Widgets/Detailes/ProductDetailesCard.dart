@@ -8,7 +8,7 @@ import '../../../core/constant/Colors.dart';
 import '../../../core/theme/theme.dart';
 import '../../../data/dataSource/Static/UINumbers.dart';
 
-class ProductDetailesCard extends GetView<DetailesControllerImp> {
+class ProductDetailesCard extends StatelessWidget {
   const ProductDetailesCard({
     Key? key,
   }) : super(key: key);
@@ -23,52 +23,54 @@ class ProductDetailesCard extends GetView<DetailesControllerImp> {
         width: UINumber.deviceWidth,
         child: Padding(
           padding: const EdgeInsets.only(left: 15, right: 15, top: 10),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "${controller.product.itemsName}",
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText1!
-                    .copyWith(fontSize: 18),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      RatingBar.builder(
-                        ignoreGestures: true,
-                        unratedColor: AppColors.grey,
-                        itemSize: 25,
-                        initialRating:
-                            double.parse(controller.product.itemsRate!),
-                        minRating: 1,
-                        direction: Axis.horizontal,
-                        allowHalfRating: true,
-                        glow: false,
-                        itemCount: 5,
-                        itemBuilder: (context, _) => const Icon(
-                          Icons.star_rate_rounded,
-                          color: AppColors.amber,
+          child: GetBuilder<DetailesControllerImp>(
+            builder: (controller) => Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "${controller.product.itemsName}",
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyText1!
+                      .copyWith(fontSize: 18),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        RatingBar.builder(
+                          ignoreGestures: true,
+                          unratedColor: AppColors.grey,
+                          itemSize: 25,
+                          initialRating:
+                              double.parse(controller.product.itemsRate!),
+                          minRating: 1,
+                          direction: Axis.horizontal,
+                          allowHalfRating: true,
+                          glow: false,
+                          itemCount: 5,
+                          itemBuilder: (context, _) => const Icon(
+                            Icons.star_rate_rounded,
+                            color: AppColors.amber,
+                          ),
+                          onRatingUpdate: (rating) {},
                         ),
-                        onRatingUpdate: (rating) {},
-                      ),
-                      Text(
-                        controller.product.itemsRate!,
-                        style: Theme.of(context).textTheme.bodyText1,
-                      )
-                    ],
-                  ),
-                  Text(
-                    "${controller.product.itemsPrice!}\$",
-                    style: Theme.of(context).textTheme.bodyText1,
-                  )
-                ],
-              )
-            ],
+                        Text(
+                          controller.product.itemsRate!,
+                          style: Theme.of(context).textTheme.bodyText1,
+                        )
+                      ],
+                    ),
+                    Text(
+                      "${controller.product.itemsPrice!}\$",
+                      style: Theme.of(context).textTheme.bodyText1,
+                    )
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),

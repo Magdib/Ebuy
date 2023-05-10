@@ -1,5 +1,6 @@
 import 'package:ebuy/Controller/authControllers/SignInController.dart';
 import 'package:ebuy/core/class/HandlingDataRequest.dart';
+import 'package:ebuy/core/constant/Colors.dart';
 import 'package:ebuy/core/theme/theme.dart';
 import 'package:ebuy/data/dataSource/Static/UINumbers.dart';
 import 'package:ebuy/routes.dart';
@@ -19,50 +20,57 @@ class SignIn extends GetView<SignInControllerImp> {
     Get.put(SignInControllerImp());
     return SafeArea(
         child: Scaffold(
+            appBar: AppBar(
+              title: Text("Sign In",
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyText1!
+                      .copyWith(fontSize: 20)),
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+              centerTitle: true,
+              elevation: 0,
+            ),
             body: GetBuilder<SignInControllerImp>(
-      builder: (controller) => HandlingDataRequest(
-        onPressed: () => controller.signinRequest(),
-        statusRequest: controller.signInStatusRequest,
-        widget: SingleChildScrollView(
-          child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    AuthPageTitle(title: 'Sign In'.tr),
-                    Padding(
-                        padding: const EdgeInsets.only(left: 10.0),
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const SignInTextFields(),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              InkWell(
-                                onTap: () =>
-                                    Get.toNamed(AppRoutes.checkEmailRoute),
-                                child: Text(
-                                  'Forgot Password'.tr,
-                                  style: Theme.of(context).textTheme.headline5,
+              builder: (controller) => HandlingDataRequest(
+                onPressed: () => controller.signinRequest(),
+                statusRequest: controller.signInStatusRequest,
+                widget: Padding(
+                    padding:
+                        const EdgeInsets.only(right: 5, left: 15, bottom: 10),
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                              child: SingleChildScrollView(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const SignInTextFields(),
+                                const SizedBox(
+                                  height: 5,
                                 ),
-                              ),
-                              SizedBox(
-                                height: UINumber.deviceHeight / 2.9,
-                              ),
-                              const SignInCustomButton(),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              HaveAccountAuth(
-                                  authText: "Don't have an account? ".tr,
-                                  authType: 'Sign Up'.tr,
+                                InkWell(
                                   onTap: () =>
-                                      Get.toNamed(AppRoutes.signUpRoute)),
-                            ]))
-                  ])),
-        ),
-      ),
-    )));
+                                      Get.toNamed(AppRoutes.checkEmailRoute),
+                                  child: Text(
+                                    'Forgot Password'.tr,
+                                    style:
+                                        Theme.of(context).textTheme.headline5,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )),
+                          const SignInCustomButton(),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          HaveAccountAuth(
+                              authText: "Don't have an account? ".tr,
+                              authType: 'Sign Up'.tr,
+                              onTap: () => Get.toNamed(AppRoutes.signUpRoute))
+                        ])),
+              ),
+            )));
   }
 }

@@ -28,25 +28,24 @@ class DetailsPage extends GetView<DetailesControllerImp> {
               padding: const EdgeInsets.symmetric(horizontal: 5),
               height: UINumber.deviceHeight / 1.13,
               child: CustomScrollView(
+                controller: controller.scrollController,
                 slivers: [
-                  GetBuilder<DetailesControllerImp>(
-                    builder: (controller) => SliverAppBar(
-                      toolbarHeight: 45,
-                      shadowColor: AppColors.white,
-                      actions: [
-                        IconButton(
-                            splashRadius: 14,
-                            onPressed: () {
-                              controller.shareProduct();
-                            },
-                            icon: const Icon(
-                              Icons.share,
-                              color: AppColors.black,
-                            ))
-                      ],
-                      floating: true,
-                      backgroundColor: AppColors.white,
-                    ),
+                  SliverAppBar(
+                    toolbarHeight: 45,
+                    shadowColor: AppColors.white,
+                    actions: [
+                      IconButton(
+                          splashRadius: 14,
+                          onPressed: () {
+                            controller.shareProduct();
+                          },
+                          icon: const Icon(
+                            Icons.share,
+                            color: AppColors.black,
+                          ))
+                    ],
+                    floating: true,
+                    backgroundColor: AppColors.white,
                   ),
                   SliverList(
                       delegate: SliverChildBuilderDelegate(

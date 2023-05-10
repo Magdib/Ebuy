@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:ebuy/core/class/StatusRequest.dart';
+import 'package:ebuy/core/class/enums.dart';
 import 'package:ebuy/core/constant/Server.dart';
 import 'package:ebuy/core/function/SnackBars.dart';
 import 'package:ebuy/core/function/handleData.dart';
@@ -33,7 +33,8 @@ abstract class DetailesController extends GetxController {
 
 class DetailesControllerImp extends DetailesController {
   Box authBox = Hive.box(HiveBoxes.authBox);
-  PageController? pageController;
+  PageController? imagesController;
+  ScrollController? scrollController;
   DefaultCacheManager? caheManger;
   late List<Products> products;
   late Products product;
@@ -91,7 +92,7 @@ class DetailesControllerImp extends DetailesController {
   @override
   void shareProduct() async {
     File image = await caheManger!.getSingleFile(
-        "${AppServer.itemsImages}${productImages[pageController!.page!.toInt()]}");
+        "${AppServer.itemsImages}${productImages[imagesController!.page!.toInt()]}");
 
     Share.shareXFiles(
       [XFile(image.path)],
@@ -137,6 +138,10 @@ class DetailesControllerImp extends DetailesController {
     product = similarProducts[index];
     similarProducts.clear();
     handleSimilarProduct();
+    productImages.clear();
+    handleProductImages();
+    scrollController!.animateTo(0,
+        duration: const Duration(seconds: 1), curve: Curves.easeIn);
     update();
   }
 
@@ -149,7 +154,8 @@ class DetailesControllerImp extends DetailesController {
       product.itemsDeliveryRefund!,
       product.itemsSizeGuide!
     ];
-    pageController = PageController();
+    imagesController = PageController();
+    scrollController = ScrollController();
     caheManger = DefaultCacheManager();
     handleSimilarProduct();
 
@@ -158,7 +164,8 @@ class DetailesControllerImp extends DetailesController {
 
   @override
   void onClose() {
-    pageController!.dispose();
+    imagesController!.dispose();
+    scrollController!.dispose();
     super.onClose();
   }
 }

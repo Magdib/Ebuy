@@ -1,4 +1,4 @@
-import 'package:ebuy/core/class/StatusRequest.dart';
+import 'package:ebuy/core/class/enums.dart';
 import 'package:ebuy/core/function/handleData.dart';
 import 'package:ebuy/core/services/intialServices.dart';
 import 'package:ebuy/routes.dart';
@@ -275,9 +275,8 @@ class SignUpControllerImp extends SignUpController {
     verifyEmailStatusRequest = handlingData(response);
     if (StatusRequest.success == verifyEmailStatusRequest) {
       if (response['status'] == "success") {
-        Get.offAllNamed(
-          AppRoutes.signInRoute,
-        );
+        Get.back();
+        Get.back();
         succesSnackBar(
             'Success'.tr, 'Your account have been Created successfully'.tr);
       } else {

@@ -7,7 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
-import '../../core/class/StatusRequest.dart';
+import '../../core/class/enums.dart';
 import '../../core/function/handleData.dart';
 import '../../core/function/SnackBars.dart';
 import '../../data/dataSource/remote/auth/CheckEmailData.dart';

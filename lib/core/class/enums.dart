@@ -6,3 +6,5 @@ enum StatusRequest {
   serverfailure,
   success,
 }
+
+enum SearchState { empty, noRecent, recent, success, none }

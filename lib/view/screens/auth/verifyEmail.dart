@@ -1,6 +1,6 @@
 import 'package:ebuy/Controller/authControllers/SignUpController.dart';
 import 'package:ebuy/core/class/HandlingDataRequest.dart';
-import 'package:ebuy/core/class/StatusRequest.dart';
+import 'package:ebuy/core/class/enums.dart';
 import 'package:ebuy/core/constant/Colors.dart';
 import 'package:ebuy/view/Widgets/auth/shared/AuthPageTitle.dart';
 
@@ -30,7 +30,7 @@ class EmailVerification extends GetView<SignUpControllerImp> {
         widget: SingleChildScrollView(
             child: Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
