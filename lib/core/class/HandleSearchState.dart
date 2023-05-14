@@ -108,7 +108,7 @@ AppBar handleSearchAppBar(SearchState searchState, BuildContext context) {
           ),
           leadingWidth: 40,
           leading: IconButton(
-            onPressed: () => controller.changeSearchState(0),
+            onPressed: () => controller.changeSearchState(0, context),
             icon: const Icon(
               Icons.arrow_back,
               color: AppColors.grey,
@@ -121,7 +121,7 @@ AppBar handleSearchAppBar(SearchState searchState, BuildContext context) {
           titleSpacing: 10,
           elevation: 0,
           title: SearchTextFiled(
-            onTap: () => controller.changeSearchState(1),
+            onTap: () => controller.changeSearchState(1, context),
             readOnly: controller.showTabBar,
           ),
           bottom: controller.showTabBar == true

@@ -9,7 +9,7 @@ import '../../data/model/HomePageModels/BannersModel.dart';
 
 abstract class SearchController extends GetxController {
   void searchingProducts();
-  void changeSearchState(int index);
+  void changeSearchState(int index, BuildContext context);
   void goToSearchCategory(String category);
   void sortCategoriesProducts(String gender, String category);
 }
@@ -79,9 +79,10 @@ class SearchControllerImp extends SearchController
   }
 
   @override
-  changeSearchState(int index) {
+  changeSearchState(int index, BuildContext context) {
     switch (index) {
       case 0:
+        FocusScope.of(context).unfocus();
         searchController!.clear();
         searchState = SearchState.none;
         break;

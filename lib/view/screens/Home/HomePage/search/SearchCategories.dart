@@ -1,12 +1,7 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ebuy/Controller/Home/SearchController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../../core/constant/ArgumentsNames.dart';
-import '../../../../../core/constant/Server.dart';
-import '../../../../../data/model/HomePageModels/BannersModel.dart';
-import '../../../../../routes.dart';
 import '../../../../Widgets/Home/HomePage/BannerCardWithRichtext.dart';
 import '../../../../Widgets/shared/ProductsPageGridView.dart';
 

@@ -28,9 +28,9 @@ class SearchTextFiled extends GetView<SearchControllerImp> {
           onChanged: (value) {
             if (value.isNotEmpty) {
               controller.searchingProducts();
-              controller.changeSearchState(2);
+              controller.changeSearchState(2, context);
             } else {
-              controller.changeSearchState(1);
+              controller.changeSearchState(1, context);
             }
           },
           decoration: InputDecoration(
@@ -38,7 +38,7 @@ class SearchTextFiled extends GetView<SearchControllerImp> {
                 Icons.search,
               ),
               suffixIcon: IconButton(
-                onPressed: () => controller.changeSearchState(1),
+                onPressed: () => controller.changeSearchState(1, context),
                 icon: Icon(
                   Icons.circle,
                   color: AppColors.deepGrey,
