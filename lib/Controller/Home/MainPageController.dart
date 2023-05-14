@@ -4,7 +4,7 @@ import 'package:ebuy/data/dataSource/Static/HiveKeys.dart';
 import 'package:ebuy/view/screens/Home/Cart.dart';
 import 'package:ebuy/view/screens/Home/Favourite.dart';
 import 'package:ebuy/view/screens/Home/HomePage/HomePage.dart';
-import 'package:ebuy/view/screens/Home/Search.dart';
+import 'package:ebuy/view/screens/Home/HomePage/search/Search.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import '../../view/screens/Home/Settings/SettingsMainPage.dart';

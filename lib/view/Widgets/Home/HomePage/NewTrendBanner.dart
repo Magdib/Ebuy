@@ -1,10 +1,6 @@
 import 'package:ebuy/core/constant/Server.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
-import '../../../../core/constant/Images.dart';
-
-import '../../../../core/theme/theme.dart';
 import '../../../../data/dataSource/Static/UINumbers.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 

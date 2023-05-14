@@ -7,4 +7,4 @@ enum StatusRequest {
   success,
 }
 
-enum SearchState { empty, noRecent, recent, success, none }
+enum SearchState { searching, noRecent, recent, success, none }

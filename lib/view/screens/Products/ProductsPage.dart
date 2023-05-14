@@ -9,6 +9,8 @@ import '../../../Controller/products/ProductsController.dart';
 import '../../../core/constant/ArgumentsNames.dart';
 import '../../../core/constant/Server.dart';
 import '../../../core/theme/theme.dart';
+import '../../Widgets/Home/HomePage/ProductsGridView.dart';
+import '../../Widgets/shared/ProductsPageGridView.dart';
 
 class ProductsPage extends StatelessWidget {
   const ProductsPage({super.key});
@@ -32,62 +34,10 @@ class ProductsPage extends StatelessWidget {
           builder: (controller) => HandlingDataRequest(
             onPressed: () => controller.getData(true),
             statusRequest: controller.statusRequest,
-            widget: GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 20,
-                  childAspectRatio: 0.9),
-              itemCount: controller.products.length,
-              itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: () =>
-                      Get.toNamed(AppRoutes.detailsPageRoute, arguments: {
-                    ArgumentsNames.productD: controller.products[index],
-                    ArgumentsNames.productListD: controller.allProducts
-                  }),
-                  child: Stack(
-                    children: [
-                      const SizedBox(
-                          height: 170,
-                          width: double.infinity,
-                          child: Card(
-                            elevation: 10,
-                            margin: EdgeInsets.only(top: 40),
-                          )),
-                      Positioned(
-                        top: 0,
-                        right: 10,
-                        child: Hero(
-                          tag: controller.products[index].itemsImage!,
-                          child: CachedNetworkImage(
-                            imageUrl:
-                                "${AppServer.itemsImages}${controller.products[index].itemsImage!}",
-                            height: 100,
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        bottom: 55,
-                        left: 20,
-                        child: Text(
-                          controller.products[index].itemsName!,
-                          style: AppTheme.arabicTheme.textTheme.headline6!
-                              .copyWith(fontSize: 14),
-                        ),
-                      ),
-                      Positioned(
-                        bottom: 30,
-                        left: 20,
-                        child: Text(
-                          '\$${controller.products[index].itemsPrice}',
-                          style: AppTheme.arabicTheme.textTheme.bodyText1,
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              },
+            widget: ProductsPageGridView(
+              allProducts: controller.allProducts,
+              productsList: controller.products,
+              isScrollable: true,
             ),
           ),
         ));

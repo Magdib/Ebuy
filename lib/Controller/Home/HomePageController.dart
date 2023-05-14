@@ -52,6 +52,7 @@ class HomePageControllerImp extends HomePageController {
   List<Products> homeProducts = [];
   List<Products> newTrend = [];
   List<Banners> banners = [];
+  List<Banners> allBanners = [];
   List<Products> savedItems = [];
   List<Products> newProducts = [];
   List<BrandsModel> brands = [];
@@ -93,7 +94,10 @@ class HomePageControllerImp extends HomePageController {
         newProducts.addAll(itemsList
             .map((e) => Products.fromJson(e))
             .where((product) => product.itemsIsNew == "1"));
-        banners.addAll(bannersList.map((e) => Banners.fromJson(e)));
+        allBanners.addAll(bannersList.map((e) => Banners.fromJson(e)));
+        allBanners.length > 2
+            ? banners.addAll([allBanners[0], allBanners[1]])
+            : banners = allBanners;
         savedItems.addAll(itemsList
             .map((e) => Products.fromJson(e))
             .where((product) => product.favourite == "1"));

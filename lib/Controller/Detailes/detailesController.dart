@@ -105,7 +105,7 @@ class DetailesControllerImp extends DetailesController {
     handleProductImages();
     products.removeWhere((currentProduct) =>
         currentProduct.itemsName!.contains(product.itemsName!));
-    products.shuffle();
+
     similarProducts = products
         .where((similarProduct) =>
             similarProduct.itemsColor!.contains(product.itemsColor!))

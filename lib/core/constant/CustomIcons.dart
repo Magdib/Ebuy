@@ -30,4 +30,6 @@ class CustomIcons {
       IconData(0xe80b, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData boxIcon =
       IconData(0xe80c, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData tshirt =
+      IconData(0xf553, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }

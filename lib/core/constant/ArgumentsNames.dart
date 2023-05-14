@@ -8,4 +8,5 @@ class ArgumentsNames {
   static const String isProductsFilterd = "isProductsFilterd";
   static const String productListF = "ProductsListF";
   static const String filterdProducts = "filterdProducts";
+  static const String searchCategories = "SearchCategories";
 }

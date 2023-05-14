@@ -3,8 +3,9 @@ import 'package:ebuy/view/screens/Details/DetailsImagesview.dart';
 import 'package:ebuy/view/screens/Home/Cart.dart';
 import 'package:ebuy/view/screens/Home/Favourite.dart';
 import 'package:ebuy/view/screens/Home/HomePage/NewTrends.dart';
+import 'package:ebuy/view/screens/Home/HomePage/search/SearchCategories.dart';
 import 'package:ebuy/view/screens/Home/MainPage.dart';
-import 'package:ebuy/view/screens/Home/Search.dart';
+import 'package:ebuy/view/screens/Home/HomePage/search/Search.dart';
 import 'package:ebuy/view/screens/Products/ProductsPage.dart';
 import 'package:ebuy/view/screens/auth/CheckEmail.dart';
 import 'package:ebuy/view/screens/auth/setNewPassword.dart';
@@ -34,6 +35,7 @@ class AppRoutes {
   static const String detailsPageRoute = "/DetailsPage";
   static const String productImagesRoute = "/productImagesRoute";
   static const String productsPageRoute = "/productsPageRoute";
+  static const String searchCategories = "/searchCategories";
 }
 
 List<GetPage<dynamic>>? routes = [
@@ -62,5 +64,9 @@ List<GetPage<dynamic>>? routes = [
   GetPage(
       name: AppRoutes.productImagesRoute,
       page: () => const ProductImagesView()),
-  GetPage(name: AppRoutes.productsPageRoute, page: () => const ProductsPage())
+  GetPage(name: AppRoutes.productsPageRoute, page: () => const ProductsPage()),
+  GetPage(
+    name: AppRoutes.searchCategories,
+    page: () => const SearchCategories(),
+  )
 ];
