@@ -4,14 +4,20 @@ import 'package:get/get.dart';
 
 import '../../../../core/constant/Colors.dart';
 
-class SearchTextFiled extends GetView<SearchControllerImp> {
+class SearchTextFiled extends StatelessWidget {
   const SearchTextFiled({
     super.key,
     this.onTap,
     required this.readOnly,
+    required this.textController,
+    required this.onChanged,
+    required this.suffixTap,
   });
   final void Function()? onTap;
   final bool readOnly;
+  final TextEditingController textController;
+  final void Function(String) onChanged;
+  final VoidCallback suffixTap;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -24,22 +30,15 @@ class SearchTextFiled extends GetView<SearchControllerImp> {
           autofocus: true,
           style: Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 16),
           cursorColor: AppColors.primaryColor,
-          controller: controller.searchController,
-          onChanged: (value) {
-            if (value.isNotEmpty) {
-              controller.searchingProducts();
-              controller.changeSearchState(2, context);
-            } else {
-              controller.changeSearchState(1, context);
-            }
-          },
+          controller: textController,
+          onChanged: onChanged,
           decoration: InputDecoration(
               prefixIcon: const Icon(
                 Icons.search,
               ),
               suffixIcon: IconButton(
-                onPressed: () => controller.changeSearchState(1, context),
-                icon: Icon(
+                onPressed: suffixTap,
+                icon: const Icon(
                   Icons.circle,
                   color: AppColors.deepGrey,
                 ),

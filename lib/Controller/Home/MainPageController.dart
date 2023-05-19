@@ -1,7 +1,7 @@
 import 'package:ebuy/Controller/Home/HomePageController.dart';
 import 'package:ebuy/Controller/Home/favouritePageController.dart';
 import 'package:ebuy/data/dataSource/Static/HiveKeys.dart';
-import 'package:ebuy/view/screens/Home/Cart.dart';
+import 'package:ebuy/view/screens/Home/Cart/Cart.dart';
 import 'package:ebuy/view/screens/Home/Favourite.dart';
 import 'package:ebuy/view/screens/Home/HomePage/HomePage.dart';
 import 'package:ebuy/view/screens/Home/HomePage/search/Search.dart';

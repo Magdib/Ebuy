@@ -45,7 +45,7 @@ class Products {
   String? categoriesDatetime;
   String? favourite;
   String? recent;
-
+  bool cartDelete = false;
   Products(
       {this.itemsId,
       this.itemsName,
@@ -92,7 +92,8 @@ class Products {
       this.categoriesNameAr,
       this.categoriesDatetime,
       this.favourite,
-      this.recent});
+      this.recent,
+      required this.cartDelete});
 
   Products.fromJson(Map<String, dynamic> json) {
     itemsId = json['items_id'];

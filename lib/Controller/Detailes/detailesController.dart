@@ -1,17 +1,20 @@
 import 'dart:io';
 
 import 'package:ebuy/core/class/enums.dart';
+import 'package:ebuy/core/constant/Colors.dart';
 import 'package:ebuy/core/constant/Server.dart';
 import 'package:ebuy/core/function/SnackBars.dart';
 import 'package:ebuy/core/function/handleData.dart';
 import 'package:ebuy/core/function/handleFavourite.dart';
 import 'package:ebuy/data/dataSource/Static/HiveKeys.dart';
+import 'package:ebuy/data/dataSource/Static/UINumbers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:share_plus/share_plus.dart';
 import '../../core/constant/ArgumentsNames.dart';
 import '../../core/constant/Images.dart';
+import '../../core/function/StringToColors.dart';
 import '../../data/dataSource/remote/Favourite/FavouriteAddData.dart';
 import '../../data/dataSource/remote/Favourite/favouriteRemoveData.dart';
 import '../../data/model/HomePageModels/itemsModel.dart';
@@ -19,16 +22,20 @@ import '../../data/model/ProductModels/RateModel.dart';
 
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
-import '../../routes.dart';
+import '../../view/Widgets/Detailes/DetailesBottomSheet.dart';
 
 abstract class DetailesController extends GetxController {
   changeFavouriteState();
   likediLikeComment(int index);
   void handleProductImages();
+  void handleProductColors();
+  void handleProductsSizes();
   void shareProduct();
   void handleSimilarProduct();
   void similarProductFavState(int index);
   void goToSimilarProduct(int index);
+  void changeSelectedColor(int index);
+  void addToCart();
 }
 
 class DetailesControllerImp extends DetailesController {
@@ -39,11 +46,15 @@ class DetailesControllerImp extends DetailesController {
   late List<Products> products;
   late Products product;
   late List<String> productDesc;
+  int colorSelected = 0;
+  late int sizeSelected;
   FavouriteAddData favouriteAddData = FavouriteAddData(Get.find());
   FavouriteRemoveData favouriteRemoveData = FavouriteRemoveData(Get.find());
   StatusRequest statusRequest = StatusRequest.none;
   List<String> productImages = [];
+  List<Color> productColors = [];
   List<Products> similarProducts = [];
+  List<String> sizes = [];
   List<RateModel> usersRate = [
     RateModel(
         username: 'Jack Bibber',
@@ -90,6 +101,34 @@ class DetailesControllerImp extends DetailesController {
   }
 
   @override
+  void handleProductColors() {
+    productColors.add(stringToColor(product.itemsColor!));
+    if (product.itemsColor2 != null) {
+      productColors.add(stringToColor(product.itemsColor2!));
+    }
+    if (product.itemsColor3 != null) {
+      productColors.add(stringToColor(product.itemsColor3!));
+    }
+    if (product.itemsColor4 != null) {
+      productColors.add(stringToColor(product.itemsColor4!));
+    }
+  }
+
+  @override
+  void handleProductsSizes() {
+    sizes.add(product.itemsSize![0]);
+    if (product.itemsSize2 != null) {
+      sizes.add(product.itemsSize2![0]);
+    }
+    if (product.itemsSize3 != null) {
+      sizes.add(product.itemsSize3![0]);
+    }
+    if (product.itemsSize4 != null) {
+      sizes.add(product.itemsSize4![0] + product.itemsSize4![1]);
+    }
+  }
+
+  @override
   void shareProduct() async {
     File image = await caheManger!.getSingleFile(
         "${AppServer.itemsImages}${productImages[imagesController!.page!.toInt()]}");
@@ -103,6 +142,8 @@ class DetailesControllerImp extends DetailesController {
   @override
   void handleSimilarProduct() {
     handleProductImages();
+    handleProductColors();
+    handleProductsSizes();
     products.removeWhere((currentProduct) =>
         currentProduct.itemsName!.contains(product.itemsName!));
 
@@ -146,6 +187,20 @@ class DetailesControllerImp extends DetailesController {
   }
 
   @override
+  void changeSelectedColor(int index) {
+    colorSelected = index;
+    update();
+  }
+
+  @override
+  void addToCart() {
+    Get.bottomSheet(const DetailesBottomSheet(),
+        backgroundColor: AppColors.white,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        isScrollControlled: true);
+  }
+
+  @override
   void onInit() {
     product = Get.arguments[ArgumentsNames.productD];
     products = Get.arguments[ArgumentsNames.productListD];
@@ -158,7 +213,8 @@ class DetailesControllerImp extends DetailesController {
     scrollController = ScrollController();
     caheManger = DefaultCacheManager();
     handleSimilarProduct();
-
+    String size = product.itemsSize![0];
+    sizeSelected = sizes.indexWhere((tempSize) => tempSize.contains(size));
     super.onInit();
   }
 

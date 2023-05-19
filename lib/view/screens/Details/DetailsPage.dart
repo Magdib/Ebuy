@@ -82,7 +82,9 @@ class DetailsPage extends GetView<DetailesControllerImp> {
               child: SizedBox(
                 height: 50,
                 width: UINumber.deviceWidth,
-                child: CustomButton(text: 'Add to card', onPressed: () {}),
+                child: CustomButton(
+                    text: 'Add to cart',
+                    onPressed: () => controller.addToCart()),
               ),
             )
           ],

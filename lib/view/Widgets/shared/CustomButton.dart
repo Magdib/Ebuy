@@ -11,22 +11,26 @@ class CustomButton extends StatelessWidget {
     Key? key,
     required this.text,
     required this.onPressed,
+    this.borderRadius,
   }) : super(key: key);
   final String text;
   final void Function() onPressed;
+  final double? borderRadius;
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(UINumber.borderRadius),
-      child: MaterialButton(
-        padding: const EdgeInsets.symmetric(vertical: 17),
-        minWidth: MediaQuery.of(context).size.width / 1,
-        color: AppColors.primaryColor,
-        onPressed: onPressed,
-        child: Text(
-          text,
-          style: Theme.of(context).textTheme.headline3,
-        ),
+    return MaterialButton(
+      shape: RoundedRectangleBorder(
+        borderRadius: borderRadius == null
+            ? BorderRadius.circular(UINumber.borderRadius)
+            : BorderRadius.circular(borderRadius!),
+      ),
+      padding: const EdgeInsets.symmetric(vertical: 17),
+      minWidth: MediaQuery.of(context).size.width / 1,
+      color: AppColors.primaryColor,
+      onPressed: onPressed,
+      child: Text(
+        text,
+        style: Theme.of(context).textTheme.headline3,
       ),
     );
   }

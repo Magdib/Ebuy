@@ -12,6 +12,7 @@ abstract class SearchController extends GetxController {
   void changeSearchState(int index, BuildContext context);
   void goToSearchCategory(String category);
   void sortCategoriesProducts(String gender, String category);
+  void searchFieldOnChanged(String value, BuildContext context);
 }
 
 class SearchControllerImp extends SearchController
@@ -105,7 +106,7 @@ class SearchControllerImp extends SearchController
     String gender;
     tabController!.index == 0 ? gender = "female" : gender = "male";
     sortCategoriesProducts(gender, category);
-    Get.toNamed(AppRoutes.searchCategories);
+    Get.toNamed(AppRoutes.searchCategoriesRoute);
   }
 
   @override
@@ -149,6 +150,16 @@ class SearchControllerImp extends SearchController
     }
     if (sortedProducts.length > 3) {
       sortedProducts.removeRange(3, sortedProducts.length);
+    }
+  }
+
+  @override
+  void searchFieldOnChanged(String value, BuildContext context) {
+    if (value.isNotEmpty) {
+      searchingProducts();
+      changeSearchState(2, context);
+    } else {
+      changeSearchState(1, context);
     }
   }
 

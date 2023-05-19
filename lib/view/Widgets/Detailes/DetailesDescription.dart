@@ -7,7 +7,7 @@ import '../../../core/theme/theme.dart';
 import '../../../data/dataSource/Static/static.dart';
 import '../Home/HomePage/NewTrend/FilterPageWidgets/GreyDivider.dart';
 
-class DetailesDescription extends StatelessWidget {
+class DetailesDescription extends GetView<DetailesControllerImp> {
   const DetailesDescription({
     Key? key,
   }) : super(key: key);
@@ -17,7 +17,7 @@ class DetailesDescription extends StatelessWidget {
     return Card(
       elevation: UINumber.cardElevation,
       child: ListView.separated(
-        itemCount: 3,
+        itemCount: controller.productDesc.length,
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         itemBuilder: (BuildContext context, int index) {

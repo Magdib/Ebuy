@@ -103,8 +103,12 @@ AppBar handleSearchAppBar(SearchState searchState, BuildContext context) {
           toolbarHeight: 80,
           titleSpacing: 10,
           elevation: 0,
-          title: const SearchTextFiled(
+          title: SearchTextFiled(
             readOnly: false,
+            textController: controller.searchController!,
+            onChanged: (value) =>
+                controller.searchFieldOnChanged(value, context),
+            suffixTap: () => controller.changeSearchState(1, context),
           ),
           leadingWidth: 40,
           leading: IconButton(
@@ -123,6 +127,10 @@ AppBar handleSearchAppBar(SearchState searchState, BuildContext context) {
           title: SearchTextFiled(
             onTap: () => controller.changeSearchState(1, context),
             readOnly: controller.showTabBar,
+            textController: controller.searchController!,
+            onChanged: (value) =>
+                controller.searchFieldOnChanged(value, context),
+            suffixTap: () => controller.changeSearchState(1, context),
           ),
           bottom: controller.showTabBar == true
               ? TabBar(

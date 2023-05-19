@@ -1,6 +1,9 @@
 import 'package:ebuy/core/middleware/middleware.dart';
 import 'package:ebuy/view/screens/Details/DetailsImagesview.dart';
-import 'package:ebuy/view/screens/Home/Cart.dart';
+import 'package:ebuy/view/screens/Home/Cart/Cart.dart';
+import 'package:ebuy/view/screens/Home/Cart/CheckOut.dart';
+import 'package:ebuy/view/screens/Home/Cart/OrderSuccess.dart';
+import 'package:ebuy/view/screens/Home/Cart/SelectCountry.dart';
 import 'package:ebuy/view/screens/Home/Favourite.dart';
 import 'package:ebuy/view/screens/Home/HomePage/NewTrends.dart';
 import 'package:ebuy/view/screens/Home/HomePage/search/SearchCategories.dart';
@@ -33,9 +36,12 @@ class AppRoutes {
   static const String favouriteRoute = "/favourite";
   static const String accoutSettingsRoute = "/accountSettings";
   static const String detailsPageRoute = "/DetailsPage";
-  static const String productImagesRoute = "/productImagesRoute";
-  static const String productsPageRoute = "/productsPageRoute";
-  static const String searchCategories = "/searchCategories";
+  static const String productImagesRoute = "/productImages";
+  static const String productsPageRoute = "/productsPage";
+  static const String searchCategoriesRoute = "/searchCategories";
+  static const String checkOutRoute = "/checkOut";
+  static const String orderSuccessRoute = "/orderSuccess";
+  static const String selectCountryRoute = "/SelectCountry";
 }
 
 List<GetPage<dynamic>>? routes = [
@@ -66,7 +72,19 @@ List<GetPage<dynamic>>? routes = [
       page: () => const ProductImagesView()),
   GetPage(name: AppRoutes.productsPageRoute, page: () => const ProductsPage()),
   GetPage(
-    name: AppRoutes.searchCategories,
+    name: AppRoutes.searchCategoriesRoute,
     page: () => const SearchCategories(),
+  ),
+  GetPage(
+    name: AppRoutes.checkOutRoute,
+    page: () => const CheckOut(),
+  ),
+  GetPage(
+    name: AppRoutes.orderSuccessRoute,
+    page: () => const OrderSuccess(),
+  ),
+  GetPage(
+    name: AppRoutes.selectCountryRoute,
+    page: () => const SelectCountry(),
   )
 ];
