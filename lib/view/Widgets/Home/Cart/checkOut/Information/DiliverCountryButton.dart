@@ -2,6 +2,7 @@ import 'package:country_flags/country_flags.dart';
 import 'package:ebuy/Controller/Home/CartController.dart';
 import 'package:ebuy/core/constant/Colors.dart';
 import 'package:ebuy/routes.dart';
+import 'package:ebuy/view/Widgets/shared/CustomContainer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,9 +14,7 @@ class DiliverCountryButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<CartControllerImp>(
-      builder: (controller) => Container(
-        decoration: const BoxDecoration(
-            boxShadow: [BoxShadow(color: AppColors.deepGrey, blurRadius: 4)]),
+      builder: (controller) => CustomContainer(
         child: MaterialButton(
           height: 60,
           minWidth: double.infinity,

@@ -1,12 +1,10 @@
 import 'package:ebuy/Controller/Home/CartController.dart';
 import 'package:ebuy/core/constant/Colors.dart';
-import 'package:ebuy/core/function/GiftCardDialogs.dart';
 
-import 'package:ebuy/view/Widgets/Home/Cart/CheckOutItem.dart';
 import 'package:ebuy/view/Widgets/Home/Cart/CustomStepper.dart';
-import 'package:ebuy/view/Widgets/Home/Cart/DiliverCountryButton.dart';
-import 'package:ebuy/view/Widgets/Home/Cart/Information.dart';
-import 'package:ebuy/view/Widgets/shared/CustomButton.dart';
+import 'package:ebuy/view/Widgets/Home/Cart/checkOut/Information/Information.dart';
+import 'package:ebuy/view/Widgets/Home/Cart/checkOut/payment/Payment.dart';
+import 'package:ebuy/view/Widgets/Home/Cart/checkOut/shipping/Shipping.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -33,16 +31,19 @@ class CheckOut extends GetView<CartControllerImp> {
             )),
       ),
       body: GetBuilder<CartControllerImp>(
-        builder: (controller) => Column(
-          children: [
-            const CustomStepper(),
-            Expanded(
-              child: PageView(
-                  controller: controller.pageController,
-                  physics: const NeverScrollableScrollPhysics(),
-                  children: [const Information(), ListView(), ListView()]),
-            ),
-          ],
+        builder: (controller) => WillPopScope(
+          onWillPop: () => controller.resetCheckOut(),
+          child: Column(
+            children: [
+              const CustomStepper(),
+              Expanded(
+                child: PageView(
+                    controller: controller.pageController,
+                    physics: const NeverScrollableScrollPhysics(),
+                    children: const [Information(), Shipping(), Payment()]),
+              ),
+            ],
+          ),
         ),
       ),
     );

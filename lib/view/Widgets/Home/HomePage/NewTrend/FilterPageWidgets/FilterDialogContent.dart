@@ -1,4 +1,5 @@
 import 'package:ebuy/Controller/Home/FilterPageController.dart';
+import 'package:ebuy/view/Widgets/shared/CustomRadio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -24,20 +25,13 @@ class FilterDialogContent extends GetView<FilterPageControllerimp> {
             const SizedBox(
               width: 10,
             ),
-            GestureDetector(
-              onTap: () => controller.changeFilterValue(
-                  controller.filterList[filterIndex].type[index], filterIndex),
-              child: Container(
-                height: 30,
-                width: 30,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    color: controller.filterValues[filterIndex] ==
-                            controller.filterList[filterIndex].type[index]
-                        ? AppColors.primaryColor
-                        : AppColors.grey),
-              ),
-            ),
+            CustomRadio(
+                onTap: () => controller.changeFilterValue(
+                    controller.filterList[filterIndex].type[index],
+                    filterIndex),
+                condition: controller.filterValues[filterIndex] ==
+                    controller.filterList[filterIndex].type[index],
+                radius: 30),
             const SizedBox(
               width: 10,
             ),

@@ -1,9 +1,6 @@
-import 'package:ebuy/core/theme/theme.dart';
 import 'package:ebuy/data/dataSource/Static/UINumbers.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-import '../../../Controller/onBoardingController/OnBoardingController.dart';
 import '../../../core/constant/Colors.dart';
 
 class CustomButton extends StatelessWidget {

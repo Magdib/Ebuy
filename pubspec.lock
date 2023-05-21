@@ -129,6 +129,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.10.1"
+  dotted_border:
+    dependency: "direct main"
+    description:
+      name: dotted_border
+      sha256: "07a5c5e8d4e6e992279e190e0352be8faa5b8f96d81c77a78b2d42f060279840"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0+3"
   fake_async:
     dependency: transitive
     description:
@@ -328,6 +336,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.18.1"
+  jiffy:
+    dependency: "direct main"
+    description:
+      name: jiffy
+      sha256: "9d1ea8fa2955d62d3fd5f83317db4d565350deea13d7884212aa7d0ddb1c9982"
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.1.0"
   js:
     dependency: transitive
     description:

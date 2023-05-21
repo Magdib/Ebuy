@@ -14,7 +14,7 @@ import '../../Widgets/auth/shared/AuthPageTitle.dart';
 import '../../Widgets/auth/SignUp/ChildrenWidgets/MostlyIntersetedRichText.dart';
 import '../../Widgets/auth/SignUp/ParentWidgets/DropDownButtonsRow.dart';
 import '../../Widgets/auth/SignUp/ParentWidgets/EmailLikedListView.dart';
-import '../../Widgets/auth/SignUp/ParentWidgets/MenOrWomensWearCircle.dart';
+import '../../Widgets/auth/SignUp/ParentWidgets/GenderWearCircle.dart';
 import '../../Widgets/auth/SignUp/ParentWidgets/SignUpTextFields.dart';
 
 class Signup extends StatelessWidget {
@@ -68,7 +68,7 @@ class Signup extends StatelessWidget {
                       const SizedBox(
                         height: 20,
                       ),
-                      const MenOrWomensWearCircle(),
+                      const GenderWearCircle(),
                       const SizedBox(height: 20),
                       const SizedBox(height: 5),
                       Text(

@@ -1,13 +1,14 @@
 import 'package:ebuy/Controller/Home/CartController.dart';
 import 'package:ebuy/core/constant/Colors.dart';
 import 'package:ebuy/core/function/GiftCardDialogs.dart';
+import 'package:ebuy/view/Widgets/shared/CustomContainer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../shared/CustomButton.dart';
-import 'CheckOutItem.dart';
-import 'CustomStepper.dart';
+import '../../../../shared/CustomButton.dart';
+import '../../CustomStepper.dart';
 import 'DiliverCountryButton.dart';
+import 'CheckOutItem.dart';
 
 class Information extends StatelessWidget {
   const Information({
@@ -42,10 +43,7 @@ class Information extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              Container(
-                  decoration: const BoxDecoration(boxShadow: [
-                    BoxShadow(color: AppColors.deepGrey, blurRadius: 4)
-                  ]),
+              CustomContainer(
                   child: MaterialButton(
                       height: 55,
                       minWidth: double.infinity,
@@ -58,7 +56,7 @@ class Information extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Promo/ Student code or e-gift cards',
+                            'add or choose e-gift cards',
                             style: Theme.of(context).textTheme.bodyText1,
                           ),
                           const Icon(
@@ -70,7 +68,7 @@ class Information extends StatelessWidget {
             ]),
       ),
       Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
         child: GetBuilder<CartControllerImp>(
           builder: (controller) => CustomButton(
               text: 'Shipping', onPressed: () => controller.nextStep()),

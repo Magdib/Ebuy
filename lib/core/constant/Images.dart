@@ -8,7 +8,14 @@ class AppImagesAssets {
   static const String lottieError = "$lottie/error404.json";
   static const String lottieoffline = "$lottie/offline.json";
   static const String noRecetSearch = "$imagesAssetFolder/NoRecentSearch.svg";
-  static const user1 = "$imagesAssetFolder/Jack Bibber.png";
-  static const user2 = "$imagesAssetFolder/Vie Ruan.png";
-  static const acccountperson = "$imagesAssetFolder/anonymous person.png";
+  static const String user1 = "$imagesAssetFolder/Jack Bibber.png";
+  static const String user2 = "$imagesAssetFolder/Vie Ruan.png";
+  static const String acccountperson =
+      "$imagesAssetFolder/anonymous person.png";
+  static const String visa = "$imagesAssetFolder/visa.png";
+  static const String payPal = "$imagesAssetFolder/paypal.png";
+  static const String masterCard = "$imagesAssetFolder/mastercard.png";
+  static const String klarna = "$imagesAssetFolder/klarna.png";
+  static const String americanExpress =
+      "$imagesAssetFolder/american-express.png";
 }

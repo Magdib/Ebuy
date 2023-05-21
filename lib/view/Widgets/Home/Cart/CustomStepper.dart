@@ -1,4 +1,5 @@
 import 'package:ebuy/Controller/Home/CartController.dart';
+import 'package:ebuy/data/dataSource/Static/static.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -20,36 +21,31 @@ class CustomStepper extends StatelessWidget {
           child: GetBuilder<CartControllerImp>(
             builder: (controller) => ListView.builder(
               scrollDirection: Axis.horizontal,
-              padding: const EdgeInsets.only(left: 10.0),
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemCount: 3,
               itemBuilder: (context, index) => Row(
                 children: [
-                  Container(
-                    height: controller.stepperList[index].containerHeight,
+                  AnimatedContainer(
+                    duration: const Duration(milliseconds: 600),
+                    curve: Curves.easeInCubic,
+                    height: stepperList[index].containerHeight,
                     width: 30,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(
-                          controller.stepperList[index].borderRadius),
-                      color: controller.currentStep < index
-                          ? AppColors.grey
-                          : AppColors.primaryColor,
+                          stepperList[index].borderRadius),
+                      color: controller.stepsColors[index],
                     ),
                   ),
                   index < 2
-                      ? Container(
-                          height: 2,
-                          width: UINumber.deviceWidth / 3.5,
-                          color: controller.currentStep < index + 1
-                              ? AppColors.grey
-                              : AppColors.primaryColor,
+                      ? AnimatedContainer(
+                          duration: const Duration(milliseconds: 600),
+                          curve: Curves.linear,
+                          height: 3,
+                          width: UINumber.deviceWidth / 3,
+                          color: controller.stepsColors[index + 1],
                         )
-                      : Container(
-                          height: 2,
-                          margin: const EdgeInsets.symmetric(vertical: 28),
-                          width: UINumber.deviceWidth / 3.5,
-                          color: Theme.of(context).scaffoldBackgroundColor),
+                      : const SizedBox()
                 ],
               ),
             ),
@@ -67,7 +63,7 @@ class CustomStepper extends StatelessWidget {
                 shrinkWrap: true,
                 itemCount: 3,
                 itemBuilder: (context, index) => Text(
-                      controller.stepperList[index].subtitle,
+                      stepperList[index].subtitle,
                       style: index == controller.currentStep
                           ? Theme.of(context)
                               .textTheme

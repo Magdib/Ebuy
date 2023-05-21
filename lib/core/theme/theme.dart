@@ -6,6 +6,8 @@ class AppTheme {
   static const String fontFamily = 'sanfrancisco';
   // static const String fontFamily = 'Amiri';
   static ThemeData arabicTheme = ThemeData.light().copyWith(
+      colorScheme: const ColorScheme.light().copyWith(
+          primary: AppColors.primaryColor, secondary: AppColors.primaryColor),
       appBarTheme:
           const AppBarTheme(iconTheme: IconThemeData(color: AppColors.black)),
       textTheme: const TextTheme(

@@ -1,17 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ebuy/Controller/Home/SearchController.dart';
-import 'package:ebuy/core/constant/Colors.dart';
-import 'package:ebuy/core/constant/Images.dart';
-import 'package:ebuy/data/model/HomePageModels/BannersModel.dart';
-import 'package:ebuy/view/Widgets/Home/HomePage/BannerCardWithRichtext.dart';
+import 'package:ebuy/core/class/HandleSearchState.dart';
+import 'package:ebuy/view/Widgets/Home/Search/SearchBanner.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-
-import '../../../../../core/class/HandleSearchState.dart';
-import '../../../../../core/class/enums.dart';
-
-import '../../../../Widgets/Home/Search/SearchBanner.dart';
 
 class SearchPage extends StatelessWidget {
   const SearchPage({Key? key}) : super(key: key);
