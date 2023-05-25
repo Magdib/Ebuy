@@ -18,4 +18,7 @@ class AppImagesAssets {
   static const String klarna = "$imagesAssetFolder/klarna.png";
   static const String americanExpress =
       "$imagesAssetFolder/american-express.png";
+  static const String paymentImage = '$imagesAssetFolder/Illus - 4.svg';
+  static const String noOrdersImage = '$imagesAssetFolder/Iluss - 2.svg';
+  static const String noAddressImage = '$imagesAssetFolder/Illus - 3.svg';
 }

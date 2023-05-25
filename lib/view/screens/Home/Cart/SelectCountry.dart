@@ -1,7 +1,7 @@
 import 'package:ebuy/Controller/Home/CartController.dart';
 import 'package:ebuy/core/constant/Colors.dart';
 import 'package:ebuy/data/dataSource/Static/UINumbers.dart';
-import 'package:ebuy/view/Widgets/Home/HomePage/NewTrend/FilterPageWidgets/GreyDivider.dart';
+import 'package:ebuy/view/Widgets/shared/GreyDivider.dart';
 import 'package:ebuy/view/Widgets/Home/Search/SearchTextFiled.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

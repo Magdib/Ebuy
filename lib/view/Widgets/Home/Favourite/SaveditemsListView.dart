@@ -2,7 +2,7 @@ import 'package:ebuy/Controller/Home/HomePageController.dart';
 import 'package:ebuy/Controller/Home/favouritePageController.dart';
 import 'package:ebuy/core/class/HandlingDataRequest.dart';
 import 'package:ebuy/core/constant/Server.dart';
-import 'package:ebuy/core/function/StringToColors.dart';
+import 'package:ebuy/core/function/Ui%20Functions/StringToColors.dart';
 import 'package:ebuy/data/model/favouriteModel/favouriteModel.dart';
 import 'package:ebuy/routes.dart';
 import 'package:flutter/material.dart';

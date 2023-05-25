@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../Controller/Home/MainPageController.dart';
-import '../../data/dataSource/Static/UINumbers.dart';
+import '../../../Controller/Home/MainPageController.dart';
+import '../../../data/dataSource/Static/UINumbers.dart';
 
 EdgeInsets bottomBarHandle(MainContrllerImp mainContrllerImp) {
   return mainContrllerImp.bottomBarIndex == 0

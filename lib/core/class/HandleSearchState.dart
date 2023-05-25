@@ -1,7 +1,7 @@
 import 'package:ebuy/Controller/Home/SearchController.dart';
 import 'package:ebuy/Controller/authControllers/SignUpController.dart';
 import 'package:ebuy/core/class/enums.dart';
-import 'package:ebuy/view/Widgets/Home/HomePage/NewTrend/FilterPageWidgets/GreyDivider.dart';
+import 'package:ebuy/view/Widgets/shared/GreyDivider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

@@ -2,8 +2,8 @@ import 'package:ebuy/Controller/Home/SearchController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../Widgets/Home/HomePage/BannerCardWithRichtext.dart';
-import '../../../../Widgets/shared/ProductsPageGridView.dart';
+import '../../../Widgets/Home/HomePage/BannerCardWithRichtext.dart';
+import '../../../Widgets/shared/ProductsPageGridView.dart';
 
 class SearchCategories extends GetView<SearchControllerImp> {
   const SearchCategories({super.key});

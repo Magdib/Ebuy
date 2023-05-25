@@ -12,7 +12,7 @@ import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
 import '../../core/constant/ArgumentsNames.dart';
-import '../../core/function/SnackBars.dart';
+import '../../core/function/Ui Functions/SnackBars.dart';
 import '../../core/function/checkInternet.dart';
 import '../../data/dataSource/remote/Favourite/getFavouriteData.dart';
 

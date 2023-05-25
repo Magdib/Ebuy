@@ -6,7 +6,7 @@ import 'package:ebuy/view/Widgets/shared/CustomRadio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../HomePage/NewTrend/FilterPageWidgets/GreyDivider.dart';
+import '../../../../shared/GreyDivider.dart';
 
 class ShipOptionsBox extends GetView<CartControllerImp> {
   const ShipOptionsBox({

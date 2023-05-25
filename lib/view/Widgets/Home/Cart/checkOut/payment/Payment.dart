@@ -1,12 +1,12 @@
 import 'package:ebuy/Controller/Home/CartController.dart';
-
 import 'package:ebuy/data/dataSource/Static/static.dart';
 import 'package:ebuy/view/Widgets/shared/CustomContainer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../UserAddressShipBox.dart';
 import 'PayMethodListView.dart';
+import 'TermsAndConditionText.dart';
+import 'TotalPayCard.dart';
 
 class Payment extends GetView<CartControllerImp> {
   const Payment({
@@ -61,34 +61,11 @@ class Payment extends GetView<CartControllerImp> {
         const SizedBox(
           height: 20,
         ),
-        CustomContainer(
-            radius: 5,
-            child: Column(
-              children: [
-                ListView.separated(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    padding: const EdgeInsets.only(
-                        left: 15, right: 15, top: 30, bottom: 20),
-                    itemBuilder: (context, index) => Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                controller.placeOrderList[0][index],
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline6!
-                                    .copyWith(fontSize: 14),
-                              ),
-                              Text(controller.placeOrderList[1][index],
-                                  style: Theme.of(context).textTheme.bodyText1),
-                            ]),
-                    separatorBuilder: (context, index) => const SizedBox(
-                          height: 20,
-                        ),
-                    itemCount: 3)
-              ],
-            ))
+        const TotalPayCard(),
+        const SizedBox(
+          height: 15,
+        ),
+        const TermsAndConditionText(),
       ],
     );
   }

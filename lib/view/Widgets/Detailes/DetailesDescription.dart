@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 
 import '../../../core/theme/theme.dart';
 import '../../../data/dataSource/Static/static.dart';
-import '../Home/HomePage/NewTrend/FilterPageWidgets/GreyDivider.dart';
+import '../shared/GreyDivider.dart';
 
 class DetailesDescription extends GetView<DetailesControllerImp> {
   const DetailesDescription({

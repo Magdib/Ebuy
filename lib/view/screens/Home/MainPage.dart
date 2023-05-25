@@ -5,7 +5,7 @@ import 'package:ebuy/data/dataSource/Static/UINumbers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../core/function/bottomBarHandle.dart';
+import '../../../core/function/Ui Functions/bottomBarHandle.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({Key? key}) : super(key: key);

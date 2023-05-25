@@ -38,7 +38,7 @@ class NewTrendPage extends GetView<HomePageControllerImp> {
                             return const AlertDialog(
                                 contentPadding:
                                     EdgeInsets.symmetric(vertical: 5),
-                                content: DialogButton());
+                                content: SortDialogButton());
                           })),
                   ItemsSetting(
                     title: "Filter",

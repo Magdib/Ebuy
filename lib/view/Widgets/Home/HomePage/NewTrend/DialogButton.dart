@@ -1,5 +1,5 @@
 import 'package:ebuy/Controller/Home/HomePageController.dart';
-import 'package:ebuy/view/Widgets/Home/HomePage/NewTrend/FilterPageWidgets/GreyDivider.dart';
+import 'package:ebuy/view/Widgets/shared/GreyDivider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -7,8 +7,8 @@ import '../../../../../core/constant/Colors.dart';
 
 import '../../../../../core/theme/theme.dart';
 
-class DialogButton extends StatelessWidget {
-  const DialogButton({
+class SortDialogButton extends StatelessWidget {
+  const SortDialogButton({
     Key? key,
   }) : super(key: key);
   @override

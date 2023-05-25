@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../../core/constant/Colors.dart';
+import '../../../core/constant/Colors.dart';
 
 class GreyDivider extends StatelessWidget {
   const GreyDivider({

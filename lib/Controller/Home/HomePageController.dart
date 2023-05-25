@@ -12,7 +12,7 @@ import 'package:hive/hive.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 import 'package:flutter/material.dart';
 import '../../core/constant/ArgumentsNames.dart';
-import '../../core/function/SnackBars.dart';
+import '../../core/function/Ui Functions/SnackBars.dart';
 import '../../core/function/checkInternet.dart';
 import '../../core/function/getProductIndex.dart';
 import '../../data/dataSource/remote/home/RecentData.dart';

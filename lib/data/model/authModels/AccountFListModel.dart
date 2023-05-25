@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 
-class AccountListTileModel {
+class AccountFListModel {
   IconData leadingIcon;
   String text;
-  AccountListTileModel({
+  Function() onTap;
+  AccountFListModel({
     required this.leadingIcon,
     required this.text,
+    required this.onTap,
   });
 }

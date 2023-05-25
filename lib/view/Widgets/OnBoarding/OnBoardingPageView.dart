@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 
 import '../../../Controller/onBoardingController/OnBoardingController.dart';
 
-import '../../../core/theme/theme.dart';
 import '../../../data/dataSource/Static/static.dart';
 
 class OnBoardingPageView extends GetView<OnBoardingControllerImp> {

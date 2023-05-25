@@ -1,4 +1,5 @@
 import 'package:ebuy/core/constant/Images.dart';
+import 'package:ebuy/routes.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,7 +8,7 @@ import '../../../core/constant/CustomIcons.dart';
 import '../../model/CartModels/ShippingModel.dart';
 import '../../model/CartModels/StepperModel.dart';
 import '../../model/OnBoardingModel/OnBoardingModel.dart';
-import '../../model/authModels/AccountListTileModel.dart';
+import '../../model/authModels/AccountListModel.dart';
 
 //onBoardingList
 
@@ -39,20 +40,37 @@ List<String> detailesTitles = [
 ];
 // Settings List
 
-List<AccountListTileModel> accountPageUpperList = [
-  AccountListTileModel(leadingIcon: CustomIcons.boxIcon, text: 'My order'),
-  AccountListTileModel(
-      leadingIcon: CustomIcons.crownIcon, text: 'Premier Delivery')
+List<AccountListModel> accountPageUpperList = [
+  AccountListModel(
+      leadingIcon: CustomIcons.boxIcon,
+      text: 'My order',
+      page: AppRoutes.ordersPageRoute),
+  AccountListModel(
+      leadingIcon: CustomIcons.crownIcon,
+      text: 'Premier Delivery',
+      page: AppRoutes.deliveryPageRoute)
 ];
-List<AccountListTileModel> accountPageLowerList = [
-  AccountListTileModel(leadingIcon: Icons.square, text: 'My details'),
-  AccountListTileModel(
-      leadingIcon: Icons.location_on_rounded, text: 'Address book'),
-  AccountListTileModel(leadingIcon: Icons.credit_card, text: 'Payment methods'),
-  AccountListTileModel(
-      leadingIcon: CustomIcons.meetingIcon, text: 'Contact preferences'),
-  AccountListTileModel(
-      leadingIcon: CustomIcons.personIcon, text: 'Social accounts')
+List<AccountListModel> accountPageLowerList = [
+  AccountListModel(
+      leadingIcon: Icons.square,
+      text: 'My details',
+      page: AppRoutes.usersDetailesPageRoute),
+  AccountListModel(
+      leadingIcon: Icons.location_on_rounded,
+      text: 'Address book',
+      page: AppRoutes.addressPageRoute),
+  AccountListModel(
+      leadingIcon: Icons.credit_card,
+      text: 'Payment methods',
+      page: AppRoutes.paymentPageRoute),
+  AccountListModel(
+      leadingIcon: CustomIcons.meetingIcon,
+      text: 'Contact preferences',
+      page: AppRoutes.contactPageRoute),
+  AccountListModel(
+      leadingIcon: CustomIcons.personIcon,
+      text: 'Social accounts',
+      page: AppRoutes.accountPageRoute)
 ];
 //Check Out Lists
 

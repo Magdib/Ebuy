@@ -9,7 +9,7 @@ import 'package:hive/hive.dart';
 
 import '../../core/class/enums.dart';
 import '../../core/function/handleData.dart';
-import '../../core/function/SnackBars.dart';
+import '../../core/function/Ui Functions/SnackBars.dart';
 import '../../data/dataSource/remote/auth/CheckEmailData.dart';
 import '../../data/dataSource/remote/auth/CodeVerificationData.dart';
 import '../../data/dataSource/remote/auth/NewPasswordData.dart';
@@ -53,7 +53,7 @@ class SignInControllerImp extends SigninController {
     update();
     if (StatusRequest.success == signInStatusRequest) {
       if (response['status'] == "success") {
-        authBox.put(HiveKeys.islogin, '1');
+        authBox.put(HiveKeys.islogin, '2');
         authBox.put(HiveKeys.email, response['data']['users_email']);
         authBox.put(HiveKeys.username, response['data']['users_name']);
         authBox.put(HiveKeys.userid, response['data']['users_id']);

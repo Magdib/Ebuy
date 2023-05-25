@@ -24,7 +24,6 @@ class CustomTextFromFieldWithUpperText extends GetView<SignUpControllerImp> {
   final TextEditingController textEditingController;
   final String? Function(String?)? validator;
   final void Function(String)? onChanged;
-
   @override
   Widget build(BuildContext context) {
     return Column(

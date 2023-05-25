@@ -1,17 +1,16 @@
 import 'package:ebuy/data/dataSource/Static/UINumbers.dart';
-import 'package:ebuy/data/model/authModels/AccountListModel.dart';
+import 'package:ebuy/data/model/authModels/AccountFListModel.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import '../../../../core/constant/Colors.dart';
 import '../../shared/GreyDivider.dart';
 
-class AccountPageCard extends StatelessWidget {
-  const AccountPageCard({
+class AccountPageFCard extends StatelessWidget {
+  const AccountPageFCard({
     Key? key,
     required this.list,
   }) : super(key: key);
-  final List<AccountListModel> list;
+  final List<AccountFListModel> list;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -23,7 +22,7 @@ class AccountPageCard extends StatelessWidget {
         itemBuilder: (context, index) => Column(
           children: [
             GestureDetector(
-              onTap: () => Get.toNamed(list[index].page),
+              onTap: list[index].onTap,
               child: SizedBox(
                 height: 38,
                 child: ListTile(

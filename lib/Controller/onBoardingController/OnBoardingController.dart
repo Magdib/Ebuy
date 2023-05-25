@@ -1,7 +1,9 @@
+import 'package:ebuy/data/dataSource/Static/HiveKeys.dart';
 import 'package:ebuy/data/dataSource/Static/static.dart';
 import 'package:ebuy/routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
 
 abstract class OnBoardingController extends GetxController {
   next();
@@ -10,11 +12,13 @@ abstract class OnBoardingController extends GetxController {
 
 class OnBoardingControllerImp extends OnBoardingController {
   late PageController pageController;
+  late Box authBox;
   int currentPage = 0;
   @override
   next() {
     if (currentPage == onBoardingdata.length - 1) {
-      Get.toNamed(AppRoutes.signInRoute);
+      authBox.put(HiveKeys.islogin, '1');
+      Get.offNamed(AppRoutes.signInRoute);
       currentPage = onBoardingdata.length - 2;
     }
     currentPage++;
@@ -29,9 +33,15 @@ class OnBoardingControllerImp extends OnBoardingController {
   }
 
   @override
-  void onInit() {
+  void onInit() async {
     pageController = PageController();
     super.onInit();
+  }
+
+  @override
+  void onReady() async {
+    authBox = await Hive.openBox(HiveBoxes.authBox);
+    super.onReady();
   }
 
   @override

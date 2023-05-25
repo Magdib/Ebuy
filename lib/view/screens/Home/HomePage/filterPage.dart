@@ -13,7 +13,7 @@ import '../../../../core/theme/theme.dart';
 import '../../../Widgets/Home/HomePage/NewTrend/FilterPageWidgets/FilterDialogContent.dart';
 import '../../../Widgets/Home/HomePage/NewTrend/FilterPageWidgets/FilterItemsContent.dart';
 import '../../../Widgets/Home/HomePage/NewTrend/FilterPageWidgets/FilterPageHeaders.dart';
-import '../../../Widgets/Home/HomePage/NewTrend/FilterPageWidgets/GreyDivider.dart';
+import '../../../Widgets/shared/GreyDivider.dart';
 import '../../../Widgets/shared/CustomButton.dart';
 import 'PricePage.dart';
 

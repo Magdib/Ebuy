@@ -6,9 +6,18 @@ import 'package:ebuy/view/screens/Home/Cart/OrderSuccess.dart';
 import 'package:ebuy/view/screens/Home/Cart/SelectCountry.dart';
 import 'package:ebuy/view/screens/Home/Favourite.dart';
 import 'package:ebuy/view/screens/Home/HomePage/NewTrends.dart';
-import 'package:ebuy/view/screens/Home/HomePage/search/SearchCategories.dart';
+import 'package:ebuy/view/screens/Home/Settings/AccountPages/AccountPage.dart';
+import 'package:ebuy/view/screens/Home/Settings/AccountPages/AddressBook.dart';
+import 'package:ebuy/view/screens/Home/Settings/AccountPages/Contactpage.dart';
+import 'package:ebuy/view/screens/Home/Settings/AccountPages/OrdersPage.dart';
+import 'package:ebuy/view/screens/Home/Settings/AccountPages/PaymentMethods.dart';
+import 'package:ebuy/view/screens/Home/Settings/AccountPages/PremierDelivery.dart';
+import 'package:ebuy/view/screens/Home/Settings/AccountPages/UsersDetailes.dart';
+import 'package:ebuy/view/screens/Home/Settings/SettingsPage.dart';
+import 'package:ebuy/view/screens/Home/Settings/SettingsPages/language.dart';
+import 'package:ebuy/view/screens/Home/search/SearchCategories.dart';
 import 'package:ebuy/view/screens/Home/MainPage.dart';
-import 'package:ebuy/view/screens/Home/HomePage/search/Search.dart';
+import 'package:ebuy/view/screens/Home/search/Search.dart';
 import 'package:ebuy/view/screens/Products/ProductsPage.dart';
 import 'package:ebuy/view/screens/auth/CheckEmail.dart';
 import 'package:ebuy/view/screens/auth/setNewPassword.dart';
@@ -17,6 +26,8 @@ import 'package:ebuy/view/screens/auth/SignUp.dart';
 import 'package:ebuy/view/screens/auth/verifyEmail.dart';
 import 'package:get/get.dart';
 import 'view/screens/Details/DetailsPage.dart';
+import 'view/screens/Home/Settings/AccountPages/GiftCardsPage.dart';
+import 'view/screens/Home/Settings/SettingsPages/notifications.dart';
 import 'view/screens/OnBoarding/OnBoarding.dart';
 import 'view/screens/auth/ForgotPasswordVerificaton.dart';
 
@@ -42,6 +53,17 @@ class AppRoutes {
   static const String checkOutRoute = "/checkOut";
   static const String orderSuccessRoute = "/orderSuccess";
   static const String selectCountryRoute = "/SelectCountry";
+  static const String accountPageRoute = '/AccountPage';
+  static const String contactPageRoute = '/ContactPage';
+  static const String paymentPageRoute = '/PaymentPage';
+  static const String addressPageRoute = '/AddressPage';
+  static const String usersDetailesPageRoute = '/usersDetailesPage';
+  static const String deliveryPageRoute = '/DeliveryPage';
+  static const String ordersPageRoute = '/OrdersPage';
+  static const String giftCardPageRoute = '/giftCardPage';
+  static const String settingsPageRoute = '/SettingsPage';
+  static const String notificationsPageRoute = '/NotificationsPage';
+  static const String languagePageRoute = '/LanguagePage';
 }
 
 List<GetPage<dynamic>>? routes = [
@@ -86,5 +108,49 @@ List<GetPage<dynamic>>? routes = [
   GetPage(
     name: AppRoutes.selectCountryRoute,
     page: () => const SelectCountry(),
+  ),
+  GetPage(
+    name: AppRoutes.accountPageRoute,
+    page: () => const AccountPage(),
+  ),
+  GetPage(
+    name: AppRoutes.contactPageRoute,
+    page: () => const ContactPage(),
+  ),
+  GetPage(
+    name: AppRoutes.paymentPageRoute,
+    page: () => const PaymentMethods(),
+  ),
+  GetPage(
+    name: AppRoutes.addressPageRoute,
+    page: () => const AddressBook(),
+  ),
+  GetPage(
+    name: AppRoutes.usersDetailesPageRoute,
+    page: () => const UsersDetailes(),
+  ),
+  GetPage(
+    name: AppRoutes.deliveryPageRoute,
+    page: () => const PremierDelivery(),
+  ),
+  GetPage(
+    name: AppRoutes.ordersPageRoute,
+    page: () => const OrdersPage(),
+  ),
+  GetPage(
+    name: AppRoutes.giftCardPageRoute,
+    page: () => const GiftCardsPage(),
+  ),
+  GetPage(
+    name: AppRoutes.settingsPageRoute,
+    page: () => const SettingsPage(),
+  ),
+  GetPage(
+    name: AppRoutes.notificationsPageRoute,
+    page: () => const NotificationsPage(),
+  ),
+  GetPage(
+    name: AppRoutes.languagePageRoute,
+    page: () => const LanguagePage(),
   )
 ];

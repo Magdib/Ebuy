@@ -1,13 +1,10 @@
 import 'package:ebuy/core/class/enums.dart';
 import 'package:ebuy/core/function/handleData.dart';
-import 'package:ebuy/core/services/intialServices.dart';
 import 'package:ebuy/routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
-import '../../core/function/handleData.dart';
-import '../../core/function/SnackBars.dart';
+import '../../core/function/Ui Functions/SnackBars.dart';
 import '../../data/dataSource/remote/auth/EmailVerificationData.dart';
 import '../../data/dataSource/remote/auth/signupData.dart';
 import '../../data/model/authModels/EmailLikedModel.dart';

@@ -5,6 +5,7 @@ import 'package:ebuy/data/dataSource/Static/HiveKeys.dart';
 import 'package:ebuy/data/dataSource/Static/UINumbers.dart';
 import 'package:ebuy/data/dataSource/Static/static.dart';
 import 'package:ebuy/data/model/HomePageModels/itemsModel.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
@@ -28,12 +29,15 @@ class CartControllerImp extends CartController {
   double totalPrice = 0.0;
   late int selectedIndex;
   late PageController pageController;
+  TapGestureRecognizer? returnspolicies;
+  TapGestureRecognizer? termsPrivacy;
   List<Color> stepsColors = [
     AppColors.primaryColor,
     AppColors.grey,
     AppColors.grey
   ];
   int? selectedPayment;
+  bool canPlaceOrder = false;
   List<String> paymentMethods = [
     AppImagesAssets.payPal,
     AppImagesAssets.klarna,
@@ -78,6 +82,7 @@ class CartControllerImp extends CartController {
   @override
   void choosePayMethod(int index) {
     selectedPayment = index;
+    canPlaceOrder = true;
     update();
   }
 
@@ -101,13 +106,15 @@ class CartControllerImp extends CartController {
   resetCheckOut() {
     pageController.jumpToPage(0);
     currentStep = 0;
+    selectedPayment = null;
+    canPlaceOrder = false;
+    shipLastIndex = 0;
     stepsColors = [AppColors.primaryColor, AppColors.grey, AppColors.grey];
     Get.back();
   }
 
   @override
   void onInit() {
-    print(shipWay = shipRadioList[0].title[5]);
     addressList = [
       CartAddressModel(
           title: authBox.get(HiveKeys.username), icon: Icons.person),
@@ -121,7 +128,8 @@ class CartControllerImp extends CartController {
     for (int i = 0; i < cartProducts.length; i++) {
       totalPrice += double.parse(cartProducts[i].itemsPrice!);
     }
-
+    returnspolicies = TapGestureRecognizer()..onTap = () => print('object');
+    termsPrivacy = TapGestureRecognizer()..onTap = () => print('object');
     super.onInit();
   }
 

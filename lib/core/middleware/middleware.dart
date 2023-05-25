@@ -11,9 +11,12 @@ class MyMiddleWare extends GetMiddleware {
   MyServices myServices = Get.find();
   @override
   RouteSettings? redirect(String? route) {
-    if (myServices.authBox!.get(HiveKeys.islogin) == "1") {
+    if (myServices.authBox!.get(HiveKeys.islogin) == "2") {
       Hive.box(HiveBoxes.authBox).close();
       return const RouteSettings(name: AppRoutes.mainPageRoute);
+    } else if (myServices.authBox!.get(HiveKeys.islogin) == "1") {
+      Hive.box(HiveBoxes.authBox).close();
+      return const RouteSettings(name: AppRoutes.signInRoute);
     } else {
       Hive.box(HiveBoxes.authBox).close();
     }
