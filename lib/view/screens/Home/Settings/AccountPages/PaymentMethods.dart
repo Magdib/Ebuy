@@ -23,7 +23,7 @@ class PaymentMethods extends StatelessWidget {
           svgImage: AppImagesAssets.noAddressImage,
           title: 'You need a billing address',
           subtitle:
-              'You currently have no saved address.Without one, you won\'t able to add a newpayment method.',
+              'You currently have no saved address.Without one, you won\'t able to add a new payment method.',
           buttonText: 'Add new address',
           isSpaced: true,
           onPressed: () => Get.offNamed(AppRoutes.addressPageRoute)),

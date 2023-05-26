@@ -21,7 +21,7 @@ class SignIn extends GetView<SignInControllerImp> {
     return SafeArea(
         child: Scaffold(
             appBar: AppBar(
-              title: Text("Sign In",
+              title: Text("Sign In".tr,
                   style: Theme.of(context)
                       .textTheme
                       .bodyText1!
@@ -29,6 +29,7 @@ class SignIn extends GetView<SignInControllerImp> {
               backgroundColor: Theme.of(context).scaffoldBackgroundColor,
               centerTitle: true,
               elevation: 0,
+              automaticallyImplyLeading: false,
             ),
             body: GetBuilder<SignInControllerImp>(
               builder: (controller) => HandlingDataRequest(

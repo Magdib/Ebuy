@@ -27,7 +27,7 @@ class AccountPage extends GetView<AccountControllerImp> {
           automaticallyImplyLeading: false,
           actions: [
             IconButton(
-                onPressed: () {},
+                onPressed: () => Get.toNamed(AppRoutes.settingsPageRoute),
                 icon: const Icon(
                   CustomIcons.settingIcon,
                   color: AppColors.grey,

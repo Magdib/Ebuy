@@ -1,4 +1,6 @@
 class AppWords {
+  static const websiteWord =
+      '///////////////////////////////////////////\nWebsite Page Must Be Opened With Url Luncher\n///////////////////////////////////////////////////';
   //English Language
   static const Map<String, String> englishLanguage = {
     //OnBoarding
@@ -110,6 +112,9 @@ class AppWords {
     'Email Not Found Or Password is wrong':
         'Email Not Found Or Password is wrong',
     'Email Not Found': 'Email Not Found',
+    //Settings
+    'English': 'English',
+    'Language': 'Language',
   };
   //Arabic Language
   static const Map<String, String> arabicLanguage = {
@@ -201,7 +206,7 @@ class AppWords {
 
     //Handel Data
 
-    'Retry': 'إعادة المحاولة',
+    'Retry': 'أعد المحاولة',
 
     //SnackBars
     //Sign Up SncakBars
@@ -221,5 +226,8 @@ class AppWords {
     'Email Not Found Or Password is wrong':
         'كلمة المرور أو البريد الإلكتروني خطأ رجاءََ أعد التحقق من البريد الإلكتروني وكلمة السر ثم أعد المحاولة',
     'Email Not Found': 'البريد الإلكتروني غير موجود',
+    //Settings
+    'English': 'العربية',
+    'Language': 'اللغة',
   };
 }

@@ -1,3 +1,6 @@
+import 'package:ebuy/Controller/Home/MainPageController.dart';
+import 'package:ebuy/core/constant/AppWords.dart';
+import 'package:ebuy/core/theme/theme.dart';
 import 'package:ebuy/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -17,6 +20,7 @@ abstract class AccountController extends GetxController {
   saveDetailes();
   saveButtonState();
   void notificationState(val);
+  void changeLanguage(val);
 }
 
 class AccountControllerImp extends AccountController {
@@ -28,6 +32,8 @@ class AccountControllerImp extends AccountController {
   GlobalKey<FormState> detailesFormState = GlobalKey<FormState>();
   late bool sendNotificatios;
   bool canSaveChanges = true;
+  late bool isEnglish;
+  bool isLanguageChanging = false;
   List<AccountFListModel> accountpageList = [
     AccountFListModel(
         leadingIcon: Icons.circle,
@@ -56,6 +62,16 @@ class AccountControllerImp extends AccountController {
         leadingIcon: Icons.lock,
         text: 'Terms & Conditions',
         onTap: () => print('Terms & Conditions must be a website Page')),
+  ];
+  List<AccountFListModel> giftCardList = [
+    AccountFListModel(
+        text: 'What is a Gift Card?', onTap: () => print(AppWords.websiteWord)),
+    AccountFListModel(
+        text: 'What is a Gift Voucher?',
+        onTap: () => print(AppWords.websiteWord)),
+    AccountFListModel(
+        text: 'Gift card/ Voucher FAQs',
+        onTap: () => print(AppWords.websiteWord))
   ];
   bool getBackGroundImage() => _isThereBackGround;
   bool getAccountImage() => _isThereAccountImage;
@@ -115,13 +131,43 @@ class AccountControllerImp extends AccountController {
   }
 
   @override
+  void changeLanguage(val) async {
+    isLanguageChanging = true;
+    update();
+    isEnglish = val;
+    authBox.put(HiveKeys.language, val);
+    Locale newLocale;
+    val == true
+        ? newLocale = const Locale('en')
+        : newLocale = const Locale('ar');
+    MainContrllerImp mainContrllerImp = Get.find();
+
+    mainContrllerImp.languageChanged();
+    Get.updateLocale(newLocale);
+
+    await Future.delayed(const Duration(milliseconds: 1500));
+    isLanguageChanging = false;
+    update();
+  }
+
+  @override
   void onInit() {
     userName = authBox.get(HiveKeys.username);
     userEmail = authBox.get(HiveKeys.email);
     userEmailController = TextEditingController(text: userEmail);
     userNameController = TextEditingController(text: userName);
-    handleHiveNullState(HiveKeys.notification, sendNotificatios,
-        authBox.get(HiveKeys.notification), false);
+    sendNotificatios = handleHiveNullState(HiveKeys.notification, false);
+    bool langNullval;
+    if (authBox.get(HiveKeys.language) == null) {
+      if (Get.deviceLocale!.languageCode.contains('ar') == true) {
+        langNullval = false;
+      } else {
+        langNullval = true;
+      }
+    } else {
+      langNullval = false;
+    }
+    isEnglish = handleHiveNullState(HiveKeys.language, langNullval);
     super.onInit();
   }
 

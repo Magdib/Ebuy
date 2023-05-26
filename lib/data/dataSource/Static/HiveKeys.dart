@@ -11,5 +11,7 @@ class HiveKeys {
   //Recent id's
   static const String firstRecentId = 'firstRecentId';
   static const String lastRecentId = "lastRecentId";
+  //Settings
   static const String notification = "Notifications";
+  static const String language = "Language";
 }

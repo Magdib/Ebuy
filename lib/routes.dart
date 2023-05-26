@@ -26,7 +26,8 @@ import 'package:ebuy/view/screens/auth/SignUp.dart';
 import 'package:ebuy/view/screens/auth/verifyEmail.dart';
 import 'package:get/get.dart';
 import 'view/screens/Details/DetailsPage.dart';
-import 'view/screens/Home/Settings/AccountPages/GiftCardsPage.dart';
+import 'view/screens/Home/Settings/AccountPages/GiftCardsPages/AddGiftCardPage.dart';
+import 'view/screens/Home/Settings/AccountPages/GiftCardsPages/GiftCardsPage.dart';
 import 'view/screens/Home/Settings/SettingsPages/notifications.dart';
 import 'view/screens/OnBoarding/OnBoarding.dart';
 import 'view/screens/auth/ForgotPasswordVerificaton.dart';
@@ -64,6 +65,7 @@ class AppRoutes {
   static const String settingsPageRoute = '/SettingsPage';
   static const String notificationsPageRoute = '/NotificationsPage';
   static const String languagePageRoute = '/LanguagePage';
+  static const String addGiftCardPageRoute = '/addGiftCardPage';
 }
 
 List<GetPage<dynamic>>? routes = [
@@ -152,5 +154,9 @@ List<GetPage<dynamic>>? routes = [
   GetPage(
     name: AppRoutes.languagePageRoute,
     page: () => const LanguagePage(),
+  ),
+  GetPage(
+    name: AppRoutes.addGiftCardPageRoute,
+    page: () => const AddGiftCardPage(),
   )
 ];

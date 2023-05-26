@@ -7,6 +7,8 @@ class AppImagesAssets {
   static const String lottieLoading = "$lottie/loadingEbuy.json";
   static const String lottieError = "$lottie/error404.json";
   static const String lottieoffline = "$lottie/offline.json";
+  static const String lottieSplashScreen = '$lottie/store.json';
+  static const String lottieLanguage = "$lottie/language.json";
   static const String noRecetSearch = "$imagesAssetFolder/NoRecentSearch.svg";
   static const String user1 = "$imagesAssetFolder/Jack Bibber.png";
   static const String user2 = "$imagesAssetFolder/Vie Ruan.png";
@@ -21,4 +23,8 @@ class AppImagesAssets {
   static const String paymentImage = '$imagesAssetFolder/Illus - 4.svg';
   static const String noOrdersImage = '$imagesAssetFolder/Iluss - 2.svg';
   static const String noAddressImage = '$imagesAssetFolder/Illus - 3.svg';
+  static const String aArabic = '$imagesAssetFolder/AArabic.png';
+  static const String aEnglish = '$imagesAssetFolder/AEnglish.png';
+  static const String giftCard = "$imagesAssetFolder/Gifts.png";
+  static const String giftCardEx = "$imagesAssetFolder/QR.png";
 }

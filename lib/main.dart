@@ -6,6 +6,8 @@ import 'package:ebuy/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'core/localization/getCurrentLang.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initialServices();
@@ -18,12 +20,12 @@ class Ebuy extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      // locale: Get.deviceLocale,
+      locale: getLocal(),
       translations: Languages(),
       debugShowCheckedModeBanner: false,
       initialBinding: InitialBinding(),
       getPages: routes,
-      theme: AppTheme.arabicTheme,
+      theme: getcurrentTheme(),
     );
   }
 }

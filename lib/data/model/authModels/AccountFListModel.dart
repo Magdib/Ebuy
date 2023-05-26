@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 
 class AccountFListModel {
-  IconData leadingIcon;
+  IconData? leadingIcon;
   String text;
   Function() onTap;
   AccountFListModel({
-    required this.leadingIcon,
+    this.leadingIcon,
     required this.text,
     required this.onTap,
   });
