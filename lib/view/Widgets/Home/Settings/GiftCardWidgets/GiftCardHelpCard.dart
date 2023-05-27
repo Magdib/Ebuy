@@ -1,9 +1,9 @@
-import 'package:ebuy/Controller/Home/AccountController.dart';
+import 'package:ebuy/Controller/Home/SettingsControllers/AccountController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../shared/CustomContainer.dart';
-import '../../shared/GreyDivider.dart';
+import '../../../shared/CustomContainer.dart';
+import '../../../shared/GreyDivider.dart';
 
 class GiftCardHelpCard extends GetView<AccountControllerImp> {
   const GiftCardHelpCard({

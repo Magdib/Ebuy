@@ -1,4 +1,4 @@
-import 'package:ebuy/Controller/Home/AccountController.dart';
+import 'package:ebuy/Controller/Home/SettingsControllers/AccountController.dart';
 import 'package:ebuy/core/constant/Colors.dart';
 import 'package:ebuy/core/constant/CustomIcons.dart';
 import 'package:ebuy/data/dataSource/Static/HiveKeys.dart';
@@ -8,7 +8,7 @@ import 'package:ebuy/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../Widgets/Home/AccountSettings/AccountPageCard.dart';
+import '../../../Widgets/Home/Settings/AccountSettings/AccountPageCard.dart';
 
 class SettingsMainPage extends StatelessWidget {
   const SettingsMainPage({Key? key}) : super(key: key);

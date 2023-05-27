@@ -4,16 +4,16 @@ import 'package:ebuy/view/screens/Home/Cart/Cart.dart';
 import 'package:ebuy/view/screens/Home/Cart/CheckOut.dart';
 import 'package:ebuy/view/screens/Home/Cart/OrderSuccess.dart';
 import 'package:ebuy/view/screens/Home/Cart/SelectCountry.dart';
-import 'package:ebuy/view/screens/Home/Favourite.dart';
+import 'package:ebuy/view/screens/Home/favourite/Favourite.dart';
 import 'package:ebuy/view/screens/Home/HomePage/NewTrends.dart';
 import 'package:ebuy/view/screens/Home/Settings/AccountPages/AccountPage.dart';
 import 'package:ebuy/view/screens/Home/Settings/AccountPages/AddressBook.dart';
 import 'package:ebuy/view/screens/Home/Settings/AccountPages/Contactpage.dart';
 import 'package:ebuy/view/screens/Home/Settings/AccountPages/OrdersPage.dart';
-import 'package:ebuy/view/screens/Home/Settings/AccountPages/PaymentMethods.dart';
+import 'package:ebuy/view/screens/Home/Settings/AccountPages/PaymentPages/PaymentMethods.dart';
 import 'package:ebuy/view/screens/Home/Settings/AccountPages/PremierDelivery.dart';
 import 'package:ebuy/view/screens/Home/Settings/AccountPages/UsersDetailes.dart';
-import 'package:ebuy/view/screens/Home/Settings/SettingsPage.dart';
+import 'package:ebuy/view/screens/Home/Settings/SettingsPages/SettingsPage.dart';
 import 'package:ebuy/view/screens/Home/Settings/SettingsPages/language.dart';
 import 'package:ebuy/view/screens/Home/search/SearchCategories.dart';
 import 'package:ebuy/view/screens/Home/MainPage.dart';
@@ -25,6 +25,7 @@ import 'package:ebuy/view/screens/auth/SignIn.dart';
 import 'package:ebuy/view/screens/auth/SignUp.dart';
 import 'package:ebuy/view/screens/auth/verifyEmail.dart';
 import 'package:get/get.dart';
+import 'Controller/Home/SettingsControllers/GiftCardController.dart';
 import 'view/screens/Details/DetailsPage.dart';
 import 'view/screens/Home/Settings/AccountPages/GiftCardsPages/AddGiftCardPage.dart';
 import 'view/screens/Home/Settings/AccountPages/GiftCardsPages/GiftCardsPage.dart';
@@ -140,9 +141,9 @@ List<GetPage<dynamic>>? routes = [
     page: () => const OrdersPage(),
   ),
   GetPage(
-    name: AppRoutes.giftCardPageRoute,
-    page: () => const GiftCardsPage(),
-  ),
+      name: AppRoutes.giftCardPageRoute,
+      page: () => const GiftCardsPage(),
+      binding: BindingsBuilder.put(() => GiftCardControllerimp())),
   GetPage(
     name: AppRoutes.settingsPageRoute,
     page: () => const SettingsPage(),

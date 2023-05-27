@@ -1,11 +1,11 @@
-import 'package:ebuy/Controller/Home/AccountController.dart';
+import 'package:ebuy/Controller/Home/SettingsControllers/AccountController.dart';
 import 'package:ebuy/core/constant/Colors.dart';
 import 'package:ebuy/core/constant/CustomIcons.dart';
 import 'package:ebuy/data/model/authModels/AccountFListModel.dart';
 import 'package:ebuy/data/model/authModels/AccountListModel.dart';
 import 'package:ebuy/routes.dart';
-import 'package:ebuy/view/Widgets/Home/AccountSettings/AccountPageCard.dart';
-import 'package:ebuy/view/Widgets/Home/AccountSettings/AccountPageFCard.dart';
+import 'package:ebuy/view/Widgets/Home/Settings/AccountSettings/AccountPageCard.dart';
+import 'package:ebuy/view/Widgets/Home/Settings/AccountSettings/AccountPageFCard.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

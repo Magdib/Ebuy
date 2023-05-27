@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../../core/theme/theme.dart';
-import '../ChildrenWidgets/CustomTextFromFieldWithUpperText.dart';
+import '../../../shared/TitledTextFiled.dart';
 
 class SignUpTextFields extends GetView<SignUpControllerImp> {
   const SignUpTextFields({
@@ -17,7 +17,7 @@ class SignUpTextFields extends GetView<SignUpControllerImp> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CustomTextFromFieldWithUpperText(
+          TitledTextFiled(
               label: 'Email'.tr,
               hint: 'Enter email'.tr,
               obscure: false,
@@ -29,21 +29,21 @@ class SignUpTextFields extends GetView<SignUpControllerImp> {
             style:
                 Theme.of(context).textTheme.headline6!.copyWith(fontSize: 12),
           ),
-          CustomTextFromFieldWithUpperText(
+          TitledTextFiled(
               label: 'First name'.tr,
               hint: 'Enter first name'.tr,
               obscure: false,
               textEditingController: controller.firstName!,
               validator: (String? val) => controller.firstNameValidate(val),
               onChanged: (val) => controller.signUpStateCheck()),
-          CustomTextFromFieldWithUpperText(
+          TitledTextFiled(
               label: 'Last name'.tr,
               hint: 'Enter last name'.tr,
               obscure: false,
               textEditingController: controller.lastName!,
               validator: (String? val) => controller.lastNameValidate(val),
               onChanged: (val) => controller.signUpStateCheck()),
-          CustomTextFromFieldWithUpperText(
+          TitledTextFiled(
               label: 'Password'.tr,
               hint: 'Enter Password'.tr,
               obscure: true,

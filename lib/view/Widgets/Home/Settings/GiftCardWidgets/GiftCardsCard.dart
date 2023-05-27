@@ -1,7 +1,7 @@
 import 'package:ebuy/data/dataSource/Static/UINumbers.dart';
 import 'package:flutter/material.dart';
 
-import '../../shared/CustomContainer.dart';
+import '../../../shared/CustomContainer.dart';
 
 class GiftCardsCard extends StatelessWidget {
   const GiftCardsCard({

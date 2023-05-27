@@ -5,8 +5,8 @@ import 'package:ebuy/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../shared/CustomButton.dart';
-import '../../shared/CustomContainer.dart';
+import '../../../shared/CustomButton.dart';
+import '../../../shared/CustomContainer.dart';
 import 'GiftCardHelpCard.dart';
 
 class NoGiftCardPage extends StatelessWidget {
@@ -70,7 +70,7 @@ class NoGiftCardPage extends StatelessWidget {
               ],
             )),
         const SizedBox(
-          height: 10,
+          height: 15,
         ),
         const GiftCardHelpCard(),
         const SizedBox(

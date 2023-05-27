@@ -1,4 +1,4 @@
-import 'package:ebuy/view/Widgets/Home/AccountSettings/HandleGiftCards.dart';
+import 'package:ebuy/view/Widgets/Home/Settings/GiftCardWidgets/HandleGiftCards.dart';
 
 import 'package:flutter/material.dart';
 

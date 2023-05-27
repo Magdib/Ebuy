@@ -1,4 +1,4 @@
-import 'package:ebuy/Controller/Home/AccountController.dart';
+import 'package:ebuy/Controller/Home/SettingsControllers/AccountController.dart';
 import 'package:ebuy/view/Widgets/shared/CustomContainer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

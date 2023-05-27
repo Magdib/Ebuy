@@ -1,8 +1,8 @@
-import 'package:ebuy/Controller/Home/AccountController.dart';
+import 'package:ebuy/Controller/Home/SettingsControllers/AccountController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../Widgets/Home/AccountSettings/AccountPageFCard.dart';
+import '../../../../Widgets/Home/Settings/AccountSettings/AccountPageFCard.dart';
 
 class SettingsPage extends GetView<AccountControllerImp> {
   const SettingsPage({super.key});

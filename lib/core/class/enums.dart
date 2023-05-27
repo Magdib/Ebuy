@@ -8,3 +8,5 @@ enum StatusRequest {
 }
 
 enum SearchState { searching, noRecent, recent, success, none }
+
+enum PaymentState { noAddress, noMethod, none }

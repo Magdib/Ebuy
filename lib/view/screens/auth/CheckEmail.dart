@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../data/dataSource/Static/UINumbers.dart';
 import '../../../routes.dart';
-import '../../Widgets/auth/SignUp/ChildrenWidgets/CustomTextFromFieldWithUpperText.dart';
+
+import '../../Widgets/shared/TitledTextFiled.dart';
 import '../../Widgets/auth/shared/HaveAccountAuth.dart';
 
 class CheckEmail extends StatelessWidget {
@@ -40,7 +41,7 @@ class CheckEmail extends StatelessWidget {
                                 ),
                                 Form(
                                   key: controller.checkEmailFormState,
-                                  child: CustomTextFromFieldWithUpperText(
+                                  child: TitledTextFiled(
                                     label: 'Email'.tr,
                                     hint: 'Enter email'.tr,
                                     obscure: false,

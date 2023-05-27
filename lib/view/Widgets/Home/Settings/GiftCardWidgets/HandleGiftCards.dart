@@ -1,6 +1,6 @@
 import 'package:ebuy/core/constant/Colors.dart';
 import 'package:ebuy/data/dataSource/Static/UINumbers.dart';
-import 'package:ebuy/view/Widgets/Home/AccountSettings/GiftCardHelpCard.dart';
+import 'package:ebuy/view/Widgets/Home/Settings/GiftCardWidgets/GiftCardHelpCard.dart';
 import 'package:ebuy/view/Widgets/shared/CustomContainer.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

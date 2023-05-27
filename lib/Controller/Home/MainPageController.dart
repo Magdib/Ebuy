@@ -3,7 +3,7 @@ import 'package:ebuy/Controller/Home/favouritePageController.dart';
 import 'package:ebuy/core/function/handleHiveNullState.dart';
 import 'package:ebuy/data/dataSource/Static/HiveKeys.dart';
 import 'package:ebuy/view/screens/Home/Cart/Cart.dart';
-import 'package:ebuy/view/screens/Home/Favourite.dart';
+import 'package:ebuy/view/screens/Home/favourite/Favourite.dart';
 import 'package:ebuy/view/screens/Home/HomePage/HomePage.dart';
 import 'package:ebuy/view/screens/Home/search/Search.dart';
 import 'package:flutter/cupertino.dart';

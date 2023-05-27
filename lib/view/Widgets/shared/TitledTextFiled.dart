@@ -3,13 +3,13 @@ import 'package:ebuy/Controller/authControllers/SignUpController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../../core/constant/Colors.dart';
+import '../../../core/constant/Colors.dart';
 
-import '../../../../../core/theme/theme.dart';
-import '../../../../../data/dataSource/Static/UINumbers.dart';
+import '../../../core/theme/theme.dart';
+import '../../../data/dataSource/Static/UINumbers.dart';
 
-class CustomTextFromFieldWithUpperText extends GetView<SignUpControllerImp> {
-  const CustomTextFromFieldWithUpperText({
+class TitledTextFiled extends GetView<SignUpControllerImp> {
+  const TitledTextFiled({
     Key? key,
     this.onChanged,
     required this.label,
@@ -17,6 +17,7 @@ class CustomTextFromFieldWithUpperText extends GetView<SignUpControllerImp> {
     required this.obscure,
     required this.textEditingController,
     required this.validator,
+    this.keyboardType,
   }) : super(key: key);
   final String label;
   final String hint;
@@ -24,6 +25,7 @@ class CustomTextFromFieldWithUpperText extends GetView<SignUpControllerImp> {
   final TextEditingController textEditingController;
   final String? Function(String?)? validator;
   final void Function(String)? onChanged;
+  final TextInputType? keyboardType;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -46,6 +48,7 @@ class CustomTextFromFieldWithUpperText extends GetView<SignUpControllerImp> {
             controller: textEditingController,
             obscureText: obscure,
             cursorColor: AppColors.deepGrey,
+            keyboardType: keyboardType,
             decoration: InputDecoration(
                 hintStyle: Theme.of(context)
                     .textTheme

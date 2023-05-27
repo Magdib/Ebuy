@@ -3,7 +3,7 @@ import 'package:ebuy/Controller/Home/favouritePageController.dart';
 import 'package:ebuy/core/constant/Colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../Widgets/Home/Favourite/SaveditemsListView.dart';
+import '../../../Widgets/Home/Favourite/SaveditemsListView.dart';
 
 class FavouritePage extends GetView<MainContrllerImp> {
   const FavouritePage({Key? key}) : super(key: key);

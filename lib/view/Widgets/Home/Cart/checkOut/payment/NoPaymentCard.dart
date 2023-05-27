@@ -17,12 +17,12 @@ class NoPaymentCard extends StatelessWidget {
         ..lineTo(0, 85)
         ..lineTo(0, 0), // PathBuilder
       color: AppColors.veryLightGrey,
-      padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 22.5),
+      padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 25),
       dashPattern: const [10, 10],
       strokeWidth: 2,
       child: Container(
-        height: 33,
-        width: 40,
+        height: 24,
+        width: 32,
         decoration: BoxDecoration(
             color: AppColors.grey, borderRadius: BorderRadius.circular(7.5)),
       ),

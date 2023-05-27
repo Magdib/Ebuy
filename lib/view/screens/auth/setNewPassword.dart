@@ -5,7 +5,7 @@ import 'package:ebuy/view/Widgets/shared/CustomButton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../data/dataSource/Static/UINumbers.dart';
-import '../../Widgets/auth/SignUp/ChildrenWidgets/CustomTextFromFieldWithUpperText.dart';
+import '../../Widgets/shared/TitledTextFiled.dart';
 
 class SetNewPassword extends StatelessWidget {
   const SetNewPassword({Key? key}) : super(key: key);
@@ -38,7 +38,7 @@ class SetNewPassword extends StatelessWidget {
                                   key: controller.newPasswordFormState,
                                   child: Column(
                                     children: [
-                                      CustomTextFromFieldWithUpperText(
+                                      TitledTextFiled(
                                         label: 'Password'.tr,
                                         hint: 'Enter new password'.tr,
                                         obscure: true,
@@ -50,7 +50,7 @@ class SetNewPassword extends StatelessWidget {
                                       const SizedBox(
                                         height: 10,
                                       ),
-                                      CustomTextFromFieldWithUpperText(
+                                      TitledTextFiled(
                                         label: 'Password Confirm'.tr,
                                         hint: 'Re-enter new password'.tr,
                                         obscure: true,
