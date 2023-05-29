@@ -11,13 +11,14 @@ class CustomButton extends StatelessWidget {
     this.borderRadius,
     this.color,
     this.textColor,
+    this.width,
   }) : super(key: key);
   final String text;
   final void Function() onPressed;
   final double? borderRadius;
   final Color? color;
   final Color? textColor;
-
+  final double? width;
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
@@ -29,7 +30,7 @@ class CustomButton extends StatelessWidget {
               ? BorderSide(color: textColor!)
               : BorderSide.none),
       padding: const EdgeInsets.symmetric(vertical: 17),
-      minWidth: MediaQuery.of(context).size.width / 1,
+      minWidth: width ?? MediaQuery.of(context).size.width,
       color: color ?? AppColors.primaryColor,
       onPressed: onPressed,
       child: Text(

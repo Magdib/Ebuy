@@ -7,10 +7,10 @@ class DialogButton extends StatelessWidget {
   const DialogButton({
     super.key,
     required this.title,
-    this.onPressed,
+    required this.onPressed,
   });
   final String title;
-  final void Function()? onPressed;
+  final void Function() onPressed;
   @override
   Widget build(BuildContext context) {
     return MaterialButton(

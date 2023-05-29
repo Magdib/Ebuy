@@ -1,7 +1,9 @@
+import 'package:ebuy/core/constant/Colors.dart';
 import 'package:ebuy/core/constant/Images.dart';
 import 'package:ebuy/routes.dart';
 
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:jiffy/jiffy.dart';
 import '../../../core/constant/CustomIcons.dart';
@@ -20,15 +22,15 @@ List<OnBoardingModel> onBoardingdata = [
           'You can see the product with all angles, true and convenient'.tr),
   OnBoardingModel(
       image: AppImagesAssets.onBoardingImageTow,
-      title: 'Find Products easily'.tr,
+      title: 'Find products easily'.tr,
       subtitle:
-          'You just need to take a photo or upload and we will find similar Products for you.'
+          'You just need to take a photo or upload and we will find similar products for you.'
               .tr),
   OnBoardingModel(
       image: AppImagesAssets.onBoardingImageThree,
       title: 'Payment is easy'.tr,
       subtitle:
-          'You just need to take a photo or upload and we will find similar Products for you.'
+          'You just need to take a photo or upload and we will find similar products for you.'
               .tr),
 ];
 //Detailes List
@@ -63,10 +65,6 @@ List<AccountListModel> accountPageLowerList = [
       leadingIcon: Icons.credit_card,
       text: 'Payment methods',
       page: AppRoutes.paymentPageRoute),
-  AccountListModel(
-      leadingIcon: CustomIcons.meetingIcon,
-      text: 'Contact preferences',
-      page: AppRoutes.contactPageRoute),
   AccountListModel(
       leadingIcon: CustomIcons.personIcon,
       text: 'Social accounts',
@@ -106,4 +104,28 @@ List<String> payMethods = [
   AppImagesAssets.masterCard,
   AppImagesAssets.americanExpress,
   AppImagesAssets.klarna
+];
+List<Icon> orderTrackIcons = const [
+  Icon(
+    Icons.shopping_cart,
+    color: AppColors.white,
+  ),
+  Icon(
+    FontAwesomeIcons.shop,
+    color: AppColors.white,
+  ),
+  Icon(
+    FontAwesomeIcons.truck,
+    color: AppColors.white,
+  ),
+  Icon(
+    Icons.favorite,
+    color: AppColors.primaryColor,
+  )
+];
+List<String> ordersTrackText = [
+  'Placed order',
+  'Delivery to shipping units',
+  'Orders are being shipped',
+  'Delivered successfully'
 ];

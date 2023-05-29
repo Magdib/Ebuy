@@ -59,6 +59,7 @@ dependencies:
   country_flags: ^1.0.0
   jiffy: ^6.1.0
   dotted_border: ^2.0.0+3
+  wheel_slider: ^1.1.1
  
 dev_dependencies:
   flutter_test:

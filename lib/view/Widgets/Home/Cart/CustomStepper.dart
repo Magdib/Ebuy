@@ -1,10 +1,8 @@
 import 'package:ebuy/Controller/Home/CartController.dart';
+import 'package:ebuy/data/dataSource/Static/UINumbers.dart';
 import 'package:ebuy/data/dataSource/Static/static.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../../core/constant/Colors.dart';
-import '../../../../data/dataSource/Static/UINumbers.dart';
 
 class CustomStepper extends StatelessWidget {
   const CustomStepper({

@@ -54,7 +54,9 @@ class NewTrendItemsGridView extends StatelessWidget {
                   left: 20,
                   child: Text(
                     controller.sortedProducts[index].itemsName!,
-                    style: AppTheme.arabicTheme.textTheme.headline6!
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline6!
                         .copyWith(fontSize: 14),
                   ),
                 ),
@@ -63,7 +65,7 @@ class NewTrendItemsGridView extends StatelessWidget {
                   left: 20,
                   child: Text(
                     '\$${controller.sortedProducts[index].itemsPrice}',
-                    style: AppTheme.arabicTheme.textTheme.bodyText1,
+                    style: Theme.of(context).textTheme.bodyText1,
                   ),
                 ),
               ],

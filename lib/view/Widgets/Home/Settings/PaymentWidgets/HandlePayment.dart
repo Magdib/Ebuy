@@ -40,7 +40,8 @@ class HandlePayment extends StatelessWidget {
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) => GestureDetector(
-                            onTap: () {},
+                            onTap: () =>
+                                Get.toNamed(AppRoutes.addPaymentPageRoute),
                             child: const NoPaymentCard(),
                           ),
                       separatorBuilder: (context, index) => const SizedBox(

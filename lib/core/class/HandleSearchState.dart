@@ -103,6 +103,7 @@ AppBar handleSearchAppBar(SearchState searchState, BuildContext context) {
           toolbarHeight: 80,
           titleSpacing: 10,
           elevation: 0,
+          automaticallyImplyLeading: false,
           title: SearchTextFiled(
             readOnly: false,
             textController: controller.searchController!,
@@ -123,6 +124,7 @@ AppBar handleSearchAppBar(SearchState searchState, BuildContext context) {
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           toolbarHeight: 80,
           titleSpacing: 10,
+          automaticallyImplyLeading: false,
           elevation: 0,
           title: SearchTextFiled(
             onTap: () => controller.changeSearchState(1, context),

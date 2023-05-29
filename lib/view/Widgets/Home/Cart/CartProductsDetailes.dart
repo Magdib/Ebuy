@@ -48,7 +48,9 @@ class CartProductsDetailes extends StatelessWidget {
                   children: [
                     Text(
                       'Color:   ',
-                      style: AppTheme.arabicTheme.textTheme.headline6!
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline6!
                           .copyWith(fontSize: 14),
                     ),
                     Container(
