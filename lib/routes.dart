@@ -10,11 +10,11 @@ import 'package:ebuy/view/screens/Home/Settings/AccountPages/PaymentPages/AddPay
 import 'package:ebuy/view/screens/Home/favourite/Favourite.dart';
 import 'package:ebuy/view/screens/Home/HomePage/NewTrends.dart';
 import 'package:ebuy/view/screens/Home/Settings/AccountPages/AccountPage.dart';
-import 'package:ebuy/view/screens/Home/Settings/AccountPages/AddressBook.dart';
+import 'package:ebuy/view/screens/Home/Settings/AccountPages/AddressPages/AddressBook.dart';
 import 'package:ebuy/view/screens/Home/Settings/AccountPages/Contactpage.dart';
 import 'package:ebuy/view/screens/Home/Settings/AccountPages/OrdersPages/OrdersPage.dart';
 import 'package:ebuy/view/screens/Home/Settings/AccountPages/PaymentPages/PaymentMethods.dart';
-import 'package:ebuy/view/screens/Home/Settings/AccountPages/PremierDelivery.dart';
+import 'package:ebuy/view/screens/Home/Settings/AccountPages/ContactUs.dart';
 import 'package:ebuy/view/screens/Home/Settings/AccountPages/UsersDetailes.dart';
 import 'package:ebuy/view/screens/Home/Settings/SettingsPages/SettingsPage.dart';
 import 'package:ebuy/view/screens/Home/Settings/SettingsPages/language.dart';
@@ -28,8 +28,11 @@ import 'package:ebuy/view/screens/auth/SignIn.dart';
 import 'package:ebuy/view/screens/auth/SignUp.dart';
 import 'package:ebuy/view/screens/auth/verifyEmail.dart';
 import 'package:get/get.dart';
+import 'Controller/Home/SettingsControllers/AddressController.dart';
 import 'Controller/Home/SettingsControllers/GiftCardController.dart';
 import 'view/screens/Details/DetailsPage.dart';
+import 'view/screens/Home/Settings/AccountPages/AddressPages/AddAddressMap.dart';
+import 'view/screens/Home/Settings/AccountPages/AddressPages/AddAddressName.dart';
 import 'view/screens/Home/Settings/AccountPages/GiftCardsPages/AddGiftCardPage.dart';
 import 'view/screens/Home/Settings/AccountPages/GiftCardsPages/GiftCardsPage.dart';
 import 'view/screens/Home/Settings/AccountPages/OrdersPages/OrderTrack.dart';
@@ -73,6 +76,8 @@ class AppRoutes {
   static const String addGiftCardPageRoute = '/addGiftCardPage';
   static const String addPaymentPageRoute = '/addPaymentPage';
   static const String orderTrackPageRoute = '/orderTrackPage';
+  static const String addAddressMapPageRoute = '/addAddressPage';
+  static const String addAddressNamePageRoute = '/addAddressNamePage';
 }
 
 List<GetPage<dynamic>>? routes = [
@@ -131,16 +136,16 @@ List<GetPage<dynamic>>? routes = [
       page: () => const PaymentMethods(),
       binding: BindingsBuilder.put(() => PaymentControllerimp())),
   GetPage(
-    name: AppRoutes.addressPageRoute,
-    page: () => const AddressBook(),
-  ),
+      name: AppRoutes.addressPageRoute,
+      page: () => const AddressBook(),
+      binding: BindingsBuilder.put(() => AddressControllerimp())),
   GetPage(
     name: AppRoutes.usersDetailesPageRoute,
     page: () => const UsersDetailes(),
   ),
   GetPage(
     name: AppRoutes.deliveryPageRoute,
-    page: () => const PremierDelivery(),
+    page: () => const ContactUs(),
   ),
   GetPage(
       name: AppRoutes.ordersPageRoute,
@@ -173,5 +178,13 @@ List<GetPage<dynamic>>? routes = [
   GetPage(
     name: AppRoutes.orderTrackPageRoute,
     page: () => const OrderTrackPage(),
+  ),
+  GetPage(
+    name: AppRoutes.addAddressMapPageRoute,
+    page: () => const AddAddressMap(),
+  ),
+  GetPage(
+    name: AppRoutes.addAddressNamePageRoute,
+    page: () => const AddAddressName(),
   )
 ];

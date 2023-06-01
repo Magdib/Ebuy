@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ebuy/Controller/Home/CartController.dart';
 import 'package:ebuy/core/constant/Server.dart';
-import 'package:ebuy/core/function/Ui%20Functions/StringToColors.dart';
+import 'package:ebuy/core/function/UiFunctions/StringToColors.dart';
 import 'package:ebuy/data/dataSource/Static/UINumbers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

@@ -57,8 +57,9 @@ class FilterPage extends StatelessWidget {
                                   type: controller.filterValues[index],
                                   onPressed: () => Get.defaultDialog(
                                       title: controller.filterList[index].title,
-                                      titleStyle: AppTheme
-                                          .arabicTheme.textTheme.bodyText1!
+                                      titleStyle: Theme.of(context)
+                                          .textTheme
+                                          .bodyText1!
                                           .copyWith(fontSize: 20),
                                       content: FilterDialogContent(
                                         filterIndex: index,

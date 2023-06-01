@@ -38,6 +38,7 @@ class OrderTrackPage extends StatelessWidget {
         ],
       ),
       body: ListView(
+        physics: const BouncingScrollPhysics(),
         children: [
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
@@ -48,7 +49,7 @@ class OrderTrackPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               SizedBox(
-                height: 500,
+                height: 380,
                 width: 120,
                 child: IconStepper(
                   activeStep: 3,

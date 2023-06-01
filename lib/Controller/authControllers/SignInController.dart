@@ -1,6 +1,3 @@
-import 'dart:async';
-
-import 'package:ebuy/core/services/intialServices.dart';
 import 'package:ebuy/data/dataSource/Static/HiveKeys.dart';
 import 'package:ebuy/routes.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,7 +6,7 @@ import 'package:hive/hive.dart';
 
 import '../../core/class/enums.dart';
 import '../../core/function/handleData.dart';
-import '../../core/function/Ui Functions/SnackBars.dart';
+import '../../core/function/UiFunctions/SnackBars.dart';
 import '../../data/dataSource/remote/auth/CheckEmailData.dart';
 import '../../data/dataSource/remote/auth/CodeVerificationData.dart';
 import '../../data/dataSource/remote/auth/NewPasswordData.dart';

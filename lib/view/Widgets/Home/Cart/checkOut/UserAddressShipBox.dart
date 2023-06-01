@@ -1,6 +1,6 @@
 import 'package:ebuy/Controller/Home/CartController.dart';
 import 'package:ebuy/core/constant/Colors.dart';
-import 'package:ebuy/data/model/CartModels/CartAddressModel.dart';
+import 'package:ebuy/data/model/CartModels/StaticAddressModel.dart';
 import 'package:ebuy/view/Widgets/shared/CustomContainer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,7 +12,7 @@ class UserAddressShipBox extends StatelessWidget {
     required this.userAddress,
   });
   final String title;
-  final List<CartAddressModel> userAddress;
+  final List<StaticAddressModel> userAddress;
 
   @override
   Widget build(BuildContext context) {

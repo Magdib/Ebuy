@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
-import '../../data/model/CartModels/CartAddressModel.dart';
+import '../../data/model/CartModels/StaticAddressModel.dart';
 import '../../data/model/CartModels/ShippingModel.dart';
 
 abstract class CartController extends GetxController {
@@ -45,7 +45,7 @@ class CartControllerImp extends CartController {
   late List<List<String>> placeOrderList;
   int shipLastIndex = 0;
   List<ShippingModel> shipRadioList = shipRadioStatic;
-  late List<CartAddressModel> addressList;
+  late List<StaticAddressModel> addressList;
   String shipWay = 'Free';
   int currentStep = 0;
   @override
@@ -116,10 +116,10 @@ class CartControllerImp extends CartController {
   @override
   void onInit() {
     addressList = [
-      CartAddressModel(
+      StaticAddressModel(
           title: authBox.get(HiveKeys.username), icon: Icons.person),
-      CartAddressModel(title: '', icon: Icons.location_on_outlined),
-      CartAddressModel(title: '', icon: Icons.amp_stories_rounded)
+      StaticAddressModel(title: '', icon: Icons.location_on_outlined),
+      StaticAddressModel(title: '', icon: Icons.amp_stories_rounded)
     ];
     pageController = PageController();
     HomePageControllerImp homeController = Get.find();

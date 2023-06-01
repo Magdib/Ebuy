@@ -52,12 +52,13 @@ class EmailVerification extends GetView<SignUpControllerImp> {
                                   onSubmit: (val) {
                                     controller.emailVerifiy(val);
                                   },
-                                  textStyle: AppTheme
-                                      .arabicTheme.textTheme.headline2!
+                                  textStyle: Theme.of(context)
+                                      .textTheme
+                                      .headline2!
                                       .copyWith(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 20,
-                                  ),
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 20,
+                                      ),
                                   focusedBorderColor: AppColors.primaryColor,
                                   cursorColor: AppColors.primaryColor,
                                   numberOfFields: 5,

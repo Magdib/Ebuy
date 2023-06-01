@@ -1,17 +1,12 @@
 import 'package:ebuy/Controller/Home/HomePageController.dart';
 import 'package:ebuy/Controller/Home/favouritePageController.dart';
 import 'package:ebuy/core/class/HandlingDataRequest.dart';
+import 'package:ebuy/core/constant/Colors.dart';
 import 'package:ebuy/core/constant/Server.dart';
-import 'package:ebuy/core/function/Ui%20Functions/StringToColors.dart';
+import 'package:ebuy/core/function/UiFunctions/StringToColors.dart';
 import 'package:ebuy/data/model/favouriteModel/favouriteModel.dart';
-import 'package:ebuy/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../../core/constant/Colors.dart';
-
-import '../../../../core/theme/theme.dart';
-import '../../../../data/dataSource/Static/UINumbers.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 import 'FavouriteCard.dart';
@@ -79,8 +74,9 @@ class SaveditemsListView extends StatelessWidget {
                               children: [
                                 Text(
                                   'Color:   ',
-                                  style: AppTheme
-                                      .arabicTheme.textTheme.headline6!
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline6!
                                       .copyWith(fontSize: 14),
                                 ),
                                 Container(

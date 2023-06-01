@@ -1,6 +1,6 @@
 import 'package:ebuy/Controller/Home/SettingsControllers/OrdersController.dart';
 import 'package:ebuy/core/constant/Colors.dart';
-import 'package:ebuy/core/function/Ui%20Functions/customAppBar.dart';
+import 'package:ebuy/core/function/UiFunctions/customAppBar.dart';
 import 'package:ebuy/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

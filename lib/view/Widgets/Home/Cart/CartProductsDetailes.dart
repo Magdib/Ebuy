@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/constant/Server.dart';
-import '../../../../core/function/Ui Functions/StringToColors.dart';
+import '../../../../core/function/UiFunctions/StringToColors.dart';
 import '../../../../core/theme/theme.dart';
 
 class CartProductsDetailes extends StatelessWidget {

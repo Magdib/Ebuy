@@ -48,8 +48,8 @@ List<AccountListModel> accountPageUpperList = [
       text: 'My order',
       page: AppRoutes.ordersPageRoute),
   AccountListModel(
-      leadingIcon: CustomIcons.crownIcon,
-      text: 'Premier Delivery',
+      leadingIcon: CustomIcons.meetingIcon,
+      text: 'Contact us',
       page: AppRoutes.deliveryPageRoute)
 ];
 List<AccountListModel> accountPageLowerList = [

@@ -14,14 +14,14 @@ class TitledTextFiled extends GetView<SignUpControllerImp> {
     this.onChanged,
     required this.label,
     required this.hint,
-    required this.obscure,
+    this.obscure = false,
     required this.textEditingController,
-    required this.validator,
+    this.validator,
     this.keyboardType,
   }) : super(key: key);
   final String label;
   final String hint;
-  final bool obscure;
+  final bool? obscure;
   final TextEditingController textEditingController;
   final String? Function(String?)? validator;
   final void Function(String)? onChanged;
@@ -46,7 +46,7 @@ class TitledTextFiled extends GetView<SignUpControllerImp> {
             onChanged: onChanged,
             validator: validator,
             controller: textEditingController,
-            obscureText: obscure,
+            obscureText: obscure!,
             cursorColor: AppColors.deepGrey,
             keyboardType: keyboardType,
             decoration: InputDecoration(

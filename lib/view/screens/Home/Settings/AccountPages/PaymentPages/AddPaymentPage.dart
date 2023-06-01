@@ -1,6 +1,6 @@
 import 'package:ebuy/Controller/Home/SettingsControllers/PaymentController.dart';
 import 'package:ebuy/core/constant/Colors.dart';
-import 'package:ebuy/core/function/Ui%20Functions/CardExpiredDialog.dart';
+import 'package:ebuy/core/function/UiFunctions/CardExpiredDialog.dart';
 import 'package:ebuy/data/dataSource/Static/UINumbers.dart';
 import 'package:ebuy/view/Widgets/shared/AcceptedPayments.dart';
 import 'package:ebuy/view/Widgets/shared/CustomButton.dart';

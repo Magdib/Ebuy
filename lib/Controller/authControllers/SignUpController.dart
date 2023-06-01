@@ -4,7 +4,7 @@ import 'package:ebuy/routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-import '../../core/function/Ui Functions/SnackBars.dart';
+import '../../core/function/UiFunctions/SnackBars.dart';
 import '../../data/dataSource/remote/auth/EmailVerificationData.dart';
 import '../../data/dataSource/remote/auth/signupData.dart';
 import '../../data/model/authModels/EmailLikedModel.dart';

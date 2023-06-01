@@ -1,4 +1,4 @@
-import 'package:ebuy/core/function/Ui%20Functions/SnackBars.dart';
+import 'package:ebuy/core/function/UiFunctions/SnackBars.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

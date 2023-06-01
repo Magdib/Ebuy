@@ -48,11 +48,13 @@ class PricePage extends GetView<FilterPageControllerimp> {
                     child: GetBuilder<FilterPageControllerimp>(
                         builder: (controller) => SfRangeSliderTheme(
                               data: SfRangeSliderThemeData(
-                                  inactiveLabelStyle: AppTheme
-                                      .arabicTheme.textTheme.bodyText1!
+                                  inactiveLabelStyle: Theme.of(context)
+                                      .textTheme
+                                      .bodyText1!
                                       .copyWith(fontSize: 13),
-                                  activeLabelStyle: AppTheme
-                                      .arabicTheme.textTheme.headline2!
+                                  activeLabelStyle: Theme.of(context)
+                                      .textTheme
+                                      .headline2!
                                       .copyWith(fontSize: 16),
                                   thumbRadius: 13,
                                   tooltipBackgroundColor:

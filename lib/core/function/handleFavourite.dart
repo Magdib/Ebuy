@@ -6,7 +6,7 @@ import 'package:ebuy/data/model/HomePageModels/itemsModel.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
-import 'Ui Functions/SnackBars.dart';
+import 'UiFunctions/SnackBars.dart';
 import 'handleData.dart';
 
 handleFavourite(

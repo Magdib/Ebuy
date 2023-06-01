@@ -1,6 +1,6 @@
 import 'package:ebuy/Controller/Home/CartController.dart';
 import 'package:ebuy/core/constant/Colors.dart';
-import 'package:ebuy/core/function/Ui%20Functions/confirmPaymentDialog.dart';
+import 'package:ebuy/core/function/UiFunctions/confirmPaymentDialog.dart';
 import 'package:ebuy/data/dataSource/Static/UINumbers.dart';
 import 'package:ebuy/view/Widgets/shared/CustomButton.dart';
 import 'package:ebuy/view/Widgets/shared/CustomConditionButton.dart';

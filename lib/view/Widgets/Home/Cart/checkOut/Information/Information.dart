@@ -1,6 +1,6 @@
 import 'package:ebuy/Controller/Home/CartController.dart';
 import 'package:ebuy/core/constant/Colors.dart';
-import 'package:ebuy/core/function/Ui%20Functions/GiftCardDialogs.dart';
+import 'package:ebuy/core/function/UiFunctions/GiftCardDialogs.dart';
 import 'package:ebuy/view/Widgets/shared/CustomContainer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
