@@ -1,5 +1,6 @@
 import 'package:ebuy/Controller/authControllers/SignInController.dart';
 import 'package:ebuy/core/class/HandlingDataRequest.dart';
+import 'package:ebuy/core/constant/ArgumentsNames.dart';
 import 'package:ebuy/view/Widgets/auth/shared/AuthPageTitle.dart';
 import 'package:ebuy/view/Widgets/shared/CustomButton.dart';
 import 'package:flutter/material.dart';
@@ -63,8 +64,11 @@ class CheckEmail extends StatelessWidget {
                                 HaveAccountAuth(
                                     authText: "Don't have an account? ".tr,
                                     authType: 'Sign Up'.tr,
-                                    onTap: () =>
-                                        Get.offNamed(AppRoutes.signUpRoute)),
+                                    onTap: () => Get.offNamed(
+                                            AppRoutes.signUpRoute,
+                                            arguments: {
+                                              ArgumentsNames.verified: "1"
+                                            })),
                               ]))
                     ]))),
       ),

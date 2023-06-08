@@ -12,15 +12,15 @@ class OrdersPage extends GetView<OrdersControllerimp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: true == false
+        appBar: true == true
             ? customAppBar(
-                'My orders',
+                'My orders'.tr,
                 context,
                 0,
               )
             : AppBar(
                 title: Text(
-                  'My orders',
+                  'My orders'.tr,
                   style: Theme.of(context)
                       .textTheme
                       .bodyText1!
@@ -54,6 +54,6 @@ class OrdersPage extends GetView<OrdersControllerimp> {
                   unselectedLabelColor: AppColors.grey,
                 ),
               ),
-        body: const HandleOrders(anyOrders: true));
+        body: const HandleOrders(anyOrders: false));
   }
 }

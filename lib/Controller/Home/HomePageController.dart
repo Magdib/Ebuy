@@ -9,7 +9,6 @@ import 'package:ebuy/data/model/HomePageModels/ColorsModel.dart';
 import 'package:ebuy/data/model/HomePageModels/ProductsSortModel.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
-import 'package:syncfusion_flutter_sliders/sliders.dart';
 import 'package:flutter/material.dart';
 import '../../core/constant/ArgumentsNames.dart';
 import '../../core/function/UiFunctions/SnackBars.dart';
@@ -18,7 +17,6 @@ import '../../core/function/getProductIndex.dart';
 import '../../data/dataSource/remote/home/RecentData.dart';
 import '../../data/model/HomePageModels/BannersModel.dart';
 import '../../data/model/HomePageModels/BrandsModel.dart';
-import '../../data/model/HomePageModels/FilterModel.dart';
 import '../../data/model/HomePageModels/itemsModel.dart';
 import '../../routes.dart';
 
@@ -75,10 +73,10 @@ class HomePageControllerImp extends HomePageController {
     if (StatusRequest.success == statusRequest) {
       if (response['status'] == "success") {
         List itemsList = response['items'];
-        List bannersList = response['banners'];
-        List brandsList = response['brands'];
-        List colorsList = response['Colors'];
-        List categoriesList = response['categories'];
+        List bannersList = response['banners']["data"];
+        List brandsList = response['brands']["data"];
+        List colorsList = response['Colors']["data"];
+        List categoriesList = response['categories']["data"];
         if (response['recent'] != "failure") {
           List recentList = response['recent'];
           recentProduct.addAll(recentList.map((e) => Products.fromJson(e)));
@@ -87,7 +85,6 @@ class HomePageControllerImp extends HomePageController {
         homeProducts.addAll(itemsList
             .map((e) => Products.fromJson(e))
             .where((product) => product.itemsMainPW != null));
-
         newTrend.addAll(itemsList
             .map((e) => Products.fromJson(e))
             .where((product) => product.isNewTrend == "1"));
@@ -241,12 +238,15 @@ class HomePageControllerImp extends HomePageController {
     if (recentProduct.length == 1) {
       firstRecentIndex = getProductIndex(products, recentProduct, 0);
       recentProduct[0].favourite = products[firstRecentIndex].favourite;
+      print('///////////////////1////////////////////////');
     } else if (recentProduct.length == 2) {
       firstRecentIndex = getProductIndex(products, recentProduct, 0);
       secondeRecentIndex = getProductIndex(products, recentProduct, 1);
       recentProduct[0].favourite = products[firstRecentIndex].favourite;
       recentProduct[1].favourite = products[secondeRecentIndex].favourite;
+      print('///////////////////2////////////////////////');
     }
+    print('///////////////////${recentProduct.length}////////////////////////');
   }
 
   @override

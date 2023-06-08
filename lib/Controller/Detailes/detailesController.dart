@@ -1,8 +1,9 @@
 import 'dart:io';
 
 import 'package:ebuy/core/class/enums.dart';
-import 'package:ebuy/core/constant/Colors.dart';
 import 'package:ebuy/core/constant/Server.dart';
+import 'package:ebuy/core/function/UiFunctions/SnackBars.dart';
+import 'package:ebuy/core/function/handleData.dart';
 import 'package:ebuy/core/function/handleFavourite.dart';
 import 'package:ebuy/data/dataSource/Static/HiveKeys.dart';
 import 'package:flutter/material.dart';
@@ -14,12 +15,11 @@ import '../../core/constant/Images.dart';
 import '../../core/function/UiFunctions/StringToColors.dart';
 import '../../data/dataSource/remote/Favourite/FavouriteAddData.dart';
 import '../../data/dataSource/remote/Favourite/favouriteRemoveData.dart';
+import '../../data/dataSource/remote/cart/CartData.dart';
 import '../../data/model/HomePageModels/itemsModel.dart';
 import '../../data/model/ProductModels/RateModel.dart';
 
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
-
-import '../../view/Widgets/Detailes/DetailesBottomSheet.dart';
 
 abstract class DetailesController extends GetxController {
   changeFavouriteState();
@@ -32,10 +32,16 @@ abstract class DetailesController extends GetxController {
   void similarProductFavState(int index);
   void goToSimilarProduct(int index);
   void changeSelectedColor(int index);
+  void changeSelectedSize(int index);
   void addToCart();
+  getItemsCount();
+  void increaseAmount();
+  void decreaseAmount();
+  onWillPopSnackBar();
 }
 
 class DetailesControllerImp extends DetailesController {
+  CartData cartData = CartData(Get.find());
   Box authBox = Hive.box(HiveBoxes.authBox);
   PageController? imagesController;
   ScrollController? scrollController;
@@ -47,11 +53,16 @@ class DetailesControllerImp extends DetailesController {
   late int sizeSelected;
   FavouriteAddData favouriteAddData = FavouriteAddData(Get.find());
   FavouriteRemoveData favouriteRemoveData = FavouriteRemoveData(Get.find());
-  StatusRequest statusRequest = StatusRequest.none;
+  StatusRequest statusRequest = StatusRequest.loading;
   List<String> productImages = [];
-  List<Color> productColors = [];
+  List<Color> productColorsUI = [];
+  List<String> productColorsString = [];
   List<Products> similarProducts = [];
+  List<String> sizesLetter = [];
   List<String> sizes = [];
+  int itemsAmount = 0;
+  late int serverItemsAmount;
+  bool canAddToCart = false;
   List<RateModel> usersRate = [
     RateModel(
         username: 'Jack Bibber',
@@ -99,29 +110,37 @@ class DetailesControllerImp extends DetailesController {
 
   @override
   void handleProductColors() {
-    productColors.add(stringToColor(product.itemsColor!));
+    productColorsUI.add(stringToColor(product.itemsColor!));
+    productColorsString.add(product.itemsColor!);
     if (product.itemsColor2 != null) {
-      productColors.add(stringToColor(product.itemsColor2!));
+      productColorsUI.add(stringToColor(product.itemsColor2!));
+      productColorsString.add(product.itemsColor2!);
     }
     if (product.itemsColor3 != null) {
-      productColors.add(stringToColor(product.itemsColor3!));
+      productColorsUI.add(stringToColor(product.itemsColor3!));
+      productColorsString.add(product.itemsColor3!);
     }
     if (product.itemsColor4 != null) {
-      productColors.add(stringToColor(product.itemsColor4!));
+      productColorsUI.add(stringToColor(product.itemsColor4!));
+      productColorsString.add(product.itemsColor4!);
     }
   }
 
   @override
   void handleProductsSizes() {
-    sizes.add(product.itemsSize![0]);
+    sizesLetter.add(product.itemsSize![0]);
+    sizes.add(product.itemsSize!);
     if (product.itemsSize2 != null) {
-      sizes.add(product.itemsSize2![0]);
+      sizesLetter.add(product.itemsSize2![0]);
+      sizes.add(product.itemsSize2!);
     }
     if (product.itemsSize3 != null) {
-      sizes.add(product.itemsSize3![0]);
+      sizesLetter.add(product.itemsSize3![0]);
+      sizes.add(product.itemsSize3!);
     }
     if (product.itemsSize4 != null) {
-      sizes.add(product.itemsSize4![0] + product.itemsSize4![1]);
+      sizesLetter.add(product.itemsSize4![0] + product.itemsSize4![2]);
+      sizes.add(product.itemsSize4!);
     }
   }
 
@@ -138,6 +157,9 @@ class DetailesControllerImp extends DetailesController {
 
   @override
   void handleSimilarProduct() {
+    colorSelected = 0;
+    sizeSelected = 0;
+    getItemsCount();
     handleProductImages();
     handleProductColors();
     handleProductsSizes();
@@ -174,10 +196,15 @@ class DetailesControllerImp extends DetailesController {
   @override
   void goToSimilarProduct(int index) {
     product = similarProducts[index];
+    sizes.clear();
+    sizesLetter.clear();
+    productColorsUI.clear();
+    productColorsString.clear();
+
     similarProducts.clear();
-    handleSimilarProduct();
     productImages.clear();
-    handleProductImages();
+    handleSimilarProduct();
+
     scrollController!.animateTo(0,
         duration: const Duration(seconds: 1), curve: Curves.easeIn);
     update();
@@ -190,11 +217,77 @@ class DetailesControllerImp extends DetailesController {
   }
 
   @override
-  void addToCart() {
-    Get.bottomSheet(const DetailesBottomSheet(),
-        backgroundColor: AppColors.white,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        isScrollControlled: true);
+  void changeSelectedSize(int index) {
+    sizeSelected = index;
+    update();
+  }
+
+  @override
+  getItemsCount() async {
+    var response = await cartData.getItemCount(
+        authBox.get(HiveKeys.userid), product.itemsId!);
+    statusRequest = handlingData(response);
+    if (statusRequest == StatusRequest.success) {
+      if (response['status'] == 'success') {
+        itemsAmount = int.parse(response['data']);
+        serverItemsAmount = int.parse(response['data']);
+      }
+      itemsAmount > 0 ? canAddToCart = true : canAddToCart = false;
+    } else {
+      statusRequest = StatusRequest.failure;
+    }
+    update();
+  }
+
+  @override
+  void increaseAmount() {
+    if (itemsAmount < double.parse(product.itemsCount!)) {
+      itemsAmount++;
+      canAddToCart = true;
+    }
+    update();
+  }
+
+  @override
+  void decreaseAmount() {
+    if (itemsAmount > 0) {
+      itemsAmount--;
+    }
+    if (itemsAmount < serverItemsAmount) {
+      canAddToCart = false;
+    }
+    update();
+  }
+
+  @override
+  onWillPopSnackBar() {
+    statusRequest = StatusRequest.none;
+    Get.back();
+    return Future.value(false);
+  }
+
+  @override
+  void addToCart() async {
+    statusRequest = StatusRequest.loading;
+    update();
+
+    var response = await cartData.addToCart(
+        authBox.get(HiveKeys.userid),
+        product.itemsId!,
+        productColorsString[colorSelected],
+        sizes[sizeSelected],
+        "${itemsAmount - serverItemsAmount}");
+    statusRequest = handlingData(response);
+    serverItemsAmount = 0;
+    await getItemsCount();
+    update();
+    if (statusRequest == StatusRequest.success) {
+      Get.back();
+      succesSnackBar(
+          'Done.', 'your product have been successfully added to the cart ');
+    } else {
+      noInternetSnackBar();
+    }
   }
 
   @override
@@ -211,7 +304,8 @@ class DetailesControllerImp extends DetailesController {
     caheManger = DefaultCacheManager();
     handleSimilarProduct();
     String size = product.itemsSize![0];
-    sizeSelected = sizes.indexWhere((tempSize) => tempSize.contains(size));
+    sizeSelected =
+        sizesLetter.indexWhere((tempSize) => tempSize.contains(size));
     super.onInit();
   }
 

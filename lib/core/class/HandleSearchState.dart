@@ -45,7 +45,7 @@ class HandleSearchState extends GetView<SearchControllerImp> {
         : searchState == SearchState.searching
             ? ListView.separated(
                 itemBuilder: (context, index) => InkWell(
-                      onTap: () {},
+                      onTap: () => controller.goToProduct(index, context),
                       child: ListTile(
                         contentPadding:
                             const EdgeInsets.symmetric(horizontal: 10.0),

@@ -19,10 +19,10 @@ class DetailesSizesListView extends StatelessWidget {
           separatorBuilder: (context, index) => const SizedBox(
             width: 5,
           ),
-          itemCount: controller.sizes.length,
+          itemCount: controller.sizesLetter.length,
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) => MaterialButton(
-            onPressed: () => controller.changeSelectedColor(index),
+            onPressed: () => controller.changeSelectedSize(index),
             shape: RoundedRectangleBorder(
                 side: controller.sizeSelected == index
                     ? const BorderSide(color: AppColors.red, width: 2)
@@ -33,7 +33,7 @@ class DetailesSizesListView extends StatelessWidget {
             padding: const EdgeInsets.all(0),
             color: AppColors.white,
             child: Text(
-              controller.sizes[index],
+              controller.sizesLetter[index],
               style:
                   Theme.of(context).textTheme.headline6!.copyWith(fontSize: 14),
             ),

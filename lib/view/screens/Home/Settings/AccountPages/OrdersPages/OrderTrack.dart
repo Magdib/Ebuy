@@ -1,3 +1,4 @@
+import 'package:ebuy/Controller/Home/SettingsControllers/OrdersController.dart';
 import 'package:ebuy/core/constant/Colors.dart';
 import 'package:ebuy/data/dataSource/Static/UINumbers.dart';
 import 'package:ebuy/data/dataSource/Static/static.dart';
@@ -8,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
-class OrderTrackPage extends StatelessWidget {
+class OrderTrackPage extends GetView<OrdersControllerimp> {
   const OrderTrackPage({super.key});
 
   @override
@@ -48,7 +49,7 @@ class OrderTrackPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 380,
                 width: 120,
                 child: IconStepper(
@@ -80,7 +81,7 @@ class OrderTrackPage extends StatelessWidget {
                     itemBuilder: (context, index) => RichText(
                       text: TextSpan(children: <TextSpan>[
                         TextSpan(
-                          text: '${ordersTrackText[index]}\n',
+                          text: '${controller.ordersTrackText[index]}\n',
                           style: index < 3
                               ? Theme.of(context)
                                   .textTheme

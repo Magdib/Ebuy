@@ -1,3 +1,5 @@
+import 'package:ebuy/Controller/authControllers/SignUpController.dart';
+import 'package:ebuy/core/constant/ArgumentsNames.dart';
 import 'package:ebuy/data/dataSource/Static/HiveKeys.dart';
 import 'package:ebuy/routes.dart';
 import 'package:flutter/cupertino.dart';
@@ -50,12 +52,19 @@ class SignInControllerImp extends SigninController {
     update();
     if (StatusRequest.success == signInStatusRequest) {
       if (response['status'] == "success") {
-        authBox.put(HiveKeys.islogin, '2');
-        authBox.put(HiveKeys.email, response['data']['users_email']);
-        authBox.put(HiveKeys.username, response['data']['users_name']);
-        authBox.put(HiveKeys.userid, response['data']['users_id']);
-        Get.offAllNamed(AppRoutes.mainPageRoute);
-        authBox.close();
+        if (response['data']['users_approve'] == "1") {
+          authBox.put(HiveKeys.islogin, '2');
+          authBox.put(HiveKeys.email, response['data']['users_email']);
+          authBox.put(HiveKeys.username, response['data']['users_name']);
+          authBox.put(HiveKeys.userid, response['data']['users_id']);
+          Get.offAllNamed(AppRoutes.mainPageRoute);
+          authBox.close();
+        } else {
+          Get.toNamed(AppRoutes.emailVerificationRoute, arguments: {
+            ArgumentsNames.verified: "0",
+            ArgumentsNames.email: signInEmail!.text
+          });
+        }
       } else {
         signInStatusRequest = StatusRequest.failure;
         update();

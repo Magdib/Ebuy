@@ -115,8 +115,27 @@ class AppWords {
     //Settings
     'English': 'English',
     'Language': 'Language',
+    'Setting': 'Setting',
+    'Shop in': 'Shop in',
+    'Notifications': 'Notifications',
+    'Terms & Conditions': 'Terms & Conditions',
+    'My orders': 'My orders',
+    'Contact us': 'Contact us',
+    'My details': 'My details',
+    'Address book': 'Address book',
+    'Payment methods': 'Payment methods',
+    'Social accounts': 'Social accounts',
+
+    //Orders
+    'You currently have no orders': 'You currently have no orders',
+    'You can Start Shopping by adding some products to your cart and checkout... ':
+        'You can Start Shopping by adding some products to your cart and checkout... ',
+    'Start shopping': 'Start shopping',
   };
-  //Arabic Language
+
+  ///Arabic Language
+  ///
+  ///
   static const Map<String, String> arabicLanguage = {
     //OnBoarding
     'View product 360 degrees': 'شاهد المنتج 360 درجة',
@@ -229,5 +248,20 @@ class AppWords {
     //Settings
     'English': 'العربية',
     'Language': 'اللغة',
+    'Setting': 'الإعدادات',
+    'Shop in': 'موقع التسوق',
+    'Notifications': 'الإشعارات',
+    'Terms & Conditions': 'الشروط و الأحكام',
+    'My orders': 'طلباتي',
+    'Contact us': 'تواصل معنا',
+    'My details': 'تفاصيل حسابي',
+    'Address book': 'دفتر العناوين',
+    'Payment methods': 'وسائل الدفع',
+    'Social accounts': 'الحسابات',
+    //Orders
+    'You currently have no orders': 'أنت حالياً لا تملك أي طلبات',
+    'You can Start Shopping by adding some products to your cart and checkout... ':
+        'يمكنك بدأ التسوق من خلال إضافة بعض العناصر إلى السلة ثم شرائهم بعد إكمال الخطوات',
+    'Start shopping': 'أبدأ التسوق',
   };
 }

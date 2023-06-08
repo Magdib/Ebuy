@@ -70,7 +70,11 @@ class MainContrllerImp extends MainController {
       homeController.refreshPage();
       somthingChange = false;
     }
-    bottomBarIndex = page;
+    if (bottomBarIndex == 0 && page == 0) {
+      Get.back();
+    } else {
+      bottomBarIndex = page;
+    }
     update();
   }
 

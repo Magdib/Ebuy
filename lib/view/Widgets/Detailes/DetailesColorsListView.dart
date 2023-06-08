@@ -19,7 +19,7 @@ class DetailesColorsListView extends StatelessWidget {
           separatorBuilder: (context, index) => const SizedBox(
             width: 5,
           ),
-          itemCount: controller.productColors.length,
+          itemCount: controller.productColorsUI.length,
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) => MaterialButton(
             onPressed: () => controller.changeSelectedColor(index),
@@ -30,7 +30,7 @@ class DetailesColorsListView extends StatelessWidget {
                 borderRadius: BorderRadius.circular(40)),
             height: 40,
             minWidth: 40,
-            color: controller.productColors[index],
+            color: controller.productColorsUI[index],
           ),
         ),
       ),

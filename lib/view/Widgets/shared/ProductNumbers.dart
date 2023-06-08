@@ -6,8 +6,13 @@ import '../../../data/dataSource/Static/UINumbers.dart';
 class ProductNumbers extends StatelessWidget {
   const ProductNumbers({
     super.key,
+    required this.increaseFuncion,
+    required this.decreaseFuncion,
+    required this.value,
   });
-
+  final void Function() increaseFuncion;
+  final void Function() decreaseFuncion;
+  final int value;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -20,18 +25,18 @@ class ProductNumbers extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           IconButton(
-              onPressed: () => print('-'),
+              onPressed: decreaseFuncion,
               icon: const Icon(
                 Icons.remove,
                 color: AppColors.black,
                 size: 15,
               )),
           Text(
-            "1",
+            "$value",
             style: Theme.of(context).textTheme.bodyText1,
           ),
           IconButton(
-              onPressed: () => print('+'),
+              onPressed: increaseFuncion,
               icon: const Icon(
                 Icons.add,
                 color: AppColors.black,

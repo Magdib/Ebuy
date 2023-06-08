@@ -5,6 +5,12 @@ abstract class OrdersController extends GetxController {}
 
 class OrdersControllerimp extends OrdersController
     with GetSingleTickerProviderStateMixin {
+  List<String> ordersTrackText = [
+    'Placed order',
+    'Delivery to shipping units',
+    'Orders are being shipped',
+    'Delivered successfully'
+  ];
   List<Tab> tabsList = const [
     Tab(
       text: 'Pending orders',
@@ -13,6 +19,7 @@ class OrdersControllerimp extends OrdersController
       text: 'Past orders',
     )
   ];
+
   late TabController tabController;
   @override
   void onInit() {

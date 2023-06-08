@@ -1,4 +1,5 @@
 import 'package:ebuy/core/class/enums.dart';
+import 'package:ebuy/core/constant/ArgumentsNames.dart';
 import 'package:ebuy/core/function/handleData.dart';
 import 'package:ebuy/routes.dart';
 import 'package:flutter/cupertino.dart';
@@ -297,7 +298,9 @@ class SignUpControllerImp extends SignUpController {
     monthListContent();
     yearListContent();
     signUpStateCheck();
-
+    if (Get.arguments[ArgumentsNames.verified] == "0") {
+      email!.text = Get.arguments[ArgumentsNames.email];
+    }
     super.onInit();
   }
 

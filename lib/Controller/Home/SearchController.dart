@@ -1,5 +1,6 @@
 import 'package:ebuy/Controller/Home/HomePageController.dart';
 import 'package:ebuy/core/class/enums.dart';
+import 'package:ebuy/core/constant/ArgumentsNames.dart';
 import 'package:ebuy/data/model/HomePageModels/itemsModel.dart';
 import 'package:ebuy/routes.dart';
 import "package:flutter/material.dart";
@@ -9,6 +10,7 @@ import '../../data/model/HomePageModels/BannersModel.dart';
 
 abstract class SearchController extends GetxController {
   void searchingProducts();
+  void goToProduct(int index, BuildContext context);
   void changeSearchState(int index, BuildContext context);
   void goToSearchCategory(String category);
   void sortCategoriesProducts(String gender, String category);
@@ -22,8 +24,8 @@ class SearchControllerImp extends SearchController
   TextEditingController? searchController;
   late List<Products> products;
   List<Products> searchProducts = [];
-  List<Banners> banners = [];
   late List<Products> sortedProducts;
+  List<Banners> banners = [];
   SearchState searchState = SearchState.none;
   late String categoryName;
   bool showTabBar = true;
@@ -77,6 +79,15 @@ class SearchControllerImp extends SearchController
         .where((product) => product.itemsName!
             .isCaseInsensitiveContains(searchController!.text))
         .toList();
+  }
+
+  @override
+  void goToProduct(int index, BuildContext context) {
+    FocusScope.of(context).unfocus();
+    Get.toNamed(AppRoutes.detailsPageRoute, arguments: {
+      ArgumentsNames.productListD: products,
+      ArgumentsNames.productD: searchProducts[index]
+    });
   }
 
   @override

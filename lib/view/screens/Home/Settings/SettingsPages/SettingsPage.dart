@@ -12,7 +12,7 @@ class SettingsPage extends GetView<AccountControllerImp> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Setting',
+          'Setting'.tr,
           style: Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 20),
         ),
         centerTitle: true,

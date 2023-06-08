@@ -1,6 +1,7 @@
 import 'package:ebuy/Controller/authControllers/SignUpController.dart';
 import 'package:ebuy/core/class/enums.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import '../../view/Widgets/auth/shared/RetryAuthButton.dart';
@@ -46,6 +47,25 @@ class HandlingDataRequest extends GetView<SignUpControllerImp> {
                       ],
                     ),
                   )
-                : widget;
+                : statusRequest == StatusRequest.failure
+                    ? Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SvgPicture.asset(AppImagesAssets.noRecetSearch),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              'No Data.',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyText1!
+                                  .copyWith(fontSize: 20),
+                            )
+                          ],
+                        ),
+                      )
+                    : widget;
   }
 }

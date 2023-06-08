@@ -1,5 +1,6 @@
 import 'package:ebuy/core/constant/Colors.dart';
 import 'package:ebuy/core/constant/Images.dart';
+import 'package:ebuy/core/function/UiFunctions/ShopInDialog.dart';
 import 'package:ebuy/routes.dart';
 
 import 'package:flutter/material.dart';
@@ -10,11 +11,12 @@ import '../../../core/constant/CustomIcons.dart';
 import '../../model/CartModels/ShippingModel.dart';
 import '../../model/CartModels/StepperModel.dart';
 import '../../model/OnBoardingModel/OnBoardingModel.dart';
+import '../../model/authModels/AccountFListModel.dart';
 import '../../model/authModels/AccountListModel.dart';
 
 //onBoardingList
 
-List<OnBoardingModel> onBoardingdata = [
+final List<OnBoardingModel> onBoardingdata = [
   OnBoardingModel(
       image: AppImagesAssets.onBoardingImageOne,
       title: 'View product 360 degrees'.tr,
@@ -35,40 +37,10 @@ List<OnBoardingModel> onBoardingdata = [
 ];
 //Detailes List
 
-List<String> detailesTitles = [
+const List<String> detailesTitles = [
   'Description',
   'Free delivery & returns',
   'Size guide',
-];
-// Settings List
-
-List<AccountListModel> accountPageUpperList = [
-  AccountListModel(
-      leadingIcon: CustomIcons.boxIcon,
-      text: 'My order',
-      page: AppRoutes.ordersPageRoute),
-  AccountListModel(
-      leadingIcon: CustomIcons.meetingIcon,
-      text: 'Contact us',
-      page: AppRoutes.deliveryPageRoute)
-];
-List<AccountListModel> accountPageLowerList = [
-  AccountListModel(
-      leadingIcon: Icons.square,
-      text: 'My details',
-      page: AppRoutes.usersDetailesPageRoute),
-  AccountListModel(
-      leadingIcon: Icons.location_on_rounded,
-      text: 'Address book',
-      page: AppRoutes.addressPageRoute),
-  AccountListModel(
-      leadingIcon: Icons.credit_card,
-      text: 'Payment methods',
-      page: AppRoutes.paymentPageRoute),
-  AccountListModel(
-      leadingIcon: CustomIcons.personIcon,
-      text: 'Social accounts',
-      page: AppRoutes.accountPageRoute)
 ];
 //Check Out Lists
 
@@ -98,14 +70,14 @@ List<StepperModel> stepperList = [
   StepperModel(containerHeight: 25.0, borderRadius: 5, subtitle: 'Shipping'),
   StepperModel(containerHeight: 30.0, borderRadius: 30, subtitle: 'Payment')
 ];
-List<String> payMethods = [
+const List<String> payMethods = [
   AppImagesAssets.visa,
   AppImagesAssets.payPal,
   AppImagesAssets.masterCard,
   AppImagesAssets.americanExpress,
   AppImagesAssets.klarna
 ];
-List<Icon> orderTrackIcons = const [
+const List<Icon> orderTrackIcons = [
   Icon(
     Icons.shopping_cart,
     color: AppColors.white,
@@ -122,10 +94,4 @@ List<Icon> orderTrackIcons = const [
     Icons.favorite,
     color: AppColors.primaryColor,
   )
-];
-List<String> ordersTrackText = [
-  'Placed order',
-  'Delivery to shipping units',
-  'Orders are being shipped',
-  'Delivered successfully'
 ];

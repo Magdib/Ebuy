@@ -24,7 +24,7 @@ class AddressControllerimp extends AddressController {
   late Completer<GoogleMapController> googleMapController;
   CameraPosition cameraPosition = const CameraPosition(target: LatLng(0, 0));
   late String choosenLocation;
-  late String postalCode;
+  late List<Placemark> placemark;
   late TextEditingController adNameController;
   List<StaticAddressModel> addressList = [];
   List<AddressCartModel> addressCardList = [];
@@ -63,8 +63,8 @@ class AddressControllerimp extends AddressController {
       List<Placemark> placemark = await placemarkFromCoordinates(
           cameraPosition.target.latitude, cameraPosition.target.longitude);
       if (placemark.isNotEmpty) {
-        postalCode = "${placemark[0].postalCode}";
-        choosenLocation = placemark[0].street!.replaceAll("$postalCode،", '');
+        choosenLocation =
+            placemark[0].street!.replaceAll("${placemark[0].postalCode}", '');
         Get.offNamed(AppRoutes.addAddressNamePageRoute);
       }
     } on Exception catch (_) {
@@ -95,15 +95,13 @@ class AddressControllerimp extends AddressController {
         AddressCartModel(title: adNameController.text, isSelected: false),
       );
     }
-    if (postalCode == '') {
-      postalCode = "Postal Code is null No Delivery.";
-    }
+
     addressList = [
       StaticAddressModel(
           title: authBox.get(HiveKeys.username), icon: Icons.person),
       StaticAddressModel(
           title: choosenLocation, icon: Icons.location_on_outlined),
-      StaticAddressModel(title: postalCode, icon: Icons.amp_stories_rounded)
+      StaticAddressModel(title: "PhoneNumber", icon: Icons.amp_stories_rounded)
     ];
     Get.back();
     update();

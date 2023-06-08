@@ -108,7 +108,7 @@ class CheckOutItem extends GetView<CartControllerImp> {
             bottom: 30,
             right: 30,
             child: Text(
-              "\$${controller.getItemTotalPrice(0)}",
+              "\$${200}",
               style:
                   Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 18),
             )),

@@ -18,7 +18,7 @@ class LanguagePage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         const SizedBox(
-                          height: 10,
+                          height: 20,
                         ),
                         Text(
                           'Language'.tr,
@@ -27,18 +27,16 @@ class LanguagePage extends StatelessWidget {
                               .bodyText1!
                               .copyWith(fontSize: 20),
                         ),
-                        const SizedBox(
-                          height: 20,
-                        ),
                         Padding(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 10,
-                              vertical: 20,
+                              vertical: 30,
                             ),
                             child: CustomContainer(
                                 height: 72,
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 10),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 10,
+                                ),
                                 radius: 5,
                                 child: Row(
                                   mainAxisAlignment:

@@ -1,4 +1,13 @@
-class Products {
+class CartModel {
+  String? itemsPrice;
+  String? cartCount;
+  String? cartId;
+  String? cartUsersid;
+  String? cartItemsid;
+  String? cartItemsColor;
+  String? cartItemsSize;
+  String? selectedcolor;
+  String? selectedsize;
   String? itemsId;
   String? itemsName;
   String? itemsNameAr;
@@ -10,7 +19,7 @@ class Products {
   String? itemsImage4;
   String? itemsCount;
   String? itemsActive;
-  String? itemsPrice;
+  String? cartPrice;
   String? itemsDiscount;
   String? itemsRate;
   String? itemsSize;
@@ -29,25 +38,28 @@ class Products {
   String? itemsColor2Ar;
   String? itemsColor3Ar;
   String? itemsColor4Ar;
-  String? itemsDate;
-  String? itemsCat;
   String? itemsBrand;
-  String? itemsCatDetailes;
   String? itemsBrandAr;
   String? itemsGender;
   String? itemsGenderAr;
+  String? itemsDate;
+  String? itemsCat;
+  String? itemsCatDetailes;
   String? itemsCatDetailesAr;
   String? itemsMainPW;
   String? itemsMainPWAr;
-  String? categoriesId;
-  String? categoriesName;
-  String? categoriesNameAr;
-  String? categoriesDatetime;
-  String? favourite;
-  String? recent;
   String? itemsPriceDiscount;
-  Products(
-      {this.itemsId,
+  CartModel(
+      {this.itemsPrice,
+      this.cartCount,
+      this.cartId,
+      this.cartUsersid,
+      this.cartItemsid,
+      this.cartItemsColor,
+      this.cartItemsSize,
+      this.selectedcolor,
+      this.selectedsize,
+      this.itemsId,
       this.itemsName,
       this.itemsNameAr,
       this.itemsDesc,
@@ -58,7 +70,7 @@ class Products {
       this.itemsImage4,
       this.itemsCount,
       this.itemsActive,
-      this.itemsPrice,
+      this.cartPrice,
       this.itemsDiscount,
       this.itemsRate,
       this.itemsSize,
@@ -68,6 +80,7 @@ class Products {
       this.itemsDeliveryRefund,
       this.itemsSizeGuide,
       this.isNewTrend,
+      this.itemsIsNew,
       this.itemsColor,
       this.itemsColor2,
       this.itemsColor3,
@@ -76,26 +89,28 @@ class Products {
       this.itemsColor2Ar,
       this.itemsColor3Ar,
       this.itemsColor4Ar,
+      this.itemsBrand,
+      this.itemsBrandAr,
       this.itemsGender,
       this.itemsGenderAr,
       this.itemsDate,
-      this.itemsIsNew,
       this.itemsCat,
-      this.itemsBrand,
       this.itemsCatDetailes,
-      this.itemsBrandAr,
       this.itemsCatDetailesAr,
       this.itemsMainPW,
       this.itemsMainPWAr,
-      this.categoriesId,
-      this.categoriesName,
-      this.categoriesNameAr,
-      this.categoriesDatetime,
-      this.favourite,
-      this.recent,
       this.itemsPriceDiscount});
 
-  Products.fromJson(Map<String, dynamic> json) {
+  CartModel.fromJson(Map<String, dynamic> json) {
+    cartPrice = json['itemsPrice'];
+    cartCount = json['countitems'];
+    cartId = json['cart_id'];
+    cartUsersid = json['cart_usersid'];
+    cartItemsid = json['cart_itemsid'];
+    cartItemsColor = json['cart_itemsColor'];
+    cartItemsSize = json['cart_itemsSize'];
+    selectedcolor = json['selectedcolor'];
+    selectedsize = json['selectedsize'];
     itemsId = json['items_id'];
     itemsName = json['items_name'];
     itemsNameAr = json['items_name_ar'];
@@ -114,6 +129,10 @@ class Products {
     itemsSize2 = json['items_Size2'];
     itemsSize3 = json['items_Size3'];
     itemsSize4 = json['items_Size4'];
+    itemsDeliveryRefund = json['items_delivery_refund'];
+    itemsSizeGuide = json['items_size_guide'];
+    isNewTrend = json['isNewTrend'];
+    itemsIsNew = json['items_isNew'];
     itemsColor = json['items_Color'];
     itemsColor2 = json['items_Color2'];
     itemsColor3 = json['items_Color3'];
@@ -122,31 +141,30 @@ class Products {
     itemsColor2Ar = json['items_Color2_ar'];
     itemsColor3Ar = json['items_Color3_ar'];
     itemsColor4Ar = json['items_Color4_ar'];
+    itemsBrand = json['items_brand'];
+    itemsBrandAr = json['items_brand_ar'];
     itemsGender = json['items_gender'];
     itemsGenderAr = json['items_gender_ar'];
-    itemsDeliveryRefund = json['items_delivery_refund'];
-    itemsSizeGuide = json['items_size_guide'];
-    isNewTrend = json['isNewTrend'];
-    itemsIsNew = json['items_isNew'];
     itemsDate = json['items_date'];
     itemsCat = json['items_cat'];
-    itemsBrand = json['items_brand'];
     itemsCatDetailes = json['items_catDetailes'];
-    itemsBrandAr = json['items_brand_ar'];
     itemsCatDetailesAr = json['items_catDetailes_ar'];
     itemsMainPW = json['items_mainPW'];
     itemsMainPWAr = json['items_mainPW_ar'];
-    categoriesId = json['categories_id'];
-    categoriesName = json['categories_name'];
-    categoriesNameAr = json['categories_name_ar'];
-    categoriesDatetime = json['categories_datetime'];
     itemsPriceDiscount = json["itemsPriceDiscount"];
-    favourite = json["favourite"];
-    recent = json['recents'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['itemsPrice'] = this.cartPrice;
+    data['countitems'] = this.cartCount;
+    data['cart_id'] = this.cartId;
+    data['cart_usersid'] = this.cartUsersid;
+    data['cart_itemsid'] = this.cartItemsid;
+    data['cart_itemsColor'] = this.cartItemsColor;
+    data['cart_itemsSize'] = this.cartItemsSize;
+    data['selectedcolor'] = this.selectedcolor;
+    data['selectedsize'] = this.selectedsize;
     data['items_id'] = this.itemsId;
     data['items_name'] = this.itemsName;
     data['items_name_ar'] = this.itemsNameAr;
@@ -177,23 +195,17 @@ class Products {
     data['items_Color2_ar'] = this.itemsColor2Ar;
     data['items_Color3_ar'] = this.itemsColor3Ar;
     data['items_Color4_ar'] = this.itemsColor4Ar;
+    data['items_brand'] = this.itemsBrand;
+    data['items_brand_ar'] = this.itemsBrandAr;
     data['items_gender'] = this.itemsGender;
     data['items_gender_ar'] = this.itemsGenderAr;
     data['items_date'] = this.itemsDate;
     data['items_cat'] = this.itemsCat;
-    data['items_brand'] = this.itemsBrand;
     data['items_catDetailes'] = this.itemsCatDetailes;
-    data['items_brand_ar'] = this.itemsBrandAr;
     data['items_catDetailes_ar'] = this.itemsCatDetailesAr;
     data['items_mainPW'] = this.itemsMainPW;
     data['items_mainPW_ar'] = this.itemsMainPWAr;
-    data['categories_id'] = this.categoriesId;
-    data['categories_name'] = this.categoriesName;
-    data['categories_name_ar'] = this.categoriesNameAr;
-    data['categories_datetime'] = this.categoriesDatetime;
     data["itemsPriceDiscount"] = this.itemsPriceDiscount;
-    data["favourite"] = this.favourite;
-    data['recents'] = this.recent;
     return data;
   }
 }

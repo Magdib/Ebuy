@@ -15,7 +15,7 @@ class SettingsMainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(AccountControllerImp());
+    final controller = Get.put(AccountControllerImp());
 
     return SingleChildScrollView(
       child: SizedBox(
@@ -87,11 +87,11 @@ class SettingsMainPage extends StatelessWidget {
               width: UINumber.deviceWidth - 15,
               child: Column(
                 children: [
-                  AccountPageCard(list: accountPageUpperList),
+                  AccountPageCard(list: controller.accountPageUpperList),
                   const SizedBox(
                     height: 20,
                   ),
-                  AccountPageCard(list: accountPageLowerList)
+                  AccountPageCard(list: controller.accountPageLowerList)
                 ],
               ),
             ),

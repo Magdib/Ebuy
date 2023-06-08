@@ -1,6 +1,9 @@
 import 'package:ebuy/Controller/Home/MainPageController.dart';
 import 'package:ebuy/core/constant/AppWords.dart';
+import 'package:ebuy/core/constant/CustomIcons.dart';
 import 'package:ebuy/core/theme/theme.dart';
+import 'package:ebuy/data/dataSource/Static/static.dart';
+import 'package:ebuy/data/model/authModels/AccountListModel.dart';
 import 'package:ebuy/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -34,6 +37,36 @@ class AccountControllerImp extends AccountController {
   bool canSaveChanges = true;
   late bool isEnglish;
   bool isLanguageChanging = false;
+
+  List<AccountListModel> accountPageUpperList = [
+    AccountListModel(
+        leadingIcon: CustomIcons.boxIcon,
+        text: 'My orders'.tr,
+        page: AppRoutes.ordersPageRoute),
+    AccountListModel(
+        leadingIcon: CustomIcons.meetingIcon,
+        text: 'Contact us'.tr,
+        page: AppRoutes.deliveryPageRoute)
+  ];
+
+  List<AccountListModel> accountPageLowerList = [
+    AccountListModel(
+        leadingIcon: Icons.square,
+        text: 'My details'.tr,
+        page: AppRoutes.usersDetailesPageRoute),
+    AccountListModel(
+        leadingIcon: Icons.location_on_rounded,
+        text: 'Address book'.tr,
+        page: AppRoutes.addressPageRoute),
+    AccountListModel(
+        leadingIcon: Icons.credit_card,
+        text: 'Payment methods'.tr,
+        page: AppRoutes.paymentPageRoute),
+    AccountListModel(
+        leadingIcon: CustomIcons.personIcon,
+        text: 'Social accounts'.tr,
+        page: AppRoutes.accountPageRoute)
+  ];
   List<AccountFListModel> accountpageList = [
     AccountFListModel(
         leadingIcon: Icons.circle,
@@ -44,23 +77,24 @@ class AccountControllerImp extends AccountController {
         text: 'Tell us what you think of Ebuy',
         onTap: () => print('Open App Page on GooglePlay Store'))
   ];
+
   List<AccountFListModel> settingsList = [
     AccountFListModel(
       leadingIcon: Icons.circle,
-      text: 'Shop in',
+      text: 'Shop in'.tr,
       onTap: () => shopInDialog(),
     ),
     AccountFListModel(
         leadingIcon: Icons.notifications,
-        text: 'Notifications',
+        text: 'Notifications'.tr,
         onTap: () => Get.toNamed(AppRoutes.notificationsPageRoute)),
     AccountFListModel(
         leadingIcon: Icons.language,
-        text: 'Language',
+        text: 'Language'.tr,
         onTap: () => Get.toNamed(AppRoutes.languagePageRoute)),
     AccountFListModel(
         leadingIcon: Icons.lock,
-        text: 'Terms & Conditions',
+        text: 'Terms & Conditions'.tr,
         onTap: () => print('Terms & Conditions must be a website Page')),
   ];
   List<AccountFListModel> giftCardList = [
@@ -141,10 +175,8 @@ class AccountControllerImp extends AccountController {
         ? newLocale = const Locale('en')
         : newLocale = const Locale('ar');
     MainContrllerImp mainContrllerImp = Get.find();
-
     mainContrllerImp.languageChanged();
     Get.updateLocale(newLocale);
-
     await Future.delayed(const Duration(milliseconds: 1500));
     isLanguageChanging = false;
     update();

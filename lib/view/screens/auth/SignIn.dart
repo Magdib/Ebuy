@@ -1,15 +1,12 @@
 import 'package:ebuy/Controller/authControllers/SignInController.dart';
 import 'package:ebuy/core/class/HandlingDataRequest.dart';
-import 'package:ebuy/core/constant/Colors.dart';
-import 'package:ebuy/core/theme/theme.dart';
-import 'package:ebuy/data/dataSource/Static/UINumbers.dart';
+import 'package:ebuy/core/constant/ArgumentsNames.dart';
 import 'package:ebuy/routes.dart';
 import 'package:ebuy/view/Widgets/auth/SignIn/ParentWidgets/SignInTextFields.dart';
 import 'package:ebuy/view/Widgets/auth/SignIn/ChildrenWidgets/SignInCustomButton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../Widgets/auth/shared/AuthPageTitle.dart';
 import '../../Widgets/auth/shared/HaveAccountAuth.dart';
 
 class SignIn extends GetView<SignInControllerImp> {
@@ -69,7 +66,8 @@ class SignIn extends GetView<SignInControllerImp> {
                           HaveAccountAuth(
                               authText: "Don't have an account? ".tr,
                               authType: 'Sign Up'.tr,
-                              onTap: () => Get.toNamed(AppRoutes.signUpRoute))
+                              onTap: () => Get.toNamed(AppRoutes.signUpRoute,
+                                  arguments: {ArgumentsNames.verified: "1"}))
                         ])),
               ),
             )));

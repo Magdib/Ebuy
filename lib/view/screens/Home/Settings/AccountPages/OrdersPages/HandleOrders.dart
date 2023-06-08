@@ -18,9 +18,11 @@ class HandleOrders extends GetView<OrdersControllerimp> {
     return anyOrders == false
         ? CustomPage(
             svgImage: AppImagesAssets.noOrdersImage,
-            title: 'You currently have no orders',
-            subtitle: 'Best get shopping App pronto... ',
-            buttonText: 'Start shopping',
+            title: 'You currently have no orders'.tr,
+            subtitle:
+                'You can Start Shopping by adding some products to your cart and checkout... '
+                    .tr,
+            buttonText: 'Start shopping'.tr,
             isSpaced: true,
             onPressed: () => Get.offAllNamed(AppRoutes.mainPageRoute))
         : TabBarView(controller: controller.tabController, children: [

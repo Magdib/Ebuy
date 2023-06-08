@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 
 import '../../../core/constant/Colors.dart';
 
-import '../../../core/theme/theme.dart';
 import '../../../data/dataSource/Static/UINumbers.dart';
 
 class ProductDetailesCard extends StatelessWidget {
@@ -63,10 +62,26 @@ class ProductDetailesCard extends StatelessWidget {
                         )
                       ],
                     ),
-                    Text(
-                      "${controller.product.itemsPrice!}\$",
-                      style: Theme.of(context).textTheme.bodyText1,
-                    )
+                    controller.product.itemsDiscount == "0"
+                        ? Text(
+                            "${controller.product.itemsPrice!}\$",
+                            style: Theme.of(context).textTheme.bodyText1,
+                          )
+                        : RichText(
+                            text: TextSpan(children: [
+                            TextSpan(
+                                text: "${controller.product.itemsPrice!}\$\n",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText1!
+                                    .copyWith(
+                                        decoration:
+                                            TextDecoration.lineThrough)),
+                            TextSpan(
+                                text:
+                                    "${double.parse(controller.product.itemsPriceDiscount!).toStringAsFixed(2)}\$",
+                                style: Theme.of(context).textTheme.headline2)
+                          ]))
                   ],
                 )
               ],

@@ -1,3 +1,5 @@
+import 'package:ebuy/core/class/enums.dart';
+import 'package:ebuy/core/function/UiFunctions/handleCartItemButton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -33,27 +35,42 @@ class CartItemsListView extends StatelessWidget {
                       margin: EdgeInsets.only(top: 20, left: 46, right: 20),
                     )),
                 CartProductsDetailes(index: index),
-                const Positioned(
-                    bottom: 30, right: 30, child: ProductNumbers()),
+                Positioned(
+                    bottom: 30,
+                    right: 30,
+                    child: GetBuilder<CartControllerImp>(
+                      builder: (controller) => ProductNumbers(
+                          value: controller.listOfCounts[index],
+                          increaseFuncion: () =>
+                              controller.increaseAmountUI(index),
+                          decreaseFuncion: () =>
+                              controller.decreaseAmountUI(index)),
+                    )),
                 Positioned(
                     right: 0,
                     top: 35,
-                    child: Visibility(
-                      visible: controller.cartProducts[index].cartDelete,
-                      child: MaterialButton(
-                        onPressed: () => print("Removed"),
-                        color: AppColors.red,
-                        minWidth: 45,
-                        padding: const EdgeInsets.all(0),
-                        height: 45,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5)),
-                        child: const Icon(
-                          Icons.close,
-                          color: AppColors.white,
-                        ),
-                      ),
-                    ))
+                    child: AnimatedContainer(
+                        duration: const Duration(seconds: 1),
+                        child: Visibility(
+                          visible: handleCartItemButton(
+                              controller.cartButtonStateList[index], "visible"),
+                          child: MaterialButton(
+                            onPressed: () => controller.cartAmountData(index),
+                            color: handleCartItemButton(
+                                controller.cartButtonStateList[index], "Color"),
+                            minWidth: 45,
+                            padding: const EdgeInsets.all(0),
+                            height: 45,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5)),
+                            child: Icon(
+                              handleCartItemButton(
+                                  controller.cartButtonStateList[index],
+                                  'Icon'),
+                              color: AppColors.white,
+                            ),
+                          ),
+                        ))),
               ],
             ),
           ),

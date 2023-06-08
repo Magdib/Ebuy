@@ -7,11 +7,6 @@ import 'package:ebuy/view/Widgets/auth/shared/AuthPageTitle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
-
-import '../../../core/constant/Images.dart';
-
-import '../../../core/theme/theme.dart';
 import '../../../data/dataSource/Static/UINumbers.dart';
 import '../../Widgets/auth/SignUp/emailVerificatonWidgets/EmailVerificationRichText.dart';
 
@@ -20,6 +15,7 @@ class EmailVerification extends GetView<SignUpControllerImp> {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(SignUpControllerImp());
     return SafeArea(
         child: GetBuilder<SignUpControllerImp>(
       builder: (controller) => Scaffold(

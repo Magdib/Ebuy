@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 
 import '../../../../core/constant/Server.dart';
 import '../../../../core/function/UiFunctions/StringToColors.dart';
-import '../../../../core/theme/theme.dart';
 
 class CartProductsDetailes extends StatelessWidget {
   const CartProductsDetailes({
@@ -59,13 +58,13 @@ class CartProductsDetailes extends StatelessWidget {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
                           color: stringToColor(
-                              controller.cartProducts[index].itemsColor!)),
+                              controller.cartProducts[index].selectedcolor!)),
                     ),
                     const SizedBox(
                       width: 20,
                     ),
                     Text(
-                      'Size:  ${controller.cartProducts[index].itemsSize![0]}',
+                      'Size:  ${controller.cartProducts[index].selectedsize![0]}',
                       style: Theme.of(context)
                           .textTheme
                           .headline6!
@@ -77,7 +76,7 @@ class CartProductsDetailes extends StatelessWidget {
                   height: 30,
                 ),
                 Text(
-                  '\$${controller.cartProducts[index].itemsPrice!}',
+                  '\$${double.parse(controller.cartProducts[index].cartPrice!).toStringAsFixed(2)}',
                   style: Theme.of(context)
                       .textTheme
                       .bodyText1!
