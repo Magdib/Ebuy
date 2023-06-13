@@ -1,12 +1,8 @@
 import 'package:ebuy/Controller/Home/CartController.dart';
-import 'package:ebuy/core/constant/Colors.dart';
-import 'package:ebuy/data/dataSource/Static/UINumbers.dart';
-import 'package:ebuy/view/Widgets/shared/GreyDivider.dart';
 import 'package:ebuy/view/Widgets/shared/CustomButton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../shared/CustomRadio.dart';
 import '../UserAddressShipBox.dart';
 import 'ShipOptionsBox.dart';
 

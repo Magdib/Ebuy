@@ -34,7 +34,8 @@ import 'view/screens/Details/DetailsPage.dart';
 import 'view/screens/Home/Settings/AccountPages/AddressPages/AddAddressMap.dart';
 import 'view/screens/Home/Settings/AccountPages/AddressPages/AddAddressName.dart';
 import 'view/screens/Home/Settings/AccountPages/GiftCardsPages/AddGiftCardPage.dart';
-import 'view/screens/Home/Settings/AccountPages/GiftCardsPages/GiftCardsPage.dart';
+import 'view/screens/Home/Settings/AccountPages/GiftCardsPages/GiftCardPage.dart';
+import 'view/screens/Home/Settings/AccountPages/GiftCardsPages/GiftCardsVoucherPage.dart';
 import 'view/screens/Home/Settings/AccountPages/OrdersPages/OrderTrack.dart';
 import 'view/screens/Home/Settings/SettingsPages/notifications.dart';
 import 'view/screens/OnBoarding/OnBoarding.dart';
@@ -69,7 +70,7 @@ class AppRoutes {
   static const String usersDetailesPageRoute = '/usersDetailesPage';
   static const String deliveryPageRoute = '/DeliveryPage';
   static const String ordersPageRoute = '/OrdersPage';
-  static const String giftCardPageRoute = '/giftCardPage';
+  static const String giftCardVoucherPageRoute = '/giftCardVoucherPage';
   static const String settingsPageRoute = '/SettingsPage';
   static const String notificationsPageRoute = '/NotificationsPage';
   static const String languagePageRoute = '/LanguagePage';
@@ -78,6 +79,7 @@ class AppRoutes {
   static const String orderTrackPageRoute = '/orderTrackPage';
   static const String addAddressMapPageRoute = '/addAddressPage';
   static const String addAddressNamePageRoute = '/addAddressNamePage';
+  static const String giftCardsPageRoute = "/giftCardsPage";
 }
 
 List<GetPage<dynamic>>? routes = [
@@ -152,9 +154,13 @@ List<GetPage<dynamic>>? routes = [
       page: () => const OrdersPage(),
       binding: BindingsBuilder.put(() => OrdersControllerimp())),
   GetPage(
-      name: AppRoutes.giftCardPageRoute,
-      page: () => const GiftCardsPage(),
+      name: AppRoutes.giftCardVoucherPageRoute,
+      page: () => const GiftCardsVoucherPage(),
       binding: BindingsBuilder.put(() => GiftCardControllerimp())),
+  GetPage(
+    name: AppRoutes.giftCardsPageRoute,
+    page: () => const GiftCardPage(),
+  ),
   GetPage(
     name: AppRoutes.settingsPageRoute,
     page: () => const SettingsPage(),

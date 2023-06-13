@@ -41,7 +41,7 @@ class AccountPage extends GetView<AccountControllerImp> {
               AccountListModel(
                   leadingIcon: Icons.card_giftcard,
                   text: 'Gift cards & voucher',
-                  page: AppRoutes.giftCardPageRoute)
+                  page: AppRoutes.giftCardVoucherPageRoute)
             ]),
             const SizedBox(
               height: 20,

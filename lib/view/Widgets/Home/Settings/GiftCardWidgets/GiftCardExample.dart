@@ -7,8 +7,11 @@ import 'package:flutter/material.dart';
 class GiftCardExample extends StatelessWidget {
   const GiftCardExample({
     super.key,
+    this.shortDigit,
+    this.longDigit,
   });
-
+  final String? shortDigit;
+  final String? longDigit;
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -25,7 +28,9 @@ class GiftCardExample extends StatelessWidget {
                 height: 10,
               ),
               Text(
-                '123456789456789   6789',
+                shortDigit == null
+                    ? '123456789456789   6789'
+                    : '$longDigit   $shortDigit',
                 style: Theme.of(context)
                     .textTheme
                     .bodyText1!

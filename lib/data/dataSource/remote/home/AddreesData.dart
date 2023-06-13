@@ -5,11 +5,12 @@ class AddreesData {
   CRUD crud;
   AddreesData(this.crud);
 
-  addAddress(String userid, String name, String city, String street, String lat,
-      String long) async {
+  addAddress(String userid, String name, String phoneNumber, String city,
+      String street, String lat, String long) async {
     var response = await crud.postData("${AppServer.address}add.php", {
       "usersId": userid,
       "name": name,
+      "phoneNumber": phoneNumber,
       "city": city,
       "street": street,
       "lat": lat,
@@ -18,11 +19,12 @@ class AddreesData {
     return response.fold((l) => l, (r) => r);
   }
 
-  editAddress(String addressId, String name, String city, String street,
-      String lat, String long) async {
-    var response = await crud.postData("${AppServer.address}add.php", {
+  editAddress(String addressId, String name, String phoneNumber, String city,
+      String street, String lat, String long) async {
+    var response = await crud.postData("${AppServer.address}edit.php", {
       "addressId": addressId,
       "name": name,
+      "phoneNumber": phoneNumber,
       "city": city,
       "street": street,
       "lat": lat,
@@ -37,9 +39,9 @@ class AddreesData {
     return response.fold((l) => l, (r) => r);
   }
 
-  getAddresses(String addressId) async {
+  getAddresses(String usersId) async {
     var response = await crud
-        .postData("${AppServer.address}view.php", {"addressId": addressId});
+        .postData("${AppServer.address}view.php", {"usersId": usersId});
     return response.fold((l) => l, (r) => r);
   }
 }

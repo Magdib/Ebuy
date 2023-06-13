@@ -14,4 +14,5 @@ class HiveKeys {
   //Settings
   static const String notification = "Notifications";
   static const String language = "Language";
+  static const String choosenAddress = "ChoosenAddress";
 }

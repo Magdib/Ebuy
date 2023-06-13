@@ -55,7 +55,7 @@ class Information extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'add or choose e-gift cards',
+                            ' choose e-gift cards/ Voucher code',
                             style: Theme.of(context).textTheme.bodyText1,
                           ),
                           const Icon(

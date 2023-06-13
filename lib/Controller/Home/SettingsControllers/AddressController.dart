@@ -1,8 +1,13 @@
 import 'dart:async';
 
+import 'package:ebuy/core/class/enums.dart';
 import 'package:ebuy/core/function/UiFunctions/SnackBars.dart';
+import 'package:ebuy/core/function/handleData.dart';
+import 'package:ebuy/core/function/handleHiveNullState.dart';
 import 'package:ebuy/data/dataSource/Static/HiveKeys.dart';
+import 'package:ebuy/data/dataSource/remote/home/AddreesData.dart';
 import 'package:ebuy/data/model/CartModels/StaticAddressModel.dart';
+import 'package:ebuy/data/model/SettingsModels/AddressModel.dart';
 import 'package:ebuy/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
@@ -12,25 +17,65 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 abstract class AddressController extends GetxController {
+  getAddresses(bool showLoading);
   void goToUserLocation();
+  void goToEditAddress(int index);
   void saveLocation();
-  void handleAddressAdd(String val);
+  void handleAddressAdd();
   void saveAddress();
   void chooseAddress(int index);
+  void removeAddress(int index);
+  willPopAddress();
 }
 
 class AddressControllerimp extends AddressController {
   Box authBox = Hive.box(HiveBoxes.authBox);
   late Completer<GoogleMapController> googleMapController;
   CameraPosition cameraPosition = const CameraPosition(target: LatLng(0, 0));
+  AddreesData addreesData = AddreesData(Get.find());
+  StatusRequest statusRequest = StatusRequest.loading;
+  StatusRequest addStatusRequest = StatusRequest.none;
   late String choosenLocation;
   late List<Placemark> placemark;
   late TextEditingController adNameController;
-  List<StaticAddressModel> addressList = [];
+  late TextEditingController adNumberController;
   List<AddressCartModel> addressCardList = [];
-  int oldIndex = 0;
+  List<AddressModel> addressList = [];
+  int? oldIndex;
+  int? editIndex;
   bool canAddAddress = false;
   bool anyAddress = false;
+  @override
+  getAddresses(bool showLoading) async {
+    if (showLoading == true) {
+      statusRequest = StatusRequest.loading;
+      update();
+    }
+    var response = await addreesData.getAddresses(authBox.get(HiveKeys.userid));
+    statusRequest = handlingData(response);
+    if (statusRequest == StatusRequest.success) {
+      if (response['status'] == "success") {
+        List addressTempList = response['data'];
+        addressList
+            .addAll(addressTempList.map((e) => AddressModel.fromJson(e)));
+
+        if (addressList.isNotEmpty) {
+          anyAddress = true;
+          for (int i = 0; i < addressList.length; i++) {
+            if (i == authBox.get(HiveKeys.choosenAddress)) {
+              addressCardList.add(AddressCartModel(
+                  title: addressList[i].addressName!, isSelected: true));
+            } else {
+              addressCardList.add(AddressCartModel(
+                  title: addressList[i].addressName!, isSelected: false));
+            }
+          }
+        }
+      }
+    }
+    update();
+  }
+
   @override
   goToUserLocation() async {
     bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
@@ -58,15 +103,20 @@ class AddressControllerimp extends AddressController {
   }
 
   @override
+  void goToEditAddress(int index) {
+    editIndex = index;
+    adNumberController.text = addressList[index].addressPhone!;
+    adNameController.text = addressList[index].addressName!;
+    canAddAddress = true;
+    Get.toNamed(AppRoutes.addAddressMapPageRoute);
+  }
+
+  @override
   void saveLocation() async {
     try {
-      List<Placemark> placemark = await placemarkFromCoordinates(
+      placemark = await placemarkFromCoordinates(
           cameraPosition.target.latitude, cameraPosition.target.longitude);
-      if (placemark.isNotEmpty) {
-        choosenLocation =
-            placemark[0].street!.replaceAll("${placemark[0].postalCode}", '');
-        Get.offNamed(AppRoutes.addAddressNamePageRoute);
-      }
+      Get.offNamed(AppRoutes.addAddressNamePageRoute);
     } on Exception catch (_) {
       errorSnackBar('Something went wrong!',
           'it\'s maybe Because of slow internet connection or you have choosen wrong location');
@@ -74,8 +124,8 @@ class AddressControllerimp extends AddressController {
   }
 
   @override
-  void handleAddressAdd(String val) {
-    if (val.isEmpty) {
+  void handleAddressAdd() {
+    if (adNameController.text.isEmpty || adNumberController.text.isEmpty) {
       canAddAddress = false;
     } else {
       canAddAddress = true;
@@ -84,50 +134,134 @@ class AddressControllerimp extends AddressController {
   }
 
   @override
-  void saveAddress() {
-    anyAddress = true;
-    if (addressCardList.isEmpty) {
-      addressCardList.add(
-        AddressCartModel(title: adNameController.text, isSelected: true),
-      );
+  void saveAddress() async {
+    addStatusRequest = StatusRequest.loading;
+    update();
+    if (editIndex == null) {
+      if (anyAddress == false) {
+        anyAddress = true;
+      }
+      var response = await addreesData.addAddress(
+          authBox.get(HiveKeys.userid),
+          adNameController.text,
+          adNumberController.text,
+          placemark[0].locality!,
+          placemark[0].street!,
+          "${cameraPosition.target.latitude}",
+          "${cameraPosition.target.longitude}");
+      addStatusRequest = handlingData(response);
+      if (statusRequest == StatusRequest.success) {
+        if (response['status'] == "success") {
+          if (addressCardList.isEmpty) {
+            authBox.put(HiveKeys.choosenAddress, 0);
+          }
+          addressList.clear();
+          addressCardList.clear();
+          await getAddresses(false);
+          Get.back();
+          succesSnackBar('Done.', 'Your address have been added successfully');
+        } else {
+          errorSnackBar('Something went wrong!',
+              'it\'s maybe Because of slow internet connection');
+        }
+      }
     } else {
-      addressCardList.add(
-        AddressCartModel(title: adNameController.text, isSelected: false),
-      );
+      var response = await addreesData.editAddress(
+          addressList[editIndex!].addressId!,
+          adNameController.text,
+          adNumberController.text,
+          placemark[0].locality!,
+          placemark[0].street!,
+          "${cameraPosition.target.latitude}",
+          "${cameraPosition.target.longitude}");
+      addStatusRequest = handlingData(response);
+      if (statusRequest == StatusRequest.success) {
+        if (response['status'] == "success") {
+          if (addressCardList.isEmpty) {
+            authBox.put(HiveKeys.choosenAddress, 0);
+          }
+          addressList.clear();
+          addressCardList.clear();
+          await getAddresses(false);
+          Get.back();
+          succesSnackBar('Done.', 'Your address have been edited successfully');
+          editIndex = null;
+        } else {
+          errorSnackBar('Something went wrong!',
+              'it\'s maybe Because of slow internet connection');
+        }
+      }
     }
-
-    addressList = [
-      StaticAddressModel(
-          title: authBox.get(HiveKeys.username), icon: Icons.person),
-      StaticAddressModel(
-          title: choosenLocation, icon: Icons.location_on_outlined),
-      StaticAddressModel(title: "PhoneNumber", icon: Icons.amp_stories_rounded)
-    ];
-    Get.back();
     update();
     canAddAddress = false;
     adNameController.clear();
+    adNumberController.clear();
   }
 
   @override
   void chooseAddress(int index) {
-    addressCardList[oldIndex].isSelected = false;
+    addressCardList[oldIndex!].isSelected = false;
+    authBox.put(HiveKeys.choosenAddress, index);
     addressCardList[index].isSelected = true;
     oldIndex = index;
     update();
   }
 
   @override
+  void removeAddress(int index) async {
+    statusRequest = StatusRequest.loading;
+    update();
+    var response =
+        await addreesData.removeAddress(addressList[index].addressId!);
+    statusRequest = handlingData(response);
+    if (statusRequest == StatusRequest.success) {
+      if (response['status'] == "success") {
+        addressList.removeAt(index);
+        addressCardList.removeAt(index);
+        if (addressCardList.isEmpty) {
+          authBox.put(HiveKeys.choosenAddress, 0);
+          anyAddress = false;
+        } else {
+          if (authBox.get(HiveKeys.choosenAddress) == index &&
+              index == addressList.length) {
+            authBox.put(HiveKeys.choosenAddress, 0);
+            oldIndex = 0;
+            addressCardList[0].isSelected = true;
+          }
+        }
+
+        succesSnackBar('Done.', 'Your address have been deleted successfully');
+      } else {
+        errorSnackBar('Something went wrong!',
+            'it\'s maybe Because of slow internet connection');
+      }
+    }
+    update();
+  }
+
+  @override
+  willPopAddress() {
+    canAddAddress = false;
+    addStatusRequest = StatusRequest.none;
+    editIndex = null;
+    Get.back();
+    return Future.value(false);
+  }
+
+  @override
   void onInit() {
     googleMapController = Completer<GoogleMapController>();
     adNameController = TextEditingController();
-
+    adNumberController = TextEditingController();
+    getAddresses(false);
+    oldIndex = handleHiveNullState(HiveKeys.choosenAddress, 0);
     super.onInit();
   }
 
   @override
   void onClose() {
     adNameController.dispose();
+    adNumberController.dispose();
     super.onClose();
   }
 }

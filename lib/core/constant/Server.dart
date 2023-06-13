@@ -24,4 +24,5 @@ class AppServer {
   //Cart
   static const String cart = "${server}cart/";
   static const String address = "${server}address/";
+  static const String giftCard = "${server}giftCards/";
 }

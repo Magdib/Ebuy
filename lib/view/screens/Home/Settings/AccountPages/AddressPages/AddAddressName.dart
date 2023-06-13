@@ -1,5 +1,5 @@
-import 'package:ebuy/Controller/Home/SettingsControllers/AccountController.dart';
 import 'package:ebuy/Controller/Home/SettingsControllers/AddressController.dart';
+import 'package:ebuy/core/class/HandlingDataRequest.dart';
 import 'package:ebuy/core/function/UiFunctions/customAppBar.dart';
 import 'package:ebuy/view/Widgets/shared/CustomConditionButton.dart';
 import 'package:ebuy/view/Widgets/shared/TitledTextFiled.dart';
@@ -13,25 +13,46 @@ class AddAddressName extends GetView<AddressControllerimp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppBar('Address Name', context, 4),
-      body: Padding(
-        padding: const EdgeInsets.only(top: 20, bottom: 5, left: 10, right: 10),
-        child: Column(
-          children: [
-            Expanded(
-              child: TitledTextFiled(
-                label: 'Address Name',
-                hint: 'Address name',
-                onChanged: (val) => controller.handleAddressAdd(val),
-                textEditingController: controller.adNameController,
+      body: GetBuilder<AddressControllerimp>(
+        builder: (controller) => WillPopScope(
+          onWillPop: () => controller.willPopAddress(),
+          child: HandlingDataRequest(
+            onPressed: () => controller.saveAddress(),
+            statusRequest: controller.addStatusRequest,
+            widget: Padding(
+              padding: const EdgeInsets.only(
+                  top: 20, bottom: 5, left: 10, right: 10),
+              child: Column(
+                children: [
+                  Expanded(
+                    child: Column(
+                      children: [
+                        TitledTextFiled(
+                          label: 'Address Name',
+                          hint: 'Enter address name here...',
+                          onChanged: (val) => controller.handleAddressAdd(),
+                          textEditingController: controller.adNameController,
+                        ),
+                        TitledTextFiled(
+                          label: 'Address Phone Number',
+                          hint: 'Enter address Phone Number here...',
+                          onChanged: (val) => controller.handleAddressAdd(),
+                          textEditingController: controller.adNumberController,
+                          keyboardType: TextInputType.phone,
+                        ),
+                      ],
+                    ),
+                  ),
+                  CustomConditionButton(
+                      condition: controller.canAddAddress,
+                      onPressed: () => controller.saveAddress(),
+                      text: controller.editIndex == null
+                          ? 'Add Address'
+                          : 'Edit Address'),
+                ],
               ),
             ),
-            GetBuilder<AddressControllerimp>(
-              builder: (controller) => CustomConditionButton(
-                  condition: controller.canAddAddress,
-                  onPressed: () => controller.saveAddress(),
-                  text: 'Add Address'),
-            )
-          ],
+          ),
         ),
       ),
     );
