@@ -18,10 +18,7 @@ import '../../data/model/CartModels/ShippingModel.dart';
 abstract class CartController extends GetxController {
   void showDeleteButton(int index);
   void resetDeleteButton(PointerDownEvent event);
-  void changeShipWay(int index);
-  void choosePayMethod(int index);
-  resetCheckOut();
-  void nextStep();
+
   void getCartItems();
   void increaseAmountUI(int index);
   void cartAmountData(int index);
@@ -29,36 +26,17 @@ abstract class CartController extends GetxController {
 }
 
 class CartControllerImp extends CartController {
+  Box authBox = Hive.box(HiveBoxes.authBox);
+
   StatusRequest statusRequest = StatusRequest.loading;
   List<CartButtonState> cartButtonStateList = [];
   CartData cartData = CartData(Get.find());
-  Box authBox = Hive.box(HiveBoxes.authBox);
   List<CartModel> cartProducts = [];
+  List<CartModel> argumentCartProducts = [];
   List<int> listOfCounts = [];
   List<int> serverListOfCounts = [];
   double totalPrice = 0.0;
-  late int selectedIndex;
-  late PageController pageController;
-  TapGestureRecognizer? returnspolicies;
-  TapGestureRecognizer? termsPrivacy;
-  List<Color> stepsColors = [
-    AppColors.primaryColor,
-    AppColors.grey,
-    AppColors.grey
-  ];
-  int? selectedPayment;
-  bool canPlaceOrder = false;
 
-  List<String> paymentMethods = [
-    AppImagesAssets.payPal,
-    AppImagesAssets.klarna,
-  ];
-  late List<List<String>> placeOrderList;
-  int shipLastIndex = 0;
-  List<ShippingModel> shipRadioList = shipRadioStatic;
-  late List<StaticAddressModel> addressList;
-  String shipWay = 'Free';
-  int currentStep = 0;
   @override
   void showDeleteButton(int index) {
     if (cartButtonStateList[index] == CartButtonState.invisible) {
@@ -90,6 +68,8 @@ class CartControllerImp extends CartController {
         if (response['datacart']['status'] == "success") {
           List products = response['datacart']['data'];
           cartProducts.addAll(products.map((e) => CartModel.fromJson(e)));
+          argumentCartProducts
+              .addAll(products.map((e) => CartModel.fromJson(e)));
           totalPrice = double.parse(response["countprice"]["totalPrice"]);
           for (int i = 0; i < cartProducts.length; i++) {
             listOfCounts.add(int.parse(cartProducts[i].cartCount!));
@@ -101,7 +81,7 @@ class CartControllerImp extends CartController {
         }
       }
     } else {
-      statusRequest = StatusRequest.serverfailure;
+      statusRequest = StatusRequest.offlinefailure;
     }
 
     update();
@@ -218,69 +198,8 @@ class CartControllerImp extends CartController {
   }
 
   @override
-  void changeShipWay(int index) {
-    shipRadioList[shipLastIndex].isSelected = false;
-    shipLastIndex = index;
-    shipRadioList[index].isSelected = true;
-    shipWay = shipRadioList[index].title.replaceRange(4, null, '');
-    update();
-  }
-
-  @override
-  void choosePayMethod(int index) {
-    selectedPayment = index;
-    canPlaceOrder = true;
-    update();
-  }
-
-  @override
-  void nextStep() {
-    if (currentStep == 1) {
-      placeOrderList = [
-        ['Sub - total', 'Shipping', 'Sale tax'],
-        ['\$$totalPrice', shipWay, "\$4.70"]
-      ];
-    }
-    pageController.nextPage(
-        duration: const Duration(milliseconds: 600), curve: Curves.easeIn);
-    currentStep++;
-    stepsColors[currentStep] = AppColors.primaryColor;
-
-    update();
-  }
-
-  @override
-  resetCheckOut() {
-    pageController.jumpToPage(0);
-    currentStep = 0;
-    selectedPayment = null;
-    canPlaceOrder = false;
-    shipLastIndex = 0;
-    stepsColors = [AppColors.primaryColor, AppColors.grey, AppColors.grey];
-    Get.back();
-  }
-
-  @override
   void onInit() {
     getCartItems();
-    addressList = [
-      StaticAddressModel(
-          title: authBox.get(HiveKeys.username), icon: Icons.person),
-      StaticAddressModel(title: '', icon: Icons.location_on_outlined),
-      StaticAddressModel(title: '', icon: Icons.amp_stories_rounded)
-    ];
-    pageController = PageController();
-    for (int i = 0; i < cartProducts.length; i++) {
-      totalPrice += double.parse(cartProducts[i].cartPrice!);
-    }
-    returnspolicies = TapGestureRecognizer()..onTap = () => print('object');
-    termsPrivacy = TapGestureRecognizer()..onTap = () => print('object');
     super.onInit();
-  }
-
-  @override
-  void onClose() {
-    pageController.dispose();
-    super.onClose();
   }
 }

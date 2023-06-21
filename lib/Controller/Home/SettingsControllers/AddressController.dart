@@ -5,7 +5,6 @@ import 'package:ebuy/core/function/UiFunctions/SnackBars.dart';
 import 'package:ebuy/core/function/handleData.dart';
 import 'package:ebuy/core/function/handleHiveNullState.dart';
 import 'package:ebuy/data/dataSource/Static/HiveKeys.dart';
-import 'package:ebuy/data/dataSource/remote/home/AddreesData.dart';
 import 'package:ebuy/data/model/CartModels/StaticAddressModel.dart';
 import 'package:ebuy/data/model/SettingsModels/AddressModel.dart';
 import 'package:ebuy/routes.dart';
@@ -15,6 +14,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:ebuy/data/dataSource/remote/home/AddressData.dart';
 
 abstract class AddressController extends GetxController {
   getAddresses(bool showLoading);
@@ -32,14 +32,14 @@ class AddressControllerimp extends AddressController {
   Box authBox = Hive.box(HiveBoxes.authBox);
   late Completer<GoogleMapController> googleMapController;
   CameraPosition cameraPosition = const CameraPosition(target: LatLng(0, 0));
-  AddreesData addreesData = AddreesData(Get.find());
+  AddressData addressData = AddressData(Get.find());
   StatusRequest statusRequest = StatusRequest.loading;
   StatusRequest addStatusRequest = StatusRequest.none;
   late String choosenLocation;
   late List<Placemark> placemark;
   late TextEditingController adNameController;
   late TextEditingController adNumberController;
-  List<AddressCartModel> addressCardList = [];
+  List<AddressCartModel> shippingAddresList = [];
   List<AddressModel> addressList = [];
   int? oldIndex;
   int? editIndex;
@@ -51,7 +51,7 @@ class AddressControllerimp extends AddressController {
       statusRequest = StatusRequest.loading;
       update();
     }
-    var response = await addreesData.getAddresses(authBox.get(HiveKeys.userid));
+    var response = await addressData.getAddresses(authBox.get(HiveKeys.userid));
     statusRequest = handlingData(response);
     if (statusRequest == StatusRequest.success) {
       if (response['status'] == "success") {
@@ -63,10 +63,10 @@ class AddressControllerimp extends AddressController {
           anyAddress = true;
           for (int i = 0; i < addressList.length; i++) {
             if (i == authBox.get(HiveKeys.choosenAddress)) {
-              addressCardList.add(AddressCartModel(
+              shippingAddresList.add(AddressCartModel(
                   title: addressList[i].addressName!, isSelected: true));
             } else {
-              addressCardList.add(AddressCartModel(
+              shippingAddresList.add(AddressCartModel(
                   title: addressList[i].addressName!, isSelected: false));
             }
           }
@@ -141,7 +141,7 @@ class AddressControllerimp extends AddressController {
       if (anyAddress == false) {
         anyAddress = true;
       }
-      var response = await addreesData.addAddress(
+      var response = await addressData.addAddress(
           authBox.get(HiveKeys.userid),
           adNameController.text,
           adNumberController.text,
@@ -152,11 +152,11 @@ class AddressControllerimp extends AddressController {
       addStatusRequest = handlingData(response);
       if (statusRequest == StatusRequest.success) {
         if (response['status'] == "success") {
-          if (addressCardList.isEmpty) {
+          if (shippingAddresList.isEmpty) {
             authBox.put(HiveKeys.choosenAddress, 0);
           }
           addressList.clear();
-          addressCardList.clear();
+          shippingAddresList.clear();
           await getAddresses(false);
           Get.back();
           succesSnackBar('Done.', 'Your address have been added successfully');
@@ -166,7 +166,7 @@ class AddressControllerimp extends AddressController {
         }
       }
     } else {
-      var response = await addreesData.editAddress(
+      var response = await addressData.editAddress(
           addressList[editIndex!].addressId!,
           adNameController.text,
           adNumberController.text,
@@ -177,11 +177,11 @@ class AddressControllerimp extends AddressController {
       addStatusRequest = handlingData(response);
       if (statusRequest == StatusRequest.success) {
         if (response['status'] == "success") {
-          if (addressCardList.isEmpty) {
+          if (shippingAddresList.isEmpty) {
             authBox.put(HiveKeys.choosenAddress, 0);
           }
           addressList.clear();
-          addressCardList.clear();
+          shippingAddresList.clear();
           await getAddresses(false);
           Get.back();
           succesSnackBar('Done.', 'Your address have been edited successfully');
@@ -200,9 +200,9 @@ class AddressControllerimp extends AddressController {
 
   @override
   void chooseAddress(int index) {
-    addressCardList[oldIndex!].isSelected = false;
+    shippingAddresList[oldIndex!].isSelected = false;
     authBox.put(HiveKeys.choosenAddress, index);
-    addressCardList[index].isSelected = true;
+    shippingAddresList[index].isSelected = true;
     oldIndex = index;
     update();
   }
@@ -212,13 +212,13 @@ class AddressControllerimp extends AddressController {
     statusRequest = StatusRequest.loading;
     update();
     var response =
-        await addreesData.removeAddress(addressList[index].addressId!);
+        await addressData.removeAddress(addressList[index].addressId!);
     statusRequest = handlingData(response);
     if (statusRequest == StatusRequest.success) {
       if (response['status'] == "success") {
         addressList.removeAt(index);
-        addressCardList.removeAt(index);
-        if (addressCardList.isEmpty) {
+        shippingAddresList.removeAt(index);
+        if (shippingAddresList.isEmpty) {
           authBox.put(HiveKeys.choosenAddress, 0);
           anyAddress = false;
         } else {
@@ -226,7 +226,7 @@ class AddressControllerimp extends AddressController {
               index == addressList.length) {
             authBox.put(HiveKeys.choosenAddress, 0);
             oldIndex = 0;
-            addressCardList[0].isSelected = true;
+            shippingAddresList[0].isSelected = true;
           }
         }
 

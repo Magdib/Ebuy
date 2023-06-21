@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
-import '../../../core/function/UiFunctions/ShopInDialog.dart';
+import '../../../core/function/UiFunctions/Dialogs/ShopInDialog.dart';
 import '../../../core/function/handleHiveNullState.dart';
 import '../../../data/dataSource/Static/HiveKeys.dart';
 import '../../../data/model/authModels/AccountFListModel.dart';

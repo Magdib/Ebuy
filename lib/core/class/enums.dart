@@ -10,5 +10,3 @@ enum StatusRequest {
 enum CartButtonState { delete, add, invisible }
 
 enum SearchState { searching, noRecent, recent, success, none }
-
-enum PaymentState { noAddress, noMethod, none }

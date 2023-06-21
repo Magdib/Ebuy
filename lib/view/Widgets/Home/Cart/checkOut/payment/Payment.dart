@@ -1,4 +1,5 @@
 import 'package:ebuy/Controller/Home/CartController.dart';
+import 'package:ebuy/Controller/Home/CheckOutController.dart';
 import 'package:ebuy/data/dataSource/Static/static.dart';
 import 'package:ebuy/view/Widgets/shared/AcceptedPayments.dart';
 import 'package:ebuy/view/Widgets/shared/CustomContainer.dart';
@@ -9,7 +10,7 @@ import 'PayMethodListView.dart';
 import 'TermsAndConditionText.dart';
 import 'TotalPayCard.dart';
 
-class Payment extends GetView<CartControllerImp> {
+class Payment extends GetView<CheckOutControllerimp> {
   const Payment({
     super.key,
   });
@@ -26,9 +27,10 @@ class Payment extends GetView<CartControllerImp> {
         const SizedBox(
           height: 20,
         ),
-        GetBuilder<CartControllerImp>(
+        GetBuilder<CheckOutControllerimp>(
           builder: (controller) => UserAddressShipBox(
-              title: 'Postal address', userAddress: controller.addressList),
+              title: 'Postal address',
+              userAddress: controller.paymentAddresList),
         ),
         const SizedBox(
           height: 20,

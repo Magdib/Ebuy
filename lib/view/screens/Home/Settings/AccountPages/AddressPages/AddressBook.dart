@@ -34,7 +34,8 @@ class AddressBook extends StatelessWidget {
                               Expanded(
                                 child: ListView.separated(
                                   physics: const BouncingScrollPhysics(),
-                                  itemCount: controller.addressCardList.length,
+                                  itemCount:
+                                      controller.shippingAddresList.length,
                                   separatorBuilder: (context, index) =>
                                       const SizedBox(
                                     height: 20,
@@ -60,7 +61,7 @@ class AddressBook extends StatelessWidget {
                                                   children: [
                                                     CustomRadio(
                                                       condition: controller
-                                                          .addressCardList[
+                                                          .shippingAddresList[
                                                               index]
                                                           .isSelected,
                                                       radius: 25,
@@ -72,7 +73,7 @@ class AddressBook extends StatelessWidget {
                                                     ),
                                                     Text(
                                                       controller
-                                                          .addressCardList[
+                                                          .shippingAddresList[
                                                               index]
                                                           .title,
                                                       style: Theme.of(context)

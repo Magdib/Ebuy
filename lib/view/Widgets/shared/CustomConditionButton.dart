@@ -8,15 +8,20 @@ class CustomConditionButton extends StatelessWidget {
     required this.condition,
     required this.onPressed,
     required this.text,
+    this.borderRadius,
   });
   final bool condition;
   final void Function() onPressed;
   final String text;
+  final double? borderRadius;
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(UINumber.borderRadius)),
+        borderRadius: borderRadius == null
+            ? BorderRadius.circular(UINumber.borderRadius)
+            : BorderRadius.circular(borderRadius!),
+      ),
       padding: const EdgeInsets.symmetric(vertical: 17),
       minWidth: MediaQuery.of(context).size.width / 1,
       color: AppColors.primaryColor,

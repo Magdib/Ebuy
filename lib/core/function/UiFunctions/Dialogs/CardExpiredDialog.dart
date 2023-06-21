@@ -6,7 +6,7 @@ import 'package:ebuy/view/Widgets/shared/DialogButton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../constant/Colors.dart';
+import '../../../constant/Colors.dart';
 
 cardExpiredDialog(BuildContext context) {
   PaymentControllerimp controller = Get.find();

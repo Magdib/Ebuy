@@ -1,9 +1,9 @@
 import 'package:ebuy/core/class/CRUD.dart';
 import 'package:ebuy/core/constant/Server.dart';
 
-class AddreesData {
+class AddressData {
   CRUD crud;
-  AddreesData(this.crud);
+  AddressData(this.crud);
 
   addAddress(String userid, String name, String phoneNumber, String city,
       String street, String lat, String long) async {

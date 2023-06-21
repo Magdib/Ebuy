@@ -15,4 +15,9 @@ class HiveKeys {
   static const String notification = "Notifications";
   static const String language = "Language";
   static const String choosenAddress = "ChoosenAddress";
+  //Cart
+  static const String voucherCode = "VoucherCode";
+  static const String voucherDiscount = "VoucherDiscount";
+  static const String cardDiscount = "CardDiscount";
+  static const String giftCardId = "GiftCardId";
 }

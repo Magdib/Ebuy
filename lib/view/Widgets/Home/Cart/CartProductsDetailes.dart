@@ -22,14 +22,11 @@ class CartProductsDetailes extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           mainAxisSize: MainAxisSize.max,
           children: [
-            Hero(
-              tag: controller.cartProducts[index].itemsImage!,
-              child: CachedNetworkImage(
-                imageUrl:
-                    "${AppServer.itemsImages}${controller.cartProducts[index].itemsImage!}",
-                height: 85,
-                width: 87,
-              ),
+            CachedNetworkImage(
+              imageUrl:
+                  "${AppServer.itemsImages}${controller.cartProducts[index].itemsImage!}",
+              height: 85,
+              width: 87,
             ),
             Column(
               mainAxisAlignment: MainAxisAlignment.start,

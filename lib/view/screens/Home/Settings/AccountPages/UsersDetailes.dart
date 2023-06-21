@@ -1,5 +1,5 @@
 import 'package:ebuy/Controller/Home/SettingsControllers/AccountController.dart';
-import 'package:ebuy/view/Widgets/shared/TitledTextFiled.dart';
+import 'package:ebuy/view/Widgets/shared/TitledTextField.dart';
 import 'package:ebuy/view/Widgets/shared/CustomButton.dart';
 import 'package:ebuy/view/Widgets/shared/CustomConditionButton.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +29,7 @@ class UsersDetailes extends GetView<AccountControllerImp> {
               key: controller.detailesFormState,
               child: Column(
                 children: [
-                  TitledTextFiled(
+                  TitledTextField(
                     hint: '',
                     label: 'User Name',
                     obscure: false,
@@ -37,7 +37,7 @@ class UsersDetailes extends GetView<AccountControllerImp> {
                     onChanged: (val) => controller.saveButtonState(),
                     validator: (val) => controller.vaildateUserName(val!),
                   ),
-                  TitledTextFiled(
+                  TitledTextField(
                     hint: '',
                     label: 'Email address',
                     obscure: false,

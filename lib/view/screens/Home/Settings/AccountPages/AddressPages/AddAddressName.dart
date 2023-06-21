@@ -2,7 +2,7 @@ import 'package:ebuy/Controller/Home/SettingsControllers/AddressController.dart'
 import 'package:ebuy/core/class/HandlingDataRequest.dart';
 import 'package:ebuy/core/function/UiFunctions/customAppBar.dart';
 import 'package:ebuy/view/Widgets/shared/CustomConditionButton.dart';
-import 'package:ebuy/view/Widgets/shared/TitledTextFiled.dart';
+import 'package:ebuy/view/Widgets/shared/TitledTextField.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -27,13 +27,13 @@ class AddAddressName extends GetView<AddressControllerimp> {
                   Expanded(
                     child: Column(
                       children: [
-                        TitledTextFiled(
+                        TitledTextField(
                           label: 'Address Name',
                           hint: 'Enter address name here...',
                           onChanged: (val) => controller.handleAddressAdd(),
                           textEditingController: controller.adNameController,
                         ),
-                        TitledTextFiled(
+                        TitledTextField(
                           label: 'Address Phone Number',
                           hint: 'Enter address Phone Number here...',
                           onChanged: (val) => controller.handleAddressAdd(),

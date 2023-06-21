@@ -1,4 +1,5 @@
 import 'package:ebuy/Controller/Home/CartController.dart';
+import 'package:ebuy/Controller/Home/CheckOutController.dart';
 import 'package:ebuy/data/dataSource/Static/UINumbers.dart';
 import 'package:ebuy/data/dataSource/Static/static.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ class CustomStepper extends StatelessWidget {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 15),
           height: 45,
-          child: GetBuilder<CartControllerImp>(
+          child: GetBuilder<CheckOutControllerimp>(
             builder: (controller) => ListView.builder(
               scrollDirection: Axis.horizontal,
               physics: const NeverScrollableScrollPhysics(),
@@ -51,7 +52,7 @@ class CustomStepper extends StatelessWidget {
         ),
         SizedBox(
           height: 30,
-          child: GetBuilder<CartControllerImp>(
+          child: GetBuilder<CheckOutControllerimp>(
             builder: (controller) => ListView.separated(
                 scrollDirection: Axis.horizontal,
                 separatorBuilder: (context, index) => SizedBox(

@@ -10,4 +10,8 @@ class ArgumentsNames {
   static const String isProductsFilterd = "isProductsFilterd";
   static const String productListF = "ProductsListF";
   static const String filterdProducts = "filterdProducts";
+  //CART AND CHECKOUT
+  static const String cartProducts = "CartProducts";
+  static const String cartTotalPrice = "cartTotalPrice";
+  static const String canChooseCard = "CanChooseCard";
 }

@@ -5,8 +5,7 @@ import 'package:ebuy/view/screens/Details/DetailsImagesview.dart';
 import 'package:ebuy/view/screens/Home/Cart/Cart.dart';
 import 'package:ebuy/view/screens/Home/Cart/CheckOut.dart';
 import 'package:ebuy/view/screens/Home/Cart/OrderSuccess.dart';
-import 'package:ebuy/view/screens/Home/Cart/SelectCountry.dart';
-import 'package:ebuy/view/screens/Home/Settings/AccountPages/PaymentPages/AddPaymentPage.dart';
+import 'package:ebuy/view/screens/Home/Settings/AccountPages/PaymentPages/CUDPaymentPage.dart';
 import 'package:ebuy/view/screens/Home/favourite/Favourite.dart';
 import 'package:ebuy/view/screens/Home/HomePage/NewTrends.dart';
 import 'package:ebuy/view/screens/Home/Settings/AccountPages/AccountPage.dart';
@@ -28,6 +27,7 @@ import 'package:ebuy/view/screens/auth/SignIn.dart';
 import 'package:ebuy/view/screens/auth/SignUp.dart';
 import 'package:ebuy/view/screens/auth/verifyEmail.dart';
 import 'package:get/get.dart';
+import 'Controller/Home/CheckOutController.dart';
 import 'Controller/Home/SettingsControllers/AddressController.dart';
 import 'Controller/Home/SettingsControllers/GiftCardController.dart';
 import 'view/screens/Details/DetailsPage.dart';
@@ -75,7 +75,7 @@ class AppRoutes {
   static const String notificationsPageRoute = '/NotificationsPage';
   static const String languagePageRoute = '/LanguagePage';
   static const String addGiftCardPageRoute = '/addGiftCardPage';
-  static const String addPaymentPageRoute = '/addPaymentPage';
+  static const String CUDPaymentPageRoute = '/CUDPaymentPage';
   static const String orderTrackPageRoute = '/orderTrackPage';
   static const String addAddressMapPageRoute = '/addAddressPage';
   static const String addAddressNamePageRoute = '/addAddressNamePage';
@@ -114,16 +114,12 @@ List<GetPage<dynamic>>? routes = [
     page: () => const SearchCategories(),
   ),
   GetPage(
-    name: AppRoutes.checkOutRoute,
-    page: () => const CheckOut(),
-  ),
+      name: AppRoutes.checkOutRoute,
+      page: () => const CheckOut(),
+      binding: BindingsBuilder.put(() => CheckOutControllerimp())),
   GetPage(
     name: AppRoutes.orderSuccessRoute,
     page: () => const OrderSuccess(),
-  ),
-  GetPage(
-    name: AppRoutes.selectCountryRoute,
-    page: () => const SelectCountry(),
   ),
   GetPage(
     name: AppRoutes.accountPageRoute,
@@ -158,9 +154,9 @@ List<GetPage<dynamic>>? routes = [
       page: () => const GiftCardsVoucherPage(),
       binding: BindingsBuilder.put(() => GiftCardControllerimp())),
   GetPage(
-    name: AppRoutes.giftCardsPageRoute,
-    page: () => const GiftCardPage(),
-  ),
+      name: AppRoutes.giftCardsPageRoute,
+      page: () => const GiftCardPage(),
+      binding: BindingsBuilder.put(() => GiftCardControllerimp())),
   GetPage(
     name: AppRoutes.settingsPageRoute,
     page: () => const SettingsPage(),
@@ -178,8 +174,8 @@ List<GetPage<dynamic>>? routes = [
     page: () => const AddGiftCardPage(),
   ),
   GetPage(
-    name: AppRoutes.addPaymentPageRoute,
-    page: () => const AddPaymentPage(),
+    name: AppRoutes.CUDPaymentPageRoute,
+    page: () => const CUDPaymentPage(),
   ),
   GetPage(
     name: AppRoutes.orderTrackPageRoute,

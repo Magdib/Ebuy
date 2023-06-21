@@ -33,15 +33,18 @@ class AddAddressMap extends GetView<AddressControllerimp> {
                   child: Text('Save',
                       style: Theme.of(context).textTheme.headline2))
             ]),
-        body: GoogleMap(
-            zoomControlsEnabled: false,
-            myLocationEnabled: true,
-            myLocationButtonEnabled: false,
-            onCameraMove: (position) {
-              controller.cameraPosition = position;
-            },
-            onMapCreated: (gMController) =>
-                controller.googleMapController.complete(gMController),
-            initialCameraPosition: controller.cameraPosition));
+        body: WillPopScope(
+          onWillPop: () => controller.willPopAddress(),
+          child: GoogleMap(
+              zoomControlsEnabled: false,
+              myLocationEnabled: true,
+              myLocationButtonEnabled: false,
+              onCameraMove: (position) {
+                controller.cameraPosition = position;
+              },
+              onMapCreated: (gMController) =>
+                  controller.googleMapController.complete(gMController),
+              initialCameraPosition: controller.cameraPosition),
+        ));
   }
 }

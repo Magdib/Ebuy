@@ -1,6 +1,7 @@
 import 'package:ebuy/Controller/Home/CartController.dart';
 import 'package:ebuy/Controller/Home/MainPageController.dart';
 import 'package:ebuy/core/class/HandlingDataRequest.dart';
+import 'package:ebuy/core/constant/ArgumentsNames.dart';
 import 'package:ebuy/core/constant/Colors.dart';
 import 'package:ebuy/data/dataSource/Static/UINumbers.dart';
 import 'package:ebuy/routes.dart';
@@ -71,8 +72,14 @@ class CartPage extends GetView<MainContrllerImp> {
                               height: 15,
                             ),
                             MaterialButton(
-                              onPressed: () =>
-                                  Get.toNamed(AppRoutes.checkOutRoute),
+                              onPressed: () => Get.toNamed(
+                                  AppRoutes.checkOutRoute,
+                                  arguments: {
+                                    ArgumentsNames.cartProducts:
+                                        controller.argumentCartProducts,
+                                    ArgumentsNames.cartTotalPrice:
+                                        controller.totalPrice,
+                                  }),
                               height: 50,
                               minWidth: double.infinity,
                               shape: RoundedRectangleBorder(

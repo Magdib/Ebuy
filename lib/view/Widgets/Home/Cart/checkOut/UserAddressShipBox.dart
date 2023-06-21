@@ -1,5 +1,7 @@
 import 'package:ebuy/Controller/Home/CartController.dart';
+import 'package:ebuy/Controller/Home/CheckOutController.dart';
 import 'package:ebuy/core/constant/Colors.dart';
+import 'package:ebuy/core/function/UiFunctions/Dialogs/AddressDialog.dart';
 import 'package:ebuy/data/model/CartModels/StaticAddressModel.dart';
 import 'package:ebuy/view/Widgets/shared/CustomContainer.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +32,7 @@ class UserAddressShipBox extends StatelessWidget {
                   style: Theme.of(context).textTheme.bodyText1,
                 ),
                 IconButton(
-                    onPressed: () {},
+                    onPressed: () => addressDialog(context),
                     icon: const Icon(
                       Icons.edit,
                       color: AppColors.primaryColor,
@@ -42,7 +44,7 @@ class UserAddressShipBox extends StatelessWidget {
             color: AppColors.brandsGrey,
             thickness: 1,
           ),
-          GetBuilder<CartControllerImp>(
+          GetBuilder<CheckOutControllerimp>(
             builder: (controller) => ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../../Controller/authControllers/SignInController.dart';
-import '../../../shared/TitledTextFiled.dart';
+import '../../../shared/TitledTextField.dart';
 
 class SignInTextFields extends GetView<SignInControllerImp> {
   const SignInTextFields({
@@ -15,14 +15,14 @@ class SignInTextFields extends GetView<SignInControllerImp> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          TitledTextFiled(
+          TitledTextField(
               label: 'Email'.tr,
               hint: 'Enter email'.tr,
               obscure: false,
               textEditingController: controller.signInEmail!,
               validator: (val) => controller.emailValidate(val),
               onChanged: (val) => controller.signInStateCheck()),
-          TitledTextFiled(
+          TitledTextField(
               label: 'Password'.tr,
               hint: 'Enter Password'.tr,
               obscure: true,

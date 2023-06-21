@@ -1,4 +1,5 @@
 import 'package:ebuy/Controller/Home/CartController.dart';
+import 'package:ebuy/Controller/Home/CheckOutController.dart';
 import 'package:ebuy/core/constant/Colors.dart';
 import 'package:ebuy/view/Widgets/shared/CustomContainer.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +7,7 @@ import 'package:get/get.dart';
 
 import 'NoPaymentCard.dart';
 
-class PayMethodListView extends GetView<CartControllerImp> {
+class PayMethodListView extends GetView<CheckOutControllerimp> {
   const PayMethodListView({
     super.key,
   });
@@ -25,7 +26,7 @@ class PayMethodListView extends GetView<CartControllerImp> {
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) =>
               controller.paymentMethods.length > index
-                  ? GetBuilder<CartControllerImp>(
+                  ? GetBuilder<CheckOutControllerimp>(
                       builder: (controller) => GestureDetector(
                         onTap: () => controller.choosePayMethod(index),
                         child: CustomContainer(

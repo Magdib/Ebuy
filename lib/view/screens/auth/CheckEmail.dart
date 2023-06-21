@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 import '../../../data/dataSource/Static/UINumbers.dart';
 import '../../../routes.dart';
 
-import '../../Widgets/shared/TitledTextFiled.dart';
+import '../../Widgets/shared/TitledTextField.dart';
 import '../../Widgets/auth/shared/HaveAccountAuth.dart';
 
 class CheckEmail extends StatelessWidget {
@@ -42,7 +42,7 @@ class CheckEmail extends StatelessWidget {
                                 ),
                                 Form(
                                   key: controller.checkEmailFormState,
-                                  child: TitledTextFiled(
+                                  child: TitledTextField(
                                     label: 'Email'.tr,
                                     hint: 'Enter email'.tr,
                                     obscure: false,

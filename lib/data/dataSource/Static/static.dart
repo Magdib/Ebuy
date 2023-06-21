@@ -1,6 +1,6 @@
 import 'package:ebuy/core/constant/Colors.dart';
 import 'package:ebuy/core/constant/Images.dart';
-import 'package:ebuy/core/function/UiFunctions/ShopInDialog.dart';
+import 'package:ebuy/core/function/UiFunctions/Dialogs/ShopInDialog.dart';
 import 'package:ebuy/routes.dart';
 
 import 'package:flutter/material.dart';
@@ -53,11 +53,11 @@ List<ShippingModel> shipRadioStatic = [
       isSelected: true),
   ShippingModel(
       title: '\$10.00 Express Shipping',
-      subtitle: 'Delivered on or before ${Jiffy.now().add(days: 5).yMMMMEEEEd}',
+      subtitle: 'Delivered on or before ${Jiffy.now().add(days: 4).yMMMMEEEEd}',
       isSelected: false),
   ShippingModel(
       title: '\$19.99 Express Shipping',
-      subtitle: 'Delivered on ${Jiffy.now().add(days: 2).yMMMMEEEEd}',
+      subtitle: 'Delivered on ${Jiffy.now().add(days: 1).yMMMMEEEEd}',
       isSelected: false)
 ];
 

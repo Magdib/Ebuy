@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:ebuy/core/class/enums.dart';
@@ -8,6 +9,7 @@ import 'package:http/http.dart' as http;
 class CRUD {
   Future<Either<StatusRequest, Map>> postData(String linkurl, Map data) async {
     if (await checkinternet()) {
+      log("SendingRequest<<");
       var response = await http.post(Uri.parse(linkurl), body: data);
       if (response.statusCode == 200 || response.statusCode == 201) {
         Map responseBody = jsonDecode(response.body);

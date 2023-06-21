@@ -1,8 +1,9 @@
 import 'package:ebuy/Controller/Home/CartController.dart';
+import 'package:ebuy/Controller/Home/CheckOutController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class TermsAndConditionText extends GetView<CartControllerImp> {
+class TermsAndConditionText extends GetView<CheckOutControllerimp> {
   const TermsAndConditionText({
     super.key,
   });

@@ -9,9 +9,11 @@ class GiftCardExample extends StatelessWidget {
     super.key,
     this.shortDigit,
     this.longDigit,
+    this.giftCardValue,
   });
   final String? shortDigit;
   final String? longDigit;
+  final String? giftCardValue;
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -21,7 +23,9 @@ class GiftCardExample extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                'Back of Gift Card',
+                giftCardValue == null
+                    ? 'Back of Gift Card'
+                    : "\$ $giftCardValue",
                 style: Theme.of(context).textTheme.headline6,
               ),
               const SizedBox(

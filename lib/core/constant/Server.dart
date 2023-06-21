@@ -23,6 +23,9 @@ class AppServer {
   static const String favouriteItems = "${favourite}getFavouriteItems.php";
   //Cart
   static const String cart = "${server}cart/";
-  static const String address = "${server}address/";
   static const String giftCard = "${server}giftCards/";
+  static const String giftVoucher = "${server}giftVoucher/";
+  //Settings
+  static const String address = "${server}address/";
+  static const String payment = "${server}Payment/";
 }

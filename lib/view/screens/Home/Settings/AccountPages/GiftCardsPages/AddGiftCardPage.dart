@@ -2,7 +2,7 @@ import 'package:ebuy/Controller/Home/SettingsControllers/GiftCardController.dart
 import 'package:ebuy/core/class/HandlingDataRequest.dart';
 import 'package:ebuy/view/Widgets/Home/Settings/GiftCardWidgets/GiftCardExample.dart';
 import 'package:ebuy/view/Widgets/shared/CustomButton.dart';
-import 'package:ebuy/view/Widgets/shared/TitledTextFiled.dart';
+import 'package:ebuy/view/Widgets/shared/TitledTextField.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -48,7 +48,7 @@ class AddGiftCardPage extends GetView<GiftCardControllerimp> {
                         const SizedBox(
                           height: 15,
                         ),
-                        TitledTextFiled(
+                        TitledTextField(
                             label: '16-Digit Code',
                             hint: 'Enter 16-Digit Code',
                             obscure: false,
@@ -57,7 +57,7 @@ class AddGiftCardPage extends GetView<GiftCardControllerimp> {
                                 controller.longDigitController,
                             validator: (val) =>
                                 controller.validateLongDigit(val!)),
-                        TitledTextFiled(
+                        TitledTextField(
                             label: '4-Digit Pin',
                             hint: 'Enter 4-Digit Code',
                             obscure: false,

@@ -4,6 +4,7 @@ class GiftCardModel {
   String? cardShortDigit;
   String? cardLongDigit;
   String? cardDiscount;
+  String? cardAvailable;
   String? cardExpireDate;
 
   GiftCardModel(
@@ -12,6 +13,7 @@ class GiftCardModel {
       this.cardShortDigit,
       this.cardLongDigit,
       this.cardDiscount,
+      this.cardAvailable,
       this.cardExpireDate});
 
   GiftCardModel.fromJson(Map<String, dynamic> json) {
@@ -20,6 +22,7 @@ class GiftCardModel {
     cardShortDigit = json['card_shortDigit'];
     cardLongDigit = json['card_longDigit'];
     cardDiscount = json['card_discount'];
+    cardAvailable = json['card_available'];
     cardExpireDate = json['card_expireDate'];
   }
 
@@ -30,6 +33,7 @@ class GiftCardModel {
     data['card_shortDigit'] = this.cardShortDigit;
     data['card_longDigit'] = this.cardLongDigit;
     data['card_discount'] = this.cardDiscount;
+    data['card_available'] = this.cardAvailable;
     data['card_expireDate'] = this.cardExpireDate;
     return data;
   }

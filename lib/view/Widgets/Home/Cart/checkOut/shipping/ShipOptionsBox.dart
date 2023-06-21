@@ -1,4 +1,5 @@
 import 'package:ebuy/Controller/Home/CartController.dart';
+import 'package:ebuy/Controller/Home/CheckOutController.dart';
 import 'package:ebuy/core/constant/Colors.dart';
 import 'package:ebuy/data/dataSource/Static/UINumbers.dart';
 import 'package:ebuy/view/Widgets/shared/CustomContainer.dart';
@@ -8,7 +9,7 @@ import 'package:get/get.dart';
 
 import '../../../../shared/GreyDivider.dart';
 
-class ShipOptionsBox extends GetView<CartControllerImp> {
+class ShipOptionsBox extends GetView<CheckOutControllerimp> {
   const ShipOptionsBox({
     super.key,
   });
@@ -27,7 +28,7 @@ class ShipOptionsBox extends GetView<CartControllerImp> {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            GetBuilder<CartControllerImp>(
+            GetBuilder<CheckOutControllerimp>(
               builder: (controller) => CustomRadio(
                   onTap: () => controller.changeShipWay(index),
                   condition: controller.shipRadioList[index].isSelected,

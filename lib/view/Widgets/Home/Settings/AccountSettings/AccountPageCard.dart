@@ -1,3 +1,4 @@
+import 'package:ebuy/core/constant/ArgumentsNames.dart';
 import 'package:ebuy/data/dataSource/Static/UINumbers.dart';
 import 'package:ebuy/data/model/authModels/AccountListModel.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,10 @@ class AccountPageCard extends StatelessWidget {
         itemBuilder: (context, index) => Column(
           children: [
             GestureDetector(
-              onTap: () => Get.toNamed(list[index].page),
+              onTap: () => Get.toNamed(list[index].page,
+                  arguments: list[0].text == 'Gift cards & voucher'
+                      ? {ArgumentsNames.canChooseCard: false}
+                      : null),
               child: SizedBox(
                 height: 38,
                 child: ListTile(

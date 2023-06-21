@@ -1,5 +1,8 @@
+import 'package:ebuy/Controller/Home/SettingsControllers/PaymentController.dart';
+import 'package:ebuy/core/constant/Colors.dart';
 import 'package:ebuy/data/dataSource/Static/static.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'CustomContainer.dart';
 
@@ -20,19 +23,27 @@ class AcceptedPayments extends StatelessWidget {
         Container(
           height: 40,
           margin: const EdgeInsets.symmetric(vertical: 10),
-          child: ListView.separated(
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) => CustomContainer(
-                  height: 40,
-                  width: 45,
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: Image.asset(
-                    payMethods[index],
-                  )),
-              separatorBuilder: (context, index) => const SizedBox(
-                    width: 20,
-                  ),
-              itemCount: payMethods.length),
+          child: GetBuilder<PaymentControllerimp>(
+            builder: (controller) => ListView.separated(
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) => GestureDetector(
+                      onTap: () => controller.selectPayment(index),
+                      child: CustomContainer(
+                          height: 40,
+                          borderColor: controller.selectedPayment == index
+                              ? AppColors.primaryColor
+                              : null,
+                          width: 45,
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          child: Image.asset(
+                            payMethods[index],
+                          )),
+                    ),
+                separatorBuilder: (context, index) => const SizedBox(
+                      width: 20,
+                    ),
+                itemCount: payMethods.length),
+          ),
         ),
       ],
     );

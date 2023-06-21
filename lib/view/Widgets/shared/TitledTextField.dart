@@ -8,8 +8,8 @@ import '../../../core/constant/Colors.dart';
 import '../../../core/theme/theme.dart';
 import '../../../data/dataSource/Static/UINumbers.dart';
 
-class TitledTextFiled extends GetView<SignUpControllerImp> {
-  const TitledTextFiled({
+class TitledTextField extends GetView<SignUpControllerImp> {
+  const TitledTextField({
     Key? key,
     this.onChanged,
     required this.label,

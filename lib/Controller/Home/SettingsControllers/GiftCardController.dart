@@ -1,4 +1,6 @@
+import 'package:ebuy/Controller/Home/CheckOutController.dart';
 import 'package:ebuy/core/class/enums.dart';
+import 'package:ebuy/core/constant/ArgumentsNames.dart';
 import 'package:ebuy/core/function/UiFunctions/SnackBars.dart';
 import 'package:ebuy/core/function/handleData.dart';
 import 'package:ebuy/data/dataSource/Static/HiveKeys.dart';
@@ -13,6 +15,7 @@ abstract class GiftCardController extends GetxController {
   validateLongDigit(String val);
   validateShortDigit(String val);
   void addGiftCard();
+  void chooseGiftCard(int index);
 }
 
 class GiftCardControllerimp extends GiftCardController {
@@ -21,6 +24,7 @@ class GiftCardControllerimp extends GiftCardController {
   late TextEditingController shortDigitController;
   List<GiftCardModel> giftCards = [];
   bool anyGiftCard = false;
+  bool canChooseCard = false;
   GiftCardData giftCardData = GiftCardData(Get.find());
   StatusRequest statusRequest = StatusRequest.loading;
   StatusRequest checkStatusRequest = StatusRequest.none;
@@ -72,7 +76,11 @@ class GiftCardControllerimp extends GiftCardController {
   @override
   void addGiftCard() async {
     FormState formData = formState.currentState!;
-    if (formData.validate()) {
+    if (formData.validate() &&
+        giftCards
+            .where((card) =>
+                card.cardShortDigit!.contains(shortDigitController.text))
+            .isEmpty) {
       checkStatusRequest = StatusRequest.loading;
       update();
       var response = await giftCardData.checkGiftCard(shortDigitController.text,
@@ -95,6 +103,19 @@ class GiftCardControllerimp extends GiftCardController {
         }
       }
       update();
+    } else {
+      errorSnackBar('Card already exist!',
+          'the gift card you are trying to add already exist in your gift cards page');
+    }
+  }
+
+  @override
+  void chooseGiftCard(int index) {
+    if (canChooseCard == true) {
+      CheckOutControllerimp checkOutController = Get.find();
+      checkOutController.selectedGiftCard = giftCards[index];
+      Get.back();
+      checkOutController.useGiftCard();
     }
   }
 
@@ -103,6 +124,9 @@ class GiftCardControllerimp extends GiftCardController {
     getGiftCards();
     longDigitController = TextEditingController();
     shortDigitController = TextEditingController();
+    if (Get.arguments[ArgumentsNames.canChooseCard] != null) {
+      canChooseCard = true;
+    }
     super.onInit();
   }
 

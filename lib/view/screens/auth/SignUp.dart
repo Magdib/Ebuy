@@ -1,14 +1,10 @@
 import 'package:ebuy/Controller/authControllers/SignUpController.dart';
 import 'package:ebuy/core/class/HandlingDataRequest.dart';
-import 'package:ebuy/core/class/enums.dart';
-import 'package:ebuy/core/constant/Colors.dart';
-import 'package:ebuy/core/constant/Images.dart';
 
 import 'package:ebuy/data/dataSource/Static/UINumbers.dart';
 import 'package:ebuy/view/Widgets/auth/shared/HaveAccountAuth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../core/theme/theme.dart';
 import '../../Widgets/auth/SignUp/ChildrenWidgets/SignUpCustomButton.dart';
 import '../../Widgets/auth/shared/AuthPageTitle.dart';
 import '../../Widgets/auth/SignUp/ChildrenWidgets/MostlyIntersetedRichText.dart';

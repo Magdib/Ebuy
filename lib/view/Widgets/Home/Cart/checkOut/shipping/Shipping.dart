@@ -1,4 +1,5 @@
 import 'package:ebuy/Controller/Home/CartController.dart';
+import 'package:ebuy/Controller/Home/CheckOutController.dart';
 import 'package:ebuy/view/Widgets/shared/CustomButton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -6,7 +7,7 @@ import 'package:get/get.dart';
 import '../UserAddressShipBox.dart';
 import 'ShipOptionsBox.dart';
 
-class Shipping extends GetView<CartControllerImp> {
+class Shipping extends GetView<CheckOutControllerimp> {
   const Shipping({
     super.key,
   });
@@ -23,8 +24,11 @@ class Shipping extends GetView<CartControllerImp> {
         const SizedBox(
           height: 20,
         ),
-        UserAddressShipBox(
-            title: 'Postal address', userAddress: controller.addressList),
+        GetBuilder<CheckOutControllerimp>(
+          builder: (controller) => UserAddressShipBox(
+              title: 'Postal address',
+              userAddress: controller.shippingAddresList),
+        ),
         const SizedBox(
           height: 20,
         ),
