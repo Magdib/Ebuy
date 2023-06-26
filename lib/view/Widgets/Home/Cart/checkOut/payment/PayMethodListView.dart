@@ -1,6 +1,7 @@
 import 'package:ebuy/Controller/Home/CartController.dart';
 import 'package:ebuy/Controller/Home/CheckOutController.dart';
 import 'package:ebuy/core/constant/Colors.dart';
+import 'package:ebuy/core/function/UiFunctions/PaymentImage.dart';
 import 'package:ebuy/view/Widgets/shared/CustomContainer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -24,27 +25,26 @@ class PayMethodListView extends GetView<CheckOutControllerimp> {
           physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           scrollDirection: Axis.horizontal,
-          itemBuilder: (context, index) =>
-              controller.paymentMethods.length > index
-                  ? GetBuilder<CheckOutControllerimp>(
-                      builder: (controller) => GestureDetector(
-                        onTap: () => controller.choosePayMethod(index),
-                        child: CustomContainer(
-                            height: 85,
-                            width: 85,
-                            radius: 5,
-                            borderColor: controller.selectedPayment == index
-                                ? AppColors.primaryColor
-                                : null,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 10),
-                            child: Image.asset(
-                              controller.paymentMethods[index],
-                              fit: BoxFit.fitWidth,
-                            )),
-                      ),
-                    )
-                  : const NoPaymentCard(),
+          itemBuilder: (context, index) => controller.paymentList.length > index
+              ? GetBuilder<CheckOutControllerimp>(
+                  builder: (controller) => GestureDetector(
+                    onTap: () => controller.choosePayMethod(index),
+                    child: CustomContainer(
+                        height: 85,
+                        width: 85,
+                        radius: 5,
+                        borderColor: controller.selectedPayment == index
+                            ? AppColors.primaryColor
+                            : null,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 10),
+                        child: Image.asset(
+                          paymentImage(index, controller.paymentList),
+                          fit: BoxFit.fitWidth,
+                        )),
+                  ),
+                )
+              : const NoPaymentCard(),
           separatorBuilder: (context, index) => const SizedBox(
                 width: 20,
               ),

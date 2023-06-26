@@ -25,12 +25,6 @@ class OrderTrackPage extends GetView<OrdersControllerimp> {
         elevation: 0,
         actions: [
           IconButton(
-              onPressed: () => Get.toNamed(AppRoutes.searchRoute),
-              icon: const Icon(
-                Icons.search,
-                color: AppColors.deepGrey,
-              )),
-          IconButton(
               onPressed: () => Get.toNamed(AppRoutes.cartRoute),
               icon: const Icon(
                 Icons.shopping_cart,
@@ -41,29 +35,36 @@ class OrderTrackPage extends GetView<OrdersControllerimp> {
       body: ListView(
         physics: const BouncingScrollPhysics(),
         children: [
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-            child: OrdersCard(),
+          ListView.builder(
+            shrinkWrap: true,
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+            physics: const NeverScrollableScrollPhysics(),
+            itemBuilder: (context, index) => OrdersCard(
+                showPrice: false,
+                index: index,
+                ordersList: controller.ordersDetailesList),
+            itemCount: controller.ordersDetailesList.length,
           ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              const SizedBox(
+              SizedBox(
                 height: 380,
                 width: 120,
                 child: IconStepper(
-                  activeStep: 3,
+                  activeStep:
+                      int.parse(controller.ordersDetailesList[0].ordersStatus!),
                   lineColor: AppColors.primaryColor,
                   enableStepTapping: false,
                   activeStepBorderColor: AppColors.white,
-                  activeStepColor: AppColors.white,
-                  stepColor: AppColors.primaryColor,
+                  activeStepColor: AppColors.primaryColor,
+                  stepColor: AppColors.white,
                   stepPadding: 0,
                   alignment: Alignment.topLeft,
                   enableNextPreviousButtons: false,
                   scrollingDisabled: true,
-                  icons: orderTrackIcons,
+                  icons: controller.orderTrackIcons,
                   direction: Axis.vertical,
                 ),
               ),
@@ -78,36 +79,8 @@ class OrderTrackPage extends GetView<OrdersControllerimp> {
                     separatorBuilder: (context, index) => const SizedBox(
                       height: 55,
                     ),
-                    itemBuilder: (context, index) => RichText(
-                      text: TextSpan(children: <TextSpan>[
-                        TextSpan(
-                          text: '${controller.ordersTrackText[index]}\n',
-                          style: index < 3
-                              ? Theme.of(context)
-                                  .textTheme
-                                  .headline2!
-                                  .copyWith(fontSize: 18)
-                              : Theme.of(context)
-                                  .textTheme
-                                  .headline6!
-                                  .copyWith(fontSize: 18),
-                        ),
-                        TextSpan(
-                          text: index < 3
-                              ? 'June 06, 2020 - 08:45 am'
-                              : 'Not delivered yet',
-                          style: index < 3
-                              ? Theme.of(context)
-                                  .textTheme
-                                  .bodyText1!
-                                  .copyWith(fontSize: 15, height: 1.5)
-                              : Theme.of(context)
-                                  .textTheme
-                                  .headline6!
-                                  .copyWith(fontSize: 15),
-                        )
-                      ]),
-                    ),
+                    itemBuilder: (context, index) =>
+                        OrdersRichText(index: index),
                   ),
                 ),
               )
@@ -115,6 +88,42 @@ class OrderTrackPage extends GetView<OrdersControllerimp> {
           )
         ],
       ),
+    );
+  }
+}
+
+class OrdersRichText extends GetView<OrdersControllerimp> {
+  const OrdersRichText({
+    required this.index,
+    super.key,
+  });
+  final int index;
+
+  @override
+  Widget build(BuildContext context) {
+    return RichText(
+      text: TextSpan(children: <TextSpan>[
+        TextSpan(
+          text: '${controller.ordersTrackText[index]}\n',
+          style: index <=
+                  int.parse(controller.ordersDetailesList[0].ordersStatus!)
+              ? Theme.of(context).textTheme.headline2!.copyWith(fontSize: 18)
+              : Theme.of(context).textTheme.headline6!.copyWith(fontSize: 18),
+        ),
+        TextSpan(
+          text:
+              index <= int.parse(controller.ordersDetailesList[0].ordersStatus!)
+                  ? controller.orderStatusTime[index]
+                  : notDoneOrdersStatus[index - 1],
+          style: index <=
+                  int.parse(controller.ordersDetailesList[0].ordersStatus!)
+              ? Theme.of(context)
+                  .textTheme
+                  .bodyText1!
+                  .copyWith(fontSize: 15, height: 1.5)
+              : Theme.of(context).textTheme.headline6!.copyWith(fontSize: 15),
+        )
+      ]),
     );
   }
 }

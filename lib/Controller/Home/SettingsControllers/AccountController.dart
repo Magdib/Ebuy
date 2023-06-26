@@ -1,25 +1,30 @@
+import 'dart:io';
+
 import 'package:ebuy/Controller/Home/MainPageController.dart';
+import 'package:ebuy/core/class/enums.dart';
 import 'package:ebuy/core/constant/AppWords.dart';
 import 'package:ebuy/core/constant/CustomIcons.dart';
-import 'package:ebuy/core/theme/theme.dart';
-import 'package:ebuy/data/dataSource/Static/static.dart';
+import 'package:ebuy/core/constant/Server.dart';
+import 'package:ebuy/core/function/UiFunctions/SnackBars.dart';
+import 'package:ebuy/core/function/handleData.dart';
+import 'package:path/path.dart';
+import 'package:ebuy/data/dataSource/remote/auth/AuthEditData.dart';
 import 'package:ebuy/data/model/authModels/AccountListModel.dart';
 import 'package:ebuy/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
-import '../../../core/function/UiFunctions/Dialogs/ShopInDialog.dart';
+import 'package:image_picker/image_picker.dart';
 import '../../../core/function/handleHiveNullState.dart';
 import '../../../data/dataSource/Static/HiveKeys.dart';
 import '../../../data/model/authModels/AccountFListModel.dart';
 
 abstract class AccountController extends GetxController {
-  final bool _isThereBackGround = false;
-  final bool _isThereAccountImage = false;
   void signOut();
+  void updateImage(String type);
   vaildateUserName(String val);
-  vaildateEmail(String val);
+  passwordValidate(String val);
   saveDetailes();
   saveButtonState();
   void notificationState(val);
@@ -28,10 +33,14 @@ abstract class AccountController extends GetxController {
 
 class AccountControllerImp extends AccountController {
   Box authBox = Hive.box(HiveBoxes.authBox);
+  StatusRequest statusRequest = StatusRequest.none;
+  AuthEditData authEditData = AuthEditData(Get.find());
+  String? backgroungImage;
+  String? userImage;
   late String userName;
   late String userEmail;
   late TextEditingController userNameController;
-  late TextEditingController userEmailController;
+  late TextEditingController passwordController;
   GlobalKey<FormState> detailesFormState = GlobalKey<FormState>();
   late bool sendNotificatios;
   bool canSaveChanges = true;
@@ -80,11 +89,6 @@ class AccountControllerImp extends AccountController {
 
   List<AccountFListModel> settingsList = [
     AccountFListModel(
-      leadingIcon: Icons.circle,
-      text: 'Shop in'.tr,
-      onTap: () => shopInDialog(),
-    ),
-    AccountFListModel(
         leadingIcon: Icons.notifications,
         text: 'Notifications'.tr,
         onTap: () => Get.toNamed(AppRoutes.notificationsPageRoute)),
@@ -107,8 +111,47 @@ class AccountControllerImp extends AccountController {
         text: 'Gift card/ Voucher FAQs',
         onTap: () => print(AppWords.websiteWord))
   ];
-  bool getBackGroundImage() => _isThereBackGround;
-  bool getAccountImage() => _isThereAccountImage;
+
+  @override
+  void updateImage(String type) async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? ximage = await picker.pickImage(source: ImageSource.gallery);
+    if (ximage != null) {
+      String imageoldname;
+      final File image = File(ximage.path);
+      if (type == "user image") {
+        imageoldname = handleHiveNullState(HiveKeys.userimage, '');
+        StatusRequest imageStatusRequest = StatusRequest.none;
+        var response = await authEditData.updateUserImage(
+            authBox.get(HiveKeys.userid), image, imageoldname);
+        imageStatusRequest = handlingData(response);
+        if (imageStatusRequest == StatusRequest.success) {
+          if (response['status'] == "success") {
+            userImage = response['data']['users_image'];
+
+            authBox.put(HiveKeys.userimage, userImage);
+          }
+        } else {
+          noInternetSnackBar();
+        }
+      } else {
+        imageoldname = handleHiveNullState(HiveKeys.backgroundimage, '');
+        StatusRequest imageStatusRequest = StatusRequest.none;
+        var response = await authEditData.updateBackgroundImage(
+            authBox.get(HiveKeys.userid), image, imageoldname);
+        imageStatusRequest = handlingData(response);
+        if (imageStatusRequest == StatusRequest.success) {
+          if (response['status'] == "success") {
+            backgroungImage = response['data']['users_background'];
+            authBox.put(HiveKeys.backgroundimage, backgroungImage);
+          }
+        } else {
+          noInternetSnackBar();
+        }
+      }
+    }
+    update();
+  }
 
   @override
   void signOut() {
@@ -128,12 +171,12 @@ class AccountControllerImp extends AccountController {
   }
 
   @override
-  vaildateEmail(String val) {
-    if (val.isEmpty) {
-      return "Email can't be empty".tr;
+  passwordValidate(String? val) {
+    if (val!.isEmpty) {
+      return "Password can't be empty".tr;
     }
-    if (val.contains('@gmail.com') == false || val.length < 10) {
-      return 'Please write correct email'.tr;
+    if (val.length < 6) {
+      return 'Password must be more than 6 charcters'.tr;
     }
     return null;
   }
@@ -150,10 +193,24 @@ class AccountControllerImp extends AccountController {
   }
 
   @override
-  saveDetailes() {
+  saveDetailes() async {
     FormState formData = detailesFormState.currentState!;
     if (formData.validate()) {
-      print('Save Changes');
+      statusRequest = StatusRequest.loading;
+      update();
+      var response = await authEditData.editDetailes(
+          authBox.get(HiveKeys.userid),
+          userNameController.text,
+          passwordController.text);
+      statusRequest = handlingData(response);
+      if (statusRequest == StatusRequest.success) {
+        if (response["status"] == "success") {
+          Get.back();
+          succesSnackBar(
+              "Done.", "your detailes have been edited successfully");
+        }
+      }
+      update();
     }
   }
 
@@ -185,8 +242,7 @@ class AccountControllerImp extends AccountController {
   @override
   void onInit() {
     userName = authBox.get(HiveKeys.username);
-    userEmail = authBox.get(HiveKeys.email);
-    userEmailController = TextEditingController(text: userEmail);
+    passwordController = TextEditingController();
     userNameController = TextEditingController(text: userName);
     sendNotificatios = handleHiveNullState(HiveKeys.notification, false);
     bool langNullval;
@@ -200,13 +256,15 @@ class AccountControllerImp extends AccountController {
       langNullval = false;
     }
     isEnglish = handleHiveNullState(HiveKeys.language, langNullval);
+    userImage = handleHiveNullState(HiveKeys.userimage, null);
+    backgroungImage = handleHiveNullState(HiveKeys.backgroundimage, null);
     super.onInit();
   }
 
   @override
   void onClose() {
     userNameController.dispose();
-    userEmailController.dispose();
+    passwordController.dispose();
     super.onClose();
   }
 }

@@ -13,7 +13,6 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 abstract class PaymentController extends GetxController {
   getData(bool start);
-  String paymentImage(int index);
   void changeExpiryMonth(int val);
   void changeExpiryYear(int val);
   void saveExpiryTime();
@@ -21,6 +20,7 @@ abstract class PaymentController extends GetxController {
   void selectPayment(int index);
   void handleSavePayment();
   void goToEditPayment(int index);
+  void deletePayment();
   resetPayment();
   void savePayment();
 }
@@ -42,7 +42,7 @@ class PaymentControllerimp extends PaymentController {
   String? paymentType;
   String? expiryDate;
   DateTime? expiryDateTime;
-  bool paymentEdit = false;
+  int? editIndex;
   @override
   getData(bool start) async {
     if (start == true) {
@@ -66,6 +66,8 @@ class PaymentControllerimp extends PaymentController {
         }
       }
     } else {
+      statusRequest = StatusRequest.loading;
+      update();
       paymentList.clear();
       var paymentResponse =
           await paymentData.getPayments(authBox.get(HiveKeys.userid));
@@ -78,24 +80,6 @@ class PaymentControllerimp extends PaymentController {
       }
     }
     update();
-  }
-
-  @override
-  String paymentImage(int index) {
-    switch (paymentList[index].paymentType) {
-      case "Visa":
-        return payMethods[0];
-
-      case "Paypal":
-        return payMethods[1];
-      case "Master Card":
-        return payMethods[2];
-      case "American Express":
-        return payMethods[3];
-
-      default:
-        return payMethods[4];
-    }
   }
 
   @override
@@ -114,7 +98,8 @@ class PaymentControllerimp extends PaymentController {
   @override
   void saveExpiryTime() {
     expiryDateTime = DateTime(selectedYear, selectedMonth);
-    if (expiryDateTime!.month < DateTime.now().month) {
+    if (expiryDateTime!.month < DateTime.now().month &&
+        expiryDateTime!.year == DateTime.now().year) {
       errorSnackBar('Wrong Date',
           'The expiry date is invalid please enter valid date and try again');
     } else {
@@ -141,7 +126,7 @@ class PaymentControllerimp extends PaymentController {
 
   @override
   void goToEditPayment(int index) {
-    Get.toNamed(AppRoutes.CUDPaymentPageRoute);
+    Get.toNamed(AppRoutes.cudPaymentPageRoute);
     cardNameController.text = paymentList[index].paymentName!;
     cardNumberController.text = paymentList[index].paymentCardnumber!;
     switch (paymentList[index].paymentType) {
@@ -168,7 +153,7 @@ class PaymentControllerimp extends PaymentController {
     expiryDate = DateTime(selectedYear, selectedMonth)
         .toString()
         .replaceRange(7, null, '');
-    paymentEdit = true;
+    editIndex = index;
     canSaveCard = true;
   }
 
@@ -210,6 +195,25 @@ class PaymentControllerimp extends PaymentController {
   }
 
   @override
+  void deletePayment() async {
+    cudStatusRequest = StatusRequest.loading;
+    update();
+    var response =
+        await paymentData.deletePayment(paymentList[editIndex!].paymentId!);
+    cudStatusRequest = handlingData(response);
+    if (cudStatusRequest == StatusRequest.success) {
+      if (response['status'] == "success") {
+        paymentList.removeAt(editIndex!);
+        resetPayment();
+
+        succesSnackBar(
+            "Done.", "Payment Method have been deleted successfully");
+        update();
+      }
+    }
+  }
+
+  @override
   resetPayment() {
     selectedMonth = 1;
     selectedYear = DateTime.now().year;
@@ -218,7 +222,7 @@ class PaymentControllerimp extends PaymentController {
     selectedPayment = null;
     expiryDate = null;
     canSaveCard = false;
-    paymentEdit = false;
+    editIndex = null;
     Get.back();
     return Future.value(false);
   }
@@ -227,18 +231,35 @@ class PaymentControllerimp extends PaymentController {
   void savePayment() async {
     cudStatusRequest = StatusRequest.loading;
     update();
-    var response = await paymentData.addPayments(
-        authBox.get(HiveKeys.userid),
-        cardNameController.text,
-        paymentType!,
-        cardNumberController.text,
-        "$expiryDateTime");
+    // ignore: prefer_typing_uninitialized_variables
+    var response;
+    bool isEditing = false;
+    if (editIndex == null) {
+      response = await paymentData.addPayments(
+          authBox.get(HiveKeys.userid),
+          cardNameController.text,
+          paymentType!,
+          cardNumberController.text,
+          "$expiryDateTime");
+    } else {
+      isEditing = true;
+      response = await paymentData.editPayment(
+          paymentList[editIndex!].paymentId!,
+          cardNameController.text,
+          paymentType!,
+          cardNumberController.text,
+          "$expiryDateTime");
+    }
     cudStatusRequest = handlingData(response);
     if (cudStatusRequest == StatusRequest.success) {
       if (response['status'] == "success") {
         resetPayment();
         await getData(false);
-        succesSnackBar("Done.", "Payment Method have been added successfully");
+        isEditing == false
+            ? succesSnackBar(
+                "Done.", "Payment Method have been added successfully")
+            : succesSnackBar(
+                "Done.", "Payment Method have been edited successfully");
       }
     }
   }

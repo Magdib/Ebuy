@@ -40,7 +40,12 @@ class TotalPayCard extends GetView<CheckOutControllerimp> {
                                 .copyWith(fontSize: 14),
                           ),
                           Text(controller.placeOrderList[1][index],
-                              style: Theme.of(context).textTheme.bodyText1),
+                              style: controller.shipPrice == 19.99 && index == 1
+                                  ? Theme.of(context)
+                                      .textTheme
+                                      .bodyText1!
+                                      .copyWith(color: AppColors.red)
+                                  : Theme.of(context).textTheme.bodyText1),
                         ]),
                 separatorBuilder: (context, index) => const SizedBox(
                       height: 20,
@@ -61,7 +66,7 @@ class TotalPayCard extends GetView<CheckOutControllerimp> {
                   style: Theme.of(context).textTheme.bodyText1,
                 ),
                 Text(
-                  '\$ 904.59',
+                  '\$ ${controller.totalToPay}',
                   style: Theme.of(context)
                       .textTheme
                       .headline2!

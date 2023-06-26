@@ -30,33 +30,42 @@ class CheckOut extends GetView<CheckOutControllerimp> {
       ),
       body: GetBuilder<CheckOutControllerimp>(
         builder: (controller) => HandlingDataRequest(
-          onPressed: () => controller.getAddresses(),
-          statusRequest: controller.statusRequest,
-          widget: controller.anyAddress == true
-              ? Column(
-                  children: [
-                    const CustomStepper(),
-                    Expanded(
-                      child: PageView(
-                          controller: controller.pageController,
-                          physics: const NeverScrollableScrollPhysics(),
-                          children: const [
-                            Information(),
-                            Shipping(),
-                            Payment()
-                          ]),
-                    ),
-                  ],
-                )
-              : CustomPage(
-                  svgImage: AppImagesAssets.noAddressImage,
-                  title: 'You need a billing address',
-                  subtitle:
-                      'You currently have no saved address.Without one, you won\'t able to add a new payment method.',
-                  buttonText: 'Add new address',
-                  isSpaced: true,
-                  onPressed: () => Get.offNamed(AppRoutes.addressPageRoute)),
-        ),
+            onPressed: () => controller.getData(),
+            statusRequest: controller.statusRequest,
+            widget: controller.anyAddress == false
+                ? CustomPage(
+                    svgImage: AppImagesAssets.noAddressImage,
+                    title: 'You need a billing address',
+                    subtitle:
+                        'You currently have no saved address.Without one, you won\'t able to checkout.',
+                    buttonText: 'Add new address',
+                    isSpaced: true,
+                    onPressed: () => Get.offNamed(AppRoutes.addressPageRoute))
+                : controller.anyPayment == true
+                    ? Column(
+                        children: [
+                          const CustomStepper(),
+                          Expanded(
+                            child: PageView(
+                                controller: controller.pageController,
+                                physics: const NeverScrollableScrollPhysics(),
+                                children: const [
+                                  Information(),
+                                  Shipping(),
+                                  Payment()
+                                ]),
+                          ),
+                        ],
+                      )
+                    : CustomPage(
+                        svgImage: AppImagesAssets.noAddressImage,
+                        title: 'You need to add payment method',
+                        subtitle:
+                            'You currently have no saved payment method.Without one, you won\'t able to checkout.',
+                        buttonText: 'Add payment method',
+                        isSpaced: true,
+                        onPressed: () =>
+                            Get.offNamed(AppRoutes.paymentPageRoute))),
       ),
     );
   }

@@ -3,6 +3,7 @@ import 'package:ebuy/core/class/HandlingDataRequest.dart';
 import 'package:ebuy/core/constant/AppWords.dart';
 import 'package:ebuy/core/constant/Colors.dart';
 import 'package:ebuy/core/constant/Images.dart';
+import 'package:ebuy/core/function/UiFunctions/PaymentImage.dart';
 import 'package:ebuy/routes.dart';
 import 'package:ebuy/view/Widgets/Home/Cart/checkOut/payment/NoPaymentCard.dart';
 import 'package:ebuy/view/Widgets/shared/CustomContainer.dart';
@@ -61,7 +62,7 @@ class PaymentMethods extends StatelessWidget {
                                     controller.paymentList.length - 1 < index
                                         ? GestureDetector(
                                             onTap: () => Get.toNamed(
-                                                AppRoutes.CUDPaymentPageRoute),
+                                                AppRoutes.cudPaymentPageRoute),
                                             child: const NoPaymentCard(),
                                           )
                                         : GestureDetector(
@@ -76,8 +77,8 @@ class PaymentMethods extends StatelessWidget {
                                                         horizontal: 10,
                                                         vertical: 10),
                                                 child: Image.asset(
-                                                  controller
-                                                      .paymentImage(index),
+                                                  paymentImage(index,
+                                                      controller.paymentList),
                                                   fit: BoxFit.fitWidth,
                                                 )),
                                           ),

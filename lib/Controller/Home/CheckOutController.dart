@@ -1,28 +1,32 @@
 import 'package:ebuy/Controller/Home/CartController.dart';
 import 'package:ebuy/core/constant/ArgumentsNames.dart';
 import 'package:ebuy/core/function/getCountryData.dart';
+import 'package:ebuy/core/function/handleHiveNullState.dart';
 import 'package:ebuy/data/dataSource/remote/settings/GiftCardData.dart';
 import 'package:ebuy/data/model/CartModels/CartModel.dart';
 import 'package:ebuy/data/model/SettingsModels/AddressModel.dart';
+import 'package:ebuy/data/model/SettingsModels/PaymentModel.dart';
 import 'package:ebuy/data/model/SettingsModels/giftCardModel.dart';
+import 'package:ebuy/routes.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:jiffy/jiffy.dart';
 import '../../core/class/enums.dart';
 import '../../core/constant/AppWords.dart';
 import '../../core/constant/Colors.dart';
-import '../../core/constant/Images.dart';
 import '../../core/function/handleData.dart';
 import '../../data/dataSource/Static/HiveKeys.dart';
-import '../../data/dataSource/Static/static.dart';
+import '../../data/dataSource/remote/cart/OrdersData.dart';
 import '../../data/dataSource/remote/cart/VoucherData.dart';
 import '../../data/dataSource/remote/home/AddressData.dart';
+import '../../data/dataSource/remote/settings/PaymentData.dart';
 import '../../data/model/CartModels/ShippingModel.dart';
 import '../../data/model/CartModels/StaticAddressModel.dart';
 
 abstract class CheckOutController extends GetxController {
-  void getAddresses();
+  void getData();
   void changeShipWay(int index);
   void handleVoucher();
   void getVoucher();
@@ -32,16 +36,21 @@ abstract class CheckOutController extends GetxController {
   changeAddress(int index);
   void choosePayMethod(int index);
   void nextStep();
+  void placeOrder();
 }
 
 class CheckOutControllerimp extends CheckOutController {
   Box authBox = Hive.box(HiveBoxes.authBox);
   bool anyAddress = false;
+  bool anyPayment = false;
   StatusRequest statusRequest = StatusRequest.loading;
+  StatusRequest orderStatusRequest = StatusRequest.none;
   StatusRequest giftStatus = StatusRequest.none;
   VoucherData voucherData = VoucherData(Get.find());
+  PaymentData paymentData = PaymentData(Get.find());
   AddressData addressData = AddressData(Get.find());
   GiftCardData giftCardData = GiftCardData(Get.find());
+  OrdersData ordersData = OrdersData(Get.find());
   late List<CartModel> cartProducts;
   late int selectedIndex;
   late PageController pageController;
@@ -66,22 +75,37 @@ class CheckOutControllerimp extends CheckOutController {
   String? giftType;
   late int paymentAddress;
   late int shippingAddress;
-  List<String> paymentMethods = [
-    AppImagesAssets.payPal,
-    AppImagesAssets.klarna,
-  ];
   late List<List<String>> placeOrderList;
   int shipLastIndex = 0;
-  List<ShippingModel> shipRadioList = shipRadioStatic;
+  List<ShippingModel> shipRadioList = [
+    ShippingModel(
+        title: 'Free Standard Shipping',
+        subtitle:
+            'Delivered on or before ${Jiffy.now().add(days: 10).yMMMMEEEEd}',
+        note: 'No shipping on Public Holidays',
+        isSelected: true),
+    ShippingModel(
+        title: '\$10.00 Express Shipping',
+        subtitle:
+            'Delivered on or before ${Jiffy.now().add(days: 4).yMMMMEEEEd}',
+        isSelected: false),
+    ShippingModel(
+        title: '\$19.99 X-Express Shipping',
+        subtitle: 'Delivered on ${Jiffy.now().add(days: 1).yMMMMEEEEd}',
+        isSelected: false)
+  ];
   late List<StaticAddressModel> shippingAddresList;
   late List<StaticAddressModel> paymentAddresList;
   String shipWay = 'Free';
+  double shipPrice = 0.0;
   int currentStep = 0;
-  double totalPrice = 0.0;
+  late double totalPrice;
+  late String totalToPay;
   List<AddressModel> addressList = [];
+  List<PaymentModel> paymentList = [];
 
   @override
-  void getAddresses() async {
+  void getData() async {
     var response = await addressData.getAddresses(authBox.get(HiveKeys.userid));
     statusRequest = handlingData(response);
     if (statusRequest == StatusRequest.success) {
@@ -113,6 +137,17 @@ class CheckOutControllerimp extends CheckOutController {
               title: addressList[paymentAddress].addressPhone!,
               icon: Icons.amp_stories_rounded)
         ];
+        var paymentResponse =
+            await paymentData.getPayments(authBox.get(HiveKeys.userid));
+        statusRequest = handlingData(paymentResponse);
+        if (statusRequest == StatusRequest.success) {
+          if (paymentResponse['status'] == "success") {
+            List tempPayment = paymentResponse['data'];
+            paymentList
+                .addAll(tempPayment.map((e) => PaymentModel.fromJson(e)));
+            anyPayment = true;
+          }
+        }
       }
     }
     update();
@@ -218,7 +253,6 @@ class CheckOutControllerimp extends CheckOutController {
         totalPrice = 0;
         for (int i = 0; i < cartProducts.length; i++) {
           cartProducts[i].cartPrice = cartController.cartProducts[i].cartPrice;
-
           totalPrice += double.parse(cartProducts[i].cartPrice!);
         }
       } else {
@@ -277,7 +311,6 @@ class CheckOutControllerimp extends CheckOutController {
       }
       update();
     }
-
     return Future.value(false);
   }
 
@@ -286,7 +319,21 @@ class CheckOutControllerimp extends CheckOutController {
     shipRadioList[shipLastIndex].isSelected = false;
     shipLastIndex = index;
     shipRadioList[index].isSelected = true;
-    shipWay = shipRadioList[index].title.replaceRange(4, null, '');
+    switch (index) {
+      case 0:
+        shipPrice = 0.0;
+        shipWay = "Free";
+        break;
+      case 1:
+        shipPrice = 10;
+        shipWay = "Express";
+        break;
+      case 2:
+        shipPrice = 19.99;
+        shipWay = "X-Express";
+        break;
+      default:
+    }
     update();
   }
 
@@ -302,14 +349,59 @@ class CheckOutControllerimp extends CheckOutController {
     if (currentStep == 1) {
       placeOrderList = [
         ['Sub - total', 'Shipping', 'Sale tax'],
-        ['\$$totalPrice', shipWay, "\$4.70"]
+        [
+          '\$${totalPrice.toStringAsFixed(2)}',
+          "$shipWay-$shipPrice\$",
+          "\$4.70"
+        ]
       ];
+      if (shipWay == "Free") {
+        placeOrderList[1][1] = "Free";
+      }
+      double tempTotalPay = totalPrice + shipPrice + 4.7;
+      totalToPay = tempTotalPay.toStringAsFixed(2);
     }
     pageController.nextPage(
         duration: const Duration(milliseconds: 600), curve: Curves.easeIn);
     currentStep++;
     stepsColors[currentStep] = AppColors.primaryColor;
     update();
+  }
+
+  @override
+  void placeOrder() async {
+    Get.back();
+    orderStatusRequest = StatusRequest.loading;
+    update();
+    String giftstate;
+    if (giftType == "Card") {
+      giftstate = "2";
+    } else if (giftType == "Voucher") {
+      giftstate = "1";
+    } else {
+      giftstate = "";
+    }
+    String voucherCode = handleHiveNullState(HiveKeys.voucherCode, "");
+    var response = await ordersData.addOrder(
+        authBox.get(HiveKeys.userid),
+        addressList[shippingAddress].addressId!,
+        addressList[paymentAddress].addressId!,
+        totalToPay,
+        paymentList[selectedPayment!].paymentType!,
+        shipWay,
+        giftstate,
+        voucherCode);
+    orderStatusRequest = handlingData(response);
+    if (orderStatusRequest == StatusRequest.success) {
+      if (response['status'] == "success") {
+        authBox.delete(HiveKeys.voucherCode);
+        authBox.delete(HiveKeys.voucherDiscount);
+        authBox.delete(HiveKeys.cardDiscount);
+        Get.toNamed(AppRoutes.orderSuccessRoute);
+      }
+    } else {
+      update();
+    }
   }
 
   @override
@@ -324,7 +416,6 @@ class CheckOutControllerimp extends CheckOutController {
     } else if (authBox.get(HiveKeys.cardDiscount) != null) {
       giftType = "Card";
     }
-
     giftType == "Voucher" || giftType == "Card"
         ? canAddGift = false
         : canAddGift = true;
@@ -349,17 +440,18 @@ class CheckOutControllerimp extends CheckOutController {
         giftCardDiscount();
       }
     }
-    getAddresses();
+    getData();
 
     pageController = PageController();
-    for (int i = 0; i < cartProducts.length; i++) {
-      totalPrice += double.parse(cartProducts[i].cartPrice!);
-    }
+    // for (int i = 0; i < cartProducts.length; i++) {
+    //   totalPrice += double.parse(cartProducts[i].cartPrice!);
+    // }
     voucherController = TextEditingController();
     returnspolicies = TapGestureRecognizer()
       ..onTap = () => print(AppWords.websiteWord);
     termsPrivacy = TapGestureRecognizer()
       ..onTap = () => print(AppWords.websiteWord);
+
     super.onInit();
   }
 

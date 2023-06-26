@@ -1,18 +1,12 @@
 import 'package:ebuy/core/constant/Colors.dart';
 import 'package:ebuy/core/constant/Images.dart';
-import 'package:ebuy/core/function/UiFunctions/Dialogs/ShopInDialog.dart';
-import 'package:ebuy/routes.dart';
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:jiffy/jiffy.dart';
-import '../../../core/constant/CustomIcons.dart';
 import '../../model/CartModels/ShippingModel.dart';
 import '../../model/CartModels/StepperModel.dart';
 import '../../model/OnBoardingModel/OnBoardingModel.dart';
-import '../../model/authModels/AccountFListModel.dart';
-import '../../model/authModels/AccountListModel.dart';
 
 //onBoardingList
 
@@ -44,23 +38,6 @@ const List<String> detailesTitles = [
 ];
 //Check Out Lists
 
-List<ShippingModel> shipRadioStatic = [
-  ShippingModel(
-      title: 'Free Standard Shipping',
-      subtitle:
-          'Delivered on or before ${Jiffy.now().add(days: 10).yMMMMEEEEd}',
-      note: 'No shipping on Public Holidays',
-      isSelected: true),
-  ShippingModel(
-      title: '\$10.00 Express Shipping',
-      subtitle: 'Delivered on or before ${Jiffy.now().add(days: 4).yMMMMEEEEd}',
-      isSelected: false),
-  ShippingModel(
-      title: '\$19.99 Express Shipping',
-      subtitle: 'Delivered on ${Jiffy.now().add(days: 1).yMMMMEEEEd}',
-      isSelected: false)
-];
-
 List<StepperModel> stepperList = [
   StepperModel(
     containerHeight: 30.0,
@@ -77,21 +54,8 @@ const List<String> payMethods = [
   AppImagesAssets.americanExpress,
   AppImagesAssets.klarna
 ];
-const List<Icon> orderTrackIcons = [
-  Icon(
-    Icons.shopping_cart,
-    color: AppColors.white,
-  ),
-  Icon(
-    FontAwesomeIcons.shop,
-    color: AppColors.white,
-  ),
-  Icon(
-    FontAwesomeIcons.truck,
-    color: AppColors.white,
-  ),
-  Icon(
-    Icons.favorite,
-    color: AppColors.primaryColor,
-  )
+List<String> notDoneOrdersStatus = [
+  "Not delivired to shipping units yet",
+  "Not shipped yet",
+  "Not delivired yet"
 ];

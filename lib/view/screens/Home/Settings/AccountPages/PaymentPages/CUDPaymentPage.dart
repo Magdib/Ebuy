@@ -2,6 +2,7 @@ import 'package:ebuy/Controller/Home/SettingsControllers/PaymentController.dart'
 import 'package:ebuy/core/class/HandlingDataRequest.dart';
 import 'package:ebuy/core/constant/Colors.dart';
 import 'package:ebuy/core/function/UiFunctions/Dialogs/CardExpiredDialog.dart';
+import 'package:ebuy/core/function/UiFunctions/customAppBar.dart';
 import 'package:ebuy/data/dataSource/Static/UINumbers.dart';
 import 'package:ebuy/view/Widgets/shared/AcceptedPayments.dart';
 import 'package:ebuy/view/Widgets/shared/CustomConditionButton.dart';
@@ -15,6 +16,25 @@ class CUDPaymentPage extends GetView<PaymentControllerimp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: controller.editIndex != null
+          ? AppBar(
+              title: Text(
+                "Edit Payment",
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1!
+                    .copyWith(fontSize: 20),
+              ),
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+              centerTitle: true,
+              elevation: 0.0,
+              actions: [
+                IconButton(
+                    onPressed: () => controller.deletePayment(),
+                    icon: const Icon(Icons.delete))
+              ],
+            )
+          : null,
       body: WillPopScope(
         onWillPop: () => controller.resetPayment(),
         child: GetBuilder<PaymentControllerimp>(
@@ -22,7 +42,10 @@ class CUDPaymentPage extends GetView<PaymentControllerimp> {
             onPressed: () => controller.savePayment(),
             statusRequest: controller.cudStatusRequest,
             widget: ListView(
-              padding: const EdgeInsets.only(top: 100, left: 10, right: 10),
+              padding: EdgeInsets.only(
+                  top: controller.editIndex == null ? 100 : 20,
+                  left: 10,
+                  right: 10),
               children: [
                 TitledTextField(
                   label: 'Card number',

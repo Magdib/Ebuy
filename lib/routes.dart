@@ -75,7 +75,7 @@ class AppRoutes {
   static const String notificationsPageRoute = '/NotificationsPage';
   static const String languagePageRoute = '/LanguagePage';
   static const String addGiftCardPageRoute = '/addGiftCardPage';
-  static const String CUDPaymentPageRoute = '/CUDPaymentPage';
+  static const String cudPaymentPageRoute = '/CUDPaymentPage';
   static const String orderTrackPageRoute = '/orderTrackPage';
   static const String addAddressMapPageRoute = '/addAddressPage';
   static const String addAddressNamePageRoute = '/addAddressNamePage';
@@ -174,7 +174,7 @@ List<GetPage<dynamic>>? routes = [
     page: () => const AddGiftCardPage(),
   ),
   GetPage(
-    name: AppRoutes.CUDPaymentPageRoute,
+    name: AppRoutes.cudPaymentPageRoute,
     page: () => const CUDPaymentPage(),
   ),
   GetPage(
@@ -188,5 +188,5 @@ List<GetPage<dynamic>>? routes = [
   GetPage(
     name: AppRoutes.addAddressNamePageRoute,
     page: () => const AddAddressName(),
-  )
+  ),
 ];

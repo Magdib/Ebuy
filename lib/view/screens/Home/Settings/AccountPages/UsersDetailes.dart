@@ -1,11 +1,12 @@
 import 'package:ebuy/Controller/Home/SettingsControllers/AccountController.dart';
+import 'package:ebuy/core/class/HandlingDataRequest.dart';
 import 'package:ebuy/view/Widgets/shared/TitledTextField.dart';
 import 'package:ebuy/view/Widgets/shared/CustomButton.dart';
 import 'package:ebuy/view/Widgets/shared/CustomConditionButton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class UsersDetailes extends GetView<AccountControllerImp> {
+class UsersDetailes extends StatelessWidget {
   const UsersDetailes({super.key});
 
   @override
@@ -20,41 +21,47 @@ class UsersDetailes extends GetView<AccountControllerImp> {
         centerTitle: true,
         elevation: 0,
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Form(
-              key: controller.detailesFormState,
-              child: Column(
-                children: [
-                  TitledTextField(
-                    hint: '',
-                    label: 'User Name',
-                    obscure: false,
-                    textEditingController: controller.userNameController,
-                    onChanged: (val) => controller.saveButtonState(),
-                    validator: (val) => controller.vaildateUserName(val!),
+      body: GetBuilder<AccountControllerImp>(
+        builder: (controller) => HandlingDataRequest(
+          onPressed: () => controller.saveDetailes(),
+          statusRequest: controller.statusRequest,
+          widget: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Form(
+                  key: controller.detailesFormState,
+                  child: Column(
+                    children: [
+                      TitledTextField(
+                        hint: 'Enter user name here...',
+                        label: 'User Name',
+                        obscure: false,
+                        textEditingController: controller.userNameController,
+                        onChanged: (val) => controller.saveButtonState(),
+                        validator: (val) => controller.vaildateUserName(val!),
+                      ),
+                      TitledTextField(
+                        hint: 'Enter password here...',
+                        label: 'Password',
+                        obscure: true,
+                        textEditingController: controller.passwordController,
+                        onChanged: (val) => controller.saveButtonState(),
+                        validator: (val) => controller.passwordValidate(val!),
+                      ),
+                    ],
                   ),
-                  TitledTextField(
-                    hint: '',
-                    label: 'Email address',
-                    obscure: false,
-                    textEditingController: controller.userEmailController,
-                    onChanged: (val) => controller.saveButtonState(),
-                    validator: (val) => controller.vaildateEmail(val!),
-                  ),
-                ],
-              ),
+                ),
+                GetBuilder<AccountControllerImp>(
+                  builder: (controller) => CustomConditionButton(
+                      condition: controller.canSaveChanges,
+                      onPressed: () => controller.saveDetailes(),
+                      text: 'Save changes'),
+                )
+              ],
             ),
-            GetBuilder<AccountControllerImp>(
-              builder: (controller) => CustomConditionButton(
-                  condition: controller.canSaveChanges,
-                  onPressed: () => controller.saveDetailes(),
-                  text: 'Save changes'),
-            )
-          ],
+          ),
         ),
       ),
     );

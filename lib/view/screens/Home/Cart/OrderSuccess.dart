@@ -10,14 +10,19 @@ class OrderSuccess extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: CustomPage(
-          svgImage: AppImagesAssets.paymentImage,
-          title: 'Your order placed',
-          subtitle:
-              'Your order has been placed successfully. You can visit my order to check the delivery process.',
-          buttonText: 'Continue shopping',
-          onPressed: () => Get.offAllNamed(AppRoutes.mainPageRoute)),
+    return WillPopScope(
+      onWillPop: () {
+        return Future.value(false);
+      },
+      child: Scaffold(
+        body: CustomPage(
+            svgImage: AppImagesAssets.paymentImage,
+            title: 'Your order placed',
+            subtitle:
+                'Your order has been placed successfully. You can visit my order to check the delivery process.',
+            buttonText: 'Continue shopping',
+            onPressed: () => Get.offAllNamed(AppRoutes.mainPageRoute)),
+      ),
     );
   }
 }
