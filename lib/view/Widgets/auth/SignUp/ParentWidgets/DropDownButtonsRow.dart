@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 
 import '../../../../../Controller/authControllers/SignUpController.dart';
 import '../ChildrenWidgets/DropDownButtonAuth.dart';
-import '../ChildrenWidgets/DropDownButtonAuth.dart';
 
 class DropDownButtonsRow extends StatelessWidget {
   const DropDownButtonsRow({

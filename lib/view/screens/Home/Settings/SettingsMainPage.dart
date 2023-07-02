@@ -5,6 +5,7 @@ import 'package:ebuy/core/constant/Server.dart';
 import 'package:ebuy/data/dataSource/Static/HiveKeys.dart';
 import 'package:ebuy/data/dataSource/Static/UINumbers.dart';
 import 'package:ebuy/routes.dart';
+import 'package:ebuy/view/Widgets/Home/Settings/AccountSettings/AccountPageFCard.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -56,12 +57,15 @@ class SettingsMainPage extends StatelessWidget {
                               color: AppColors.primaryColor,
                               borderRadius: BorderRadius.circular(45)),
                           child: controller.userImage == null
-                              ? Text(
-                                  controller.authBox.get(HiveKeys.username)[0],
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headline3!
-                                      .copyWith(fontSize: 35),
+                              ? Center(
+                                  child: Text(
+                                    controller.authBox
+                                        .get(HiveKeys.username)[0],
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headline3!
+                                        .copyWith(fontSize: 35),
+                                  ),
                                 )
                               : CachedNetworkImage(
                                   height: 90,
@@ -111,7 +115,7 @@ class SettingsMainPage extends StatelessWidget {
               width: UINumber.deviceWidth - 15,
               child: Column(
                 children: [
-                  AccountPageCard(list: controller.accountPageUpperList),
+                  AccountPageFCard(list: controller.accountPageUpperList),
                   const SizedBox(
                     height: 20,
                   ),

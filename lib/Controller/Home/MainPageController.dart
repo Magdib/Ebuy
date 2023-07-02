@@ -1,4 +1,6 @@
+import 'package:ebuy/Controller/Home/CartController.dart';
 import 'package:ebuy/Controller/Home/HomePageController.dart';
+import 'package:ebuy/Controller/Home/SearchController.dart';
 import 'package:ebuy/Controller/Home/favouritePageController.dart';
 import 'package:ebuy/core/function/handleHiveNullState.dart';
 import 'package:ebuy/data/dataSource/Static/HiveKeys.dart';
@@ -32,6 +34,7 @@ class MainContrllerImp extends MainController {
     FavouritePage(),
     SettingsMainPage(),
   ];
+  List<int> visitedPages = [0];
   @override
   EdgeInsets bottomBarHandle() {
     if (isEnglish == false) {
@@ -65,16 +68,35 @@ class MainContrllerImp extends MainController {
 
   @override
   changePage(int page) {
-    if (page == 0 && somthingChange == true) {
-      HomePageControllerImp homeController = Get.find();
-      homeController.refreshPage();
-      somthingChange = false;
-    }
-    if (bottomBarIndex == 0 && page == 0) {
-      Get.back();
+    HomePageControllerImp homeController = Get.find();
+    if (visitedPages.contains(page) == false) {
+      visitedPages.add(page);
     } else {
-      bottomBarIndex = page;
+      if (bottomBarIndex != page) {
+        switch (page) {
+          case 0:
+            homeController.canReGetData = false;
+            homeController.refreshPage();
+            break;
+          case 1:
+            SearchControllerImp searchController = Get.find();
+            searchController.getSearchData();
+            break;
+          case 2:
+            CartControllerImp cartController = Get.find();
+            cartController.refreshData();
+            break;
+          case 3:
+            FavouriteControllerImp favouriteController = Get.find();
+            favouriteController.refreshData();
+            break;
+
+          default:
+        }
+      }
     }
+    bottomBarIndex = page;
+
     update();
   }
 
@@ -88,6 +110,7 @@ class MainContrllerImp extends MainController {
   void onReady() async {
     changeOpacity();
     Box authBox = await Hive.openBox(HiveBoxes.authBox);
+    Get.put(HomePageControllerImp());
     await Future.delayed(const Duration(seconds: 2));
     bool langNullval;
     if (authBox.get(HiveKeys.language) == null) {

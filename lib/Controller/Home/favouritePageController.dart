@@ -2,7 +2,6 @@ import 'package:ebuy/Controller/Home/HomePageController.dart';
 import 'package:ebuy/Controller/Home/MainPageController.dart';
 import 'package:ebuy/core/class/enums.dart';
 import 'package:ebuy/core/function/handleData.dart';
-import 'package:ebuy/core/services/intialServices.dart';
 import 'package:ebuy/data/dataSource/Static/HiveKeys.dart';
 import 'package:ebuy/data/model/HomePageModels/itemsModel.dart';
 import 'package:ebuy/data/model/favouriteModel/favouriteModel.dart';
@@ -49,6 +48,9 @@ class FavouriteControllerImp extends FavouriteController
     statusRequest = handlingData(response);
     if (statusRequest == StatusRequest.success) {
       if (response['status'] == "success") {
+        if (favouriteItems.isNotEmpty) {
+          favouriteItems.clear();
+        }
         List favouriteList = response['data'];
         favouriteItems.addAll(favouriteList.map((e) => Favourite.fromJson(e)));
         handlePageList();
@@ -60,8 +62,7 @@ class FavouriteControllerImp extends FavouriteController
   @override
   refreshData() async {
     if (await checkinternet()) {
-      favouriteItems.clear();
-      await getData(true);
+      await getData(false);
     } else {
       noInternetSnackBar();
     }
@@ -85,14 +86,16 @@ class FavouriteControllerImp extends FavouriteController
           product.itemsId!.contains(favouriteItems[index].itemsId!));
       Get.toNamed(AppRoutes.detailsPageRoute, arguments: {
         ArgumentsNames.productD: product,
-        ArgumentsNames.productListD: homeController.products
+        ArgumentsNames.productListD: homeController.products,
+        ArgumentsNames.recentProducts: homeController.recentProduct
       });
     } else {
       Products product = homeController.products.firstWhere((product) =>
           product.itemsId!.contains(favouriteRecents[index].itemsId!));
       Get.toNamed(AppRoutes.detailsPageRoute, arguments: {
         ArgumentsNames.productD: product,
-        ArgumentsNames.productListD: homeController.products
+        ArgumentsNames.productListD: homeController.products,
+        ArgumentsNames.recentProducts: homeController.recentProduct
       });
     }
   }

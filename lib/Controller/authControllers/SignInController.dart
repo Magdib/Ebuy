@@ -1,5 +1,5 @@
-import 'package:ebuy/Controller/authControllers/SignUpController.dart';
 import 'package:ebuy/core/constant/ArgumentsNames.dart';
+import 'package:ebuy/core/localization/getCurrentLang.dart';
 import 'package:ebuy/data/dataSource/Static/HiveKeys.dart';
 import 'package:ebuy/routes.dart';
 import 'package:flutter/cupertino.dart';
@@ -13,6 +13,7 @@ import '../../data/dataSource/remote/auth/CheckEmailData.dart';
 import '../../data/dataSource/remote/auth/CodeVerificationData.dart';
 import '../../data/dataSource/remote/auth/NewPasswordData.dart';
 import '../../data/dataSource/remote/auth/signinData.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 abstract class SigninController extends GetxController {
   signin();
@@ -29,48 +30,53 @@ abstract class SigninController extends GetxController {
 }
 
 class SignInControllerImp extends SigninController {
+  late Box authBox;
+  bool isEnglish = false;
   //Text Form Filed
   TextEditingController? signInEmail;
-
   TextEditingController? password;
   GlobalKey<FormState> signInFormState = GlobalKey<FormState>();
   //Chech Request State
-  StatusRequest signInStatusRequest = StatusRequest.none;
-  StatusRequest emailCheckStatusRequest = StatusRequest.none;
-  StatusRequest forgotPasswordStatusRequest = StatusRequest.none;
-  StatusRequest setNewPasswordStatusRequest = StatusRequest.none;
+  StatusRequest statusRequest = StatusRequest.none;
+  StatusRequest emailSR = StatusRequest.none;
+  StatusRequest passwordSR = StatusRequest.none;
+  StatusRequest newpasswordSR = StatusRequest.none;
   //Sign in main Function
   SignInData signinData = SignInData(crud: Get.find());
   @override
   signinRequest() async {
-    Box authBox = await Hive.openBox(HiveBoxes.authBox);
-    signInStatusRequest = StatusRequest.loading;
+    statusRequest = StatusRequest.loading;
     update();
     var response = await signinData.postdata(signInEmail!.text, password!.text);
-
-    signInStatusRequest = handlingData(response);
-    update();
-    if (StatusRequest.success == signInStatusRequest) {
+    statusRequest = handlingData(response);
+    if (StatusRequest.success == statusRequest) {
       if (response['status'] == "success") {
         if (response['data']['users_approve'] == "1") {
           authBox.put(HiveKeys.islogin, '2');
           authBox.put(HiveKeys.email, response['data']['users_email']);
           authBox.put(HiveKeys.username, response['data']['users_name']);
           authBox.put(HiveKeys.userid, response['data']['users_id']);
+          authBox.put(HiveKeys.userimage, response['data']['users_image']);
+          authBox.put(
+              HiveKeys.backgroundimage, response['data']['users_background']);
+          FirebaseMessaging.instance.subscribeToTopic("users");
           Get.offAllNamed(AppRoutes.mainPageRoute);
           authBox.close();
         } else {
           Get.toNamed(AppRoutes.emailVerificationRoute, arguments: {
             ArgumentsNames.verified: "0",
-            ArgumentsNames.email: signInEmail!.text
+            ArgumentsNames.email: signInEmail!.text,
+            ArgumentsNames.isEnglish: isEnglish
           });
         }
       } else {
-        signInStatusRequest = StatusRequest.failure;
+        statusRequest = StatusRequest.failure;
         update();
         errorSnackBar('Invalid Email Or Password: '.tr,
             'Email Not Found Or Password is wrong'.tr);
       }
+    } else {
+      update();
     }
   }
 
@@ -131,19 +137,19 @@ class SignInControllerImp extends SigninController {
 
   @override
   sendVerifiyCode() async {
-    emailCheckStatusRequest = StatusRequest.loading;
+    emailSR = StatusRequest.loading;
     update();
     var response =
         await checkEmailData.postdata(checkEmailTextEditingController.text);
 
-    emailCheckStatusRequest = handlingData(response);
+    emailSR = handlingData(response);
     update();
-    if (StatusRequest.success == emailCheckStatusRequest) {
+    if (StatusRequest.success == emailSR) {
       if (response['status'] == "success") {
         Get.toNamed(AppRoutes.forgotPasswordVerificatonRoute);
-        emailCheckStatusRequest = StatusRequest.none;
+        emailSR = StatusRequest.none;
       } else {
-        emailCheckStatusRequest = StatusRequest.failure;
+        emailSR = StatusRequest.failure;
         update();
         errorSnackBar('Invalid Email: '.tr, 'Email Not Found'.tr);
       }
@@ -157,20 +163,20 @@ class SignInControllerImp extends SigninController {
   @override
   codeVerification(String verifiyCode) async {
     controllerVerifiyCode = verifiyCode;
-    forgotPasswordStatusRequest = StatusRequest.loading;
+    passwordSR = StatusRequest.loading;
     update();
     var response = await _codeVerificationData.postdata(
         checkEmailTextEditingController.text, controllerVerifiyCode);
 
-    forgotPasswordStatusRequest = handlingData(response);
-    if (StatusRequest.success == forgotPasswordStatusRequest) {
+    passwordSR = handlingData(response);
+    if (StatusRequest.success == passwordSR) {
       if (response['status'] == "success") {
         Get.toNamed(
           AppRoutes.setnewPasswordRoute,
         );
-        forgotPasswordStatusRequest = StatusRequest.none;
+        passwordSR = StatusRequest.none;
       } else {
-        forgotPasswordStatusRequest = StatusRequest.failure;
+        passwordSR = StatusRequest.failure;
         update();
         errorSnackBar(
             'Invalid code: '.tr,
@@ -204,19 +210,19 @@ class SignInControllerImp extends SigninController {
 
   @override
   setnewpasswordRequest() async {
-    setNewPasswordStatusRequest = StatusRequest.loading;
+    newpasswordSR = StatusRequest.loading;
     update();
     var response = await _newPasswordData.postdata(
         checkEmailTextEditingController.text, newPassword.text);
 
-    setNewPasswordStatusRequest = handlingData(response);
-    if (StatusRequest.success == setNewPasswordStatusRequest) {
+    newpasswordSR = handlingData(response);
+    if (StatusRequest.success == newpasswordSR) {
       if (response['status'] == "success") {
-        Get.offNamedUntil(
-          AppRoutes.signInRoute,
-          (route) => false,
-        );
+        Get.offAllNamed(AppRoutes.signInRoute,
+            arguments: Get.put(SignInControllerImp()));
       } else {
+        errorSnackBar(
+            "Error".tr, "New password can't be same as the old password".tr);
         update();
       }
     }
@@ -230,9 +236,12 @@ class SignInControllerImp extends SigninController {
   }
 
   @override
-  void onClose() {
-    signInEmail!.dispose();
-    password!.dispose();
-    super.onClose();
+  void onReady() async {
+    authBox = await Hive.openBox(HiveBoxes.authBox);
+    if ("${getLocal()}".contains("${const Locale("en")}")) {
+      isEnglish = true;
+    }
+
+    super.onReady();
   }
 }

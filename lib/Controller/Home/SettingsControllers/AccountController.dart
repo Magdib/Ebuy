@@ -4,13 +4,12 @@ import 'package:ebuy/Controller/Home/MainPageController.dart';
 import 'package:ebuy/core/class/enums.dart';
 import 'package:ebuy/core/constant/AppWords.dart';
 import 'package:ebuy/core/constant/CustomIcons.dart';
-import 'package:ebuy/core/constant/Server.dart';
 import 'package:ebuy/core/function/UiFunctions/SnackBars.dart';
 import 'package:ebuy/core/function/handleData.dart';
-import 'package:path/path.dart';
 import 'package:ebuy/data/dataSource/remote/auth/AuthEditData.dart';
 import 'package:ebuy/data/model/authModels/AccountListModel.dart';
 import 'package:ebuy/routes.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -19,8 +18,10 @@ import 'package:image_picker/image_picker.dart';
 import '../../../core/function/handleHiveNullState.dart';
 import '../../../data/dataSource/Static/HiveKeys.dart';
 import '../../../data/model/authModels/AccountFListModel.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 abstract class AccountController extends GetxController {
+  openWhatsUp();
   void signOut();
   void updateImage(String type);
   vaildateUserName(String val);
@@ -47,17 +48,7 @@ class AccountControllerImp extends AccountController {
   late bool isEnglish;
   bool isLanguageChanging = false;
 
-  List<AccountListModel> accountPageUpperList = [
-    AccountListModel(
-        leadingIcon: CustomIcons.boxIcon,
-        text: 'My orders'.tr,
-        page: AppRoutes.ordersPageRoute),
-    AccountListModel(
-        leadingIcon: CustomIcons.meetingIcon,
-        text: 'Contact us'.tr,
-        page: AppRoutes.deliveryPageRoute)
-  ];
-
+  late List<AccountFListModel> accountPageUpperList;
   List<AccountListModel> accountPageLowerList = [
     AccountListModel(
         leadingIcon: Icons.square,
@@ -111,6 +102,16 @@ class AccountControllerImp extends AccountController {
         text: 'Gift card/ Voucher FAQs',
         onTap: () => print(AppWords.websiteWord))
   ];
+  @override
+  openWhatsUp() async {
+    String url = "whatsapp://send?phone=+963937386785";
+    if (await canLaunchUrl(Uri.parse(url))) {
+      await launchUrl(Uri.parse(url));
+    } else {
+      errorSnackBar(
+          "whatsapp no installed", "Please install whatsapp and try again");
+    }
+  }
 
   @override
   void updateImage(String type) async {
@@ -155,7 +156,9 @@ class AccountControllerImp extends AccountController {
 
   @override
   void signOut() {
+    authBox.clear();
     authBox.put(HiveKeys.islogin, '1');
+    FirebaseMessaging.instance.unsubscribeFromTopic("users");
     Get.offAllNamed(AppRoutes.signInRoute);
   }
 
@@ -206,8 +209,12 @@ class AccountControllerImp extends AccountController {
       if (statusRequest == StatusRequest.success) {
         if (response["status"] == "success") {
           Get.back();
+          authBox.put(HiveKeys.username, userNameController.text);
           succesSnackBar(
               "Done.", "your detailes have been edited successfully");
+        } else {
+          errorSnackBar(
+              "Error".tr, "New detailes can't be same as the previous one");
         }
       }
       update();
@@ -241,10 +248,22 @@ class AccountControllerImp extends AccountController {
 
   @override
   void onInit() {
+    accountPageUpperList = [
+      AccountFListModel(
+          leadingIcon: CustomIcons.boxIcon,
+          text: 'My orders'.tr,
+          onTap: () => Get.toNamed(AppRoutes.ordersPageRoute)),
+      AccountFListModel(
+        leadingIcon: CustomIcons.meetingIcon,
+        text: 'Contact us'.tr,
+        onTap: () => openWhatsUp(),
+      )
+    ];
+
     userName = authBox.get(HiveKeys.username);
     passwordController = TextEditingController();
     userNameController = TextEditingController(text: userName);
-    sendNotificatios = handleHiveNullState(HiveKeys.notification, false);
+    sendNotificatios = handleHiveNullState(HiveKeys.notification, true);
     bool langNullval;
     if (authBox.get(HiveKeys.language) == null) {
       if (Get.deviceLocale!.languageCode.contains('ar') == true) {

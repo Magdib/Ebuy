@@ -9,4 +9,4 @@ enum StatusRequest {
 
 enum CartButtonState { delete, add, invisible }
 
-enum SearchState { searching, noRecent, recent, success, none }
+enum SearchState { searching, noRecent, loading, success, none, failure }

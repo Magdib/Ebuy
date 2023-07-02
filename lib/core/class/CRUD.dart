@@ -10,15 +10,19 @@ import 'package:http/http.dart' as http;
 class CRUD {
   Future<Either<StatusRequest, Map>> postData(String linkurl, Map data) async {
     if (await checkinternet()) {
-      log("SendingRequest<<");
-      var response = await http.post(Uri.parse(linkurl), body: data);
-      if (response.statusCode == 200 || response.statusCode == 201) {
-        Map responseBody = jsonDecode(response.body);
-        print(responseBody);
+      try {
+        log("SendingRequest<<");
+        var response = await http.post(Uri.parse(linkurl), body: data);
+        if (response.statusCode == 200 || response.statusCode == 201) {
+          Map responseBody = jsonDecode(response.body);
+          print(responseBody);
 
-        return Right(responseBody);
-      } else {
-        return left(StatusRequest.serverfailure);
+          return Right(responseBody);
+        } else {
+          return left(StatusRequest.serverfailure);
+        }
+      } catch (e) {
+        return const Left(StatusRequest.offlinefailure);
       }
     } else {
       return const Left(StatusRequest.offlinefailure);

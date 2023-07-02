@@ -1,12 +1,9 @@
 import 'package:ebuy/Controller/Detailes/detailesController.dart';
 import 'package:ebuy/core/constant/Server.dart';
-import 'package:ebuy/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../core/constant/ArgumentsNames.dart';
 import '../../../core/constant/Colors.dart';
 
-import '../../../core/theme/theme.dart';
 import '../../../data/dataSource/Static/UINumbers.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 

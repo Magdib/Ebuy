@@ -9,12 +9,11 @@ import 'package:get/get.dart';
 
 import '../../Widgets/auth/shared/HaveAccountAuth.dart';
 
-class SignIn extends GetView<SignInControllerImp> {
+class SignIn extends StatelessWidget {
   const SignIn({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Get.put(SignInControllerImp());
     return SafeArea(
         child: Scaffold(
             appBar: AppBar(
@@ -31,7 +30,7 @@ class SignIn extends GetView<SignInControllerImp> {
             body: GetBuilder<SignInControllerImp>(
               builder: (controller) => HandlingDataRequest(
                 onPressed: () => controller.signinRequest(),
-                statusRequest: controller.signInStatusRequest,
+                statusRequest: controller.statusRequest,
                 widget: Padding(
                     padding:
                         const EdgeInsets.only(right: 5, left: 15, bottom: 10),
@@ -67,7 +66,11 @@ class SignIn extends GetView<SignInControllerImp> {
                               authText: "Don't have an account? ".tr,
                               authType: 'Sign Up'.tr,
                               onTap: () => Get.toNamed(AppRoutes.signUpRoute,
-                                  arguments: {ArgumentsNames.verified: "1"}))
+                                      arguments: {
+                                        ArgumentsNames.verified: "1",
+                                        ArgumentsNames.isEnglish:
+                                            controller.isEnglish
+                                      }))
                         ])),
               ),
             )));

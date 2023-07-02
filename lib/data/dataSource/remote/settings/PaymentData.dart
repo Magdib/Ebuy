@@ -16,9 +16,10 @@ class PaymentData {
     return response.fold((l) => l, (r) => r);
   }
 
-  editPayment(String paymentid, String name, String type, String number,
-      String expireDate) async {
+  editPayment(String usersid, String paymentid, String name, String type,
+      String number, String expireDate) async {
     var response = await crud.postData("${AppServer.payment}edit.php", {
+      "usersid": usersid,
       "paymentid": paymentid,
       "name": name,
       "type": type,

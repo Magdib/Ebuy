@@ -10,21 +10,31 @@ class CommentsData {
     return response.fold((l) => l, (r) => r);
   }
 
-  addComment(String userid, String itemsid, String username, String commentrate,
+  addComment(String userid, String itemsid, String commentrate,
       String commentbody) async {
     var response = await crud.postData("${AppServer.comments}add.php", {
       "usersid": userid,
       "itemsid": itemsid,
-      "username": username,
       "commentrate": commentrate,
       "commentbody": commentbody
     });
     return response.fold((l) => l, (r) => r);
   }
 
-  deleteComment(String userid, String itemsid, String commentbody) async {
-    var response = await crud.postData("${AppServer.comments}delete.php",
-        {"usersid": userid, "itemsid": itemsid, "commentbody": commentbody});
+  editComment(String itemsid, String commentid, String commentrate,
+      String commentbody) async {
+    var response = await crud.postData("${AppServer.comments}edit.php", {
+      "commentid": commentid,
+      "itemsid": itemsid,
+      "commentrate": commentrate,
+      "commentbody": commentbody
+    });
+    return response.fold((l) => l, (r) => r);
+  }
+
+  deleteComment(String commentid) async {
+    var response = await crud
+        .postData("${AppServer.comments}delete.php", {"commentid": commentid});
     return response.fold((l) => l, (r) => r);
   }
 }

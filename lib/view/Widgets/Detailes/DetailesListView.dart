@@ -1,20 +1,21 @@
+import 'package:ebuy/core/constant/Server.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 
 import '../../../Controller/Detailes/detailesController.dart';
 import '../../../core/constant/Colors.dart';
-
-import '../../../core/theme/theme.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import '../../../data/dataSource/Static/UINumbers.dart';
 
 class DetailesListView extends GetView<DetailesControllerImp> {
   const DetailesListView({
     Key? key,
+    this.editable,
     required this.index,
   }) : super(key: key);
   final int index;
-
+  final bool? editable;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -23,20 +24,35 @@ class DetailesListView extends GetView<DetailesControllerImp> {
         Row(
           children: [
             Container(
-              height: 40,
-              width: 40,
-              decoration:
-                  BoxDecoration(borderRadius: BorderRadius.circular(40)),
-              child: Image.asset(controller.usersRate[index].userImage),
+              clipBehavior: Clip.antiAliasWithSaveLayer,
+              height: 45,
+              width: 45,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(45),
+                  color: AppColors.primaryColor),
+              child: controller.currentCommentsList[index].usersImage == null
+                  ? Center(
+                      child: Text(
+                        controller.currentCommentsList[index].usersName![0],
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline3!
+                            .copyWith(fontSize: 25),
+                      ),
+                    )
+                  : CachedNetworkImage(
+                      imageUrl:
+                          "${AppServer.usersImages}${controller.currentCommentsList[index].usersImage!}",
+                      fit: BoxFit.fill),
             ),
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  controller.usersRate[index].username,
+                  controller.currentCommentsList[index].usersName!,
                   style: Theme.of(context)
                       .textTheme
                       .headline6!
@@ -48,7 +64,8 @@ class DetailesListView extends GetView<DetailesControllerImp> {
                       ignoreGestures: true,
                       unratedColor: AppColors.grey,
                       itemSize: 18,
-                      initialRating: controller.usersRate[index].rate,
+                      initialRating: double.parse(
+                          controller.currentCommentsList[index].commentRate!),
                       direction: Axis.horizontal,
                       allowHalfRating: true,
                       glow: false,
@@ -60,7 +77,7 @@ class DetailesListView extends GetView<DetailesControllerImp> {
                       onRatingUpdate: (rating) {},
                     ),
                     Text(
-                      '  ${controller.usersRate[index].rate}',
+                      '  ${controller.currentCommentsList[index].commentRate}',
                       style: Theme.of(context)
                           .textTheme
                           .bodyText1!
@@ -70,38 +87,42 @@ class DetailesListView extends GetView<DetailesControllerImp> {
                 ),
               ],
             ),
-            SizedBox(
-              width: UINumber.deviceWidth / 4,
+            const SizedBox(
+              width: 50,
             ),
-            GetBuilder<DetailesControllerImp>(
-              builder: (controller) => IconButton(
-                  splashRadius: 0.1,
-                  padding: const EdgeInsets.only(bottom: 20),
-                  onPressed: () => controller.likediLikeComment(index),
-                  icon: controller.usersRate[index].isLiked == false
-                      ? Icon(
-                          Icons.favorite,
-                          color: AppColors.grey,
-                        )
-                      : Icon(
-                          Icons.favorite,
-                          color: AppColors.red,
-                        )),
-            )
+            editable != null
+                ? Row(
+                    children: [
+                      IconButton(
+                          onPressed: () =>
+                              controller.openReview(index, context),
+                          icon: const Icon(
+                            Icons.edit,
+                            color: AppColors.primaryColor,
+                          )),
+                      IconButton(
+                          onPressed: () => controller.deleteReview(index),
+                          icon: const Icon(
+                            Icons.delete,
+                            color: AppColors.red,
+                          )),
+                    ],
+                  )
+                : const SizedBox()
           ],
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
         SizedBox(
           width: UINumber.deviceWidth / 1.7,
           child: Text(
-            controller.usersRate[index].comment,
+            controller.currentCommentsList[index].commentBody!,
             style: Theme.of(context).textTheme.headline1,
             textAlign: TextAlign.start,
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
         Row(
@@ -116,11 +137,11 @@ class DetailesListView extends GetView<DetailesControllerImp> {
                   borderRadius: BorderRadius.circular(14)),
             ),
             Text(
-              controller.usersRate[index].rateTime,
+              controller.currentCommentsList[index].commentDatetime!,
               style:
                   Theme.of(context).textTheme.headline6!.copyWith(fontSize: 12),
             ),
-            SizedBox(
+            const SizedBox(
               width: 40,
             )
           ],

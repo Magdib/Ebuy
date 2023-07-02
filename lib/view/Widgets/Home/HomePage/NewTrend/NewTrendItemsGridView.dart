@@ -1,12 +1,10 @@
 import 'package:ebuy/Controller/Home/HomePageController.dart';
+import 'package:ebuy/core/constant/ArgumentsNames.dart';
 import 'package:ebuy/core/constant/Server.dart';
 import 'package:ebuy/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import '../../../../../core/constant/Colors.dart';
-
-import '../../../../../core/theme/theme.dart';
 
 class NewTrendItemsGridView extends StatelessWidget {
   const NewTrendItemsGridView({
@@ -27,7 +25,11 @@ class NewTrendItemsGridView extends StatelessWidget {
         itemCount: controller.sortedProducts.length,
         itemBuilder: (context, index) {
           return GestureDetector(
-            onTap: () => controller.goToDetailes(index),
+            onTap: () => Get.toNamed(AppRoutes.detailsPageRoute, arguments: {
+              ArgumentsNames.productD: controller.sortedProducts[index],
+              ArgumentsNames.productListD: controller.products,
+              ArgumentsNames.recentProducts: controller.recentProduct
+            }),
             child: Stack(
               children: [
                 const SizedBox(

@@ -1,9 +1,6 @@
-import 'package:ebuy/core/constant/Colors.dart';
-import 'package:ebuy/core/constant/Images.dart';
 import 'package:ebuy/core/constant/Server.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import '../../../../core/theme/theme.dart';
 import '../../../../data/dataSource/Static/UINumbers.dart';
 import '../../../../data/model/HomePageModels/BannersModel.dart';
 

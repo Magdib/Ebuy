@@ -1,5 +1,4 @@
 import 'package:ebuy/Controller/Home/HomePageController.dart';
-import 'package:ebuy/Controller/Home/MainPageController.dart';
 import 'package:ebuy/core/class/HandlingDataRequest.dart';
 import 'package:ebuy/core/constant/Colors.dart';
 import 'package:ebuy/routes.dart';
@@ -13,15 +12,15 @@ import '../../../Widgets/Home/HomePage/ProductsGridView.dart';
 import '../../../Widgets/Home/HomePage/UserStyleGridView.dart';
 import '../../../Widgets/Home/HomePage/RecentlyGridView.dart';
 
-class HomePage extends GetView<MainContrllerImp> {
+class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Get.put(HomePageControllerImp());
     return GetBuilder<HomePageControllerImp>(
-      builder: (controller) => HandlingDataRequest(
-        onPressed: () => controller.getData(true),
+      builder: (controller) => HandlingDataView(
+        onPressed: () =>
+            controller.canReGetData == true ? controller.getData(true) : () {},
         statusRequest: controller.statusRequest,
         widget: RefreshIndicator(
           onRefresh: () => controller.refreshPage(),

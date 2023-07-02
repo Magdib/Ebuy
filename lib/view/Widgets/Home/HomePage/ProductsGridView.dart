@@ -2,12 +2,9 @@ import 'package:ebuy/Controller/Home/HomePageController.dart';
 import 'package:ebuy/core/constant/Server.dart';
 import 'package:ebuy/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/constant/ArgumentsNames.dart';
-import '../../../../core/theme/theme.dart';
-import '../../../../data/model/HomePageModels/itemsModel.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class ProductsGridView extends GetView<HomePageControllerImp> {
@@ -32,7 +29,8 @@ class ProductsGridView extends GetView<HomePageControllerImp> {
           return GestureDetector(
             onTap: () => Get.toNamed(AppRoutes.detailsPageRoute, arguments: {
               ArgumentsNames.productD: controller.homeProducts[index],
-              ArgumentsNames.productListD: controller.products
+              ArgumentsNames.productListD: controller.products,
+              ArgumentsNames.recentProducts: controller.recentProduct
             }),
             child: Stack(
               children: [

@@ -1,6 +1,6 @@
 import 'package:ebuy/Controller/Home/SearchController.dart';
-import 'package:ebuy/Controller/authControllers/SignUpController.dart';
 import 'package:ebuy/core/class/enums.dart';
+import 'package:ebuy/core/function/UiFunctions/customAppBar.dart';
 import 'package:ebuy/view/Widgets/shared/GreyDivider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -62,17 +62,43 @@ class HandleSearchState extends GetView<SearchControllerImp> {
                     ),
                 separatorBuilder: (context, index) => const GreyDivider(),
                 itemCount: controller.searchProducts.length)
-            : searchState == SearchState.recent
+            : searchState == SearchState.loading
                 ? Center(
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Lottie.asset(AppImagesAssets.lottieError,
-                            repeat: false),
+                        Lottie.asset(
+                          AppImagesAssets.lottieLoading,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          "Loading...",
+                          style: Theme.of(context).textTheme.bodyText1,
+                        )
                       ],
                     ),
                   )
-                : widget;
+                : searchState == SearchState.failure
+                    ? Center(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Lottie.asset(
+                              AppImagesAssets.lottieoffline,
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              "No internet connection...",
+                              style: Theme.of(context).textTheme.bodyText1,
+                            )
+                          ],
+                        ),
+                      )
+                    : widget;
   }
 }
 
@@ -120,30 +146,33 @@ AppBar handleSearchAppBar(SearchState searchState, BuildContext context) {
             ),
             padding: const EdgeInsets.only(top: 10.0),
           ))
-      : AppBar(
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-          toolbarHeight: 80,
-          titleSpacing: 10,
-          automaticallyImplyLeading: false,
-          elevation: 0,
-          title: SearchTextFiled(
-            onTap: () => controller.changeSearchState(1, context),
-            readOnly: controller.showTabBar,
-            textController: controller.searchController!,
-            onChanged: (value) =>
-                controller.searchFieldOnChanged(value, context),
-            suffixTap: () => controller.changeSearchState(1, context),
-          ),
-          bottom: controller.showTabBar == true
-              ? TabBar(
-                  indicatorPadding: const EdgeInsets.symmetric(horizontal: 10),
-                  tabs: controller.tabs,
-                  indicatorWeight: 4,
-                  unselectedLabelColor: AppColors.grey,
-                  controller: controller.tabController,
-                  labelColor: AppColors.primaryColor,
-                  indicatorColor: AppColors.primaryColor,
-                )
-              : null,
-        );
+      : searchState == SearchState.loading || searchState == SearchState.failure
+          ? customAppBar("Search", context, 0)
+          : AppBar(
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+              toolbarHeight: 80,
+              titleSpacing: 10,
+              automaticallyImplyLeading: false,
+              elevation: 0,
+              title: SearchTextFiled(
+                onTap: () => controller.changeSearchState(1, context),
+                readOnly: controller.showTabBar,
+                textController: controller.searchController!,
+                onChanged: (value) =>
+                    controller.searchFieldOnChanged(value, context),
+                suffixTap: () => controller.changeSearchState(1, context),
+              ),
+              bottom: controller.showTabBar == true
+                  ? TabBar(
+                      indicatorPadding:
+                          const EdgeInsets.symmetric(horizontal: 10),
+                      tabs: controller.tabs,
+                      indicatorWeight: 4,
+                      unselectedLabelColor: AppColors.grey,
+                      controller: controller.tabController,
+                      labelColor: AppColors.primaryColor,
+                      indicatorColor: AppColors.primaryColor,
+                    )
+                  : null,
+            );
 }

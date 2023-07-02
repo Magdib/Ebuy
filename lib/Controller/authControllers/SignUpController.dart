@@ -31,6 +31,7 @@ abstract class SignUpController extends GetxController {
 }
 
 class SignUpControllerImp extends SignUpController {
+  late bool isEnglish;
   //TextFormField
   TextEditingController? email;
   TextEditingController? firstName;
@@ -96,19 +97,17 @@ class SignUpControllerImp extends SignUpController {
         "${firstName!.text} ${lastName!.text}", email!.text, password!.text);
 
     signUpStatusRequest = handlingData(response);
-    update();
     if (StatusRequest.success == signUpStatusRequest) {
       if (response['status'] == "success") {
         Get.toNamed(
           AppRoutes.emailVerificationRoute,
         );
-        signUpStatusRequest = StatusRequest.none;
       } else {
         signUpStatusRequest = StatusRequest.failure;
-        update();
         errorSnackBar('Invalid Email: '.tr, 'Email already exist'.tr);
       }
     }
+    update();
   }
 
   @override
@@ -156,7 +155,7 @@ class SignUpControllerImp extends SignUpController {
 
   @override
   yearListContent() {
-    for (int i = 1920; i < DateTime.now().year - 15; i++) {
+    for (int i = DateTime.now().year - 70; i < DateTime.now().year - 15; i++) {
       year.add('$i');
     }
   }
@@ -248,9 +247,9 @@ class SignUpControllerImp extends SignUpController {
         firstName!.text.isNotEmpty &&
         lastName!.text.isNotEmpty &&
         password!.text.isNotEmpty &&
-        birthDay!.isNotEmpty &&
-        birthmonth!.isNotEmpty &&
-        birthYear!.isNotEmpty) {
+        birthDay != null &&
+        birthmonth != null &&
+        birthYear != null) {
       signUpState = true;
       update();
     } else {
@@ -273,8 +272,7 @@ class SignUpControllerImp extends SignUpController {
     verifyEmailStatusRequest = handlingData(response);
     if (StatusRequest.success == verifyEmailStatusRequest) {
       if (response['status'] == "success") {
-        Get.back();
-        Get.back();
+        Get.offAllNamed(AppRoutes.signInRoute);
         succesSnackBar(
             'Success'.tr, 'Your account have been Created successfully'.tr);
       } else {
@@ -301,6 +299,7 @@ class SignUpControllerImp extends SignUpController {
     if (Get.arguments[ArgumentsNames.verified] == "0") {
       email!.text = Get.arguments[ArgumentsNames.email];
     }
+    isEnglish = Get.arguments[ArgumentsNames.isEnglish];
     super.onInit();
   }
 

@@ -1,10 +1,7 @@
 import 'package:ebuy/core/class/enums.dart';
-import 'package:ebuy/core/constant/Colors.dart';
-import 'package:ebuy/core/constant/Images.dart';
 import 'package:ebuy/core/function/handleData.dart';
 import 'package:ebuy/data/dataSource/Static/HiveKeys.dart';
 import 'package:ebuy/data/dataSource/Static/UINumbers.dart';
-import 'package:ebuy/data/dataSource/Static/static.dart';
 import 'package:ebuy/data/dataSource/remote/cart/CartData.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -12,14 +9,12 @@ import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
 import '../../data/model/CartModels/CartModel.dart';
-import '../../data/model/CartModels/StaticAddressModel.dart';
-import '../../data/model/CartModels/ShippingModel.dart';
 
 abstract class CartController extends GetxController {
   void showDeleteButton(int index);
   void resetDeleteButton(PointerDownEvent event);
-
-  void getCartItems();
+  void refreshData();
+  getCartItems(bool showLoading);
   void increaseAmountUI(int index);
   void cartAmountData(int index);
   void decreaseAmountUI(int index);
@@ -60,25 +55,38 @@ class CartControllerImp extends CartController {
   }
 
   @override
-  void getCartItems() async {
+  void refreshData() async {
+    await getCartItems(false);
+  }
+
+  @override
+  getCartItems(bool showLoading) async {
+    if (showLoading == true) {
+      statusRequest = StatusRequest.loading;
+      update();
+    }
     var response = await cartData.getCartItems(authBox.get(HiveKeys.userid));
     statusRequest = handlingData(response);
     if (statusRequest == StatusRequest.success) {
       if (response["status"] == 'success') {
-        if (response['datacart']['status'] == "success") {
-          List products = response['datacart']['data'];
-          cartProducts.addAll(products.map((e) => CartModel.fromJson(e)));
-          argumentCartProducts
-              .addAll(products.map((e) => CartModel.fromJson(e)));
-          totalPrice = double.parse(response["countprice"]["totalPrice"]);
-          for (int i = 0; i < cartProducts.length; i++) {
-            listOfCounts.add(int.parse(cartProducts[i].cartCount!));
-            serverListOfCounts.add(int.parse(cartProducts[i].cartCount!));
-            cartButtonStateList.add(CartButtonState.invisible);
-          }
-        } else {
-          statusRequest = StatusRequest.failure;
+        if (cartProducts.isNotEmpty) {
+          cartProducts.clear();
+          argumentCartProducts.clear();
+          listOfCounts.clear();
+          serverListOfCounts.clear();
+          cartButtonStateList.clear();
         }
+        List products = response['datacart']['data'];
+        cartProducts.addAll(products.map((e) => CartModel.fromJson(e)));
+        argumentCartProducts.addAll(products.map((e) => CartModel.fromJson(e)));
+        totalPrice = double.parse(response["countprice"]["totalPrice"]);
+        for (int i = 0; i < cartProducts.length; i++) {
+          listOfCounts.add(int.parse(cartProducts[i].cartCount!));
+          serverListOfCounts.add(int.parse(cartProducts[i].cartCount!));
+          cartButtonStateList.add(CartButtonState.invisible);
+        }
+      } else {
+        statusRequest = StatusRequest.failure;
       }
     } else {
       statusRequest = StatusRequest.offlinefailure;
@@ -125,29 +133,30 @@ class CartControllerImp extends CartController {
             cartProducts[index].itemsId!,
             "${serverListOfCounts[index] - listOfCounts[index]}");
         statusRequest = handlingData(response);
-        if (statusRequest == StatusRequest.success &&
-            response['status'] == "success") {
-          if (listOfCounts[index] == 0) {
-            cartProducts.removeAt(index);
-            listOfCounts.removeAt(index);
-            serverListOfCounts.removeAt(index);
-          } else {
-            serverListOfCounts[index] = listOfCounts[index];
-            cartProducts[index].itemsDiscount != "0"
-                ? cartProducts[index].cartPrice = double.parse(
-                        cartProducts[index].itemsPriceDiscount! *
-                            listOfCounts[index])
-                    .toStringAsFixed(2)
-                : cartProducts[index].cartPrice =
-                    (double.parse(cartProducts[index].itemsPrice!) *
-                            listOfCounts[index])
-                        .toStringAsFixed(2);
-          }
-          if (listOfCounts.isEmpty) {
-            statusRequest = StatusRequest.serverfailure;
+        if (statusRequest == StatusRequest.success) {
+          if (response['status'] == "success") {
+            if (listOfCounts[index] == 0) {
+              cartProducts.removeAt(index);
+              listOfCounts.removeAt(index);
+              serverListOfCounts.removeAt(index);
+            } else {
+              serverListOfCounts[index] = listOfCounts[index];
+              cartProducts[index].itemsDiscount != "0"
+                  ? cartProducts[index].cartPrice = double.parse(
+                          cartProducts[index].itemsPriceDiscount! *
+                              listOfCounts[index])
+                      .toStringAsFixed(2)
+                  : cartProducts[index].cartPrice =
+                      (double.parse(cartProducts[index].itemsPrice!) *
+                              listOfCounts[index])
+                          .toStringAsFixed(2);
+            }
+            if (listOfCounts.isEmpty) {
+              statusRequest = StatusRequest.failure;
+            }
           }
         } else {
-          statusRequest = StatusRequest.serverfailure;
+          statusRequest = StatusRequest.failure;
         }
       } else {
         var response = await cartData.addToCart(
@@ -199,7 +208,7 @@ class CartControllerImp extends CartController {
 
   @override
   void onInit() {
-    getCartItems();
+    getCartItems(false);
     super.onInit();
   }
 }

@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import '../../data/model/HomePageModels/BannersModel.dart';
 
 abstract class SearchController extends GetxController {
+  void getSearchData();
   void searchingProducts();
   void goToProduct(int index, BuildContext context);
   void changeSearchState(int index, BuildContext context);
@@ -26,7 +27,7 @@ class SearchControllerImp extends SearchController
   List<Products> searchProducts = [];
   late List<Products> sortedProducts;
   List<Banners> banners = [];
-  SearchState searchState = SearchState.none;
+  SearchState searchState = SearchState.loading;
   late String categoryName;
   bool showTabBar = true;
   List<Tab> tabs = const [
@@ -73,6 +74,33 @@ class SearchControllerImp extends SearchController
       bannerTitle: 'ACCESSORIES',
     )
   ];
+
+  @override
+  void getSearchData() {
+    HomePageControllerImp homeController = Get.find();
+    if (homeController.statusRequest == StatusRequest.offlinefailure) {
+      searchState = SearchState.failure;
+    }
+    if (homeController.products.isNotEmpty) {
+      products = homeController.products;
+      banners.addAll([
+        homeController.allBanners
+            .where((banner) => banner.bannerImage!.contains("SearchBanner.png"))
+            .first,
+        homeController.allBanners
+            .where((banner) => banner.bannerImage!.contains("FirstBanner.png"))
+            .first
+      ]);
+      searchState = SearchState.none;
+      banners[1].bannerTitle = "NEW PRODUCTS";
+      banners[1].bannerSubtitile = '';
+      banners[1].bannerSubtitileAr = '';
+      banners[1].bannerTitleAr = "منتجات جديدة";
+    }
+    print(searchState);
+    update();
+  }
+
   @override
   searchingProducts() {
     searchProducts = products
@@ -83,10 +111,12 @@ class SearchControllerImp extends SearchController
 
   @override
   void goToProduct(int index, BuildContext context) {
+    HomePageControllerImp controller = Get.find();
     FocusScope.of(context).unfocus();
     Get.toNamed(AppRoutes.detailsPageRoute, arguments: {
       ArgumentsNames.productListD: products,
-      ArgumentsNames.productD: searchProducts[index]
+      ArgumentsNames.productD: searchProducts[index],
+      ArgumentsNames.recentProducts: controller.recentProduct
     });
   }
 
@@ -176,20 +206,7 @@ class SearchControllerImp extends SearchController
 
   @override
   void onInit() {
-    HomePageControllerImp homeController = Get.find();
-    products = homeController.products;
-    banners.addAll([
-      homeController.allBanners
-          .where((banner) => banner.bannerImage!.contains("SearchBanner.png"))
-          .first,
-      homeController.allBanners
-          .where((banner) => banner.bannerImage!.contains("FirstBanner.png"))
-          .first
-    ]);
-    banners[1].bannerTitle = "NEW PRODUCTS";
-    banners[1].bannerSubtitile = '';
-    banners[1].bannerSubtitileAr = '';
-    banners[1].bannerTitleAr = "منتجات جديدة";
+    getSearchData();
     searchController = TextEditingController();
     tabController = TabController(length: tabs.length, vsync: this);
     super.onInit();

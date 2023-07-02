@@ -19,9 +19,10 @@ class AddressData {
     return response.fold((l) => l, (r) => r);
   }
 
-  editAddress(String addressId, String name, String phoneNumber, String city,
-      String street, String lat, String long) async {
+  editAddress(String usersId, String addressId, String name, String phoneNumber,
+      String city, String street, String lat, String long) async {
     var response = await crud.postData("${AppServer.address}edit.php", {
+      "usersId": usersId,
       "addressId": addressId,
       "name": name,
       "phoneNumber": phoneNumber,

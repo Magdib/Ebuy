@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import '../../../../../Controller/authControllers/SignUpController.dart';
 import '../../../../../core/constant/Colors.dart';
 
-import '../../../../../core/theme/theme.dart';
 import '../../../../../data/dataSource/Static/UINumbers.dart';
 
 class DropDownButtonAuth extends GetView<SignUpControllerImp> {
@@ -24,9 +23,9 @@ class DropDownButtonAuth extends GetView<SignUpControllerImp> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(
-        left: 15,
-      ),
+      padding: EdgeInsets.only(
+          left: controller.isEnglish == true ? 15 : 0,
+          right: controller.isEnglish == true ? 0 : 15),
       height: 44,
       width: width,
       decoration: BoxDecoration(

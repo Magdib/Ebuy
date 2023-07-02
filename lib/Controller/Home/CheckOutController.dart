@@ -3,6 +3,7 @@ import 'package:ebuy/core/constant/ArgumentsNames.dart';
 import 'package:ebuy/core/function/getCountryData.dart';
 import 'package:ebuy/core/function/handleHiveNullState.dart';
 import 'package:ebuy/data/dataSource/remote/settings/GiftCardData.dart';
+import 'package:ebuy/data/dataSource/remote/shared/CheckADPAY.dart';
 import 'package:ebuy/data/model/CartModels/CartModel.dart';
 import 'package:ebuy/data/model/SettingsModels/AddressModel.dart';
 import 'package:ebuy/data/model/SettingsModels/PaymentModel.dart';
@@ -20,8 +21,6 @@ import '../../core/function/handleData.dart';
 import '../../data/dataSource/Static/HiveKeys.dart';
 import '../../data/dataSource/remote/cart/OrdersData.dart';
 import '../../data/dataSource/remote/cart/VoucherData.dart';
-import '../../data/dataSource/remote/home/AddressData.dart';
-import '../../data/dataSource/remote/settings/PaymentData.dart';
 import '../../data/model/CartModels/ShippingModel.dart';
 import '../../data/model/CartModels/StaticAddressModel.dart';
 
@@ -47,8 +46,7 @@ class CheckOutControllerimp extends CheckOutController {
   StatusRequest orderStatusRequest = StatusRequest.none;
   StatusRequest giftStatus = StatusRequest.none;
   VoucherData voucherData = VoucherData(Get.find());
-  PaymentData paymentData = PaymentData(Get.find());
-  AddressData addressData = AddressData(Get.find());
+  CheckADPAY checkADPAY = CheckADPAY(Get.find());
   GiftCardData giftCardData = GiftCardData(Get.find());
   OrdersData ordersData = OrdersData(Get.find());
   late List<CartModel> cartProducts;
@@ -106,11 +104,11 @@ class CheckOutControllerimp extends CheckOutController {
 
   @override
   void getData() async {
-    var response = await addressData.getAddresses(authBox.get(HiveKeys.userid));
+    var response = await checkADPAY.getData(authBox.get(HiveKeys.userid));
     statusRequest = handlingData(response);
     if (statusRequest == StatusRequest.success) {
       if (response['status'] == "success") {
-        List addressTempList = response['data'];
+        List addressTempList = response['addresses'];
         addressList
             .addAll(addressTempList.map((e) => AddressModel.fromJson(e)));
         anyAddress = true;
@@ -137,17 +135,11 @@ class CheckOutControllerimp extends CheckOutController {
               title: addressList[paymentAddress].addressPhone!,
               icon: Icons.amp_stories_rounded)
         ];
-        var paymentResponse =
-            await paymentData.getPayments(authBox.get(HiveKeys.userid));
-        statusRequest = handlingData(paymentResponse);
-        if (statusRequest == StatusRequest.success) {
-          if (paymentResponse['status'] == "success") {
-            List tempPayment = paymentResponse['data'];
-            paymentList
-                .addAll(tempPayment.map((e) => PaymentModel.fromJson(e)));
-            anyPayment = true;
-          }
-        }
+        List tempPayment = response['payment'];
+        paymentList.addAll(tempPayment.map((e) => PaymentModel.fromJson(e)));
+        anyPayment = true;
+      } else if (response["paymentstatus"] == "failure") {
+        anyAddress = true;
       }
     }
     update();
@@ -406,8 +398,8 @@ class CheckOutControllerimp extends CheckOutController {
 
   @override
   void onInit() {
-    shippingAddress = authBox.get(HiveKeys.choosenAddress);
-    paymentAddress = authBox.get(HiveKeys.choosenAddress);
+    shippingAddress = handleHiveNullState(HiveKeys.choosenAddress, 0);
+    paymentAddress = handleHiveNullState(HiveKeys.choosenAddress, 0);
 
     totalPrice = Get.arguments[ArgumentsNames.cartTotalPrice];
     cartProducts = Get.arguments[ArgumentsNames.cartProducts];

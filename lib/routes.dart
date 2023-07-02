@@ -1,7 +1,9 @@
 import 'package:ebuy/Controller/Home/SettingsControllers/OrdersController.dart';
 import 'package:ebuy/Controller/Home/SettingsControllers/PaymentController.dart';
+import 'package:ebuy/Controller/authControllers/SignInController.dart';
 import 'package:ebuy/core/middleware/middleware.dart';
 import 'package:ebuy/view/screens/Details/DetailsImagesview.dart';
+import 'package:ebuy/view/screens/Details/ReviewsPage.dart';
 import 'package:ebuy/view/screens/Home/Cart/Cart.dart';
 import 'package:ebuy/view/screens/Home/Cart/CheckOut.dart';
 import 'package:ebuy/view/screens/Home/Cart/OrderSuccess.dart';
@@ -30,6 +32,7 @@ import 'package:get/get.dart';
 import 'Controller/Home/CheckOutController.dart';
 import 'Controller/Home/SettingsControllers/AddressController.dart';
 import 'Controller/Home/SettingsControllers/GiftCardController.dart';
+import 'Controller/authControllers/SignUpController.dart';
 import 'view/screens/Details/DetailsPage.dart';
 import 'view/screens/Home/Settings/AccountPages/AddressPages/AddAddressMap.dart';
 import 'view/screens/Home/Settings/AccountPages/AddressPages/AddAddressName.dart';
@@ -57,6 +60,7 @@ class AppRoutes {
   static const String favouriteRoute = "/favourite";
   static const String accoutSettingsRoute = "/accountSettings";
   static const String detailsPageRoute = "/DetailsPage";
+  static const String reviewsPageRoute = "/reviewsPageRoute";
   static const String productImagesRoute = "/productImages";
   static const String productsPageRoute = "/productsPage";
   static const String searchCategoriesRoute = "/searchCategories";
@@ -85,8 +89,14 @@ class AppRoutes {
 List<GetPage<dynamic>>? routes = [
   GetPage(
       name: "/", page: () => const OnBoarding(), middlewares: [MyMiddleWare()]),
-  GetPage(name: AppRoutes.signInRoute, page: () => const SignIn()),
-  GetPage(name: AppRoutes.signUpRoute, page: () => const Signup()),
+  GetPage(
+      name: AppRoutes.signInRoute,
+      page: () => const SignIn(),
+      binding: BindingsBuilder.put(() => SignInControllerImp())),
+  GetPage(
+      name: AppRoutes.signUpRoute,
+      page: () => const Signup(),
+      binding: BindingsBuilder.put(() => SignUpControllerImp())),
   GetPage(name: AppRoutes.checkEmailRoute, page: () => const CheckEmail()),
   GetPage(
       name: AppRoutes.forgotPasswordVerificatonRoute,
@@ -104,6 +114,10 @@ List<GetPage<dynamic>>? routes = [
   GetPage(name: AppRoutes.cartRoute, page: () => const CartPage()),
   GetPage(name: AppRoutes.searchRoute, page: () => const SearchPage()),
   GetPage(name: AppRoutes.cartRoute, page: () => const FavouritePage()),
+  GetPage(
+    name: AppRoutes.reviewsPageRoute,
+    page: () => const ReviewsPage(),
+  ),
   GetPage(name: AppRoutes.detailsPageRoute, page: () => const DetailsPage()),
   GetPage(
       name: AppRoutes.productImagesRoute,

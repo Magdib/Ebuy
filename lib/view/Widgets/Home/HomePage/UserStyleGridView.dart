@@ -1,16 +1,12 @@
 import 'package:ebuy/Controller/Home/HomePageController.dart';
+import 'package:ebuy/core/constant/ArgumentsNames.dart';
+import 'package:ebuy/core/constant/Colors.dart';
 import 'package:ebuy/core/constant/Server.dart';
+import 'package:ebuy/data/dataSource/Static/UINumbers.dart';
 import 'package:ebuy/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-import '../../../../core/constant/ArgumentsNames.dart';
-import '../../../../core/constant/Colors.dart';
-
-import '../../../../core/theme/theme.dart';
-import '../../../../data/dataSource/Static/UINumbers.dart';
-import '../../../../data/dataSource/Static/static.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class UserStyleGridView extends GetView<HomePageControllerImp> {
@@ -51,7 +47,8 @@ class UserStyleGridView extends GetView<HomePageControllerImp> {
                     onTap: () =>
                         Get.toNamed(AppRoutes.detailsPageRoute, arguments: {
                       ArgumentsNames.productD: controller.userStyle[index],
-                      ArgumentsNames.productListD: controller.products
+                      ArgumentsNames.productListD: controller.products,
+                      ArgumentsNames.recentProducts: controller.recentProduct
                     }),
                     child: Stack(
                       clipBehavior: Clip.none,
@@ -66,13 +63,10 @@ class UserStyleGridView extends GetView<HomePageControllerImp> {
                         Positioned(
                           top: 0,
                           right: 10,
-                          child: Hero(
-                            tag: controller.userStyle[index].itemsImage!,
-                            child: CachedNetworkImage(
-                              imageUrl:
-                                  "${AppServer.itemsImages}${controller.userStyle[index].itemsImage!}",
-                              height: 100,
-                            ),
+                          child: CachedNetworkImage(
+                            imageUrl:
+                                "${AppServer.itemsImages}${controller.userStyle[index].itemsImage!}",
+                            height: 100,
                           ),
                         ),
                         Positioned(

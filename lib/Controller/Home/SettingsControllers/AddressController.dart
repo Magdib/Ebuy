@@ -150,14 +150,25 @@ class AddressControllerimp extends AddressController {
           "${cameraPosition.target.latitude}",
           "${cameraPosition.target.longitude}");
       addStatusRequest = handlingData(response);
-      if (statusRequest == StatusRequest.success) {
+      if (addStatusRequest == StatusRequest.success) {
         if (response['status'] == "success") {
           if (shippingAddresList.isEmpty) {
             authBox.put(HiveKeys.choosenAddress, 0);
           }
           addressList.clear();
           shippingAddresList.clear();
-          await getAddresses(false);
+          List addressTempList = response['data'];
+          addressList
+              .addAll(addressTempList.map((e) => AddressModel.fromJson(e)));
+          for (int i = 0; i < addressList.length; i++) {
+            if (i == authBox.get(HiveKeys.choosenAddress)) {
+              shippingAddresList.add(AddressCartModel(
+                  title: addressList[i].addressName!, isSelected: true));
+            } else {
+              shippingAddresList.add(AddressCartModel(
+                  title: addressList[i].addressName!, isSelected: false));
+            }
+          }
           Get.back();
           succesSnackBar('Done.', 'Your address have been added successfully');
         } else {
@@ -167,6 +178,7 @@ class AddressControllerimp extends AddressController {
       }
     } else {
       var response = await addressData.editAddress(
+          authBox.get(HiveKeys.userid),
           addressList[editIndex!].addressId!,
           adNameController.text,
           adNumberController.text,
@@ -175,14 +187,25 @@ class AddressControllerimp extends AddressController {
           "${cameraPosition.target.latitude}",
           "${cameraPosition.target.longitude}");
       addStatusRequest = handlingData(response);
-      if (statusRequest == StatusRequest.success) {
+      if (addStatusRequest == StatusRequest.success) {
         if (response['status'] == "success") {
           if (shippingAddresList.isEmpty) {
             authBox.put(HiveKeys.choosenAddress, 0);
           }
           addressList.clear();
           shippingAddresList.clear();
-          await getAddresses(false);
+          List addressTempList = response['data'];
+          addressList
+              .addAll(addressTempList.map((e) => AddressModel.fromJson(e)));
+          for (int i = 0; i < addressList.length; i++) {
+            if (i == authBox.get(HiveKeys.choosenAddress)) {
+              shippingAddresList.add(AddressCartModel(
+                  title: addressList[i].addressName!, isSelected: true));
+            } else {
+              shippingAddresList.add(AddressCartModel(
+                  title: addressList[i].addressName!, isSelected: false));
+            }
+          }
           Get.back();
           succesSnackBar('Done.', 'Your address have been edited successfully');
           editIndex = null;

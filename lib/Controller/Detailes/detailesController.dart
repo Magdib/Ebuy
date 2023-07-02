@@ -1,7 +1,7 @@
 import 'dart:io';
-
 import 'package:ebuy/core/class/enums.dart';
 import 'package:ebuy/core/constant/Server.dart';
+import 'package:ebuy/core/function/UiFunctions/Dialogs/ReviewDialog.dart';
 import 'package:ebuy/core/function/UiFunctions/SnackBars.dart';
 import 'package:ebuy/core/function/handleData.dart';
 import 'package:ebuy/core/function/handleFavourite.dart';
@@ -11,86 +11,116 @@ import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:share_plus/share_plus.dart';
 import '../../core/constant/ArgumentsNames.dart';
-import '../../core/constant/Images.dart';
 import '../../core/function/UiFunctions/StringToColors.dart';
+import '../../data/dataSource/remote/Detailes/CommentsData.dart';
+import '../../data/dataSource/remote/Detailes/DetailesData.dart';
 import '../../data/dataSource/remote/Favourite/FavouriteAddData.dart';
 import '../../data/dataSource/remote/Favourite/favouriteRemoveData.dart';
 import '../../data/dataSource/remote/cart/CartData.dart';
 import '../../data/model/HomePageModels/itemsModel.dart';
-import '../../data/model/ProductModels/RateModel.dart';
+import '../../data/model/ProductModels/CommentModel.dart';
 
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
 abstract class DetailesController extends GetxController {
+  getItemData(String? olditemid, bool showLoading);
   changeFavouriteState();
-  likediLikeComment(int index);
   void handleProductImages();
   void handleProductColors();
   void handleProductsSizes();
   void shareProduct();
-  void handleSimilarProduct();
+  String? validateReview(String val);
+  void saveReview(bool isEdit);
+  void openReview(int index, BuildContext context);
+  void deleteReview(int index);
+  willPopReview();
+  handleSimilarProduct(bool showLoading);
   void similarProductFavState(int index);
   void goToSimilarProduct(int index);
   void changeSelectedColor(int index);
   void changeSelectedSize(int index);
   void addToCart();
-  getItemsCount();
   void increaseAmount();
   void decreaseAmount();
   onWillPopSnackBar();
 }
 
 class DetailesControllerImp extends DetailesController {
+  late String userid;
+  DetailesData detailesData = DetailesData(Get.find());
   CartData cartData = CartData(Get.find());
-  Box authBox = Hive.box(HiveBoxes.authBox);
-  PageController? imagesController;
-  ScrollController? scrollController;
-  DefaultCacheManager? caheManger;
-  late List<Products> products;
-  late Products product;
-  late List<String> productDesc;
-  int colorSelected = 0;
-  late int sizeSelected;
+  CommentsData commentsData = CommentsData(Get.find());
   FavouriteAddData favouriteAddData = FavouriteAddData(Get.find());
   FavouriteRemoveData favouriteRemoveData = FavouriteRemoveData(Get.find());
+  Box authBox = Hive.box(HiveBoxes.authBox);
+  PageController? imagesController;
+  late TextEditingController reviewController;
+  DefaultCacheManager? caheManger;
+  GlobalKey<FormState> formState = GlobalKey<FormState>();
+  late List<Products> products;
+  late Products product;
+  late List<Products> recentProducts;
+  late List<String> productDesc;
+  String? olditemid;
+  double rate = 0;
+  int colorSelected = 0;
+  int sizeSelected = 0;
+  StatusRequest cartstatusRequest = StatusRequest.none;
   StatusRequest statusRequest = StatusRequest.loading;
+  StatusRequest commentStatusRequest = StatusRequest.none;
+  StatusRequest deleteCommentStatus = StatusRequest.none;
   List<String> productImages = [];
+  List<CommentModel> commentsList = [];
+  List<CommentModel> currentCommentsList = [];
   List<Color> productColorsUI = [];
   List<String> productColorsString = [];
   List<Products> similarProducts = [];
   List<String> sizesLetter = [];
   List<String> sizes = [];
+
   int itemsAmount = 0;
   late int serverItemsAmount;
+  int? editIndex;
   bool canAddToCart = false;
-  List<RateModel> usersRate = [
-    RateModel(
-        username: 'Jack Bibber',
-        userImage: AppImagesAssets.user1,
-        comment:
-            'Nike is a leading sports shoes brand in the world, with a youthful and dynamic',
-        rate: 4.5,
-        isLiked: false,
-        rateTime: '09:30 - 23/09/2020'),
-    RateModel(
-        username: 'Vie Ruan',
-        userImage: AppImagesAssets.user2,
-        comment: 'Good, I Recommended it',
-        rate: 4.0,
-        isLiked: false,
-        rateTime: '14:30 - 06/09/2020')
-  ];
   bool isFavourite = false;
-
   @override
-  changeFavouriteState() async {
-    await handleFavourite(product);
+  getItemData(String? olditemid, bool showLoading) async {
+    if (showLoading == true) {
+      statusRequest = StatusRequest.loading;
+      update();
+    }
+    var response =
+        await detailesData.getData(product.itemsId!, userid, olditemid);
+    statusRequest = handlingData(response);
+    if (statusRequest == StatusRequest.success) {
+      if (olditemid != null) {
+        recentProducts.removeAt(0);
+        recentProducts.add(product);
+      }
+
+      if (response['status'] == "success") {
+        List tempCommentsList = response['comments'];
+        commentsList
+            .addAll(tempCommentsList.map((e) => CommentModel.fromJson(e)));
+        currentCommentsList = commentsList
+            .where((comment) => comment.itemsId!.contains(product.itemsId!))
+            .toList();
+        itemsAmount = int.parse(response['cartamount']);
+        serverItemsAmount = int.parse(response['cartamount']);
+        itemsAmount > 0 ? canAddToCart = true : canAddToCart = false;
+      } else {
+        itemsAmount = int.parse(response['cartamount']);
+        serverItemsAmount = int.parse(response['cartamount']);
+        itemsAmount > 0 ? canAddToCart = true : canAddToCart = false;
+      }
+    }
+
     update();
   }
 
   @override
-  likediLikeComment(int index) {
-    usersRate[index].isLiked = !usersRate[index].isLiked;
+  changeFavouriteState() async {
+    await handleFavourite(product);
     update();
   }
 
@@ -156,13 +186,95 @@ class DetailesControllerImp extends DetailesController {
   }
 
   @override
-  void handleSimilarProduct() {
+  String? validateReview(String val) {
+    return val.isEmpty ? "Review text can't be empty!" : null;
+  }
+
+  @override
+  void saveReview(bool isEdit) async {
+    FormState? formData = formState.currentState;
+    if (formData!.validate()) {
+      commentStatusRequest = StatusRequest.loading;
+      update();
+      var response;
+      if (isEdit == false) {
+        response = await commentsData.addComment(authBox.get(HiveKeys.userid),
+            product.itemsId!, "$rate", reviewController.text);
+      } else {
+        response = await commentsData.editComment(
+            product.itemsId!,
+            currentCommentsList[editIndex!].commentId!,
+            "$rate",
+            reviewController.text);
+      }
+      commentStatusRequest = handlingData(response);
+      if (commentStatusRequest == StatusRequest.success) {
+        if (response['status'] == "success") {
+          willPopReview();
+          commentsList.clear();
+          currentCommentsList.clear();
+          List tempCommentsList = response['data'];
+          commentsList
+              .addAll(tempCommentsList.map((e) => CommentModel.fromJson(e)));
+          currentCommentsList = commentsList
+              .where((comment) => comment.itemsId!.contains(product.itemsId!))
+              .toList();
+        }
+      }
+      update();
+    }
+  }
+
+  @override
+  void openReview(int index, BuildContext context) {
+    editIndex = index;
+    reviewController.text = currentCommentsList[index].commentBody!;
+    rate = double.parse(currentCommentsList[index].commentRate!);
+    reviewDialog(context);
+  }
+
+  @override
+  void deleteReview(int index) async {
+    editIndex = index;
+    deleteCommentStatus = StatusRequest.loading;
+    update();
+    var response =
+        await commentsData.deleteComment(currentCommentsList[index].commentId!);
+    deleteCommentStatus = handlingData(response);
+    if (deleteCommentStatus == StatusRequest.success) {
+      if (response['status'] == "success") {
+        currentCommentsList.removeAt(index);
+        editIndex = null;
+      }
+    }
+    update();
+  }
+
+  @override
+  willPopReview() {
+    Get.back();
+    rate = 0;
+    reviewController.clear();
+    editIndex = null;
+    return Future.value(false);
+  }
+
+  @override
+  handleSimilarProduct(bool showLoading) async {
+    if (recentProducts.length >= 2) {
+      if (recentProducts[1] != product) {
+        olditemid = recentProducts[0].itemsId!;
+      } else {
+        olditemid = recentProducts[1].itemsId!;
+      }
+    }
     colorSelected = 0;
     sizeSelected = 0;
-    getItemsCount();
     handleProductImages();
     handleProductColors();
     handleProductsSizes();
+    await getItemData(olditemid, showLoading);
+
     products.removeWhere((currentProduct) =>
         currentProduct.itemsName!.contains(product.itemsName!));
 
@@ -194,19 +306,17 @@ class DetailesControllerImp extends DetailesController {
   }
 
   @override
-  void goToSimilarProduct(int index) {
+  void goToSimilarProduct(int index) async {
     product = similarProducts[index];
     sizes.clear();
     sizesLetter.clear();
     productColorsUI.clear();
     productColorsString.clear();
-
     similarProducts.clear();
     productImages.clear();
-    handleSimilarProduct();
-
-    scrollController!.animateTo(0,
-        duration: const Duration(seconds: 1), curve: Curves.easeIn);
+    commentsList.clear();
+    currentCommentsList.clear();
+    await handleSimilarProduct(true);
     update();
   }
 
@@ -219,23 +329,6 @@ class DetailesControllerImp extends DetailesController {
   @override
   void changeSelectedSize(int index) {
     sizeSelected = index;
-    update();
-  }
-
-  @override
-  getItemsCount() async {
-    var response = await cartData.getItemCount(
-        authBox.get(HiveKeys.userid), product.itemsId!);
-    statusRequest = handlingData(response);
-    if (statusRequest == StatusRequest.success) {
-      if (response['status'] == 'success') {
-        itemsAmount = int.parse(response['data']);
-        serverItemsAmount = int.parse(response['data']);
-      }
-      itemsAmount > 0 ? canAddToCart = true : canAddToCart = false;
-    } else {
-      statusRequest = StatusRequest.failure;
-    }
     update();
   }
 
@@ -261,14 +354,14 @@ class DetailesControllerImp extends DetailesController {
 
   @override
   onWillPopSnackBar() {
-    statusRequest = StatusRequest.none;
+    cartstatusRequest = StatusRequest.none;
     Get.back();
     return Future.value(false);
   }
 
   @override
   void addToCart() async {
-    statusRequest = StatusRequest.loading;
+    cartstatusRequest = StatusRequest.loading;
     update();
 
     var response = await cartData.addToCart(
@@ -277,11 +370,14 @@ class DetailesControllerImp extends DetailesController {
         productColorsString[colorSelected],
         sizes[sizeSelected],
         "${itemsAmount - serverItemsAmount}");
-    statusRequest = handlingData(response);
+    cartstatusRequest = handlingData(response);
     serverItemsAmount = 0;
-    await getItemsCount();
-    update();
-    if (statusRequest == StatusRequest.success) {
+    if (cartstatusRequest == StatusRequest.success) {
+      if (response['status'] == 'success') {
+        itemsAmount = int.parse(response['data']);
+        serverItemsAmount = int.parse(response['data']);
+      }
+      itemsAmount > 0 ? canAddToCart = true : canAddToCart = false;
       Get.back();
       succesSnackBar(
           'Done.', 'your product have been successfully added to the cart ');
@@ -292,17 +388,20 @@ class DetailesControllerImp extends DetailesController {
 
   @override
   void onInit() {
+    userid = authBox.get(HiveKeys.userid);
     product = Get.arguments[ArgumentsNames.productD];
     products = Get.arguments[ArgumentsNames.productListD];
+    recentProducts = Get.arguments[ArgumentsNames.recentProducts];
+
     productDesc = [
       product.itemsDesc!,
       product.itemsDeliveryRefund!,
       product.itemsSizeGuide!
     ];
     imagesController = PageController();
-    scrollController = ScrollController();
+    reviewController = TextEditingController();
     caheManger = DefaultCacheManager();
-    handleSimilarProduct();
+    handleSimilarProduct(false);
     String size = product.itemsSize![0];
     sizeSelected =
         sizesLetter.indexWhere((tempSize) => tempSize.contains(size));
@@ -312,7 +411,8 @@ class DetailesControllerImp extends DetailesController {
   @override
   void onClose() {
     imagesController!.dispose();
-    scrollController!.dispose();
+
+    reviewController.dispose();
     super.onClose();
   }
 }

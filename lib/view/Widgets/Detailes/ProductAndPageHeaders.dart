@@ -38,15 +38,12 @@ class ProductAndPageHeaders extends StatelessWidget {
                           "image":
                               "${AppServer.itemsImages}${controller.productImages[index]}"
                         }),
-                    child: Hero(
-                      tag: controller.product.itemsImage!,
-                      child: CachedNetworkImage(
-                        imageUrl:
-                            "${AppServer.itemsImages}${controller.productImages[index]}",
-                        cacheManager: controller.caheManger,
-                        height: UINumber.deviceHeight / 3,
-                        fit: BoxFit.contain,
-                      ),
+                    child: CachedNetworkImage(
+                      imageUrl:
+                          "${AppServer.itemsImages}${controller.productImages[index]}",
+                      cacheManager: controller.caheManger,
+                      height: UINumber.deviceHeight / 3,
+                      fit: BoxFit.contain,
                     ),
                   ),
                 ),

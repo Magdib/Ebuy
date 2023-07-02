@@ -33,8 +33,8 @@ class CartPage extends GetView<MainContrllerImp> {
         elevation: 0,
       ),
       body: GetBuilder<CartControllerImp>(
-        builder: (controller) => HandlingDataRequest(
-          onPressed: () => controller.getCartItems(),
+        builder: (controller) => HandlingDataView(
+          onPressed: () => controller.getCartItems(true),
           statusRequest: controller.statusRequest,
           widget: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),

@@ -1,20 +1,14 @@
 import 'package:ebuy/Controller/Home/FilterPageController.dart';
-import 'package:ebuy/Controller/Home/HomePageController.dart';
-import 'package:ebuy/core/class/HandlingDataRequest.dart';
+import 'package:ebuy/core/constant/Colors.dart';
 import 'package:ebuy/data/dataSource/Static/UINumbers.dart';
-import 'package:ebuy/data/dataSource/Static/static.dart';
+import 'package:ebuy/view/Widgets/Home/HomePage/NewTrend/FilterPageWidgets/FilterDialogContent.dart';
+import 'package:ebuy/view/Widgets/Home/HomePage/NewTrend/FilterPageWidgets/FilterItemsContent.dart';
+import 'package:ebuy/view/Widgets/shared/CustomButton.dart';
+import 'package:ebuy/view/Widgets/shared/GreyDivider.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../core/constant/Colors.dart';
-
-import '../../../../core/theme/theme.dart';
-import '../../../Widgets/Home/HomePage/NewTrend/FilterPageWidgets/FilterDialogContent.dart';
-import '../../../Widgets/Home/HomePage/NewTrend/FilterPageWidgets/FilterItemsContent.dart';
-import '../../../Widgets/Home/HomePage/NewTrend/FilterPageWidgets/FilterPageHeaders.dart';
-import '../../../Widgets/shared/GreyDivider.dart';
-import '../../../Widgets/shared/CustomButton.dart';
 import 'PricePage.dart';
 
 class FilterPage extends StatelessWidget {
@@ -24,14 +18,29 @@ class FilterPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(FilterPageControllerimp());
     return Scaffold(
+        appBar: AppBar(
+          title: Text(
+            "Filter",
+            style:
+                Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 20),
+          ),
+          backgroundColor: AppColors.white,
+          centerTitle: true,
+          leading: IconButton(
+              onPressed: () => controller.onWillPop(),
+              icon: const Icon(
+                Icons.close,
+                color: AppColors.black,
+              )),
+          elevation: 0.0,
+        ),
         backgroundColor: AppColors.white,
         body: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+          padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const FilterPageHeaders(title: 'Filter'),
               Container(
                   margin: const EdgeInsets.symmetric(horizontal: 5),
                   padding: const EdgeInsets.only(top: 10, bottom: 40),

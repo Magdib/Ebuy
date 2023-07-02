@@ -1,7 +1,6 @@
 import 'package:ebuy/Controller/Home/SettingsControllers/PaymentController.dart';
 import 'package:ebuy/core/class/HandlingDataRequest.dart';
 import 'package:ebuy/core/constant/AppWords.dart';
-import 'package:ebuy/core/constant/Colors.dart';
 import 'package:ebuy/core/constant/Images.dart';
 import 'package:ebuy/core/function/UiFunctions/PaymentImage.dart';
 import 'package:ebuy/routes.dart';
@@ -29,7 +28,7 @@ class PaymentMethods extends StatelessWidget {
         ),
         body: GetBuilder<PaymentControllerimp>(
           builder: (controller) => HandlingDataRequest(
-              onPressed: () => controller.getData(true),
+              onPressed: () => controller.getData(),
               statusRequest: controller.statusRequest,
               widget: controller.anyAddress == true
                   ? ListView(

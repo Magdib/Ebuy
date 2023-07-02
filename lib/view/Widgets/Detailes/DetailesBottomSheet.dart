@@ -1,7 +1,5 @@
 import 'package:ebuy/Controller/Detailes/detailesController.dart';
 import 'package:ebuy/core/class/HandlingDataRequest.dart';
-import 'package:ebuy/core/class/enums.dart';
-import 'package:ebuy/core/constant/AppWords.dart';
 import 'package:ebuy/view/Widgets/shared/CustomConditionButton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,7 +7,6 @@ import 'package:get/get.dart';
 import '../../../core/constant/Colors.dart';
 
 import '../../../data/dataSource/Static/UINumbers.dart';
-import '../shared/CustomButton.dart';
 import '../shared/ProductNumbers.dart';
 import 'DetailesBottomCard.dart';
 import 'DetailesColorsListView.dart';
@@ -27,7 +24,7 @@ class DetailesBottomSheet extends StatelessWidget {
         onWillPop: () => controller.onWillPopSnackBar(),
         child: HandlingDataRequest(
           onPressed: () => controller.addToCart(),
-          statusRequest: controller.statusRequest,
+          statusRequest: controller.cartstatusRequest,
           widget: Container(
             height: UINumber.deviceHeight / 1.4,
             padding: const EdgeInsets.all(8),

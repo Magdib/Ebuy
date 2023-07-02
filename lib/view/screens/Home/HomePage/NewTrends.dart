@@ -16,47 +16,50 @@ class NewTrendPage extends GetView<HomePageControllerImp> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: SingleChildScrollView(
-            child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-          child: Column(
-            children: [
-              PageHeadersWithCartIcon(
-                  cartFunction: () => Get.toNamed(AppRoutes.cartRoute),
-                  backFunction: () => Get.back(),
-                  title: "New Trend"),
-              const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ItemsSetting(
-                      title: 'Sort',
-                      icon: Icons.filter_list,
-                      onTap: () => showDialog(
-                          context: context,
-                          builder: (context) {
-                            return const AlertDialog(
-                                contentPadding:
-                                    EdgeInsets.symmetric(vertical: 5),
-                                content: SortDialogButton());
-                          })),
-                  ItemsSetting(
-                    title: "Filter",
-                    icon: Icons.filter_alt_outlined,
-                    onTap: () => Get.dialog(const FilterPage(), arguments: {
-                      ArgumentsNames.productListF: controller.products,
-                      ArgumentsNames.brandsList: controller.brands,
-                      ArgumentsNames.categoriesList: controller.categories,
-                      ArgumentsNames.colorsList: controller.colors
-                    }),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 20),
-              const NewTrendItemsGridView(),
-            ],
-          ),
-        )),
+        body: WillPopScope(
+          onWillPop: () => controller.onwillpop(),
+          child: SingleChildScrollView(
+              child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+            child: Column(
+              children: [
+                PageHeadersWithCartIcon(
+                    cartFunction: () => Get.toNamed(AppRoutes.cartRoute),
+                    backFunction: () => Get.back(),
+                    title: "New Trend"),
+                const SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    ItemsSetting(
+                        title: 'Sort',
+                        icon: Icons.filter_list,
+                        onTap: () => showDialog(
+                            context: context,
+                            builder: (context) {
+                              return const AlertDialog(
+                                  contentPadding:
+                                      EdgeInsets.symmetric(vertical: 5),
+                                  content: SortDialogButton());
+                            })),
+                    ItemsSetting(
+                      title: "Filter",
+                      icon: Icons.filter_alt_outlined,
+                      onTap: () => Get.dialog(const FilterPage(), arguments: {
+                        ArgumentsNames.productListF: controller.products,
+                        ArgumentsNames.brandsList: controller.brands,
+                        ArgumentsNames.categoriesList: controller.categories,
+                        ArgumentsNames.colorsList: controller.colors
+                      }),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20),
+                const NewTrendItemsGridView(),
+              ],
+            ),
+          )),
+        ),
       ),
     );
   }

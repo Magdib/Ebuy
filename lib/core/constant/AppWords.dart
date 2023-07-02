@@ -25,6 +25,9 @@ class AppWords {
     'Forgot Password': 'Forgot Password',
     "Don't have an account? ": "Don't have an account? ",
     'Sign Up': 'Sign Up',
+    "Error": "Error",
+    "New password can't be same as the old password":
+        "New password can't be same as the old password",
 
     //Email Check
     "Email Check": "Email Check",
@@ -158,6 +161,9 @@ class AppWords {
     'Forgot Password': 'نسيت كلمة المرور',
     "Don't have an account? ": "ليس لديك حساب؟ ",
     'Sign Up': 'إنشاء حساب',
+    "Error": "خطأ",
+    "New password can't be same as the old password":
+        "كلمة المرور الجديدة لا يمكن أن تكون مطابقة لكلمة المرور القديمة",
 
     //Email Check
     "Email Check": "التحقق من البريد الإلكتروني",

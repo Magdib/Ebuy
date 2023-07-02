@@ -31,6 +31,7 @@ class AppServer {
   //Settings
   static const String address = "${server}address/";
   static const String payment = "${server}Payment/";
-  //Comments
+  //Detailes
   static const String comments = "${server}comments/";
+  static const String items = "${server}items/";
 }

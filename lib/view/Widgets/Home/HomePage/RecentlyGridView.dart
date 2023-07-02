@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ebuy/Controller/Home/HomePageController.dart';
-import 'package:ebuy/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -25,9 +24,9 @@ class RecentlyGridView extends GetView<HomePageControllerImp> {
               ),
               GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 10,
-                ),
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 60),
                 itemCount: controller.recentProduct.length,
                 padding: const EdgeInsets.only(bottom: 80),
                 shrinkWrap: true,

@@ -1,5 +1,4 @@
 import 'package:ebuy/core/class/enums.dart';
-import 'package:ebuy/core/constant/Colors.dart';
 import 'package:ebuy/core/function/handleData.dart';
 import 'package:ebuy/core/function/handleFavourite.dart';
 import 'package:ebuy/data/dataSource/Static/HiveKeys.dart';
@@ -9,7 +8,6 @@ import 'package:ebuy/data/model/HomePageModels/ColorsModel.dart';
 import 'package:ebuy/data/model/HomePageModels/ProductsSortModel.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
-import 'package:flutter/material.dart';
 import '../../core/constant/ArgumentsNames.dart';
 import '../../core/function/UiFunctions/SnackBars.dart';
 import '../../core/function/checkInternet.dart';
@@ -24,8 +22,7 @@ abstract class HomePageController extends GetxController {
   void sortProducts(int index);
   getData(bool showLoading);
   refreshPage();
-  void goToDetailes(int index);
-  void handleRecents(int index);
+  onwillpop();
   void handleRecentFavourite();
   void addToFavourite(int index);
   void recentToDetailes(int index);
@@ -34,7 +31,7 @@ abstract class HomePageController extends GetxController {
 
 class HomePageControllerImp extends HomePageController {
   late Box authBox;
-
+  bool canReGetData = true;
   List<ProductsSort> productsSort = [
     ProductsSort(type: 'Recommended', choosenSort: true),
     ProductsSort(type: 'What\'s New', choosenSort: false),
@@ -58,7 +55,7 @@ class HomePageControllerImp extends HomePageController {
   List<Products> userStyle = [];
   List<ColorsModel> colors = [];
   List<Categories> categories = [];
-  late List<Products> sortedProducts;
+  List<Products> sortedProducts = [];
 
   int lastSortIndex = 0;
   StatusRequest statusRequest = StatusRequest.loading;
@@ -72,6 +69,20 @@ class HomePageControllerImp extends HomePageController {
     statusRequest = handlingData(response);
     if (StatusRequest.success == statusRequest) {
       if (response['status'] == "success") {
+        if (products.isNotEmpty) {
+          products.clear();
+          homeProducts.clear();
+          banners.clear();
+          sortedProducts.clear();
+          savedItems.clear();
+          recentProduct.clear();
+          newTrend.clear();
+          brands.clear();
+          userStyle.clear();
+          colors.clear();
+          productsSort[lastSortIndex].choosenSort = false;
+          productsSort[0].choosenSort = true;
+        }
         List itemsList = response['items'];
         List bannersList = response['banners']["data"];
         List brandsList = response['brands']["data"];
@@ -111,7 +122,7 @@ class HomePageControllerImp extends HomePageController {
           userStyle.add(products[4]);
         }
       } else {
-        statusRequest = StatusRequest.failure;
+        statusRequest = StatusRequest.offlinefailure;
       }
     }
 
@@ -154,80 +165,7 @@ class HomePageControllerImp extends HomePageController {
   @override
   refreshPage() async {
     if (await checkinternet()) {
-      products.clear();
-      homeProducts.clear();
-      banners.clear();
-      sortedProducts.clear();
-      savedItems.clear();
-      recentProduct.clear();
-      newTrend.clear();
-      brands.clear();
-      userStyle.clear();
-      productsSort[lastSortIndex].choosenSort = false;
-      productsSort[0].choosenSort = true;
-      await getData(true);
-      handleRecentFavourite();
-    } else {
-      noInternetSnackBar();
-    }
-  }
-
-  @override
-  void handleRecents(int index) async {
-    if (recentProduct.isEmpty) {
-      recentProduct.add(sortedProducts[index]);
-    } else if (recentProduct.length == 1) {
-      recentProduct.add(sortedProducts[index]);
-    } else {
-      await recentRemoveData.removeFromRecent(
-          authBox.get(HiveKeys.userid), recentProduct[1].itemsId!);
-      recentProduct.removeAt(1);
-      recentProduct.insert(0, sortedProducts[index]);
-    }
-
-    var response = await recentAddData.addToRecent(
-        authBox.get(HiveKeys.userid), sortedProducts[index].itemsId!);
-
-    Get.back();
-    if (response['status'] == 'success') {
-      Get.toNamed(AppRoutes.detailsPageRoute, arguments: {
-        ArgumentsNames.productD: sortedProducts[index],
-        ArgumentsNames.productListD: products
-      });
-    }
-  }
-
-  @override
-  void goToDetailes(index) async {
-    if (await checkinternet()) {
-      if (recentProduct.length == 2) {
-        if (recentProduct[0].itemsId == sortedProducts[index].itemsId ||
-            recentProduct[1].itemsId == sortedProducts[index].itemsId) {
-          Get.toNamed(AppRoutes.detailsPageRoute, arguments: {
-            ArgumentsNames.productD: sortedProducts[index],
-            ArgumentsNames.productListD: products
-          });
-        } else {
-          Get.dialog(
-              const Center(
-                child: CircularProgressIndicator(
-                  color: AppColors.primaryColor,
-                ),
-              ),
-              barrierDismissible: false,
-              arguments: {handleRecents(index)});
-        }
-      } else {
-        Get.dialog(
-            const Center(
-              child: CircularProgressIndicator(
-                color: AppColors.primaryColor,
-              ),
-            ),
-            barrierDismissible: false,
-            arguments: {handleRecents(index)});
-      }
-      handleRecentFavourite();
+      await getData(false);
     } else {
       noInternetSnackBar();
     }
@@ -238,15 +176,17 @@ class HomePageControllerImp extends HomePageController {
     if (recentProduct.length == 1) {
       firstRecentIndex = getProductIndex(products, recentProduct, 0);
       recentProduct[0].favourite = products[firstRecentIndex].favourite;
-      print('///////////////////1////////////////////////');
     } else if (recentProduct.length == 2) {
       firstRecentIndex = getProductIndex(products, recentProduct, 0);
       secondeRecentIndex = getProductIndex(products, recentProduct, 1);
       recentProduct[0].favourite = products[firstRecentIndex].favourite;
       recentProduct[1].favourite = products[secondeRecentIndex].favourite;
-      print('///////////////////2////////////////////////');
+    } else if (recentProduct.length > 2) {
+      for (int i = 0; i < recentProduct.length; i++) {
+        int index = getProductIndex(products, recentProduct, i);
+        recentProduct[i].favourite = products[index].favourite;
+      }
     }
-    print('///////////////////${recentProduct.length}////////////////////////');
   }
 
   @override
@@ -269,17 +209,26 @@ class HomePageControllerImp extends HomePageController {
       case 0:
         Get.toNamed(AppRoutes.detailsPageRoute, arguments: {
           ArgumentsNames.productD: products[firstRecentIndex],
-          ArgumentsNames.productListD: products
+          ArgumentsNames.productListD: products,
+          ArgumentsNames.recentProducts: recentProduct
         });
         break;
       case 1:
         Get.toNamed(AppRoutes.detailsPageRoute, arguments: {
           ArgumentsNames.productD: products[secondeRecentIndex],
-          ArgumentsNames.productListD: products
+          ArgumentsNames.productListD: products,
+          ArgumentsNames.recentProducts: recentProduct
         });
         break;
       default:
     }
+  }
+
+  @override
+  onwillpop() {
+    Get.back();
+    refreshPage();
+    return Future.value(false);
   }
 
   @override

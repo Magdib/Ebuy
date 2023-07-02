@@ -2,9 +2,9 @@ import 'package:ebuy/core/class/enums.dart';
 import 'package:ebuy/core/function/UiFunctions/SnackBars.dart';
 import 'package:ebuy/core/function/handleData.dart';
 import 'package:ebuy/data/dataSource/Static/HiveKeys.dart';
-import 'package:ebuy/data/dataSource/Static/static.dart';
 import 'package:ebuy/data/dataSource/remote/home/AddressData.dart';
 import 'package:ebuy/data/dataSource/remote/settings/PaymentData.dart';
+import 'package:ebuy/data/dataSource/remote/shared/CheckADPAY.dart';
 import 'package:ebuy/data/model/SettingsModels/PaymentModel.dart';
 import 'package:ebuy/routes.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +12,7 @@ import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 abstract class PaymentController extends GetxController {
-  getData(bool start);
+  getData();
   void changeExpiryMonth(int val);
   void changeExpiryYear(int val);
   void saveExpiryTime();
@@ -29,6 +29,7 @@ class PaymentControllerimp extends PaymentController {
   Box authBox = Hive.box(HiveBoxes.authBox);
   StatusRequest statusRequest = StatusRequest.loading;
   StatusRequest cudStatusRequest = StatusRequest.none;
+  CheckADPAY checkADPAY = CheckADPAY(Get.find());
   AddressData addressData = AddressData(Get.find());
   PaymentData paymentData = PaymentData(Get.find());
   bool anyAddress = true;
@@ -44,39 +45,15 @@ class PaymentControllerimp extends PaymentController {
   DateTime? expiryDateTime;
   int? editIndex;
   @override
-  getData(bool start) async {
-    if (start == true) {
-      var response =
-          await addressData.getAddresses(authBox.get(HiveKeys.userid));
-      statusRequest = handlingData(response);
-      if (statusRequest == StatusRequest.success) {
-        if (response['status'] == "success") {
-          var paymentResponse =
-              await paymentData.getPayments(authBox.get(HiveKeys.userid));
-          statusRequest = handlingData(paymentResponse);
-          if (statusRequest == StatusRequest.success) {
-            if (paymentResponse['status'] == "success") {
-              List tempPayment = paymentResponse['data'];
-              paymentList
-                  .addAll(tempPayment.map((e) => PaymentModel.fromJson(e)));
-            }
-          }
-        } else {
-          anyAddress = false;
-        }
-      }
-    } else {
-      statusRequest = StatusRequest.loading;
-      update();
-      paymentList.clear();
-      var paymentResponse =
-          await paymentData.getPayments(authBox.get(HiveKeys.userid));
-      statusRequest = handlingData(paymentResponse);
-      if (statusRequest == StatusRequest.success) {
-        if (paymentResponse['status'] == "success") {
-          List tempPayment = paymentResponse['data'];
-          paymentList.addAll(tempPayment.map((e) => PaymentModel.fromJson(e)));
-        }
+  getData() async {
+    var response = await checkADPAY.getData(authBox.get(HiveKeys.userid));
+    statusRequest = handlingData(response);
+    if (statusRequest == StatusRequest.success) {
+      if (response['status'] == "success") {
+        List tempPayment = response['payment'];
+        paymentList.addAll(tempPayment.map((e) => PaymentModel.fromJson(e)));
+      } else if (response["paymentstatus"] != "failure") {
+        anyAddress = false;
       }
     }
     update();
@@ -205,7 +182,6 @@ class PaymentControllerimp extends PaymentController {
       if (response['status'] == "success") {
         paymentList.removeAt(editIndex!);
         resetPayment();
-
         succesSnackBar(
             "Done.", "Payment Method have been deleted successfully");
         update();
@@ -244,6 +220,7 @@ class PaymentControllerimp extends PaymentController {
     } else {
       isEditing = true;
       response = await paymentData.editPayment(
+          authBox.get(HiveKeys.userid),
           paymentList[editIndex!].paymentId!,
           cardNameController.text,
           paymentType!,
@@ -253,8 +230,10 @@ class PaymentControllerimp extends PaymentController {
     cudStatusRequest = handlingData(response);
     if (cudStatusRequest == StatusRequest.success) {
       if (response['status'] == "success") {
+        paymentList.clear();
         resetPayment();
-        await getData(false);
+        List tempPayment = response['data'];
+        paymentList.addAll(tempPayment.map((e) => PaymentModel.fromJson(e)));
         isEditing == false
             ? succesSnackBar(
                 "Done.", "Payment Method have been added successfully")
@@ -262,11 +241,12 @@ class PaymentControllerimp extends PaymentController {
                 "Done.", "Payment Method have been edited successfully");
       }
     }
+    update();
   }
 
   @override
   void onInit() {
-    getData(true);
+    getData();
     cardNumberController = TextEditingController();
     cardNameController = TextEditingController();
     super.onInit();

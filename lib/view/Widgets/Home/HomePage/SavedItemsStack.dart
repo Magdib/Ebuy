@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/constant/ArgumentsNames.dart';
-import '../../../../core/theme/theme.dart';
 import '../../../../data/dataSource/Static/UINumbers.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
@@ -44,7 +43,9 @@ class SavedItemsStack extends GetView<HomePageControllerImp> {
                       onPressed: () =>
                           Get.toNamed(AppRoutes.detailsPageRoute, arguments: {
                             ArgumentsNames.productD: product,
-                            ArgumentsNames.productListD: controller.products
+                            ArgumentsNames.productListD: controller.products,
+                            ArgumentsNames.recentProducts:
+                                controller.recentProduct
                           }),
                       icon: const Icon(
                         Icons.arrow_forward,
