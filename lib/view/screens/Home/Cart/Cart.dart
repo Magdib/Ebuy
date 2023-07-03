@@ -1,15 +1,15 @@
 import 'package:ebuy/Controller/Home/CartController.dart';
-import 'package:ebuy/Controller/Home/MainPageController.dart';
 import 'package:ebuy/core/class/HandlingDataRequest.dart';
 import 'package:ebuy/core/constant/ArgumentsNames.dart';
 import 'package:ebuy/core/constant/Colors.dart';
+import 'package:ebuy/core/function/UiFunctions/customAppBar.dart';
 import 'package:ebuy/data/dataSource/Static/UINumbers.dart';
 import 'package:ebuy/routes.dart';
 import 'package:ebuy/view/Widgets/Home/Cart/CartItemsListView.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class CartPage extends GetView<MainContrllerImp> {
+class CartPage extends StatelessWidget {
   const CartPage({Key? key}) : super(key: key);
 
   @override
@@ -17,21 +17,7 @@ class CartPage extends GetView<MainContrllerImp> {
     Get.put(CartControllerImp());
     return SafeArea(
         child: Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Cart',
-          style: Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 20),
-        ),
-        centerTitle: true,
-        leading: IconButton(
-            onPressed: () => controller.changePage(0),
-            icon: const Icon(
-              Icons.arrow_back,
-              color: AppColors.deepGrey,
-            )),
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        elevation: 0,
-      ),
+      appBar: customAppBar("Cart", context, 0),
       body: GetBuilder<CartControllerImp>(
         builder: (controller) => HandlingDataView(
           onPressed: () => controller.getCartItems(true),

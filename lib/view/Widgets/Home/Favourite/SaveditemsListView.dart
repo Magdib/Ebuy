@@ -1,4 +1,3 @@
-import 'package:ebuy/Controller/Home/HomePageController.dart';
 import 'package:ebuy/Controller/Home/favouritePageController.dart';
 import 'package:ebuy/core/class/HandlingDataRequest.dart';
 import 'package:ebuy/core/constant/Colors.dart';
@@ -20,7 +19,7 @@ class SaveditemsListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<FavouriteControllerImp>(
-      builder: (controller) => HandlingDataRequest(
+      builder: (controller) => HandlingDataView(
         onPressed: () => controller.getData(true),
         statusRequest: controller.statusRequest,
         widget: RefreshIndicator(

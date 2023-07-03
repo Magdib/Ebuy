@@ -1,7 +1,5 @@
-import 'package:ebuy/Controller/Home/CartController.dart';
 import 'package:ebuy/Controller/Home/CheckOutController.dart';
 import 'package:ebuy/core/class/HandlingDataRequest.dart';
-import 'package:ebuy/core/constant/Colors.dart';
 import 'package:ebuy/core/constant/Images.dart';
 import 'package:ebuy/routes.dart';
 

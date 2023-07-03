@@ -2,7 +2,6 @@ import 'package:ebuy/Controller/Home/SettingsControllers/PaymentController.dart'
 import 'package:ebuy/data/dataSource/Static/UINumbers.dart';
 import 'package:ebuy/view/Widgets/Home/Settings/PaymentWidgets/CardExpiryWheelList.dart';
 import 'package:ebuy/view/Widgets/shared/CustomButton.dart';
-import 'package:ebuy/view/Widgets/shared/DialogButton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

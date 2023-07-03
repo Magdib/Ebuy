@@ -96,7 +96,6 @@ class MainContrllerImp extends MainController {
       }
     }
     bottomBarIndex = page;
-
     update();
   }
 

@@ -12,6 +12,7 @@ class ArgumentsNames {
   static const String filterdProducts = "filterdProducts";
   static const String recentProducts = "RecentProducts";
   //CART AND CHECKOUT
+  static const String canpop = "Canpop";
   static const String cartProducts = "CartProducts";
   static const String cartTotalPrice = "cartTotalPrice";
   static const String canChooseCard = "CanChooseCard";

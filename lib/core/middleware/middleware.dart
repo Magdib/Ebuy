@@ -19,6 +19,7 @@ class MyMiddleWare extends GetMiddleware {
       return const RouteSettings(name: AppRoutes.signInRoute);
     } else {
       Hive.box(HiveBoxes.authBox).close();
+      return null;
     }
   }
 }

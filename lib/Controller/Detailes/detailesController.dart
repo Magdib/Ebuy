@@ -1,4 +1,7 @@
 import 'dart:io';
+import 'package:ebuy/Controller/Home/HomePageController.dart';
+import 'package:ebuy/Controller/Home/MainPageController.dart';
+import 'package:ebuy/Controller/Home/favouritePageController.dart';
 import 'package:ebuy/core/class/enums.dart';
 import 'package:ebuy/core/constant/Server.dart';
 import 'package:ebuy/core/function/UiFunctions/Dialogs/ReviewDialog.dart';
@@ -43,6 +46,7 @@ abstract class DetailesController extends GetxController {
   void increaseAmount();
   void decreaseAmount();
   onWillPopSnackBar();
+  onwillPop();
 }
 
 class DetailesControllerImp extends DetailesController {
@@ -384,6 +388,19 @@ class DetailesControllerImp extends DetailesController {
     } else {
       noInternetSnackBar();
     }
+  }
+
+  @override
+  onwillPop() {
+    MainContrllerImp maincontroller = Get.find();
+    if (maincontroller.bottomBarIndex == 3) {
+      HomePageControllerImp homePageController = Get.find();
+      FavouriteControllerImp favouriteController = Get.find();
+      favouriteController.refreshData();
+      homePageController.refreshPage();
+    }
+    Get.back();
+    return Future.value(false);
   }
 
   @override

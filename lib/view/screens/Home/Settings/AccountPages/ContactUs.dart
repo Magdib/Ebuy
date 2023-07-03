@@ -1,6 +1,5 @@
 import 'package:ebuy/core/function/UiFunctions/customAppBar.dart';
 import 'package:ebuy/data/dataSource/Static/UINumbers.dart';
-import 'package:ebuy/view/Widgets/Home/Settings/AccountSettings/AccountPageFCard.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/constant/Colors.dart';

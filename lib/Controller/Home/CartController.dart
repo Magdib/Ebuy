@@ -31,7 +31,6 @@ class CartControllerImp extends CartController {
   List<int> listOfCounts = [];
   List<int> serverListOfCounts = [];
   double totalPrice = 0.0;
-
   @override
   void showDeleteButton(int index) {
     if (cartButtonStateList[index] == CartButtonState.invisible) {

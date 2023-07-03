@@ -7,7 +7,7 @@ String getCountryData(String countryName, String countryCode, String type) {
   Box authBox = Hive.box(HiveBoxes.authBox);
   if (countryName.contains("سوريا") ||
       countryName.isCaseInsensitiveContains("syria")) {
-    if (authBox.get(HiveKeys.language) == false) {
+    if (authBox.get(HiveKeys.language) == true) {
       countryName = "Syria";
     } else {
       countryName = "سوريا";
@@ -15,7 +15,7 @@ String getCountryData(String countryName, String countryCode, String type) {
     countryCode = "Sy";
   } else if (countryName.contains("الولايات المتحدة") ||
       countryName.isCaseInsensitiveContains("United States")) {
-    if (authBox.get(HiveKeys.language) == false) {
+    if (authBox.get(HiveKeys.language) == true) {
       countryName = "United States";
     } else {
       countryName = "الولابات المتحدة";

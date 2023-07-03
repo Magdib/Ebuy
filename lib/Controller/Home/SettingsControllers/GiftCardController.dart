@@ -24,7 +24,7 @@ class GiftCardControllerimp extends GiftCardController {
   late TextEditingController shortDigitController;
   List<GiftCardModel> giftCards = [];
   bool anyGiftCard = false;
-  bool canChooseCard = false;
+  late bool canChooseCard;
   GiftCardData giftCardData = GiftCardData(Get.find());
   StatusRequest statusRequest = StatusRequest.loading;
   StatusRequest checkStatusRequest = StatusRequest.none;
@@ -90,15 +90,18 @@ class GiftCardControllerimp extends GiftCardController {
         if (response['status'] == "success") {
           shortDigitController.clear();
           longDigitController.clear();
+          giftCards.clear();
+          List tempCard = response['data'];
+          giftCards.addAll(tempCard.map((e) => GiftCardModel.fromJson(e)));
           Get.back();
           succesSnackBar('Done.',
               'Gift card have been added successfully to your account');
-          GiftCardModel tempCard = GiftCardModel.fromJson(response['data']);
-          giftCards.add(tempCard);
+
           if (anyGiftCard == false) {
             anyGiftCard = true;
           }
         } else {
+          errorSnackBar("No Card", "There is no gift card with this codes");
           checkStatusRequest = StatusRequest.failure;
         }
       }
@@ -124,9 +127,7 @@ class GiftCardControllerimp extends GiftCardController {
     getGiftCards();
     longDigitController = TextEditingController();
     shortDigitController = TextEditingController();
-    if (Get.arguments[ArgumentsNames.canChooseCard] != null) {
-      canChooseCard = true;
-    }
+    canChooseCard = Get.arguments[ArgumentsNames.canChooseCard];
     super.onInit();
   }
 

@@ -1,6 +1,5 @@
 import 'package:ebuy/Controller/Home/SettingsControllers/GiftCardController.dart';
 import 'package:ebuy/core/class/HandlingDataRequest.dart';
-
 import 'package:ebuy/core/function/UiFunctions/customAppBar.dart';
 import 'package:ebuy/routes.dart';
 import 'package:ebuy/view/Widgets/Home/Settings/GiftCardWidgets/GiftCardExample.dart';

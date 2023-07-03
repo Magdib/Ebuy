@@ -196,9 +196,9 @@ class CheckOutControllerimp extends CheckOutController {
         authBox.put(HiveKeys.giftCardId, selectedGiftCard.cardId);
         canAddGift = false;
         Get.back();
-        update();
       }
     }
+    update();
   }
 
   @override

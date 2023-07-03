@@ -6,7 +6,6 @@ import 'package:ebuy/routes.dart';
 import 'package:ebuy/view/Widgets/CustomPackages/IconStepper.dart';
 import 'package:ebuy/view/Widgets/Home/Settings/OrdersWidgets/OrdersCard.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 class OrderTrackPage extends GetView<OrdersControllerimp> {

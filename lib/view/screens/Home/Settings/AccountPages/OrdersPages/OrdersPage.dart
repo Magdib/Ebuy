@@ -52,7 +52,7 @@ class OrdersPage extends StatelessWidget {
                   unselectedLabelColor: AppColors.grey,
                 ),
               ),
-        body: HandlingDataRequest(
+        body: HandlingDataView(
             onPressed: () => controller.getOrders(),
             statusRequest: controller.statusRequest,
             widget: controller.anyOrders == false

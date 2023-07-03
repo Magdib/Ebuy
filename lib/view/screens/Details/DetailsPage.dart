@@ -22,83 +22,87 @@ class DetailsPage extends StatelessWidget {
       child: Scaffold(
         backgroundColor: AppColors.white,
         body: GetBuilder<DetailesControllerImp>(
-          builder: (controller) => HandlingDataRequest(
-            onPressed: () => controller.getItemData(controller.olditemid, true),
-            statusRequest: controller.statusRequest,
-            widget: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 5),
-                  height: UINumber.deviceHeight / 1.15,
-                  child: CustomScrollView(
-                    slivers: [
-                      SliverAppBar(
-                        toolbarHeight: 45,
-                        shadowColor: AppColors.white,
-                        actions: [
-                          IconButton(
-                              splashRadius: 14,
-                              onPressed: () {
-                                controller.shareProduct();
-                              },
-                              icon: const Icon(
-                                Icons.share,
-                                color: AppColors.black,
-                              ))
-                        ],
-                        floating: true,
-                        backgroundColor: AppColors.white,
-                      ),
-                      SliverList(
-                          delegate: SliverChildBuilderDelegate(
-                        childCount: 1,
-                        (context, index) => Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const ProductAndPageHeaders(),
-                            const ProductDetailesCard(),
-                            const DetailesDescription(),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            const ReviewsCard(),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              'You might also like',
-                              style: Theme.of(context).textTheme.bodyText1,
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            const DetailesSuggestionsCard(),
-                            const SizedBox(
-                              height: 40,
-                            ),
+          builder: (controller) => WillPopScope(
+            onWillPop: () => controller.onwillPop(),
+            child: HandlingDataRequest(
+              onPressed: () =>
+                  controller.getItemData(controller.olditemid, true),
+              statusRequest: controller.statusRequest,
+              widget: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 5),
+                    height: UINumber.deviceHeight / 1.15,
+                    child: CustomScrollView(
+                      slivers: [
+                        SliverAppBar(
+                          toolbarHeight: 45,
+                          shadowColor: AppColors.white,
+                          actions: [
+                            IconButton(
+                                splashRadius: 14,
+                                onPressed: () {
+                                  controller.shareProduct();
+                                },
+                                icon: const Icon(
+                                  Icons.share,
+                                  color: AppColors.black,
+                                ))
                           ],
+                          floating: true,
+                          backgroundColor: AppColors.white,
                         ),
-                      ))
-                    ],
+                        SliverList(
+                            delegate: SliverChildBuilderDelegate(
+                          childCount: 1,
+                          (context, index) => Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const ProductAndPageHeaders(),
+                              const ProductDetailesCard(),
+                              const DetailesDescription(),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              const ReviewsCard(),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                'You might also like',
+                                style: Theme.of(context).textTheme.bodyText1,
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              const DetailesSuggestionsCard(),
+                              const SizedBox(
+                                height: 40,
+                              ),
+                            ],
+                          ),
+                        ))
+                      ],
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 15,
-                    right: 15,
-                  ),
-                  child: CustomButton(
-                      text: 'Add to cart',
-                      onPressed: () => Get.bottomSheet(
-                            const DetailesBottomSheet(),
-                            backgroundColor: AppColors.white,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10)),
-                            isScrollControlled: true,
-                          )),
-                )
-              ],
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 15,
+                      right: 15,
+                    ),
+                    child: CustomButton(
+                        text: 'Add to cart',
+                        onPressed: () => Get.bottomSheet(
+                              const DetailesBottomSheet(),
+                              backgroundColor: AppColors.white,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10)),
+                              isScrollControlled: true,
+                            )),
+                  )
+                ],
+              ),
             ),
           ),
         ),
