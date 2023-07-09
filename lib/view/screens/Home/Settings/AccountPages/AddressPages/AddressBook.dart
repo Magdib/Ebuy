@@ -4,7 +4,6 @@ import 'package:ebuy/core/constant/Colors.dart';
 import 'package:ebuy/core/constant/Images.dart';
 import 'package:ebuy/core/function/UiFunctions/customAppBar.dart';
 import 'package:ebuy/data/dataSource/Static/HiveKeys.dart';
-import 'package:ebuy/data/dataSource/Static/UINumbers.dart';
 import 'package:ebuy/routes.dart';
 import 'package:ebuy/view/Widgets/Home/Settings/AddressWidgets/AddressDataRow.dart';
 import 'package:ebuy/view/Widgets/shared/CustomButton.dart';
@@ -20,7 +19,7 @@ class AddressBook extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: customAppBar('Address Book', context, 4),
+        appBar: customAppBar('Address book'.tr, context, 4),
         body: GetBuilder<AddressControllerimp>(
             builder: (controller) => HandlingDataRequest(
                   onPressed: () => controller.getAddresses(true),
@@ -130,7 +129,7 @@ class AddressBook extends StatelessWidget {
                                 ),
                               ),
                               CustomButton(
-                                  text: 'Add Address',
+                                  text: 'Add Address'.tr,
                                   onPressed: () => Get.toNamed(
                                       AppRoutes.addAddressMapPageRoute))
                             ],
@@ -138,10 +137,11 @@ class AddressBook extends StatelessWidget {
                         )
                       : CustomPage(
                           svgImage: AppImagesAssets.noAddressImage,
-                          title: 'No address',
+                          title: 'No address'.tr,
                           subtitle:
-                              'you don\'t have any address yet add one by clicking the button down below to add one from the map',
-                          buttonText: 'Add address',
+                              'you don\'t have any address yet add one by clicking the button down below to add one from the map'
+                                  .tr,
+                          buttonText: 'Add address'.tr,
                           isSpaced: true,
                           onPressed: () =>
                               Get.toNamed(AppRoutes.addAddressMapPageRoute)),

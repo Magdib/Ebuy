@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../../core/constant/Colors.dart';
 
@@ -13,7 +14,7 @@ class RecentlyViewedText extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          'Recently viewed',
+          'Recently viewed'.tr,
           style: Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 18),
         ),
         Container(

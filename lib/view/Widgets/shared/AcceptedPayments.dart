@@ -61,7 +61,7 @@ class ConstAcceptedPayments extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'We accept',
+          'We accept'.tr,
           style: Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 14),
         ),
         Container(

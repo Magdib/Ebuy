@@ -70,7 +70,7 @@ class DetailsPage extends StatelessWidget {
                                 height: 10,
                               ),
                               Text(
-                                'You might also like',
+                                'You might also like'.tr,
                                 style: Theme.of(context).textTheme.bodyText1,
                               ),
                               const SizedBox(
@@ -92,7 +92,7 @@ class DetailsPage extends StatelessWidget {
                       right: 15,
                     ),
                     child: CustomButton(
-                        text: 'Add to cart',
+                        text: 'Add to cart'.tr,
                         onPressed: () => Get.bottomSheet(
                               const DetailesBottomSheet(),
                               backgroundColor: AppColors.white,

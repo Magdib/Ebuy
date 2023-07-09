@@ -2,9 +2,6 @@ import 'package:ebuy/Controller/Detailes/detailesController.dart';
 import 'package:ebuy/data/dataSource/Static/UINumbers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../core/theme/theme.dart';
-import '../../../data/dataSource/Static/static.dart';
 import '../shared/GreyDivider.dart';
 
 class DetailesDescription extends GetView<DetailesControllerImp> {
@@ -27,7 +24,7 @@ class DetailesDescription extends GetView<DetailesControllerImp> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  detailesTitles[index],
+                  controller.detailesTitles[index],
                   style: Theme.of(context)
                       .textTheme
                       .bodyText1!

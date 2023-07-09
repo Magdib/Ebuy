@@ -1,4 +1,5 @@
 import 'package:ebuy/Controller/Home/HomePageController.dart';
+import 'package:ebuy/core/localization/handleLanguageApi.dart';
 import 'package:ebuy/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -35,7 +36,7 @@ class BrandsGridView extends GetView<HomePageControllerImp> {
               borderRadius: BorderRadius.circular(UINumber.borderRadius)),
           color: AppColors.brandsGrey,
           child: Text(
-            controller.brands[index].brandName!,
+            handleBrandsLanguage(controller.brands[index]),
             style:
                 Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 12),
             overflow: TextOverflow.clip,

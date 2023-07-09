@@ -20,7 +20,7 @@ class DiliverCountry extends StatelessWidget {
               width: 10,
             ),
             Text(
-              'Deliver to:',
+              'Deliver to:'.tr,
               style: Theme.of(context).textTheme.bodyText1,
             ),
             const SizedBox(

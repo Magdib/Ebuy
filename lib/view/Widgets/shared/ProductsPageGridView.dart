@@ -1,5 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ebuy/Controller/Home/HomePageController.dart';
+import 'package:ebuy/core/class/enums.dart';
+import 'package:ebuy/core/localization/handleLanguageApi.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -35,7 +37,6 @@ class ProductsPageGridView extends GetView<HomePageControllerImp> {
         return GestureDetector(
           onTap: () => Get.toNamed(AppRoutes.detailsPageRoute, arguments: {
             ArgumentsNames.productD: productsList[index],
-            ArgumentsNames.productListD: allProducts,
             ArgumentsNames.recentProducts: controller.recentProduct
           }),
           child: Stack(
@@ -63,7 +64,8 @@ class ProductsPageGridView extends GetView<HomePageControllerImp> {
                 bottom: 55,
                 left: 20,
                 child: Text(
-                  productsList[index].itemsName!,
+                  handlePorductsLanguage(
+                      TranslationType.itemsName, productsList[index]),
                   style: Theme.of(context)
                       .textTheme
                       .headline6!

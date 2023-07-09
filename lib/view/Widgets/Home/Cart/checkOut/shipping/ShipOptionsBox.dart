@@ -1,6 +1,4 @@
-import 'package:ebuy/Controller/Home/CartController.dart';
 import 'package:ebuy/Controller/Home/CheckOutController.dart';
-import 'package:ebuy/core/constant/Colors.dart';
 import 'package:ebuy/data/dataSource/Static/UINumbers.dart';
 import 'package:ebuy/view/Widgets/shared/CustomContainer.dart';
 import 'package:ebuy/view/Widgets/shared/CustomRadio.dart';

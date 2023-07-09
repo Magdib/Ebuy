@@ -17,7 +17,7 @@ class CartPage extends StatelessWidget {
     Get.put(CartControllerImp());
     return SafeArea(
         child: Scaffold(
-      appBar: customAppBar("Cart", context, 0),
+      appBar: customAppBar("Cart".tr, context, 0),
       body: GetBuilder<CartControllerImp>(
         builder: (controller) => HandlingDataView(
           onPressed: () => controller.getCartItems(true),
@@ -30,11 +30,13 @@ class CartPage extends StatelessWidget {
                 children: [
                   const CartItemsListView(),
                   SizedBox(
-                    height: 115,
+                    height: controller.isEnglish == true ? 115 : 118,
                     width: UINumber.deviceWidth,
                     child: Card(
-                      margin:
-                          const EdgeInsets.only(bottom: 5, left: 10, right: 10),
+                      margin: EdgeInsets.only(
+                          bottom: controller.isEnglish == true ? 5 : 0,
+                          left: 10,
+                          right: 10),
                       elevation: 10,
                       child: Padding(
                         padding: const EdgeInsets.only(
@@ -45,7 +47,7 @@ class CartPage extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  "Total:",
+                                  "Total:".tr,
                                   style: Theme.of(context).textTheme.bodyText1,
                                 ),
                                 Text(
@@ -72,7 +74,7 @@ class CartPage extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(10)),
                               color: AppColors.primaryColor,
                               child: Text(
-                                'Checkout',
+                                'Checkout'.tr,
                                 style: Theme.of(context).textTheme.headline3,
                               ),
                             )

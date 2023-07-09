@@ -1,11 +1,11 @@
 import 'package:ebuy/Controller/Detailes/detailesController.dart';
+import 'package:ebuy/core/class/enums.dart';
+import 'package:ebuy/core/constant/Colors.dart';
+import 'package:ebuy/core/localization/handleLanguageApi.dart';
+import 'package:ebuy/data/dataSource/Static/UINumbers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
-
-import '../../../core/constant/Colors.dart';
-
-import '../../../data/dataSource/Static/UINumbers.dart';
 
 class ProductDetailesCard extends StatelessWidget {
   const ProductDetailesCard({
@@ -28,7 +28,8 @@ class ProductDetailesCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "${controller.product.itemsName}",
+                  handlePorductsLanguage(
+                      TranslationType.itemsName, controller.product),
                   style: Theme.of(context)
                       .textTheme
                       .bodyText1!

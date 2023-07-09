@@ -1,4 +1,3 @@
-import 'package:ebuy/Controller/Home/CartController.dart';
 import 'package:ebuy/Controller/Home/CheckOutController.dart';
 import 'package:ebuy/view/Widgets/shared/CustomButton.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +17,7 @@ class Shipping extends GetView<CheckOutControllerimp> {
       padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
       children: [
         Text(
-          'Shipping address',
+          'Shipping address'.tr,
           style: Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 18),
         ),
         const SizedBox(
@@ -26,14 +25,14 @@ class Shipping extends GetView<CheckOutControllerimp> {
         ),
         GetBuilder<CheckOutControllerimp>(
           builder: (controller) => UserAddressShipBox(
-              title: 'Postal address',
+              title: 'Postal address'.tr,
               userAddress: controller.shippingAddresList),
         ),
         const SizedBox(
           height: 20,
         ),
         Text(
-          'Shipping options',
+          'Shipping options'.tr,
           style: Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 18),
         ),
         const SizedBox(
@@ -43,7 +42,7 @@ class Shipping extends GetView<CheckOutControllerimp> {
         const SizedBox(
           height: 20,
         ),
-        CustomButton(text: 'Payment', onPressed: () => controller.nextStep())
+        CustomButton(text: 'Payment'.tr, onPressed: () => controller.nextStep())
       ],
     );
   }

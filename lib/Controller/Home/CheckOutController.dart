@@ -1,7 +1,9 @@
 import 'package:ebuy/Controller/Home/CartController.dart';
 import 'package:ebuy/core/constant/ArgumentsNames.dart';
+import 'package:ebuy/core/function/UiFunctions/SnackBars.dart';
 import 'package:ebuy/core/function/getCountryData.dart';
 import 'package:ebuy/core/function/handleHiveNullState.dart';
+import 'package:ebuy/core/localization/handleLanguageApi.dart';
 import 'package:ebuy/data/dataSource/remote/settings/GiftCardData.dart';
 import 'package:ebuy/data/dataSource/remote/shared/CheckADPAY.dart';
 import 'package:ebuy/data/model/CartModels/CartModel.dart';
@@ -23,6 +25,7 @@ import '../../data/dataSource/remote/cart/OrdersData.dart';
 import '../../data/dataSource/remote/cart/VoucherData.dart';
 import '../../data/model/CartModels/ShippingModel.dart';
 import '../../data/model/CartModels/StaticAddressModel.dart';
+import '../../data/model/CartModels/StepperModel.dart';
 
 abstract class CheckOutController extends GetxController {
   void getData();
@@ -75,33 +78,28 @@ class CheckOutControllerimp extends CheckOutController {
   late int shippingAddress;
   late List<List<String>> placeOrderList;
   int shipLastIndex = 0;
-  List<ShippingModel> shipRadioList = [
-    ShippingModel(
-        title: 'Free Standard Shipping',
-        subtitle:
-            'Delivered on or before ${Jiffy.now().add(days: 10).yMMMMEEEEd}',
-        note: 'No shipping on Public Holidays',
-        isSelected: true),
-    ShippingModel(
-        title: '\$10.00 Express Shipping',
-        subtitle:
-            'Delivered on or before ${Jiffy.now().add(days: 4).yMMMMEEEEd}',
-        isSelected: false),
-    ShippingModel(
-        title: '\$19.99 X-Express Shipping',
-        subtitle: 'Delivered on ${Jiffy.now().add(days: 1).yMMMMEEEEd}',
-        isSelected: false)
-  ];
+  late List<ShippingModel> shipRadioList;
   late List<StaticAddressModel> shippingAddresList;
   late List<StaticAddressModel> paymentAddresList;
-  String shipWay = 'Free';
+  String shipWay = 'Free'.tr;
   double shipPrice = 0.0;
   int currentStep = 0;
   late double totalPrice;
   late String totalToPay;
   List<AddressModel> addressList = [];
   List<PaymentModel> paymentList = [];
-
+  List<StepperModel> stepperList = [
+    StepperModel(
+      containerHeight: 30.0,
+      borderRadius: 30,
+      subtitle: 'Information'.tr,
+    ),
+    StepperModel(
+        containerHeight: 25.0, borderRadius: 5, subtitle: 'Shipping'.tr),
+    StepperModel(
+        containerHeight: 30.0, borderRadius: 30, subtitle: 'Payment'.tr)
+  ];
+  final isEnglish = getLanguage();
   @override
   void getData() async {
     var response = await checkADPAY.getData(authBox.get(HiveKeys.userid));
@@ -176,6 +174,8 @@ class CheckOutControllerimp extends CheckOutController {
         Get.back();
       } else {
         giftStatus = StatusRequest.failure;
+        errorSnackBar("Wrong code".tr,
+            "the voucher code you are trying to add does not exist".tr);
       }
     }
     update();
@@ -314,15 +314,15 @@ class CheckOutControllerimp extends CheckOutController {
     switch (index) {
       case 0:
         shipPrice = 0.0;
-        shipWay = "Free";
+        shipWay = "Free".tr;
         break;
       case 1:
         shipPrice = 10;
-        shipWay = "Express";
+        shipWay = "Express".tr;
         break;
       case 2:
         shipPrice = 19.99;
-        shipWay = "X-Express";
+        shipWay = "X-Express".tr;
         break;
       default:
     }
@@ -340,15 +340,15 @@ class CheckOutControllerimp extends CheckOutController {
   void nextStep() {
     if (currentStep == 1) {
       placeOrderList = [
-        ['Sub - total', 'Shipping', 'Sale tax'],
+        ['Sub - total'.tr, 'Shipping'.tr, 'Sale tax'.tr],
         [
           '\$${totalPrice.toStringAsFixed(2)}',
           "$shipWay-$shipPrice\$",
           "\$4.70"
         ]
       ];
-      if (shipWay == "Free") {
-        placeOrderList[1][1] = "Free";
+      if (shipWay == "Free".tr) {
+        placeOrderList[1][1] = "Free".tr;
       }
       double tempTotalPay = totalPrice + shipPrice + 4.7;
       totalToPay = tempTotalPay.toStringAsFixed(2);
@@ -435,9 +435,6 @@ class CheckOutControllerimp extends CheckOutController {
     getData();
 
     pageController = PageController();
-    // for (int i = 0; i < cartProducts.length; i++) {
-    //   totalPrice += double.parse(cartProducts[i].cartPrice!);
-    // }
     voucherController = TextEditingController();
     returnspolicies = TapGestureRecognizer()
       ..onTap = () => print(AppWords.websiteWord);
@@ -445,6 +442,34 @@ class CheckOutControllerimp extends CheckOutController {
       ..onTap = () => print(AppWords.websiteWord);
 
     super.onInit();
+  }
+
+  @override
+  void onReady() async {
+    if (isEnglish == false) {
+      await Jiffy.setLocale("ar");
+    } else {
+      await Jiffy.setLocale("en_us");
+    }
+    shipRadioList = [
+      ShippingModel(
+          title: 'Free Standard Shipping'.tr,
+          subtitle:
+              '${"Delivered on or before".tr} ${Jiffy.now().add(days: 10).yMMMMEEEEd}',
+          note: 'No shipping on Public Holidays'.tr,
+          isSelected: true),
+      ShippingModel(
+          title: '\$10.00 Express Shipping'.tr,
+          subtitle:
+              '${"Delivered on or before".tr} ${Jiffy.now().add(days: 4).yMMMMEEEEd}',
+          isSelected: false),
+      ShippingModel(
+          title: '\$19.99 X-Express Shipping'.tr,
+          subtitle:
+              '${"Delivered on".tr} ${Jiffy.now().add(days: 1).yMMMMEEEEd}',
+          isSelected: false)
+    ];
+    super.onReady();
   }
 
   @override

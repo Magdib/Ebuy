@@ -44,12 +44,12 @@ class DetailesBottomSheet extends StatelessWidget {
                 ),
                 const DetailesBottomCard(),
                 Text(
-                  'Color:',
+                  'Color:'.tr,
                   style: Theme.of(context).textTheme.bodyText1,
                 ),
                 const DetailesColorsListView(),
                 Text(
-                  'Size:',
+                  'Size:'.tr,
                   style: Theme.of(context).textTheme.bodyText1,
                 ),
                 const DetailesSizesListView(),
@@ -59,7 +59,7 @@ class DetailesBottomSheet extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Amount:',
+                        'Amount:'.tr,
                         style: Theme.of(context).textTheme.bodyText1,
                       ),
                       ProductNumbers(
@@ -71,7 +71,7 @@ class DetailesBottomSheet extends StatelessWidget {
                 ),
                 CustomConditionButton(
                   condition: controller.canAddToCart,
-                  text: 'Add to cart',
+                  text: 'Add to cart'.tr,
                   onPressed: () => controller.addToCart(),
                 )
               ],

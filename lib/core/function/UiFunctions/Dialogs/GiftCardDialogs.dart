@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 
 giftCardMethodDialog(BuildContext context) {
   return Get.defaultDialog(
-      title: 'Choose Method:',
+      title: 'Choose Method:'.tr,
       titleStyle: Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 18),
       content: GetBuilder<CheckOutControllerimp>(
         builder: (controller) => HandlingDataRequest(
@@ -19,12 +19,12 @@ giftCardMethodDialog(BuildContext context) {
           widget: Column(
             children: [
               TitledTextField(
-                  label: 'Gift voucher',
-                  hint: 'Enter gift voucher code here...',
+                  label: 'Gift voucher'.tr,
+                  hint: 'Enter gift voucher code here...'.tr,
                   onChanged: (val) => controller.handleVoucher(),
                   textEditingController: controller.voucherController),
               CustomConditionButton(
-                text: 'Add gift Voucher',
+                text: 'Add gift Voucher'.tr,
                 onPressed: () => controller.getVoucher(),
                 borderRadius: 40,
                 condition: controller.canAddVoucher,
@@ -33,7 +33,7 @@ giftCardMethodDialog(BuildContext context) {
                 height: 10,
               ),
               CustomButton(
-                text: 'Choose gift card',
+                text: 'Choose gift card'.tr,
                 onPressed: () => Get.toNamed(AppRoutes.giftCardsPageRoute,
                     arguments: {ArgumentsNames.canChooseCard: true}),
                 borderRadius: 40,

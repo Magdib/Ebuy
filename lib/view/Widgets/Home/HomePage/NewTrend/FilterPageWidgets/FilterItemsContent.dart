@@ -1,9 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
-import '../../../../../../core/theme/theme.dart';
-import '../../../../../../data/dataSource/Static/static.dart';
-import 'FilterDialogContent.dart';
 
 class FilterItemsContent extends StatelessWidget {
   const FilterItemsContent({

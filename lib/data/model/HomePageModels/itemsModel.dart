@@ -18,7 +18,9 @@ class Products {
   String? itemsSize3;
   String? itemsSize4;
   String? itemsDeliveryRefund;
+  String? itemsDeliveryRefundAr;
   String? itemsSizeGuide;
+  String? itemsSizeGuideAr;
   String? isNewTrend;
   String? itemsIsNew;
   String? itemsColor;
@@ -66,7 +68,9 @@ class Products {
       this.itemsSize3,
       this.itemsSize4,
       this.itemsDeliveryRefund,
+      this.itemsDeliveryRefundAr,
       this.itemsSizeGuide,
+      this.itemsSizeGuideAr,
       this.isNewTrend,
       this.itemsColor,
       this.itemsColor2,
@@ -125,7 +129,9 @@ class Products {
     itemsGender = json['items_gender'];
     itemsGenderAr = json['items_gender_ar'];
     itemsDeliveryRefund = json['items_delivery_refund'];
+    itemsDeliveryRefundAr = json['items_delivery_refund_ar'];
     itemsSizeGuide = json['items_size_guide'];
+    itemsSizeGuideAr = json['items_size_guide_ar'];
     isNewTrend = json['isNewTrend'];
     itemsIsNew = json['items_isNew'];
     itemsDate = json['items_date'];
@@ -166,7 +172,9 @@ class Products {
     data['items_Size3'] = this.itemsSize3;
     data['items_Size4'] = this.itemsSize4;
     data['items_delivery_refund'] = this.itemsDeliveryRefund;
+    data['items_delivery_refund_ar'] = this.itemsDeliveryRefundAr;
     data['items_size_guide'] = this.itemsSizeGuide;
+    data['items_size_guide_ar'] = this.itemsSizeGuideAr;
     data['isNewTrend'] = this.isNewTrend;
     data['items_isNew'] = this.itemsIsNew;
     data['items_Color'] = this.itemsColor;

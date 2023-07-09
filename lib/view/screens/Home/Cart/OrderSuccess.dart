@@ -17,10 +17,11 @@ class OrderSuccess extends StatelessWidget {
       child: Scaffold(
         body: CustomPage(
             svgImage: AppImagesAssets.paymentImage,
-            title: 'Your order placed',
+            title: 'Your order placed'.tr,
             subtitle:
-                'Your order has been placed successfully. You can visit my order to check the delivery process.',
-            buttonText: 'Continue shopping',
+                'Your order has been placed successfully. You can visit my order to check the delivery process.'
+                    .tr,
+            buttonText: 'Continue shopping'.tr,
             onPressed: () => Get.offAllNamed(AppRoutes.mainPageRoute)),
       ),
     );

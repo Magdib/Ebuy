@@ -1,11 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ebuy/Controller/Home/SearchController.dart';
+import 'package:ebuy/core/constant/Server.dart';
+import 'package:ebuy/core/localization/HandlePosition.dart';
+import 'package:ebuy/data/dataSource/Static/UINumbers.dart';
+import 'package:ebuy/data/model/HomePageModels/BannersModel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../../core/constant/Server.dart';
-import '../../../../data/dataSource/Static/UINumbers.dart';
-import '../../../../data/model/HomePageModels/BannersModel.dart';
 
 class SearchBannersList extends StatelessWidget {
   const SearchBannersList({
@@ -34,7 +34,7 @@ class SearchBannersList extends StatelessWidget {
                     elevation: UINumber.cardElevation,
                     margin: EdgeInsets.only(top: 35, left: 5, right: 5),
                   )),
-              Positioned(
+              HandlePosition(
                 top: 30,
                 left: 20,
                 child: Padding(
@@ -48,7 +48,7 @@ class SearchBannersList extends StatelessWidget {
                   ),
                 ),
               ),
-              Positioned(
+              HandlePosition(
                 top: 0,
                 right: 20,
                 child: CachedNetworkImage(

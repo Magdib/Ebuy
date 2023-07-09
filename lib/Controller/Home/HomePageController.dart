@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:ebuy/core/class/enums.dart';
 import 'package:ebuy/core/function/handleData.dart';
 import 'package:ebuy/core/function/handleFavourite.dart';
@@ -30,13 +32,13 @@ abstract class HomePageController extends GetxController {
 }
 
 class HomePageControllerImp extends HomePageController {
-  late Box authBox;
+  Box authBox = Hive.box(HiveBoxes.authBox);
   bool canReGetData = true;
   List<ProductsSort> productsSort = [
-    ProductsSort(type: 'Recommended', choosenSort: true),
-    ProductsSort(type: 'What\'s New', choosenSort: false),
-    ProductsSort(type: 'Price: High to low', choosenSort: false),
-    ProductsSort(type: 'Price: Low to high', choosenSort: false)
+    ProductsSort(type: 'Recommended'.tr, choosenSort: true),
+    ProductsSort(type: 'What\'s New'.tr, choosenSort: false),
+    ProductsSort(type: 'Price: High to low'.tr, choosenSort: false),
+    ProductsSort(type: 'Price: Low to high'.tr, choosenSort: false)
   ];
   HomeData homeData = HomeData(Get.find());
   RecentAddData recentAddData = RecentAddData(Get.find());
@@ -56,11 +58,21 @@ class HomePageControllerImp extends HomePageController {
   List<ColorsModel> colors = [];
   List<Categories> categories = [];
   List<Products> sortedProducts = [];
-
+  late bool isEnglish;
   int lastSortIndex = 0;
   StatusRequest statusRequest = StatusRequest.loading;
   @override
   getData(bool showLoading) async {
+    if (authBox.get(HiveKeys.language) == null) {
+      if (Get.deviceLocale!.languageCode.contains('ar') == true) {
+        isEnglish = false;
+      } else {
+        isEnglish = true;
+      }
+    } else {
+      isEnglish = authBox.get(HiveKeys.language);
+    }
+    update();
     if (showLoading == true) {
       statusRequest = StatusRequest.loading;
       update();
@@ -119,7 +131,8 @@ class HomePageControllerImp extends HomePageController {
           userStyle.add(savedItems[2]);
         }
         if (recentProduct.isNotEmpty) {
-          userStyle.add(products[4]);
+          int index = Random().nextInt(19);
+          userStyle.add(products[index]);
         }
       } else {
         statusRequest = StatusRequest.offlinefailure;
@@ -209,14 +222,12 @@ class HomePageControllerImp extends HomePageController {
       case 0:
         Get.toNamed(AppRoutes.detailsPageRoute, arguments: {
           ArgumentsNames.productD: products[firstRecentIndex],
-          ArgumentsNames.productListD: products,
           ArgumentsNames.recentProducts: recentProduct
         });
         break;
       case 1:
         Get.toNamed(AppRoutes.detailsPageRoute, arguments: {
           ArgumentsNames.productD: products[secondeRecentIndex],
-          ArgumentsNames.productListD: products,
           ArgumentsNames.recentProducts: recentProduct
         });
         break;
@@ -239,7 +250,6 @@ class HomePageControllerImp extends HomePageController {
 
   @override
   void onReady() async {
-    authBox = await Hive.openBox(HiveBoxes.authBox);
     await getData(false);
     super.onReady();
   }

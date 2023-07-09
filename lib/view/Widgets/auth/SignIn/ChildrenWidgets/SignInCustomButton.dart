@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../../../core/constant/Colors.dart';
 
-import '../../../../../core/theme/theme.dart';
 import '../../../../../data/dataSource/Static/UINumbers.dart';
 
 class SignInCustomButton extends GetView<SignInControllerImp> {

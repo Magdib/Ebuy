@@ -86,7 +86,6 @@ class FavouriteControllerImp extends FavouriteController
           product.itemsId!.contains(favouriteItems[index].itemsId!));
       Get.toNamed(AppRoutes.detailsPageRoute, arguments: {
         ArgumentsNames.productD: product,
-        ArgumentsNames.productListD: homeController.products,
         ArgumentsNames.recentProducts: homeController.recentProduct
       });
     } else {
@@ -94,7 +93,6 @@ class FavouriteControllerImp extends FavouriteController
           product.itemsId!.contains(favouriteRecents[index].itemsId!));
       Get.toNamed(AppRoutes.detailsPageRoute, arguments: {
         ArgumentsNames.productD: product,
-        ArgumentsNames.productListD: homeController.products,
         ArgumentsNames.recentProducts: homeController.recentProduct
       });
     }

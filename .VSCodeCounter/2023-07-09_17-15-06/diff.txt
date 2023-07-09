@@ -1,0 +1,209 @@
+Date : 2023-07-09 17:15:06
+Directory : c:\Users\Magd\Documents\Flutter Projects\ebuy\lib
+Total : 110 files,  1230 codes, 36 comments, 68 blanks, all 1334 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| Dart     |        110 |      1,230 |         36 |         68 |      1,334 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++-----------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                              | files      | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                                 |        110 |      1,230 |         36 |         68 |      1,334 |
+| . (Files)                                                                                                                         |          2 |         13 |          0 |          0 |         13 |
+| Controller                                                                                                                        |         15 |        400 |         -3 |         11 |        408 |
+| Controller\Detailes                                                                                                               |          1 |        139 |          0 |          6 |        145 |
+| Controller\Home                                                                                                                   |         12 |        252 |         -3 |          6 |        255 |
+| Controller\Home (Files)                                                                                                           |          7 |        152 |         -3 |          3 |        152 |
+| Controller\Home\SettingsControllers                                                                                               |          5 |        100 |          0 |          3 |        103 |
+| Controller\authControllers                                                                                                        |          2 |          9 |          0 |         -1 |          8 |
+| core                                                                                                                              |         16 |        554 |         42 |         61 |        657 |
+| core\class                                                                                                                        |          4 |        115 |          0 |          3 |        118 |
+| core\constant                                                                                                                     |          3 |        230 |         42 |         37 |        309 |
+| core\function                                                                                                                     |          5 |        100 |          0 |          5 |        105 |
+| core\function (Files)                                                                                                             |          1 |         19 |          0 |          3 |         22 |
+| core\function\UiFunctions                                                                                                         |          4 |         81 |          0 |          2 |         83 |
+| core\function\UiFunctions (Files)                                                                                                 |          1 |          2 |          0 |          0 |          2 |
+| core\function\UiFunctions\Dialogs                                                                                                 |          3 |         79 |          0 |          2 |         81 |
+| core\localization                                                                                                                 |          2 |        104 |          0 |         15 |        119 |
+| core\middleware                                                                                                                   |          1 |          1 |          0 |          0 |          1 |
+| core\services                                                                                                                     |          1 |          4 |          0 |          1 |          5 |
+| data                                                                                                                              |         10 |        110 |         -1 |         15 |        124 |
+| data\dataSource                                                                                                                   |          8 |         53 |         -1 |         11 |         63 |
+| data\dataSource\Static                                                                                                            |          2 |        -31 |         -1 |         -1 |        -33 |
+| data\dataSource\remote                                                                                                            |          6 |         84 |          0 |         12 |         96 |
+| data\dataSource\remote\Detailes                                                                                                   |          2 |         48 |          0 |          7 |         55 |
+| data\dataSource\remote\auth                                                                                                       |          1 |         23 |          0 |          3 |         26 |
+| data\dataSource\remote\home                                                                                                       |          1 |          1 |          0 |          0 |          1 |
+| data\dataSource\remote\settings                                                                                                   |          1 |          1 |          0 |          0 |          1 |
+| data\dataSource\remote\shared                                                                                                     |          1 |         11 |          0 |          2 |         13 |
+| data\model                                                                                                                        |          2 |         57 |          0 |          4 |         61 |
+| data\model\HomePageModels                                                                                                         |          1 |          8 |          0 |          0 |          8 |
+| data\model\ProductModels                                                                                                          |          1 |         49 |          0 |          4 |         53 |
+| view                                                                                                                              |         67 |        153 |         -2 |        -19 |        132 |
+| view\Widgets                                                                                                                      |         46 |         50 |          0 |        -20 |         30 |
+| view\Widgets\Detailes                                                                                                             |          8 |         18 |          0 |         -8 |         10 |
+| view\Widgets\Home                                                                                                                 |         25 |         72 |          0 |         -6 |         66 |
+| view\Widgets\Home\Cart                                                                                                            |         10 |        -12 |          0 |          0 |        -12 |
+| view\Widgets\Home\Cart (Files)                                                                                                    |          1 |          1 |          0 |          0 |          1 |
+| view\Widgets\Home\Cart\checkOut                                                                                                   |          9 |        -13 |          0 |          0 |        -13 |
+| view\Widgets\Home\Cart\checkOut (Files)                                                                                           |          1 |         -1 |          0 |          0 |         -1 |
+| view\Widgets\Home\Cart\checkOut\Information                                                                                       |          3 |         -3 |          0 |          0 |         -3 |
+| view\Widgets\Home\Cart\checkOut\payment                                                                                           |          3 |         -6 |          0 |          0 |         -6 |
+| view\Widgets\Home\Cart\checkOut\shipping                                                                                          |          2 |         -3 |          0 |          0 |         -3 |
+| view\Widgets\Home\Favourite                                                                                                       |          1 |         -1 |          0 |          0 |         -1 |
+| view\Widgets\Home\HomePage                                                                                                        |         10 |         57 |          0 |         -5 |         52 |
+| view\Widgets\Home\HomePage (Files)                                                                                                |          8 |         56 |          0 |         -3 |         53 |
+| view\Widgets\Home\HomePage\NewTrend                                                                                               |          2 |          1 |          0 |         -2 |         -1 |
+| view\Widgets\Home\HomePage\NewTrend (Files)                                                                                       |          1 |          5 |          0 |         -1 |          4 |
+| view\Widgets\Home\HomePage\NewTrend\FilterPageWidgets                                                                             |          1 |         -4 |          0 |         -1 |         -5 |
+| view\Widgets\Home\Search                                                                                                          |          2 |          0 |          0 |         -1 |         -1 |
+| view\Widgets\Home\Settings                                                                                                        |          2 |         28 |          0 |          0 |         28 |
+| view\Widgets\Home\Settings\AccountSettings                                                                                        |          1 |          1 |          0 |          0 |          1 |
+| view\Widgets\Home\Settings\OrdersWidgets                                                                                          |          1 |         27 |          0 |          0 |         27 |
+| view\Widgets\auth                                                                                                                 |         11 |        -42 |          0 |         -6 |        -48 |
+| view\Widgets\auth\SignIn                                                                                                          |          1 |         -1 |          0 |          0 |         -1 |
+| view\Widgets\auth\SignIn\ChildrenWidgets                                                                                          |          1 |         -1 |          0 |          0 |         -1 |
+| view\Widgets\auth\SignUp                                                                                                          |          7 |         -7 |          0 |         -1 |         -8 |
+| view\Widgets\auth\SignUp\ChildrenWidgets                                                                                          |          4 |         -4 |          0 |          0 |         -4 |
+| view\Widgets\auth\SignUp\ParentWidgets                                                                                            |          2 |         -2 |          0 |          0 |         -2 |
+| view\Widgets\auth\SignUp\emailVerificatonWidgets                                                                                  |          1 |         -1 |          0 |         -1 |         -2 |
+| view\Widgets\auth\shared                                                                                                          |          3 |        -34 |          0 |         -5 |        -39 |
+| view\Widgets\shared                                                                                                               |          2 |          2 |          0 |          0 |          2 |
+| view\screens                                                                                                                      |         21 |        103 |         -2 |          1 |        102 |
+| view\screens\Details                                                                                                              |          2 |         90 |          0 |          3 |         93 |
+| view\screens\Home                                                                                                                 |         13 |         34 |         -2 |         -2 |         30 |
+| view\screens\Home\Cart                                                                                                            |          1 |        -12 |          0 |          0 |        -12 |
+| view\screens\Home\HomePage                                                                                                        |          4 |         15 |         -2 |         -3 |         10 |
+| view\screens\Home\Settings                                                                                                        |          8 |         31 |          0 |          1 |         32 |
+| view\screens\Home\Settings (Files)                                                                                                |          1 |         28 |          0 |          0 |         28 |
+| view\screens\Home\Settings\AccountPages                                                                                           |          7 |          3 |          0 |          1 |          4 |
+| view\screens\Home\Settings\AccountPages (Files)                                                                                   |          2 |         -2 |          0 |          0 |         -2 |
+| view\screens\Home\Settings\AccountPages\AddressPages                                                                              |          1 |         -2 |          0 |          0 |         -2 |
+| view\screens\Home\Settings\AccountPages\GiftCardsPages                                                                            |          1 |          0 |          0 |         -1 |         -1 |
+| view\screens\Home\Settings\AccountPages\OrdersPages                                                                               |          1 |          9 |          0 |          2 |         11 |
+| view\screens\Home\Settings\AccountPages\PaymentPages                                                                              |          2 |         -2 |          0 |          0 |         -2 |
+| view\screens\Products                                                                                                             |          1 |         -6 |          0 |          0 |         -6 |
+| view\screens\auth                                                                                                                 |          5 |        -15 |          0 |          0 |        -15 |
++-----------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-----------------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                                                                          | language | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\Controller\Detailes\detailesController.dart                                     | Dart     |        139 |          0 |          6 |        145 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\Controller\Home\CartController.dart                                             | Dart     |         24 |          0 |         -1 |         23 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\Controller\Home\CheckOutController.dart                                         | Dart     |         20 |         -3 |          0 |         17 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\Controller\Home\FilterPageController.dart                                       | Dart     |         67 |          0 |          2 |         69 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\Controller\Home\HomePageController.dart                                         | Dart     |        -37 |          0 |         -4 |        -41 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\Controller\Home\MainPageController.dart                                         | Dart     |         21 |          0 |          1 |         22 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\Controller\Home\SearchController.dart                                           | Dart     |         56 |          0 |          5 |         61 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\Controller\Home\SettingsControllers\AccountController.dart                      | Dart     |         62 |          0 |          3 |         65 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\Controller\Home\SettingsControllers\AddressController.dart                      | Dart     |         23 |          0 |          0 |         23 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\Controller\Home\SettingsControllers\GiftCardController.dart                     | Dart     |          0 |          0 |          1 |          1 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\Controller\Home\SettingsControllers\OrdersController.dart                       | Dart     |         34 |          0 |          0 |         34 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\Controller\Home\SettingsControllers\PaymentController.dart                      | Dart     |        -19 |          0 |         -1 |        -20 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\Controller\Home\favouritePageController.dart                                    | Dart     |          1 |          0 |          0 |          1 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\Controller\authControllers\SignInController.dart                                | Dart     |         10 |          0 |         -1 |          9 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\Controller\authControllers\SignUpController.dart                                | Dart     |         -1 |          0 |          0 |         -1 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\core\class\CRUD.dart                                                            | Dart     |         33 |          0 |          0 |         33 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\core\class\HandleSearchState.dart                                               | Dart     |         32 |          0 |          0 |         32 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\core\class\HandlingDataRequest.dart                                             | Dart     |         42 |          0 |          2 |         44 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\core\class\enums.dart                                                           | Dart     |          8 |          0 |          1 |          9 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\core\constant\AppWords.dart                                                     | Dart     |        225 |         40 |         37 |        302 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\core\constant\ArgumentsNames.dart                                               | Dart     |          2 |          1 |          0 |          3 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\core\constant\Server.dart                                                       | Dart     |          3 |          1 |          0 |          4 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\core\function\UiFunctions\Dialogs\CardExpiredDialog.dart                        | Dart     |         -1 |          0 |          0 |         -1 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\core\function\UiFunctions\Dialogs\ReviewDialog.dart                             | Dart     |         81 |          0 |          2 |         83 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\core\function\UiFunctions\Dialogs\confirmPaymentDialog.dart                     | Dart     |         -1 |          0 |          0 |         -1 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\core\function\UiFunctions\SnackBars.dart                                        | Dart     |          2 |          0 |          0 |          2 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\core\function\notifications.dart                                                | Dart     |         19 |          0 |          3 |         22 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\core\localization\HandlePosition.dart                                           | Dart     |         45 |          0 |          6 |         51 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\core\localization\handleLanguageApi.dart                                        | Dart     |         59 |          0 |          9 |         68 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\core\middleware\middleware.dart                                                 | Dart     |          1 |          0 |          0 |          1 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\core\services\intialServices.dart                                               | Dart     |          4 |          0 |          1 |          5 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\data\dataSource\Static\HiveKeys.dart                                            | Dart     |          2 |          0 |          0 |          2 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\data\dataSource\Static\static.dart                                              | Dart     |        -33 |         -1 |         -1 |        -35 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\data\dataSource\remote\Detailes\CommentsData.dart                               | Dart     |         36 |          0 |          5 |         41 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\data\dataSource\remote\Detailes\DetailesData.dart                               | Dart     |         12 |          0 |          2 |         14 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\data\dataSource\remote\auth\AuthEditData.dart                                   | Dart     |         23 |          0 |          3 |         26 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\data\dataSource\remote\home\AddressData.dart                                    | Dart     |          1 |          0 |          0 |          1 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\data\dataSource\remote\settings\PaymentData.dart                                | Dart     |          1 |          0 |          0 |          1 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\data\dataSource\remote\shared\CheckADPAY.dart                                   | Dart     |         11 |          0 |          2 |         13 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\data\model\HomePageModels\itemsModel.dart                                       | Dart     |          8 |          0 |          0 |          8 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\data\model\ProductModels\CommentModel.dart                                      | Dart     |         49 |          0 |          4 |         53 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\main.dart                                                                       | Dart     |         -1 |          0 |          0 |         -1 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\routes.dart                                                                     | Dart     |         14 |          0 |          0 |         14 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\Widgets\Detailes\DetailesBottomCard.dart                                   | Dart     |          4 |          0 |          0 |          4 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\Widgets\Detailes\DetailesBottomSheet.dart                                  | Dart     |         -3 |          0 |          0 |         -3 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\Widgets\Detailes\DetailesDescription.dart                                  | Dart     |         -2 |          0 |         -1 |         -3 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\Widgets\Detailes\DetailesListView.dart                                     | Dart     |         23 |          0 |         -2 |         21 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\Widgets\Detailes\ProductAndPageHeaders.dart                                | Dart     |         -3 |          0 |          0 |         -3 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\Widgets\Detailes\ProductDetailesCard.dart                                  | Dart     |          3 |          0 |         -2 |          1 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\Widgets\Detailes\ReviewsCard.dart                                          | Dart     |         27 |          0 |          0 |         27 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\Widgets\Detailes\SeeAllTextRow.dart                                        | Dart     |        -31 |          0 |         -3 |        -34 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\Widgets\Home\Cart\CartProductsDetailes.dart                                | Dart     |          1 |          0 |          0 |          1 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\Widgets\Home\Cart\checkOut\Information\CheckOutItems.dart                  | Dart     |          1 |          0 |          0 |          1 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\Widgets\Home\Cart\checkOut\Information\DiliverCountryButton.dart           | Dart     |         -3 |          0 |          0 |         -3 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\Widgets\Home\Cart\checkOut\Information\Information.dart                    | Dart     |         -1 |          0 |          0 |         -1 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\Widgets\Home\Cart\checkOut\UserAddressShipBox.dart                         | Dart     |         -1 |          0 |          0 |         -1 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\Widgets\Home\Cart\checkOut\payment\PayMethodListView.dart                  | Dart     |         -1 |          0 |          0 |         -1 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\Widgets\Home\Cart\checkOut\payment\TermsAndConditionText.dart              | Dart     |         -1 |          0 |          0 |         -1 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\Widgets\Home\Cart\checkOut\payment\TotalPayCard.dart                       | Dart     |         -4 |          0 |          0 |         -4 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\Widgets\Home\Cart\checkOut\shipping\ShipOptionsBox.dart                    | Dart     |         -2 |          0 |          0 |         -2 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\Widgets\Home\Cart\checkOut\shipping\Shipping.dart                          | Dart     |         -1 |          0 |          0 |         -1 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\Widgets\Home\Favourite\SaveditemsListView.dart                             | Dart     |         -1 |          0 |          0 |         -1 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\Widgets\Home\HomePage\BannerCardWithRichtext.dart                          | Dart     |         19 |          0 |          0 |         19 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\Widgets\Home\HomePage\BrandsGridView.dart                                  | Dart     |          1 |          0 |          0 |          1 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\Widgets\Home\HomePage\NewTrendBanner.dart                                  | Dart     |         18 |          0 |         -1 |         17 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\Widgets\Home\HomePage\NewTrend\FilterPageWidgets\FilterItemsContent.dart   | Dart     |         -4 |          0 |         -1 |         -5 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\Widgets\Home\HomePage\NewTrend\NewTrendItemsGridView.dart                  | Dart     |          5 |          0 |         -1 |          4 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\Widgets\Home\HomePage\ProductsGridView.dart                                | Dart     |          2 |          0 |          0 |          2 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\Widgets\Home\HomePage\RecentlyGridView.dart                                | Dart     |          7 |          0 |         -1 |          6 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\Widgets\Home\HomePage\RecentlyViewedText.dart                              | Dart     |          1 |          0 |          0 |          1 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\Widgets\Home\HomePage\SavedItemsStack.dart                                 | Dart     |         11 |          0 |          0 |         11 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\Widgets\Home\HomePage\UserStyleGridView.dart                               | Dart     |         -3 |          0 |         -1 |         -4 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\Widgets\Home\Search\SearchBanner.dart                                      | Dart     |          1 |          0 |         -1 |          0 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\Widgets\Home\Search\SearchTextFiled.dart                                   | Dart     |         -1 |          0 |          0 |         -1 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\Widgets\Home\Settings\AccountSettings\AccountPageCard.dart                 | Dart     |          1 |          0 |          0 |          1 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\Widgets\Home\Settings\OrdersWidgets\OrdersCard.dart                        | Dart     |         27 |          0 |          0 |         27 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\Widgets\auth\SignIn\ChildrenWidgets\SignInCustomButton.dart                | Dart     |         -1 |          0 |          0 |         -1 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\Widgets\auth\SignUp\ChildrenWidgets\DropDownButtonAuth.dart                | Dart     |         -1 |          0 |          0 |         -1 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\Widgets\auth\SignUp\ChildrenWidgets\EmailLikedRow.dart                     | Dart     |         -1 |          0 |          0 |         -1 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\Widgets\auth\SignUp\ChildrenWidgets\MostlyIntersetedRichText.dart          | Dart     |         -1 |          0 |          0 |         -1 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\Widgets\auth\SignUp\ChildrenWidgets\SignUpCustomButton.dart                | Dart     |         -1 |          0 |          0 |         -1 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\Widgets\auth\SignUp\ParentWidgets\DropDownButtonsRow.dart                  | Dart     |         -1 |          0 |          0 |         -1 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\Widgets\auth\SignUp\ParentWidgets\SignUpTextFields.dart                    | Dart     |         -1 |          0 |          0 |         -1 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\Widgets\auth\SignUp\emailVerificatonWidgets\EmailVerificationRichText.dart | Dart     |         -1 |          0 |         -1 |         -2 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\Widgets\auth\shared\AuthPageTitle.dart                                     | Dart     |        -30 |          0 |         -4 |        -34 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\Widgets\auth\shared\HaveAccountAuth.dart                                   | Dart     |         -3 |          0 |         -1 |         -4 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\Widgets\auth\shared\RetryAuthButton.dart                                   | Dart     |         -1 |          0 |          0 |         -1 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\Widgets\shared\ProductsPageGridView.dart                                   | Dart     |          3 |          0 |          0 |          3 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\Widgets\shared\TitledTextField.dart                                        | Dart     |         -1 |          0 |          0 |         -1 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\screens\Details\DetailsPage.dart                                           | Dart     |         12 |          0 |         -1 |         11 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\screens\Details\ReviewsPage.dart                                           | Dart     |         78 |          0 |          4 |         82 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\screens\Home\Cart\Cart.dart                                                | Dart     |        -12 |          0 |          0 |        -12 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\screens\Home\HomePage\HomePage.dart                                        | Dart     |         -1 |          0 |          0 |         -1 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\screens\Home\HomePage\NewTrends.dart                                       | Dart     |          3 |          0 |          0 |          3 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\screens\Home\HomePage\PricePage.dart                                       | Dart     |          3 |         -2 |         -2 |         -1 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\screens\Home\HomePage\filterPage.dart                                      | Dart     |         10 |          0 |         -1 |          9 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\screens\Home\Settings\AccountPages\AddressPages\AddAddressMap.dart         | Dart     |         -2 |          0 |          0 |         -2 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\screens\Home\Settings\AccountPages\ContactUs.dart                          | Dart     |         -1 |          0 |          0 |         -1 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\screens\Home\Settings\AccountPages\GiftCardsPages\GiftCardPage.dart        | Dart     |          0 |          0 |         -1 |         -1 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\screens\Home\Settings\AccountPages\OrdersPages\OrderTrack.dart             | Dart     |          9 |          0 |          2 |         11 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\screens\Home\Settings\AccountPages\PaymentPages\CUDPaymentPage.dart        | Dart     |         -1 |          0 |          0 |         -1 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\screens\Home\Settings\AccountPages\PaymentPages\PaymentMethods.dart        | Dart     |         -1 |          0 |          0 |         -1 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\screens\Home\Settings\AccountPages\UsersDetailes.dart                      | Dart     |         -1 |          0 |          0 |         -1 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\screens\Home\Settings\SettingsMainPage.dart                                | Dart     |         28 |          0 |          0 |         28 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\screens\Products\ProductsPage.dart                                         | Dart     |         -6 |          0 |          0 |         -6 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\screens\auth\CheckEmail.dart                                               | Dart     |         -9 |          0 |          0 |         -9 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\screens\auth\ForgotPasswordVerificaton.dart                                | Dart     |          1 |          0 |          0 |          1 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\screens\auth\SignIn.dart                                                   | Dart     |          3 |          0 |          0 |          3 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\screens\auth\SignUp.dart                                                   | Dart     |          2 |          0 |          0 |          2 |
+| c:\Users\Magd\Documents\Flutter Projects\ebuy\lib\view\screens\auth\setNewPassword.dart                                           | Dart     |        -12 |          0 |          0 |        -12 |
+| Total                                                                                                                             |          |      1,230 |         36 |         68 |      1,334 |
++-----------------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+

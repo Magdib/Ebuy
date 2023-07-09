@@ -15,7 +15,7 @@ class PricePage extends GetView<FilterPageControllerimp> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Price",
+          "Price".tr,
           style: Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 20),
         ),
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -31,7 +31,7 @@ class PricePage extends GetView<FilterPageControllerimp> {
       body: WillPopScope(
         onWillPop: () => controller.onWillPop(),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
           child: Column(
             children: [
               const SizedBox(

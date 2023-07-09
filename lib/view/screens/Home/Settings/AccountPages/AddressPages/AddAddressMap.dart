@@ -1,7 +1,5 @@
 import 'package:ebuy/Controller/Home/SettingsControllers/AddressController.dart';
 import 'package:ebuy/core/constant/Colors.dart';
-import 'package:ebuy/core/function/UiFunctions/customAppBar.dart';
-import 'package:ebuy/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';

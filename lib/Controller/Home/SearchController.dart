@@ -1,6 +1,7 @@
 import 'package:ebuy/Controller/Home/HomePageController.dart';
 import 'package:ebuy/core/class/enums.dart';
 import 'package:ebuy/core/constant/ArgumentsNames.dart';
+import 'package:ebuy/core/localization/handleLanguageApi.dart';
 import 'package:ebuy/data/model/HomePageModels/itemsModel.dart';
 import 'package:ebuy/routes.dart';
 import "package:flutter/material.dart";
@@ -30,53 +31,56 @@ class SearchControllerImp extends SearchController
   SearchState searchState = SearchState.loading;
   late String categoryName;
   bool showTabBar = true;
-  List<Tab> tabs = const [
+  late bool isEnglish;
+  List<Tab> tabs = [
     Tab(
-      text: "Women",
+      text: "Women".tr,
     ),
     Tab(
-      text: "Men",
+      text: "Men".tr,
     )
   ];
   List<Banners> womenBanners = [
     Banners(
       bannerImage: 'WomenNewIn.png',
-      bannerTitle: 'NEW IN',
+      bannerTitle: 'NEW IN'.tr,
     ),
     Banners(
       bannerImage: 'WomenClothing.png',
-      bannerTitle: 'CLOTHING',
+      bannerTitle: 'CLOTHING'.tr,
     ),
     Banners(
       bannerImage: 'WomenShoes.png',
-      bannerTitle: 'SHOES',
+      bannerTitle: 'SHOES'.tr,
     ),
     Banners(
       bannerImage: 'WomenAccessories.png',
-      bannerTitle: 'ACCESSORIES',
+      bannerTitle: 'ACCESSORIES'.tr,
     )
   ];
   List<Banners> menBanners = [
     Banners(
       bannerImage: 'MenNewIn.png',
-      bannerTitle: 'NEW IN',
+      bannerTitle: 'NEW IN'.tr,
     ),
     Banners(
       bannerImage: 'MenClothing.png',
-      bannerTitle: 'CLOTHING',
+      bannerTitle: 'CLOTHING'.tr,
     ),
     Banners(
       bannerImage: 'MenShoes.png',
-      bannerTitle: 'SHOES',
+      bannerTitle: 'SHOES'.tr,
     ),
     Banners(
       bannerImage: 'MenAccessories.png',
-      bannerTitle: 'ACCESSORIES',
+      bannerTitle: 'ACCESSORIES'.tr,
     )
   ];
 
   @override
   void getSearchData() {
+    isEnglish = getLanguage();
+    banners.clear();
     HomePageControllerImp homeController = Get.find();
     if (homeController.statusRequest == StatusRequest.offlinefailure) {
       searchState = SearchState.failure;
@@ -97,15 +101,16 @@ class SearchControllerImp extends SearchController
       banners[1].bannerSubtitileAr = '';
       banners[1].bannerTitleAr = "منتجات جديدة";
     }
-    print(searchState);
     update();
   }
 
   @override
   searchingProducts() {
     searchProducts = products
-        .where((product) => product.itemsName!
-            .isCaseInsensitiveContains(searchController!.text))
+        .where((product) =>
+            product.itemsName!
+                .isCaseInsensitiveContains(searchController!.text) ||
+            product.itemsNameAr!.contains(searchController!.text))
         .toList();
   }
 
@@ -114,7 +119,6 @@ class SearchControllerImp extends SearchController
     HomePageControllerImp controller = Get.find();
     FocusScope.of(context).unfocus();
     Get.toNamed(AppRoutes.detailsPageRoute, arguments: {
-      ArgumentsNames.productListD: products,
       ArgumentsNames.productD: searchProducts[index],
       ArgumentsNames.recentProducts: controller.recentProduct
     });
@@ -143,8 +147,8 @@ class SearchControllerImp extends SearchController
 
   @override
   void goToSearchCategory(String category) {
-    categoryName = category;
     String gender;
+    categoryName = category;
     tabController!.index == 0 ? gender = "female" : gender = "male";
     sortCategoriesProducts(gender, category);
     Get.toNamed(AppRoutes.searchCategoriesRoute);
@@ -152,42 +156,82 @@ class SearchControllerImp extends SearchController
 
   @override
   void sortCategoriesProducts(String gender, String category) {
-    switch (category) {
-      case "NEW IN":
-        sortedProducts = products
-            .where((product) =>
-                product.itemsIsNew!.contains("1") &&
-                product.itemsGender!.startsWith(gender))
-            .toList();
+    if (isEnglish == true) {
+      switch (category) {
+        case "NEW IN":
+          sortedProducts = products
+              .where((product) =>
+                  product.itemsIsNew!.contains("1") &&
+                  product.itemsGender!.startsWith(gender))
+              .toList();
 
-        break;
-      case "CLOTHING":
-        sortedProducts = products
-            .where((product) =>
-                (product.categoriesName!.contains("Dress") ||
-                    product.categoriesName!.contains("Shorts") ||
-                    product.categoriesName!.contains("T-Shirt")) &&
-                product.itemsGender!.startsWith(gender))
-            .toList();
-        sortedProducts.shuffle();
-        break;
-      case "SHOES":
-        sortedProducts = products
-            .where((product) =>
-                product.categoriesName!.contains("Shoes") &&
-                product.itemsGender!.startsWith(gender))
-            .toList();
+          break;
+        case "CLOTHING":
+          sortedProducts = products
+              .where((product) =>
+                  (product.categoriesName!.contains("Dress") ||
+                      product.categoriesName!.contains("Shorts") ||
+                      product.categoriesName!.contains("T-Shirt")) &&
+                  product.itemsGender!.startsWith(gender))
+              .toList();
+          sortedProducts.shuffle();
+          break;
+        case "SHOES":
+          sortedProducts = products
+              .where((product) =>
+                  product.categoriesName!.contains("Shoes") &&
+                  product.itemsGender!.startsWith(gender))
+              .toList();
 
-        break;
-      case "ACCESSORIES":
-        sortedProducts = products
-            .where((product) =>
-                product.categoriesName!.contains("Accessories") &&
-                product.itemsGender!.startsWith(gender))
-            .toList();
+          break;
+        case "ACCESSORIES":
+          sortedProducts = products
+              .where((product) =>
+                  product.categoriesName!.contains("Accessories") &&
+                  product.itemsGender!.startsWith(gender))
+              .toList();
 
-        break;
-      default:
+          break;
+        default:
+      }
+    } else {
+      switch (category) {
+        case 'منتجات جديدة':
+          sortedProducts = products
+              .where((product) =>
+                  product.itemsIsNew!.contains("1") &&
+                  product.itemsGender!.startsWith(gender))
+              .toList();
+
+          break;
+        case 'ألبسة':
+          sortedProducts = products
+              .where((product) =>
+                  (product.categoriesName!.contains("Dress") ||
+                      product.categoriesName!.contains("Shorts") ||
+                      product.categoriesName!.contains("T-Shirt")) &&
+                  product.itemsGender!.startsWith(gender))
+              .toList();
+          sortedProducts.shuffle();
+          break;
+        case 'أحذية':
+          sortedProducts = products
+              .where((product) =>
+                  product.categoriesName!.contains("Shoes") &&
+                  product.itemsGender!.startsWith(gender))
+              .toList();
+
+          break;
+        case 'إكسسوارات':
+          sortedProducts = products
+              .where((product) =>
+                  product.categoriesName!.contains("Accessories") &&
+                  product.itemsGender!.startsWith(gender))
+              .toList();
+
+          break;
+        default:
+      }
     }
     if (sortedProducts.length > 3) {
       sortedProducts.removeRange(3, sortedProducts.length);

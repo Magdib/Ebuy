@@ -45,7 +45,7 @@ class HomePage extends StatelessWidget {
                 const RecentlyGridView(),
                 const HomeSavedItems(),
                 Text(
-                  'Brands you  may like',
+                  'Brands you may like'.tr,
                   style: Theme.of(context)
                       .textTheme
                       .bodyText1!

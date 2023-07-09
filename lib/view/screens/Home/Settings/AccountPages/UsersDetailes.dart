@@ -1,7 +1,6 @@
 import 'package:ebuy/Controller/Home/SettingsControllers/AccountController.dart';
 import 'package:ebuy/core/class/HandlingDataRequest.dart';
 import 'package:ebuy/view/Widgets/shared/TitledTextField.dart';
-import 'package:ebuy/view/Widgets/shared/CustomButton.dart';
 import 'package:ebuy/view/Widgets/shared/CustomConditionButton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

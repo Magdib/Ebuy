@@ -29,13 +29,13 @@ class ReviewsCard extends GetView<DetailesControllerImp> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Reviews',
+                  'Reviews'.tr,
                   style: Theme.of(context).textTheme.bodyText1,
                 ),
                 TextButton(
                     onPressed: () => Get.toNamed(AppRoutes.reviewsPageRoute),
                     child: Text(
-                      "See All",
+                      "See All".tr,
                       style: Theme.of(context)
                           .textTheme
                           .headline2!
@@ -65,7 +65,7 @@ class ReviewsCard extends GetView<DetailesControllerImp> {
                     ),
                   )
                 : Text(
-                    "No reviews",
+                    "No reviews".tr,
                     style: Theme.of(context).textTheme.bodyText1,
                   ),
           )

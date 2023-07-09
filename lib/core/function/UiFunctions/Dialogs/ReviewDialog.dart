@@ -13,7 +13,7 @@ reviewDialog(
   DetailesControllerImp controller = Get.find();
   Get.defaultDialog(
       onWillPop: () => controller.willPopReview(),
-      title: "Review",
+      title: "Review".tr,
       titleStyle: Theme.of(context).textTheme.bodyText1,
       content: GetBuilder<DetailesControllerImp>(
         builder: (controller) => HandlingDataRequest(
@@ -31,7 +31,7 @@ reviewDialog(
                   controller: controller.reviewController,
                   style: Theme.of(context).textTheme.bodyText1,
                   decoration: InputDecoration(
-                      hintText: "Write your review here...",
+                      hintText: "Write your review here...".tr,
                       hintStyle: Theme.of(context).textTheme.headline6,
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10))),
@@ -41,7 +41,7 @@ reviewDialog(
               Row(
                 children: [
                   Text(
-                    "rate: ",
+                    "rate: ".tr,
                     style: Theme.of(context).textTheme.bodyText1,
                   ),
                   const SizedBox(
@@ -71,12 +71,12 @@ reviewDialog(
         ),
       ),
       confirm: DialogButton(
-          title: 'Confirm',
+          title: 'Confirm'.tr,
           onPressed: controller.commentStatusRequest != StatusRequest.loading
               ? controller.editIndex == null
                   ? () => controller.saveReview(false)
                   : () => controller.saveReview(true)
               : () {}),
       cancel: DialogButton(
-          title: "Cancle", onPressed: () => controller.willPopReview()));
+          title: "Cancle".tr, onPressed: () => controller.willPopReview()));
 }

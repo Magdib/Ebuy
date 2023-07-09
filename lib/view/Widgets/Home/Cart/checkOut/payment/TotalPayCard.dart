@@ -1,12 +1,8 @@
-import 'package:ebuy/Controller/Home/CartController.dart';
 import 'package:ebuy/Controller/Home/CheckOutController.dart';
 import 'package:ebuy/core/constant/Colors.dart';
 import 'package:ebuy/core/function/UiFunctions/Dialogs/confirmPaymentDialog.dart';
-import 'package:ebuy/data/dataSource/Static/UINumbers.dart';
-import 'package:ebuy/view/Widgets/shared/CustomButton.dart';
 import 'package:ebuy/view/Widgets/shared/CustomConditionButton.dart';
 import 'package:ebuy/view/Widgets/shared/CustomContainer.dart';
-import 'package:ebuy/view/Widgets/shared/DialogButton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -62,7 +58,7 @@ class TotalPayCard extends GetView<CheckOutControllerimp> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Total to pay',
+                  'Total to pay'.tr,
                   style: Theme.of(context).textTheme.bodyText1,
                 ),
                 Text(
@@ -79,7 +75,7 @@ class TotalPayCard extends GetView<CheckOutControllerimp> {
             ),
             GetBuilder<CheckOutControllerimp>(
               builder: (controller) => CustomConditionButton(
-                  text: 'Place order',
+                  text: 'Place order'.tr,
                   condition: controller.canPlaceOrder,
                   onPressed: () => confirmPaymentDialog(context)),
             ),

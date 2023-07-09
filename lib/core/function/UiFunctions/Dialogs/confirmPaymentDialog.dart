@@ -6,16 +6,17 @@ import 'package:get/get.dart';
 confirmPaymentDialog(BuildContext context) {
   CheckOutControllerimp controller = Get.find();
   Get.defaultDialog(
-      title: "Confirm payment",
+      title: "Confirm payment".tr,
       titleStyle: Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 20),
       middleText:
-          "Are you sure you want to pay and place order? !!!!!(this app is for cv so there is no payment Process!!!!!)",
+          "Are you sure you want to pay and place order? !!!!!(this app is for cv so there is no payment Process!!!!!)"
+              .tr,
       middleTextStyle: Theme.of(context).textTheme.headline6,
       confirm: DialogButton(
-        title: 'Confirm',
+        title: 'Confirm'.tr,
         onPressed: () {
           controller.placeOrder();
         },
       ),
-      cancel: DialogButton(title: 'Cancle', onPressed: () => Get.back()));
+      cancel: DialogButton(title: 'Cancle'.tr, onPressed: () => Get.back()));
 }

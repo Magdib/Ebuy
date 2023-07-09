@@ -110,12 +110,168 @@ class AppWords {
     'Please Choose Valid Date and Retry': 'Please Choose Valid Date and Retry',
     'Invalid Email: ': 'Invalid Email: ',
     'Email already exist': 'Email already exist',
+
     //Sign In SnackBars
+
     'Invalid Email Or Password: ': 'Invalid Email Or Password: ',
     'Email Not Found Or Password is wrong':
         'Email Not Found Or Password is wrong',
     'Email Not Found': 'Email Not Found',
+    //No Internet snackBar
+    "No internet connection": "No internet connection",
+    "Please check your internet and try again":
+        "Please check your internet and try again",
+
+    //success snackBars
+
+    //Home
+    "NEW TREND": "NEW TREND",
+    'Recently viewed': 'Recently viewed',
+    'Saved items': 'Saved items',
+    'View all': 'View all',
+    'Brands you may like': 'Brands you may like',
+    'Styles based on your shopping habits':
+        'Styles based on your shopping habits',
+    "Products Page": "Products Page",
+
+    //New Trend
+
+    "New Trend": "New Trend",
+    'Sort': 'Sort',
+    "Filter": "Filter",
+    'Recommended': 'Recommended',
+    'What\'s New': 'What\'s New',
+    'Price: High to low': 'Price: High to low',
+    'Price: Low to high': 'Price: Low to high',
+
+    //Filter Page
+
+    "All": "All",
+    "Gender": "Gender",
+    'male': 'male',
+    'female': 'female',
+    'Product Category': 'Product Category',
+    'Color': 'Color',
+    'Brand': 'Brand',
+    'Size': 'Size',
+    'Medium': 'Medium',
+    'Large': 'Large',
+    'X-Large': 'X-Large',
+    "Small": "Small",
+    "View items": "View items",
+    'Price': 'Price',
+
+    //Detailes Page
+    'Description': 'Description',
+    'Free delivery & returns': 'Free delivery & returns',
+    'Size guide': 'Size guide',
+    'Reviews': 'Reviews',
+    "See All": "See All",
+    "No reviews": "No reviews",
+    "Review": "Review",
+    "Write your review here...": "Write your review here...",
+    "rate: ": "rate: ",
+    "Cancle": "Cancle",
+    'You might also like': 'You might also like',
+    'Add to cart': 'Add to cart',
+    'Color:': 'Color:',
+    'Size:': 'Size:',
+    'Amount:': 'Amount:',
+    "Warehouse:": "Warehouse:",
+    "Review text can't be empty!": "Review text can't be empty!",
+    'Done.': 'Done.',
+    'your product have been successfully added to the cart ':
+        'your product have been successfully added to the cart ',
+    'price is:': 'price is:',
+    //Search
+    "Search": "Search",
+    'You have not recent searches.': 'You have not recent searches.',
+    "Loading...": "Loading...",
+    "No internet connection...": "No internet connection...",
+    "Women": "Women",
+    "Men": "Men",
+    'NEW IN': 'NEW IN',
+    'CLOTHING': 'CLOTHING',
+    'SHOES': 'SHOES',
+    'ACCESSORIES': 'ACCESSORIES',
+    "New edits": "New edits",
+
+    //Cart
+    "Cart": "Cart",
+    "Total:": "Total:",
+    'Checkout': 'Checkout',
+    'No Data.': 'No Data.',
+    'Color:   ': 'Color:   ',
+    'Size:  ': 'Size:  ',
+
+    //-------------------------------------------------Start Checkout------------------------------------------------------------------------------
+
+    'You need a billing address': 'You need a billing address',
+    'You currently have no saved address.Without one, you won\'t able to checkout.':
+        'You currently have no saved address.Without one, you won\'t able to checkout.',
+    'Add address': 'Add address',
+    'You need to add payment method': 'You need to add payment method',
+    'You currently have no saved payment method.Without one, you won\'t able to checkout.':
+        'You currently have no saved payment method.Without one, you won\'t able to checkout.',
+    'Add payment method': 'Add payment method',
+
+    //Information
+
+    'Deliver to:': 'Deliver to:',
+    'My cart': 'My cart',
+    ' choose e-gift cards/ Voucher code': ' choose e-gift cards/ Voucher code',
+    "Discount": "Discount",
+    'Information': 'Information',
+    'Shipping': 'Shipping',
+    'Payment': 'Payment',
+    "Amount:  ": "Amount:  ",
+    'Choose Method:': 'Choose Method:',
+    'Gift voucher': 'Gift voucher',
+    'Enter gift voucher code here...': 'Enter gift voucher code here...',
+    'Add gift Voucher': 'Add gift Voucher',
+    'Choose gift card': 'Choose gift card',
+    "Wrong code": "Wrong code",
+    "the voucher code you are trying to add does not exist":
+        "the voucher code you are trying to add does not exist",
+
+    //Shipping
+    'Shipping address': 'Shipping address',
+    'Postal address': 'Postal address',
+    'Shipping options': 'Shipping options',
+    'Free Standard Shipping': 'Free Standard Shipping',
+    "Delivered on or before": "Delivered on or before",
+    'No shipping on Public Holidays': 'No shipping on Public Holidays',
+    '\$10.00 Express Shipping': '\$10.00 Express Shipping',
+    '\$19.99 X-Express Shipping': '\$19.99 X-Express Shipping',
+    "Delivered on": "Delivered on",
+    'Free': 'Free',
+    "Express": "Express",
+    "X-Express": "X-Express",
+    "Choose Address": "Choose Address",
+
+    //payment
+    'Payment type': 'Payment type',
+    'We accept': 'We accept',
+    'Sub - total': 'Sub - total',
+    'Sale tax': 'Sale tax',
+    'Total to pay': 'Total to pay',
+    'Place order': 'Place order',
+    'By placing your order you agree to our ':
+        'By placing your order you agree to our ',
+    'terms and conditions,\nprivacy ': 'terms and conditions,\nprivacy ',
+    'and ': 'and ',
+    'returns policies ': 'returns policies ',
+    'and consent to some of your data being stored by Ebuy which may be used to make future shopping experiences better for you.':
+        'and consent to some of your data being stored by Ebuy which may be used to make future shopping experiences better for you.',
+    "Confirm payment": "Confirm payment",
+    "Are you sure you want to pay and place order? !!!!!(this app is for cv so there is no payment Process!!!!!)":
+        "Are you sure you want to pay and place order? !!!!!(this app is for cv so there is no payment Process!!!!!)",
+    'Your order placed': 'Your order placed',
+    'Your order has been placed successfully. You can visit my order to check the delivery process.':
+        'Your order has been placed successfully. You can visit my order to check the delivery process.',
+    'Continue shopping': 'Continue shopping',
     //Settings
+
     'English': 'English',
     'Language': 'Language',
     'Setting': 'Setting',
@@ -129,6 +285,11 @@ class AppWords {
     'Payment methods': 'Payment methods',
     'Social accounts': 'Social accounts',
 
+    // Address Book
+    'No address': 'No address',
+    'you don\'t have any address yet add one by clicking the button down below to add one from the map':
+        'you don\'t have any address yet add one by clicking the button down below to add one from the map',
+
     //Orders
     'You currently have no orders': 'You currently have no orders',
     'You can Start Shopping by adding some products to your cart and checkout... ':
@@ -136,8 +297,25 @@ class AppWords {
     'Start shopping': 'Start shopping',
   };
 
-  ///Arabic Language
+  ///A
+  ///r
+  ///a
+  ///b
+  ///i
+  ///c
   ///
+  ///l
+  ///a
+  ///n
+  ///g
+  ///u
+  ///a
+  ///g
+  ///e
+  ///
+  ///M
+  ///a
+  ///p
   ///
   static const Map<String, String> arabicLanguage = {
     //OnBoarding
@@ -251,7 +429,161 @@ class AppWords {
     'Email Not Found Or Password is wrong':
         'كلمة المرور أو البريد الإلكتروني خطأ رجاءََ أعد التحقق من البريد الإلكتروني وكلمة السر ثم أعد المحاولة',
     'Email Not Found': 'البريد الإلكتروني غير موجود',
+    //No Internet snackBar
+    "No internet connection": "لا يوجد أتصال بالإنترنت",
+    "Please check your internet and try again":
+        "الرجاء التحقق من أتصالك بالشبكة و المحاولة مرة أخرى",
+
+    //Home
+    "NEW TREND": "الموضة الجديدة",
+    'Recently viewed': 'تمت مشاهدته مؤخراً',
+    'Saved items': 'العناصر المحفوظة',
+    'View all': 'مشاهدة الكل',
+    'Brands you may like': 'علامات تجارية قد تعجبك',
+    'Styles based on your shopping habits': 'موضات مبنية على أهتماماتك',
+    "Products Page": "صفحة المنتجات",
+
+    //New Trend
+
+    "New Trend": "الموضة الجديدة",
+    'Sort': 'فرز',
+    "Filter": "تصنيف",
+    'Recommended': 'المقترحات',
+    'What\'s New': 'منتجات جديدة',
+    'Price: High to low': 'السعر: من الأعلى إلى الأدنى',
+    'Price: Low to high': 'السعر: من الأدنى إلى الأعلى',
+
+    //Filter Page
+    "All": "الكل",
+    "Gender": "الجنس",
+    'male': 'رجالي',
+    'female': 'نسائي',
+    'Product Category': 'تصنيف المنتج',
+    'Color': 'اللون',
+    'Brand': 'الماركة',
+    'Size': 'الحجم',
+    'Medium': 'متوسط',
+    'Large': 'كبير',
+    'X-Large': 'كبير جداً',
+    "Small": "صغير",
+    "View items": "مشاهدة المنتجات",
+    'Price': 'السعر',
+
+    //Detailes Page
+    'Description': 'الوصف',
+    'Free delivery & returns': 'التوصيل المجاني والإعادة',
+    'Size guide': 'القياسات',
+    'Reviews': 'مراجعات',
+    "See All": "مشاهدة الكل",
+    "No reviews": "لا توجد مراجعات",
+    "Review": "مراجعة",
+    "Write your review here...": "أكتب مراجعتك هنا...",
+    "rate: ": "التقييم: ",
+    "Cancle": "إلغاء",
+    'You might also like': 'قد يعجبك أيضاً',
+    'Add to cart': 'إضافة إلى السلّة',
+    'Color:': 'اللون:',
+    'Size:': 'الحجم:',
+    'Amount:': 'الكمية:',
+    "Warehouse:": ":المستودع",
+    "Review text can't be empty!": "نص المراجعة لا يمكن أن يكون فارغاً",
+    'Done.': 'تمت العملية بنجاح',
+    'your product have been successfully added to the cart ':
+        'تم إضافة المنتج إلى السلة بنجاح',
+    'price is:': 'السعر هو:',
+
+    //Search
+
+    "Search": "بحث",
+    'You have not recent searches.': 'لم تقم حتى الآن بأي عملية بحث',
+    "Loading...": "جارٍ التحميل...",
+    "No internet connection...": "لا يوجد إتصال بالإنترنت",
+    "Women": "نسائي",
+    "Men": "رجالي",
+    'NEW IN': 'منتجات جديدة',
+    'CLOTHING': 'ألبسة',
+    'SHOES': 'أحذية',
+    'ACCESSORIES': 'إكسسوارات',
+    "New edits": "التعديلات الجديدة",
+
+    //Cart
+
+    "Cart": "السلّة",
+    "Total:": "المبلغ الكلي",
+    'Checkout': 'الدفع',
+    'No Data.': 'لا يوجد بيانات.',
+    'Color:   ': 'اللون:   ',
+    'Size:  ': 'الحجم:   ',
+
+    //-------------------------------------------------Start Checkout------------------------------------------------------------------------------
+
+    'You need a billing address': 'انت بحاجة إلى عنوان للفواتير',
+    'You currently have no saved address.Without one, you won\'t able to checkout.':
+        'أنت حالياً لا تملك أي عنوان محفوظ. بدون واحد لا يمكنك الدفع',
+    'Add address': 'إضافة عنوان',
+    'You need to add payment method': 'أنت بحاجة إلى إضافة وسيلة دفع',
+    'You currently have no saved payment method.Without one, you won\'t able to checkout.':
+        'أنت حالياً لا تملك أي وسيلة دفع محفوظة. بدون واحدة لا يمكنك الدفع',
+    'Add payment method': 'إضافة وسيلة دفع',
+
+    //information
+
+    'Deliver to:': 'التوصيل إلى:',
+    'My cart': 'سلّتي',
+    ' choose e-gift cards/ Voucher code': ' أختر بطاقات هدايا/ رمز قسيمة',
+    "Discount": "خصم",
+    'Information': 'معلومات',
+    'Shipping': 'شحن',
+    'Payment': 'دفع',
+    "Amount:  ": "الكمية:  ",
+    'Choose Method:': 'أختر الطريقة',
+    'Gift voucher': 'قسيمة شرائية',
+    'Enter gift voucher code here...': 'قم بإدخال رمز القسيمة هنا...',
+    'Add gift Voucher': 'إضافة القسيمة',
+    'Choose gift card': 'إختيار بطاقة هدية',
+    "Wrong code": "رمز خاطئ",
+    "the voucher code you are trying to add does not exist":
+        "رمز القسيمة الذي تحاول إدخاله غير موجود",
+
+    //Shipping
+    'Shipping address': 'عنوان الشحن',
+    'Postal address': 'عناوين البريد',
+    'Shipping options': 'خيارات الشحن',
+    'Free Standard Shipping': 'الشحن المجاني القياسي',
+    "Delivered on or before": "التوصيل في أو قبل",
+    'No shipping on Public Holidays': 'لا يوجد شحن خلال أيام العطل',
+    '\$10.00 Express Shipping': '\$10.00 توصيل سريع',
+    '\$19.99 X-Express Shipping': '\$19.99 توصيل سريع جداً',
+    "Delivered on": "التوصيل في",
+    'Free': 'مجاني',
+    "Express": "سريع",
+    "X-Express": "سريع جداً",
+    "Choose Address": "أختر عنواناً",
+
+    //payment
+    'Payment type': 'وسيلة الدفع',
+    'We accept': 'نحن نقبل',
+    'Sub - total': 'المبلغ الكلي المبدئي',
+    'Sale tax': 'ضريبة شرائية',
+    'Total to pay': 'المبلغ الكلي',
+    'Place order': 'إرسال الطلب',
+    'By placing your order you agree to our ':
+        'عند إرسالك الطلب فأنت توافق على ',
+    'terms and conditions,\nprivacy ': 'شروطنا وأحكامنا، و الخصوصية',
+    'and ': 'و كذلك ',
+    'returns policies ': 'سياسة الإسترجاع ',
+    'and consent to some of your data being stored by Ebuy which may be used to make future shopping experiences better for you.':
+        'و قبول أنه سيتم تخزين بعض بياناتك من قبلنا والتي قد يتم أستخدامها لتحسين جودة التسوق لك في المستقبل.',
+    "Confirm payment": "تأكيد عملية الشراء",
+    "Are you sure you want to pay and place order? !!!!!(this app is for cv so there is no payment Process!!!!!)":
+        "هل أنت متأكد أنك تريد الدفع وإرسال الطلب (!!!!هذا التطبيق تم تصميمه من أجل سيرتي الذاتية لذلك لا يوجد أي عملية دفع!!!!)",
+    'Your order placed': 'تم إرسال طلبك ',
+    'Your order has been placed successfully. You can visit my order to check the delivery process.':
+        'تم إرسال طلبك بنجاح. يمكنك زيارة قسم طلباتي للتحقق من عملية التوصيل',
+    'Continue shopping': 'متابعة التسوق',
+
     //Settings
+
     'English': 'العربية',
     'Language': 'اللغة',
     'Setting': 'الإعدادات',
@@ -264,7 +596,14 @@ class AppWords {
     'Address book': 'دفتر العناوين',
     'Payment methods': 'وسائل الدفع',
     'Social accounts': 'الحسابات',
+
+    // Address Book
+    'No address': 'لا يوجد عناوين',
+    'you don\'t have any address yet add one by clicking the button down below to add one from the map':
+        'أنت حالياً لا تملك أي عنوان قم بإضافة واحد من خلال الزر في الأسفل لإضافة واحد من الخريطة',
+
     //Orders
+
     'You currently have no orders': 'أنت حالياً لا تملك أي طلبات',
     'You can Start Shopping by adding some products to your cart and checkout... ':
         'يمكنك بدأ التسوق من خلال إضافة بعض العناصر إلى السلة ثم شرائهم بعد إكمال الخطوات',

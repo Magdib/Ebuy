@@ -1,15 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ebuy/core/class/HandlingDataRequest.dart';
 import 'package:ebuy/core/constant/Colors.dart';
-import 'package:ebuy/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../Controller/products/ProductsController.dart';
-import '../../../core/constant/ArgumentsNames.dart';
-import '../../../core/constant/Server.dart';
-import '../../../core/theme/theme.dart';
-import '../../Widgets/Home/HomePage/ProductsGridView.dart';
 import '../../Widgets/shared/ProductsPageGridView.dart';
 
 class ProductsPage extends StatelessWidget {
@@ -23,7 +17,7 @@ class ProductsPage extends StatelessWidget {
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           elevation: 0,
           title: Text(
-            "Products Page",
+            "Products Page".tr,
             style:
                 Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 20),
           ),

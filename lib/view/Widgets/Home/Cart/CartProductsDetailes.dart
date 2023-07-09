@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ebuy/Controller/Home/CartController.dart';
+import 'package:ebuy/core/localization/handleLanguageApi.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -35,7 +36,7 @@ class CartProductsDetailes extends StatelessWidget {
                 const SizedBox(
                   height: 35,
                 ),
-                Text(controller.cartProducts[index].itemsName!,
+                Text(handleCartLanguage(controller.cartProducts[index]),
                     style: Theme.of(context).textTheme.bodyText1!),
                 const SizedBox(
                   height: 5,
@@ -43,7 +44,7 @@ class CartProductsDetailes extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      'Color:   ',
+                      'Color:   '.tr,
                       style: Theme.of(context)
                           .textTheme
                           .headline6!
@@ -61,7 +62,7 @@ class CartProductsDetailes extends StatelessWidget {
                       width: 20,
                     ),
                     Text(
-                      'Size:  ${controller.cartProducts[index].selectedsize![0]}',
+                      '${'Size:  '.tr}${controller.cartProducts[index].selectedsize![0]}',
                       style: Theme.of(context)
                           .textTheme
                           .headline6!
@@ -69,8 +70,8 @@ class CartProductsDetailes extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(
-                  height: 30,
+                SizedBox(
+                  height: controller.isEnglish == true ? 30 : 10,
                 ),
                 Text(
                   '\$${double.parse(controller.cartProducts[index].cartPrice!).toStringAsFixed(2)}',

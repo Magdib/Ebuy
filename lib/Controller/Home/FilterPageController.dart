@@ -1,4 +1,5 @@
 import 'package:ebuy/core/constant/ArgumentsNames.dart';
+import 'package:ebuy/core/localization/handleLanguageApi.dart';
 import 'package:ebuy/data/model/HomePageModels/BrandsModel.dart';
 import 'package:ebuy/data/model/HomePageModels/CategoriesModel.dart';
 import 'package:ebuy/data/model/HomePageModels/ColorsModel.dart';
@@ -22,7 +23,16 @@ class FilterPageControllerimp extends FilterPageController {
   late List<FilterModel> filterList;
   late List<Products> products;
   List<Products> filteredProducts = [];
-  List<String> filterValues = ["All", "All", "All", "All", "All", "8 - 385"];
+
+  bool isEnglish = getLanguage();
+  List<String> filterValues = [
+    "All".tr,
+    "All".tr,
+    "All".tr,
+    "All".tr,
+    "All".tr,
+    "8 - 385"
+  ];
 
   @override
   void getFilterList() {
@@ -49,14 +59,30 @@ class FilterPageControllerimp extends FilterPageController {
       colorsEnglish.add(colors[i].colorsName!);
       colorsArabic.add(colors[i].colorNameAr!);
     }
-    filterList = [
-      FilterModel(title: 'Gender', type: ['All', 'male', 'female']),
-      FilterModel(title: 'Product Category', type: categoriesEnglish),
-      FilterModel(title: 'Color', type: colorsEnglish),
-      FilterModel(title: 'Brand', type: brandsEnglish),
-      FilterModel(
-          title: 'Size', type: ['All', 'Medium', 'Large', 'X-Large', "Small"]),
-    ];
+    isEnglish == false
+        ? filterList = [
+            FilterModel(
+                title: 'Gender'.tr, type: ['All'.tr, 'male'.tr, 'female'.tr]),
+            FilterModel(title: 'Product Category'.tr, type: categoriesArabic),
+            FilterModel(title: 'Color'.tr, type: colorsArabic),
+            FilterModel(title: 'Brand'.tr, type: brandsArabic),
+            FilterModel(title: 'Size'.tr, type: [
+              'All'.tr,
+              "Small".tr,
+              'Medium'.tr,
+              'Large'.tr,
+              'X-Large'.tr,
+            ]),
+          ]
+        : filterList = [
+            FilterModel(title: 'Gender'.tr, type: ['All', 'male', 'female']),
+            FilterModel(title: 'Product Category'.tr, type: categoriesEnglish),
+            FilterModel(title: 'Color'.tr, type: colorsEnglish),
+            FilterModel(title: 'Brand'.tr, type: brandsEnglish),
+            FilterModel(
+                title: 'Size'.tr,
+                type: ['All', "Small", 'Medium', 'Large', 'X-Large']),
+          ];
   }
 
   @override
@@ -83,9 +109,17 @@ class FilterPageControllerimp extends FilterPageController {
 
   @override
   onWillPop() {
-    for (int i = 0; i < filterValues.length; i++) {
-      if (filterValues[i] == "") {
-        filterValues[i] = "All";
+    if (isEnglish) {
+      for (int i = 0; i < filterValues.length; i++) {
+        if (filterValues[i] == "") {
+          filterValues[i] = "All";
+        }
+      }
+    } else {
+      for (int i = 0; i < filterValues.length; i++) {
+        if (filterValues[i] == "") {
+          filterValues[i] = "الكل";
+        }
       }
     }
 
@@ -96,21 +130,58 @@ class FilterPageControllerimp extends FilterPageController {
 
   @override
   void filterProducts() {
-    for (int i = 0; i < filterValues.length - 1; i++) {
-      if (filterValues[i] == "All") {
-        filterValues[i] = '';
+    if (isEnglish == true) {
+      for (int i = 0; i < filterValues.length - 1; i++) {
+        if (filterValues[i] == "All") {
+          filterValues[i] = '';
+        }
+      }
+      filteredProducts = products
+          .where((product) =>
+              product.itemsGender!.startsWith(filterValues[0]) &&
+              product.categoriesName!.startsWith(filterValues[1]) &&
+              product.itemsColor!.startsWith(filterValues[2]) &&
+              product.itemsBrand!.startsWith(filterValues[3]) &&
+              product.itemsSize!.startsWith(filterValues[4]) &&
+              double.parse(product.itemsPrice!)
+                  .isGreaterThan(priceRang.start) &&
+              double.parse(product.itemsPrice!).isLowerThan(priceRang.end))
+          .toList();
+    } else {
+      for (int i = 0; i < filterValues.length - 1; i++) {
+        if (filterValues[i] == "الكل") {
+          filterValues[i] = '';
+        }
+        switch (filterValues[4]) {
+          case "صغير":
+            filterValues[4] = "Small";
+            break;
+          case "متوسط":
+            filterValues[4] = "Medium";
+            break;
+          case "كبير":
+            filterValues[4] = "Large";
+            break;
+          case "كبير جداً":
+            filterValues[4] = "X-Large";
+            break;
+          default:
+            filterValues[4] = '';
+        }
+        filteredProducts = products
+            .where((product) =>
+                product.itemsGenderAr!.startsWith(filterValues[0]) &&
+                product.categoriesNameAr!.startsWith(filterValues[1]) &&
+                product.itemsColorAr!.startsWith(filterValues[2]) &&
+                product.itemsBrandAr!.startsWith(filterValues[3]) &&
+                product.itemsSize!.startsWith(filterValues[4]) &&
+                double.parse(product.itemsPrice!)
+                    .isGreaterThan(priceRang.start) &&
+                double.parse(product.itemsPrice!).isLowerThan(priceRang.end))
+            .toList();
       }
     }
-    filteredProducts = products
-        .where((product) =>
-            product.itemsGender!.startsWith(filterValues[0]) &&
-            product.categoriesName!.startsWith(filterValues[1]) &&
-            product.itemsColor!.startsWith(filterValues[2]) &&
-            product.itemsBrand!.startsWith(filterValues[3]) &&
-            product.itemsSize!.startsWith(filterValues[4]) &&
-            double.parse(product.itemsPrice!).isGreaterThan(priceRang.start) &&
-            double.parse(product.itemsPrice!).isLowerThan(priceRang.end))
-        .toList();
+
     Get.toNamed(AppRoutes.productsPageRoute, arguments: {
       ArgumentsNames.isProductsFilterd: true,
       ArgumentsNames.productListF: products,

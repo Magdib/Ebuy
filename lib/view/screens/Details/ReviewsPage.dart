@@ -15,7 +15,7 @@ class ReviewsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: customAppBar("Reviews", context, 4),
+        appBar: customAppBar("Reviews".tr, context, 4),
         body: ListView(padding: const EdgeInsets.all(10), children: [
           GetBuilder<DetailesControllerImp>(
             builder: (controller) => HandlingDataRequest(
@@ -32,7 +32,7 @@ class ReviewsPage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Reviews',
+                            'Reviews'.tr,
                             style: Theme.of(context).textTheme.bodyText1,
                           ),
                           IconButton(

@@ -1,6 +1,7 @@
 import 'package:ebuy/Controller/Home/SearchController.dart';
 import 'package:ebuy/core/class/enums.dart';
 import 'package:ebuy/core/function/UiFunctions/customAppBar.dart';
+import 'package:ebuy/core/localization/handleLanguageApi.dart';
 import 'package:ebuy/view/Widgets/shared/GreyDivider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -30,7 +31,7 @@ class HandleSearchState extends GetView<SearchControllerImp> {
               Center(child: SvgPicture.asset(AppImagesAssets.noRecetSearch)),
               Center(
                 child: Text(
-                  'You have not recent searches.',
+                  'You have not recent searches.'.tr,
                   style: Theme.of(context)
                       .textTheme
                       .headline1!
@@ -51,7 +52,8 @@ class HandleSearchState extends GetView<SearchControllerImp> {
                             const EdgeInsets.symmetric(horizontal: 10.0),
                         minLeadingWidth: 20,
                         title: Text(
-                          controller.searchProducts[index].itemsName!,
+                          handlePorductsLanguage(TranslationType.itemsName,
+                              controller.searchProducts[index]),
                           style: Theme.of(context).textTheme.bodyText1,
                         ),
                         leading: HandleSearchIcon(
@@ -74,7 +76,7 @@ class HandleSearchState extends GetView<SearchControllerImp> {
                           height: 10,
                         ),
                         Text(
-                          "Loading...",
+                          "Loading...".tr,
                           style: Theme.of(context).textTheme.bodyText1,
                         )
                       ],
@@ -92,7 +94,7 @@ class HandleSearchState extends GetView<SearchControllerImp> {
                               height: 10,
                             ),
                             Text(
-                              "No internet connection...",
+                              "No internet connection...".tr,
                               style: Theme.of(context).textTheme.bodyText1,
                             )
                           ],
@@ -147,7 +149,7 @@ AppBar handleSearchAppBar(SearchState searchState, BuildContext context) {
             padding: const EdgeInsets.only(top: 10.0),
           ))
       : searchState == SearchState.loading || searchState == SearchState.failure
-          ? customAppBar("Search", context, 0)
+          ? customAppBar("Search".tr, context, 0)
           : AppBar(
               backgroundColor: Theme.of(context).scaffoldBackgroundColor,
               toolbarHeight: 80,
@@ -172,6 +174,7 @@ AppBar handleSearchAppBar(SearchState searchState, BuildContext context) {
                       controller: controller.tabController,
                       labelColor: AppColors.primaryColor,
                       indicatorColor: AppColors.primaryColor,
+                      labelStyle: Theme.of(context).textTheme.headline2,
                     )
                   : null,
             );

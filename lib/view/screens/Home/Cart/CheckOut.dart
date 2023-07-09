@@ -19,7 +19,7 @@ class CheckOut extends GetView<CheckOutControllerimp> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Checkout',
+          'Checkout'.tr,
           style: Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 20),
         ),
         centerTitle: true,
@@ -33,10 +33,11 @@ class CheckOut extends GetView<CheckOutControllerimp> {
             widget: controller.anyAddress == false
                 ? CustomPage(
                     svgImage: AppImagesAssets.noAddressImage,
-                    title: 'You need a billing address',
+                    title: 'You need a billing address'.tr,
                     subtitle:
-                        'You currently have no saved address.Without one, you won\'t able to checkout.',
-                    buttonText: 'Add new address',
+                        'You currently have no saved address.Without one, you won\'t able to checkout.'
+                            .tr,
+                    buttonText: 'Add address'.tr,
                     isSpaced: true,
                     onPressed: () => Get.offNamed(AppRoutes.addressPageRoute))
                 : controller.anyPayment == true
@@ -57,10 +58,11 @@ class CheckOut extends GetView<CheckOutControllerimp> {
                       )
                     : CustomPage(
                         svgImage: AppImagesAssets.noAddressImage,
-                        title: 'You need to add payment method',
+                        title: 'You need to add payment method'.tr,
                         subtitle:
-                            'You currently have no saved payment method.Without one, you won\'t able to checkout.',
-                        buttonText: 'Add payment method',
+                            'You currently have no saved payment method.Without one, you won\'t able to checkout.'
+                                .tr,
+                        buttonText: 'Add payment method'.tr,
                         isSpaced: true,
                         onPressed: () =>
                             Get.offNamed(AppRoutes.paymentPageRoute))),

@@ -1,4 +1,3 @@
-import 'package:ebuy/core/constant/AppWords.dart';
 import 'package:ebuy/core/function/notifications.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -18,8 +17,6 @@ class MyServices extends GetxService {
     bool notification = handleHiveNullState(HiveKeys.notification, true);
     if (notification == true) {
       FirebaseMessaging.instance.getToken().then((value) {
-        print(value);
-        String? token = value;
         requestPermissionNotifications();
         fcmConfig();
       });

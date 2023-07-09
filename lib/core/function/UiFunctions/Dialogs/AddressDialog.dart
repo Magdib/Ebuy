@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 addressDialog(BuildContext context) {
   CheckOutControllerimp controller = Get.find();
   return Get.defaultDialog(
-      title: "Choose Address",
+      title: "Choose Address".tr,
       titleStyle: Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 18),
       onWillPop: () => controller.changeAddress(-1),
       content: GetBuilder<CheckOutControllerimp>(

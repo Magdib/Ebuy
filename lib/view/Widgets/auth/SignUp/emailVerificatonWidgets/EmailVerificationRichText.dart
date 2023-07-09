@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../../core/theme/theme.dart';
-
 class EmailVerificationRichText extends StatelessWidget {
   const EmailVerificationRichText({
     Key? key,

@@ -1,6 +1,8 @@
 import 'package:ebuy/Controller/Home/HomePageController.dart';
+import 'package:ebuy/core/class/enums.dart';
 import 'package:ebuy/core/constant/ArgumentsNames.dart';
 import 'package:ebuy/core/constant/Server.dart';
+import 'package:ebuy/core/localization/handleLanguageApi.dart';
 import 'package:ebuy/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -27,7 +29,6 @@ class NewTrendItemsGridView extends StatelessWidget {
           return GestureDetector(
             onTap: () => Get.toNamed(AppRoutes.detailsPageRoute, arguments: {
               ArgumentsNames.productD: controller.sortedProducts[index],
-              ArgumentsNames.productListD: controller.products,
               ArgumentsNames.recentProducts: controller.recentProduct
             }),
             child: Stack(
@@ -55,7 +56,8 @@ class NewTrendItemsGridView extends StatelessWidget {
                   bottom: 55,
                   left: 20,
                   child: Text(
-                    controller.sortedProducts[index].itemsName!,
+                    handlePorductsLanguage(TranslationType.itemsName,
+                        controller.sortedProducts[index]),
                     style: Theme.of(context)
                         .textTheme
                         .headline6!

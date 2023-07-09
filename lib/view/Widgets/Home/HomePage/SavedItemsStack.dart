@@ -1,6 +1,9 @@
 import 'package:ebuy/Controller/Home/HomePageController.dart';
+import 'package:ebuy/core/class/enums.dart';
 import 'package:ebuy/core/constant/Colors.dart';
 import 'package:ebuy/core/constant/Server.dart';
+import 'package:ebuy/core/localization/HandlePosition.dart';
+import 'package:ebuy/core/localization/handleLanguageApi.dart';
 import 'package:ebuy/data/model/HomePageModels/itemsModel.dart';
 import 'package:ebuy/routes.dart';
 import 'package:flutter/material.dart';
@@ -13,9 +16,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 class SavedItemsStack extends GetView<HomePageControllerImp> {
   const SavedItemsStack({
     Key? key,
-    required this.product,
+    required this.products,
+    required this.index,
   }) : super(key: key);
-  final Products product;
+  final List<Products> products;
+  final int index;
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -25,10 +30,14 @@ class SavedItemsStack extends GetView<HomePageControllerImp> {
             width: UINumber.deviceWidth,
             child: Card(
               elevation: 10,
-              margin: const EdgeInsets.only(top: 30, left: 46, right: 5),
+              margin: handleEdgeInsets(30, 0, 46, 5),
               child: Padding(
-                padding:
-                    EdgeInsets.only(left: UINumber.deviceWidth / 1.7, top: 25),
+                padding: handleEdgeInsets(
+                  25,
+                  0,
+                  UINumber.deviceWidth / 1.7,
+                  0,
+                ),
                 child: Container(
                   margin: const EdgeInsets.all(15),
                   decoration: BoxDecoration(
@@ -42,8 +51,7 @@ class SavedItemsStack extends GetView<HomePageControllerImp> {
                       splashRadius: 14,
                       onPressed: () =>
                           Get.toNamed(AppRoutes.detailsPageRoute, arguments: {
-                            ArgumentsNames.productD: product,
-                            ArgumentsNames.productListD: controller.products,
+                            ArgumentsNames.productD: products[index],
                             ArgumentsNames.recentProducts:
                                 controller.recentProduct
                           }),
@@ -62,9 +70,10 @@ class SavedItemsStack extends GetView<HomePageControllerImp> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Hero(
-                tag: product.itemsImage!,
+                tag: products[index].itemsImage!,
                 child: CachedNetworkImage(
-                  imageUrl: "${AppServer.itemsImages}${product.itemsImage!}",
+                  imageUrl:
+                      "${AppServer.itemsImages}${products[index].itemsImage!}",
                   height: 85,
                   width: 87,
                 ),
@@ -80,7 +89,8 @@ class SavedItemsStack extends GetView<HomePageControllerImp> {
                     height: 30,
                   ),
                   Text(
-                    product.itemsName!,
+                    handlePorductsLanguage(
+                        TranslationType.itemsName, products[index]),
                     style: Theme.of(context)
                         .textTheme
                         .bodyText2!
@@ -90,7 +100,7 @@ class SavedItemsStack extends GetView<HomePageControllerImp> {
                     height: 5,
                   ),
                   Text(
-                    '\$${product.itemsPrice}',
+                    '\$${products[index].itemsPrice}',
                     style: Theme.of(context)
                         .textTheme
                         .bodyText1!

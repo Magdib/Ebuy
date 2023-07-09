@@ -20,7 +20,7 @@ class HomeSavedItems extends GetView<HomePageControllerImp> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Saved items',
+                    'Saved items'.tr,
                     style: Theme.of(context)
                         .textTheme
                         .bodyText1!
@@ -29,7 +29,7 @@ class HomeSavedItems extends GetView<HomePageControllerImp> {
                   TextButton(
                     onPressed: () => mainContrllerImp.changePage(3),
                     child: Text(
-                      'View all',
+                      'View all'.tr,
                       style: Theme.of(context)
                           .textTheme
                           .headline2!
@@ -42,8 +42,8 @@ class HomeSavedItems extends GetView<HomePageControllerImp> {
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: 2,
-                itemBuilder: (context, index) =>
-                    SavedItemsStack(product: controller.savedItems[index]),
+                itemBuilder: (context, index) => SavedItemsStack(
+                    products: controller.savedItems, index: index),
                 separatorBuilder: (context, index) => const SizedBox(
                   height: 20,
                 ),

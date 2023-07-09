@@ -1,5 +1,6 @@
 import 'package:ebuy/core/class/enums.dart';
 import 'package:ebuy/core/function/handleData.dart';
+import 'package:ebuy/core/localization/handleLanguageApi.dart';
 import 'package:ebuy/data/dataSource/Static/HiveKeys.dart';
 import 'package:ebuy/data/dataSource/Static/UINumbers.dart';
 import 'package:ebuy/data/dataSource/remote/cart/CartData.dart';
@@ -31,6 +32,7 @@ class CartControllerImp extends CartController {
   List<int> listOfCounts = [];
   List<int> serverListOfCounts = [];
   double totalPrice = 0.0;
+  late bool isEnglish;
   @override
   void showDeleteButton(int index) {
     if (cartButtonStateList[index] == CartButtonState.invisible) {
@@ -41,16 +43,28 @@ class CartControllerImp extends CartController {
 
   @override
   void resetDeleteButton(PointerDownEvent event) {
-    if (event.localPosition.dx < UINumber.deviceWidth - 150) {
-      for (int i = 0; i < cartProducts.length; i++) {
-        int cartIndex = cartButtonStateList.lastIndexWhere(
-            (cartButtonState) => cartButtonState == CartButtonState.delete);
-        if (cartIndex != -1) {
-          cartButtonStateList[cartIndex] = CartButtonState.invisible;
+    if (isEnglish == true) {
+      if (event.localPosition.dx < UINumber.deviceWidth - 150) {
+        for (int i = 0; i < cartProducts.length; i++) {
+          int cartIndex = cartButtonStateList.lastIndexWhere(
+              (cartButtonState) => cartButtonState == CartButtonState.delete);
+          if (cartIndex != -1) {
+            cartButtonStateList[cartIndex] = CartButtonState.invisible;
+          }
         }
       }
-      update();
+    } else {
+      if (event.localPosition.dx > 80) {
+        for (int i = 0; i < cartProducts.length; i++) {
+          int cartIndex = cartButtonStateList.lastIndexWhere(
+              (cartButtonState) => cartButtonState == CartButtonState.delete);
+          if (cartIndex != -1) {
+            cartButtonStateList[cartIndex] = CartButtonState.invisible;
+          }
+        }
+      }
     }
+    update();
   }
 
   @override
@@ -60,6 +74,7 @@ class CartControllerImp extends CartController {
 
   @override
   getCartItems(bool showLoading) async {
+    isEnglish = getLanguage();
     if (showLoading == true) {
       statusRequest = StatusRequest.loading;
       update();

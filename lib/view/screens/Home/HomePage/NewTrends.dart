@@ -26,13 +26,13 @@ class NewTrendPage extends GetView<HomePageControllerImp> {
                 PageHeadersWithCartIcon(
                     cartFunction: () => Get.toNamed(AppRoutes.cartRoute),
                     backFunction: () => Get.back(),
-                    title: "New Trend"),
+                    title: "New Trend".tr),
                 const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     ItemsSetting(
-                        title: 'Sort',
+                        title: 'Sort'.tr,
                         icon: Icons.filter_list,
                         onTap: () => showDialog(
                             context: context,
@@ -43,7 +43,7 @@ class NewTrendPage extends GetView<HomePageControllerImp> {
                                   content: SortDialogButton());
                             })),
                     ItemsSetting(
-                      title: "Filter",
+                      title: "Filter".tr,
                       icon: Icons.filter_alt_outlined,
                       onTap: () => Get.dialog(const FilterPage(), arguments: {
                         ArgumentsNames.productListF: controller.products,

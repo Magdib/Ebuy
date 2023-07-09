@@ -30,7 +30,7 @@ class Information extends StatelessWidget {
                 height: 20,
               ),
               Text(
-                'My cart',
+                'My cart'.tr,
                 style: Theme.of(context)
                     .textTheme
                     .bodyText1!
@@ -63,8 +63,8 @@ class Information extends StatelessWidget {
                               children: [
                                 Text(
                                   controller.canAddGift == true
-                                      ? ' choose e-gift cards/ Voucher code'
-                                      : "${controller.discount} ${controller.sign} Discount",
+                                      ? ' choose e-gift cards/ Voucher code'.tr
+                                      : "${controller.discount} ${controller.sign} ${'Discount'.tr}",
                                   style: Theme.of(context).textTheme.bodyText1,
                                 ),
                                 controller.canAddGift == true
@@ -98,7 +98,7 @@ class Information extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
         child: GetBuilder<CheckOutControllerimp>(
           builder: (controller) => CustomButton(
-              text: 'Shipping', onPressed: () => controller.nextStep()),
+              text: 'Shipping'.tr, onPressed: () => controller.nextStep()),
         ),
       ),
     ]);

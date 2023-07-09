@@ -1,11 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ebuy/Controller/Home/HomePageController.dart';
+import 'package:ebuy/core/class/enums.dart';
+import 'package:ebuy/core/constant/Colors.dart';
+import 'package:ebuy/core/constant/Server.dart';
+import 'package:ebuy/core/localization/handleLanguageApi.dart';
+import 'package:ebuy/data/dataSource/Static/UINumbers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../../core/constant/Colors.dart';
-import '../../../../core/constant/Server.dart';
-import '../../../../data/dataSource/Static/UINumbers.dart';
 import 'RecentlyViewedText.dart';
 
 class RecentlyGridView extends GetView<HomePageControllerImp> {
@@ -43,40 +44,46 @@ class RecentlyGridView extends GetView<HomePageControllerImp> {
                               top: 40,
                               width: UINumber.deviceWidth / 2 - 10,
                               height: 190,
-                              child: Card(
-                                elevation: UINumber.cardElevation,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      top: 20, left: 10, right: 10),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      const SizedBox(
-                                        height: 50,
-                                      ),
-                                      GetBuilder<HomePageControllerImp>(
-                                        builder: (controller) => IconButton(
-                                            onPressed: () => controller
-                                                .addToFavourite(index),
-                                            icon: Icon(
-                                              Icons.favorite,
-                                              color: controller
-                                                          .recentProduct[index]
-                                                          .favourite! ==
-                                                      "1"
-                                                  ? AppColors.red
-                                                  : AppColors.grey,
-                                            )),
-                                      ),
-                                      Text(
-                                        controller
-                                            .recentProduct[index].itemsDesc!,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyText2!
-                                            .copyWith(fontSize: 14),
-                                      )
-                                    ],
+                              child: Directionality(
+                                textDirection: TextDirection.ltr,
+                                child: Card(
+                                  elevation: UINumber.cardElevation,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 20, left: 10, right: 10),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: [
+                                        const SizedBox(
+                                          height: 50,
+                                        ),
+                                        GetBuilder<HomePageControllerImp>(
+                                          builder: (controller) => IconButton(
+                                              onPressed: () => controller
+                                                  .addToFavourite(index),
+                                              icon: Icon(
+                                                Icons.favorite,
+                                                color: controller
+                                                            .recentProduct[
+                                                                index]
+                                                            .favourite! ==
+                                                        "1"
+                                                    ? AppColors.red
+                                                    : AppColors.grey,
+                                              )),
+                                        ),
+                                        Text(
+                                          handlePorductsLanguage(
+                                              TranslationType.description,
+                                              controller.recentProduct[index]),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyText2!
+                                              .copyWith(fontSize: 14),
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
                               )),

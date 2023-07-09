@@ -28,7 +28,7 @@ class SearchCategories extends GetView<SearchControllerImp> {
                   allProducts: controller.products,
                   isScrollable: false),
               Text(
-                "New edits",
+                "New edits".tr,
                 style: Theme.of(context).textTheme.bodyText1,
               ),
               const SizedBox(

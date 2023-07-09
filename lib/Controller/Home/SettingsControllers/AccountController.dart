@@ -157,6 +157,7 @@ class AccountControllerImp extends AccountController {
   @override
   void signOut() {
     authBox.clear();
+    authBox.put(HiveKeys.language, isEnglish);
     authBox.put(HiveKeys.islogin, '1');
     FirebaseMessaging.instance.unsubscribeFromTopic("users");
     Get.offAllNamed(AppRoutes.signInRoute);

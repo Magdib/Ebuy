@@ -1,4 +1,3 @@
-import 'package:ebuy/Controller/Home/SearchController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -44,7 +43,7 @@ class SearchTextFiled extends StatelessWidget {
                 ),
               ),
               prefixIconColor: AppColors.primaryColor,
-              hintText: "Search",
+              hintText: "Search".tr,
               filled: true,
               fillColor: AppColors.veryLightGrey,
               border: OutlineInputBorder(

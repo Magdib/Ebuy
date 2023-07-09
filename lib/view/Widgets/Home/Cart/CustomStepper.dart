@@ -1,7 +1,5 @@
-import 'package:ebuy/Controller/Home/CartController.dart';
 import 'package:ebuy/Controller/Home/CheckOutController.dart';
 import 'package:ebuy/data/dataSource/Static/UINumbers.dart';
-import 'package:ebuy/data/dataSource/Static/static.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -28,11 +26,11 @@ class CustomStepper extends StatelessWidget {
                   AnimatedContainer(
                     duration: const Duration(milliseconds: 600),
                     curve: Curves.easeInCubic,
-                    height: stepperList[index].containerHeight,
+                    height: controller.stepperList[index].containerHeight,
                     width: 30,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(
-                          stepperList[index].borderRadius),
+                          controller.stepperList[index].borderRadius),
                       color: controller.stepsColors[index],
                     ),
                   ),
@@ -56,13 +54,15 @@ class CustomStepper extends StatelessWidget {
             builder: (controller) => ListView.separated(
                 scrollDirection: Axis.horizontal,
                 separatorBuilder: (context, index) => SizedBox(
-                      width: UINumber.deviceWidth / 5,
+                      width: controller.isEnglish == true
+                          ? UINumber.deviceWidth / 5
+                          : UINumber.deviceWidth / 3,
                     ),
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: 3,
                 itemBuilder: (context, index) => Text(
-                      stepperList[index].subtitle,
+                      controller.stepperList[index].subtitle,
                       style: index == controller.currentStep
                           ? Theme.of(context)
                               .textTheme

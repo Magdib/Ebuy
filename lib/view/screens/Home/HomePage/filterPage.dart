@@ -20,7 +20,7 @@ class FilterPage extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            "Filter",
+            "Filter".tr,
             style:
                 Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 20),
           ),
@@ -81,7 +81,7 @@ class FilterPage extends StatelessWidget {
                       const GreyDivider(),
                       GetBuilder<FilterPageControllerimp>(
                         builder: (controller) => FilterItemsContent(
-                            title: 'Price',
+                            title: 'Price'.tr,
                             type: '${controller.filterValues[5]} \$',
                             onPressed: () => Get.dialog(const PricePage())),
                       ),
@@ -92,7 +92,7 @@ class FilterPage extends StatelessWidget {
                 height: 50,
               ),
               CustomButton(
-                  text: 'View items',
+                  text: 'View items'.tr,
                   onPressed: () => controller.filterProducts()),
             ],
           ),

@@ -1,7 +1,9 @@
 import 'package:ebuy/Controller/Home/HomePageController.dart';
+import 'package:ebuy/core/class/enums.dart';
 import 'package:ebuy/core/constant/ArgumentsNames.dart';
 import 'package:ebuy/core/constant/Colors.dart';
 import 'package:ebuy/core/constant/Server.dart';
+import 'package:ebuy/core/localization/handleLanguageApi.dart';
 import 'package:ebuy/data/dataSource/Static/UINumbers.dart';
 import 'package:ebuy/routes.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +26,7 @@ class UserStyleGridView extends GetView<HomePageControllerImp> {
                 height: 20,
               ),
               Text(
-                'Styles based on your shopping habits',
+                'Styles based on your shopping habits'.tr,
                 style: Theme.of(context)
                     .textTheme
                     .bodyText1!
@@ -47,7 +49,6 @@ class UserStyleGridView extends GetView<HomePageControllerImp> {
                     onTap: () =>
                         Get.toNamed(AppRoutes.detailsPageRoute, arguments: {
                       ArgumentsNames.productD: controller.userStyle[index],
-                      ArgumentsNames.productListD: controller.products,
                       ArgumentsNames.recentProducts: controller.recentProduct
                     }),
                     child: Stack(
@@ -73,7 +74,8 @@ class UserStyleGridView extends GetView<HomePageControllerImp> {
                           bottom: 40,
                           left: 10,
                           child: Text(
-                            controller.userStyle[index].itemsCatDetailes!,
+                            handlePorductsLanguage(TranslationType.catDetailes,
+                                controller.userStyle[index]),
                             style: Theme.of(context)
                                 .textTheme
                                 .headline6!

@@ -1,5 +1,7 @@
 import 'package:ebuy/Controller/Detailes/detailesController.dart';
+import 'package:ebuy/core/class/enums.dart';
 import 'package:ebuy/core/constant/Server.dart';
+import 'package:ebuy/core/localization/handleLanguageApi.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../core/constant/Colors.dart';
@@ -50,7 +52,8 @@ class DetailesSuggestionsCard extends StatelessWidget {
                 bottom: 40,
                 left: 10,
                 child: Text(
-                  controller.similarProducts[index].itemsName!,
+                  handlePorductsLanguage(TranslationType.itemsName,
+                      controller.similarProducts[index]),
                   style: Theme.of(context)
                       .textTheme
                       .headline6!

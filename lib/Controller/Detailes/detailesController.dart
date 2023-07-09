@@ -8,6 +8,7 @@ import 'package:ebuy/core/function/UiFunctions/Dialogs/ReviewDialog.dart';
 import 'package:ebuy/core/function/UiFunctions/SnackBars.dart';
 import 'package:ebuy/core/function/handleData.dart';
 import 'package:ebuy/core/function/handleFavourite.dart';
+import 'package:ebuy/core/localization/handleLanguageApi.dart';
 import 'package:ebuy/data/dataSource/Static/HiveKeys.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -34,6 +35,7 @@ abstract class DetailesController extends GetxController {
   void shareProduct();
   String? validateReview(String val);
   void saveReview(bool isEdit);
+  handleReview(bool isEdit);
   void openReview(int index, BuildContext context);
   void deleteReview(int index);
   willPopReview();
@@ -61,7 +63,7 @@ class DetailesControllerImp extends DetailesController {
   late TextEditingController reviewController;
   DefaultCacheManager? caheManger;
   GlobalKey<FormState> formState = GlobalKey<FormState>();
-  late List<Products> products;
+  List<Products> products = [];
   late Products product;
   late List<Products> recentProducts;
   late List<String> productDesc;
@@ -81,12 +83,18 @@ class DetailesControllerImp extends DetailesController {
   List<Products> similarProducts = [];
   List<String> sizesLetter = [];
   List<String> sizes = [];
-
+  bool retryComment = false;
   int itemsAmount = 0;
   late int serverItemsAmount;
   int? editIndex;
   bool canAddToCart = false;
   bool isFavourite = false;
+  List<String> detailesTitles = [
+    'Description'.tr,
+    'Free delivery & returns'.tr,
+    'Size guide'.tr,
+  ];
+  bool isEnglish = getLanguage();
   @override
   getItemData(String? olditemid, bool showLoading) async {
     if (showLoading == true) {
@@ -103,6 +111,8 @@ class DetailesControllerImp extends DetailesController {
       }
 
       if (response['status'] == "success") {
+        List tempProducts = response['products'];
+        products.addAll(tempProducts.map((e) => Products.fromJson(e)));
         List tempCommentsList = response['comments'];
         commentsList
             .addAll(tempCommentsList.map((e) => CommentModel.fromJson(e)));
@@ -111,11 +121,11 @@ class DetailesControllerImp extends DetailesController {
             .toList();
         itemsAmount = int.parse(response['cartamount']);
         serverItemsAmount = int.parse(response['cartamount']);
-        itemsAmount > 0 ? canAddToCart = true : canAddToCart = false;
       } else {
+        List tempProducts = response['products'];
+        products.addAll(tempProducts.map((e) => Products.fromJson(e)));
         itemsAmount = int.parse(response['cartamount']);
         serverItemsAmount = int.parse(response['cartamount']);
-        itemsAmount > 0 ? canAddToCart = true : canAddToCart = false;
       }
     }
 
@@ -185,47 +195,59 @@ class DetailesControllerImp extends DetailesController {
 
     Share.shareXFiles(
       [XFile(image.path)],
-      text: "${product.itemsName}\n price is: ${product.itemsPrice}\$",
+      text:
+          "${handlePorductsLanguage(TranslationType.itemsName, product)}\n ${'price is:'.tr} ${product.itemsPrice}\$",
     );
   }
 
   @override
   String? validateReview(String val) {
-    return val.isEmpty ? "Review text can't be empty!" : null;
+    return val.isEmpty ? "Review text can't be empty!".tr : null;
+  }
+
+  @override
+  handleReview(bool isEdit) async {
+    commentStatusRequest = StatusRequest.loading;
+    update();
+    var response;
+    if (isEdit == false) {
+      response = await commentsData.addComment(authBox.get(HiveKeys.userid),
+          product.itemsId!, "$rate", reviewController.text);
+    } else {
+      response = await commentsData.editComment(
+          product.itemsId!,
+          currentCommentsList[editIndex!].commentId!,
+          "$rate",
+          reviewController.text);
+    }
+    commentStatusRequest = handlingData(response);
+    if (commentStatusRequest == StatusRequest.success) {
+      if (response['status'] == "success") {
+        willPopReview();
+        commentsList.clear();
+        currentCommentsList.clear();
+        List tempCommentsList = response['data'];
+        commentsList
+            .addAll(tempCommentsList.map((e) => CommentModel.fromJson(e)));
+        currentCommentsList = commentsList
+            .where((comment) => comment.itemsId!.contains(product.itemsId!))
+            .toList();
+      }
+    }
+    update();
   }
 
   @override
   void saveReview(bool isEdit) async {
     FormState? formData = formState.currentState;
-    if (formData!.validate()) {
-      commentStatusRequest = StatusRequest.loading;
-      update();
-      var response;
-      if (isEdit == false) {
-        response = await commentsData.addComment(authBox.get(HiveKeys.userid),
-            product.itemsId!, "$rate", reviewController.text);
-      } else {
-        response = await commentsData.editComment(
-            product.itemsId!,
-            currentCommentsList[editIndex!].commentId!,
-            "$rate",
-            reviewController.text);
+    if (retryComment == false) {
+      if (formData!.validate()) {
+        retryComment = true;
+        await handleReview(isEdit);
       }
-      commentStatusRequest = handlingData(response);
-      if (commentStatusRequest == StatusRequest.success) {
-        if (response['status'] == "success") {
-          willPopReview();
-          commentsList.clear();
-          currentCommentsList.clear();
-          List tempCommentsList = response['data'];
-          commentsList
-              .addAll(tempCommentsList.map((e) => CommentModel.fromJson(e)));
-          currentCommentsList = commentsList
-              .where((comment) => comment.itemsId!.contains(product.itemsId!))
-              .toList();
-        }
-      }
-      update();
+    } else {
+      await handleReview(isEdit);
+      retryComment = false;
     }
   }
 
@@ -277,6 +299,7 @@ class DetailesControllerImp extends DetailesController {
     handleProductImages();
     handleProductColors();
     handleProductsSizes();
+    products.clear();
     await getItemData(olditemid, showLoading);
 
     products.removeWhere((currentProduct) =>
@@ -340,7 +363,9 @@ class DetailesControllerImp extends DetailesController {
   void increaseAmount() {
     if (itemsAmount < double.parse(product.itemsCount!)) {
       itemsAmount++;
-      canAddToCart = true;
+      if (itemsAmount != serverItemsAmount && itemsAmount > serverItemsAmount) {
+        canAddToCart = true;
+      }
     }
     update();
   }
@@ -350,7 +375,7 @@ class DetailesControllerImp extends DetailesController {
     if (itemsAmount > 0) {
       itemsAmount--;
     }
-    if (itemsAmount < serverItemsAmount) {
+    if (itemsAmount <= serverItemsAmount) {
       canAddToCart = false;
     }
     update();
@@ -381,10 +406,9 @@ class DetailesControllerImp extends DetailesController {
         itemsAmount = int.parse(response['data']);
         serverItemsAmount = int.parse(response['data']);
       }
-      itemsAmount > 0 ? canAddToCart = true : canAddToCart = false;
       Get.back();
-      succesSnackBar(
-          'Done.', 'your product have been successfully added to the cart ');
+      succesSnackBar('Done.'.tr,
+          'your product have been successfully added to the cart '.tr);
     } else {
       noInternetSnackBar();
     }
@@ -407,14 +431,18 @@ class DetailesControllerImp extends DetailesController {
   void onInit() {
     userid = authBox.get(HiveKeys.userid);
     product = Get.arguments[ArgumentsNames.productD];
-    products = Get.arguments[ArgumentsNames.productListD];
     recentProducts = Get.arguments[ArgumentsNames.recentProducts];
-
-    productDesc = [
-      product.itemsDesc!,
-      product.itemsDeliveryRefund!,
-      product.itemsSizeGuide!
-    ];
+    isEnglish == true
+        ? productDesc = [
+            product.itemsDesc!,
+            product.itemsDeliveryRefund!,
+            product.itemsSizeGuide!
+          ]
+        : productDesc = [
+            product.itemsDescAr!,
+            product.itemsDeliveryRefundAr!,
+            product.itemsSizeGuideAr!
+          ];
     imagesController = PageController();
     reviewController = TextEditingController();
     caheManger = DefaultCacheManager();

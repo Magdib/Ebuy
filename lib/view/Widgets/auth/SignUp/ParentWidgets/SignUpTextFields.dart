@@ -2,7 +2,6 @@ import 'package:ebuy/Controller/authControllers/SignUpController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../../core/theme/theme.dart';
 import '../../../shared/TitledTextField.dart';
 
 class SignUpTextFields extends GetView<SignUpControllerImp> {

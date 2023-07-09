@@ -101,7 +101,7 @@ class HandlingDataView extends GetView<SignUpControllerImp> {
                               height: 10,
                             ),
                             Text(
-                              'No Data.',
+                              'No Data.'.tr,
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyText1!

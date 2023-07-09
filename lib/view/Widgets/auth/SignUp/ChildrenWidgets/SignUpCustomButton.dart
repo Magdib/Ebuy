@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import '../../../../../Controller/authControllers/SignUpController.dart';
 import '../../../../../core/constant/Colors.dart';
 
-import '../../../../../core/theme/theme.dart';
 import '../../../../../data/dataSource/Static/UINumbers.dart';
 
 class SignUpCustomButton extends StatelessWidget {

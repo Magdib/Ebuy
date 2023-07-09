@@ -1,9 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:ebuy/Controller/Home/CartController.dart';
 import 'package:ebuy/Controller/Home/CheckOutController.dart';
 import 'package:ebuy/core/constant/Server.dart';
 import 'package:ebuy/core/function/UiFunctions/StringToColors.dart';
 import 'package:ebuy/core/function/UiFunctions/fixPriceNumbers.dart';
+import 'package:ebuy/core/localization/HandlePosition.dart';
+import 'package:ebuy/core/localization/handleLanguageApi.dart';
 import 'package:ebuy/data/dataSource/Static/UINumbers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -28,9 +29,9 @@ class CheckOutItems extends StatelessWidget {
             SizedBox(
                 height: 150,
                 width: UINumber.deviceWidth,
-                child: const Card(
+                child: Card(
                   elevation: 10,
-                  margin: EdgeInsets.only(top: 20, left: 26),
+                  margin: handleEdgeInsets(20, 0, 26, 0),
                 )),
             SizedBox(
               height: 160,
@@ -55,7 +56,7 @@ class CheckOutItems extends StatelessWidget {
                       const SizedBox(
                         height: 35,
                       ),
-                      Text(controller.cartProducts[index].itemsName!,
+                      Text(handleCartLanguage(controller.cartProducts[index]),
                           style: Theme.of(context).textTheme.bodyText1!),
                       const SizedBox(
                         height: 5,
@@ -63,7 +64,7 @@ class CheckOutItems extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            'Color:   ',
+                            'Color:   '.tr,
                             style: Theme.of(context)
                                 .textTheme
                                 .headline6!
@@ -81,7 +82,7 @@ class CheckOutItems extends StatelessWidget {
                             width: 20,
                           ),
                           Text(
-                            'Size:  ${controller.cartProducts[index].cartItemsSize![0]}',
+                            '${"Size:  ".tr}${controller.cartProducts[index].cartItemsSize![0]}',
                             style: Theme.of(context)
                                 .textTheme
                                 .headline6!
@@ -91,7 +92,7 @@ class CheckOutItems extends StatelessWidget {
                             width: 20,
                           ),
                           Text(
-                            'Amount:  ${controller.cartProducts[index].cartCount}',
+                            '${"Amount:  ".tr}${controller.cartProducts[index].cartCount}',
                             style: Theme.of(context)
                                 .textTheme
                                 .headline6!
@@ -99,11 +100,11 @@ class CheckOutItems extends StatelessWidget {
                           ),
                         ],
                       ),
-                      const SizedBox(
-                        height: 30,
+                      SizedBox(
+                        height: controller.isEnglish == true ? 30 : 7.5,
                       ),
                       Text(
-                        'Total:',
+                        'Total:'.tr,
                         style: Theme.of(context).textTheme.headline6,
                       )
                     ],
@@ -111,8 +112,8 @@ class CheckOutItems extends StatelessWidget {
                 ],
               ),
             ),
-            Positioned(
-                bottom: 30,
+            HandlePosition(
+                bottom: controller.isEnglish == true ? 32.5 : 25,
                 right: 30,
                 child: Text(
                   "\$${fixPriceNumbers(controller.cartProducts[index].cartPrice!)}",

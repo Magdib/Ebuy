@@ -1,5 +1,5 @@
-import 'package:ebuy/core/class/enums.dart';
 import 'package:ebuy/core/function/UiFunctions/handleCartItemButton.dart';
+import 'package:ebuy/core/localization/HandlePosition.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -30,12 +30,12 @@ class CartItemsListView extends StatelessWidget {
                 SizedBox(
                     height: 150,
                     width: UINumber.deviceWidth,
-                    child: const Card(
+                    child: Card(
                       elevation: 10,
-                      margin: EdgeInsets.only(top: 20, left: 46, right: 20),
+                      margin: handleEdgeInsets(20, 0, 46, 20),
                     )),
                 CartProductsDetailes(index: index),
-                Positioned(
+                HandlePosition(
                     bottom: 30,
                     right: 30,
                     child: GetBuilder<CartControllerImp>(
@@ -46,7 +46,7 @@ class CartItemsListView extends StatelessWidget {
                           decreaseFuncion: () =>
                               controller.decreaseAmountUI(index)),
                     )),
-                Positioned(
+                HandlePosition(
                     right: 0,
                     top: 35,
                     child: AnimatedContainer(

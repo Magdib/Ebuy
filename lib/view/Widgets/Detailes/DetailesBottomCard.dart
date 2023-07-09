@@ -1,4 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ebuy/core/class/enums.dart';
+import 'package:ebuy/core/localization/HandlePosition.dart';
+import 'package:ebuy/core/localization/handleLanguageApi.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,12 +21,9 @@ class DetailesBottomCard extends GetView<DetailesControllerImp> {
         SizedBox(
             height: 120,
             width: UINumber.deviceWidth,
-            child: const Card(
+            child: Card(
               elevation: 10,
-              margin: EdgeInsets.only(
-                top: 20,
-                left: 46,
-              ),
+              margin: handleEdgeInsets(20, 0, 46, 0),
             )),
         SizedBox(
           height: 120,
@@ -51,13 +51,17 @@ class DetailesBottomCard extends GetView<DetailesControllerImp> {
                   const SizedBox(
                     height: 40,
                   ),
-                  Text(controller.product.itemsName!,
-                      style: Theme.of(context).textTheme.bodyText1!),
-                  const SizedBox(
-                    height: 15,
-                  ),
                   Text(
-                    'Warehouse: ${controller.product.itemsCount}',
+                      handlePorductsLanguage(
+                          TranslationType.itemsName, controller.product),
+                      style: Theme.of(context).textTheme.bodyText1!),
+                  controller.isEnglish == true
+                      ? const SizedBox(
+                          height: 15,
+                        )
+                      : const SizedBox(),
+                  Text(
+                    '${"Warehouse:".tr} ${controller.product.itemsCount}',
                     style: Theme.of(context)
                         .textTheme
                         .headline6!
@@ -71,7 +75,7 @@ class DetailesBottomCard extends GetView<DetailesControllerImp> {
             ],
           ),
         ),
-        Positioned(
+        HandlePosition(
             bottom: 30,
             right: 20,
             child: Text(

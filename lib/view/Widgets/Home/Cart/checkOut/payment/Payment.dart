@@ -23,7 +23,7 @@ class Payment extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
           children: [
             Text(
-              'Payment',
+              'Payment'.tr,
               style:
                   Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 18),
             ),
@@ -32,14 +32,14 @@ class Payment extends StatelessWidget {
             ),
             GetBuilder<CheckOutControllerimp>(
               builder: (controller) => UserAddressShipBox(
-                  title: 'Postal address',
+                  title: 'Postal address'.tr,
                   userAddress: controller.paymentAddresList),
             ),
             const SizedBox(
               height: 20,
             ),
             Text(
-              'Payment type',
+              'Payment type'.tr,
               style:
                   Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 18),
             ),

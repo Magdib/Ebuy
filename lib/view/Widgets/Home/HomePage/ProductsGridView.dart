@@ -1,5 +1,8 @@
 import 'package:ebuy/Controller/Home/HomePageController.dart';
+import 'package:ebuy/core/class/enums.dart';
 import 'package:ebuy/core/constant/Server.dart';
+import 'package:ebuy/core/localization/HandlePosition.dart';
+import 'package:ebuy/core/localization/handleLanguageApi.dart';
 import 'package:ebuy/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -29,7 +32,6 @@ class ProductsGridView extends GetView<HomePageControllerImp> {
           return GestureDetector(
             onTap: () => Get.toNamed(AppRoutes.detailsPageRoute, arguments: {
               ArgumentsNames.productD: controller.homeProducts[index],
-              ArgumentsNames.productListD: controller.products,
               ArgumentsNames.recentProducts: controller.recentProduct
             }),
             child: Stack(
@@ -41,7 +43,7 @@ class ProductsGridView extends GetView<HomePageControllerImp> {
                       elevation: 10,
                       margin: EdgeInsets.only(top: 40),
                     )),
-                Positioned(
+                HandlePosition(
                   top: 0,
                   right: 10,
                   child: Hero(
@@ -53,19 +55,21 @@ class ProductsGridView extends GetView<HomePageControllerImp> {
                     ),
                   ),
                 ),
-                Positioned(
+                HandlePosition(
                   bottom: 40,
                   left: 20,
                   child: Text(
-                    controller.homeProducts[index].itemsCatDetailes!,
+                    handlePorductsLanguage(TranslationType.catDetailes,
+                        controller.homeProducts[index]),
                     style: Theme.of(context).textTheme.bodyText1,
                   ),
                 ),
-                Positioned(
+                HandlePosition(
                   bottom: 15,
                   left: 20,
                   child: Text(
-                    controller.homeProducts[index].itemsMainPW!,
+                    handlePorductsLanguage(
+                        TranslationType.mainPW, controller.homeProducts[index]),
                     style: Theme.of(context)
                         .textTheme
                         .headline6!
