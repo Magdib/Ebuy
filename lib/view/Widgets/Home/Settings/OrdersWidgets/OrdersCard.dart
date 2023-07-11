@@ -2,9 +2,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ebuy/Controller/Home/SettingsControllers/OrdersController.dart';
 import 'package:ebuy/core/constant/Colors.dart';
 import 'package:ebuy/core/constant/Server.dart';
+import 'package:ebuy/core/localization/HandlePosition.dart';
+import 'package:ebuy/core/localization/handleLanguageApi.dart';
 import 'package:ebuy/data/dataSource/Static/UINumbers.dart';
 import 'package:ebuy/data/model/ProductModels/OrdersMode.dart';
-import 'package:ebuy/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -29,9 +30,9 @@ class OrdersCard extends GetView<OrdersControllerimp> {
           SizedBox(
               height: 170,
               width: UINumber.deviceWidth,
-              child: const Card(
+              child: Card(
                 elevation: 10,
-                margin: EdgeInsets.only(top: 20, left: 35),
+                margin: handleEdgeInsets(20, 0, 35, 0),
               )),
           SizedBox(
             height: 180,
@@ -56,7 +57,7 @@ class OrdersCard extends GetView<OrdersControllerimp> {
                     const SizedBox(
                       height: 35,
                     ),
-                    Text(ordersList[index].itemsName!,
+                    Text(handleOrdersLanguage(ordersList[index]),
                         style: Theme.of(context).textTheme.bodyText1!),
                     const SizedBox(
                       height: 5,
@@ -76,7 +77,7 @@ class OrdersCard extends GetView<OrdersControllerimp> {
                           width: 30,
                         ),
                         Text(
-                          'Order #${ordersList[index].ordersId}',
+                          '${"Order".tr} #${ordersList[index].ordersId}',
                           style: Theme.of(context)
                               .textTheme
                               .headline2!
@@ -84,18 +85,18 @@ class OrdersCard extends GetView<OrdersControllerimp> {
                         ),
                       ],
                     ),
-                    const SizedBox(
-                      height: 55,
+                    SizedBox(
+                      height: controller.isEnglish == true ? 55 : 30,
                     ),
                     showPrice == null
                         ? Text(
-                            'Cash on Delivery:',
+                            'Cash on Delivery:'.tr,
                             style: Theme.of(context).textTheme.headline6,
                           )
                         : index > 0
                             ? const SizedBox()
                             : Text(
-                                'Cash on Delivery:',
+                                'Cash on Delivery:'.tr,
                                 style: Theme.of(context).textTheme.headline6,
                               )
                   ],
@@ -104,7 +105,7 @@ class OrdersCard extends GetView<OrdersControllerimp> {
             ),
           ),
           onTap != null
-              ? Positioned(
+              ? HandlePosition(
                   bottom: 60,
                   right: 30,
                   child: Container(
@@ -128,8 +129,8 @@ class OrdersCard extends GetView<OrdersControllerimp> {
                   ),
                 )
               : const SizedBox(),
-          Positioned(
-              bottom: 30,
+          HandlePosition(
+              bottom: controller.isEnglish == true ? 30 : 20,
               right: 30,
               child: showPrice == null
                   ? Text(
@@ -141,7 +142,7 @@ class OrdersCard extends GetView<OrdersControllerimp> {
                     )
                   : index > 0
                       ? Text(
-                          'The first product shows the total price',
+                          'The first product shows the total price'.tr,
                           style: Theme.of(context)
                               .textTheme
                               .bodyText1!

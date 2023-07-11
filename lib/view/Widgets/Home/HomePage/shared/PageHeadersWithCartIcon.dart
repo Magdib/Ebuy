@@ -1,10 +1,5 @@
-import 'package:ebuy/routes.dart';
+import 'package:ebuy/core/constant/Colors.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
-import '../../../../../core/constant/Colors.dart';
-
-import '../../../../../core/theme/theme.dart';
 
 class PageHeadersWithCartIcon extends StatelessWidget {
   const PageHeadersWithCartIcon({

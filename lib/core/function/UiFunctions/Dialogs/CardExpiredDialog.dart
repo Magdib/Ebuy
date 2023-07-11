@@ -37,12 +37,12 @@ cardExpiredDialog(BuildContext context) {
       ),
       onWillPop: () => controller.resetExpiryTime(),
       confirm: CustomButton(
-        text: 'Done',
+        text: 'Done'.tr,
         onPressed: () => controller.saveExpiryTime(),
         width: UINumber.deviceWidth / 3,
       ),
       cancel: CustomButton(
-        text: 'Cancel',
+        text: 'Cancel'.tr,
         onPressed: () => controller.resetExpiryTime(),
         color: AppColors.white,
         textColor: AppColors.primaryColor,

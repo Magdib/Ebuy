@@ -34,12 +34,7 @@ abstract class HomePageController extends GetxController {
 class HomePageControllerImp extends HomePageController {
   Box authBox = Hive.box(HiveBoxes.authBox);
   bool canReGetData = true;
-  List<ProductsSort> productsSort = [
-    ProductsSort(type: 'Recommended'.tr, choosenSort: true),
-    ProductsSort(type: 'What\'s New'.tr, choosenSort: false),
-    ProductsSort(type: 'Price: High to low'.tr, choosenSort: false),
-    ProductsSort(type: 'Price: Low to high'.tr, choosenSort: false)
-  ];
+  late List<ProductsSort> productsSort;
   HomeData homeData = HomeData(Get.find());
   RecentAddData recentAddData = RecentAddData(Get.find());
   RecentRemoveData recentRemoveData = RecentRemoveData(Get.find());
@@ -63,6 +58,12 @@ class HomePageControllerImp extends HomePageController {
   StatusRequest statusRequest = StatusRequest.loading;
   @override
   getData(bool showLoading) async {
+    productsSort = [
+      ProductsSort(type: 'Recommended'.tr, choosenSort: true),
+      ProductsSort(type: 'What\'s New'.tr, choosenSort: false),
+      ProductsSort(type: 'Price: High to low'.tr, choosenSort: false),
+      ProductsSort(type: 'Price: Low to high'.tr, choosenSort: false)
+    ];
     if (authBox.get(HiveKeys.language) == null) {
       if (Get.deviceLocale!.languageCode.contains('ar') == true) {
         isEnglish = false;

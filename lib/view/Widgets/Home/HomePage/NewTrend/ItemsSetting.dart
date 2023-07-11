@@ -1,11 +1,8 @@
 import 'package:ebuy/Controller/Home/HomePageController.dart';
+import 'package:ebuy/core/constant/Colors.dart';
+import 'package:ebuy/data/dataSource/Static/UINumbers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../../../core/constant/Colors.dart';
-
-import '../../../../../core/theme/theme.dart';
-import '../../../../../data/dataSource/Static/UINumbers.dart';
-import 'DialogButton.dart';
 
 class ItemsSetting extends GetView<HomePageControllerImp> {
   const ItemsSetting({

@@ -89,7 +89,7 @@ class SavedItemsStack extends GetView<HomePageControllerImp> {
                     height: 30,
                   ),
                   Text(
-                    handlePorductsLanguage(
+                    handleProductsLanguage(
                         TranslationType.itemsName, products[index]),
                     style: Theme.of(context)
                         .textTheme

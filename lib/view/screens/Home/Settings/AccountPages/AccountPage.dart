@@ -17,7 +17,7 @@ class AccountPage extends GetView<AccountControllerImp> {
     return Scaffold(
       appBar: AppBar(
           title: Text(
-            'Account',
+            'Account'.tr,
             style:
                 Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 20),
           ),
@@ -40,7 +40,7 @@ class AccountPage extends GetView<AccountControllerImp> {
             AccountPageCard(list: [
               AccountListModel(
                   leadingIcon: Icons.card_giftcard,
-                  text: 'Gift cards & voucher',
+                  text: 'Gift cards & voucher'.tr,
                   page: AppRoutes.giftCardVoucherPageRoute)
             ]),
             const SizedBox(
@@ -53,7 +53,7 @@ class AccountPage extends GetView<AccountControllerImp> {
             AccountPageFCard(list: [
               AccountFListModel(
                   leadingIcon: Icons.logout,
-                  text: 'Sign out',
+                  text: 'Sign out'.tr,
                   onTap: () => controller.signOut())
             ]),
           ],

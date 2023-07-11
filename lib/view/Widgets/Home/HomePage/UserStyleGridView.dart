@@ -74,7 +74,7 @@ class UserStyleGridView extends GetView<HomePageControllerImp> {
                           bottom: 40,
                           left: 10,
                           child: Text(
-                            handlePorductsLanguage(TranslationType.catDetailes,
+                            handleProductsLanguage(TranslationType.catDetailes,
                                 controller.userStyle[index]),
                             style: Theme.of(context)
                                 .textTheme

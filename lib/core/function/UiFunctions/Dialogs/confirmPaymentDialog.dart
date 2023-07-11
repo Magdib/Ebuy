@@ -18,5 +18,5 @@ confirmPaymentDialog(BuildContext context) {
           controller.placeOrder();
         },
       ),
-      cancel: DialogButton(title: 'Cancle'.tr, onPressed: () => Get.back()));
+      cancel: DialogButton(title: 'Cancel'.tr, onPressed: () => Get.back()));
 }

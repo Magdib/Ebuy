@@ -12,7 +12,7 @@ class AddAddressName extends GetView<AddressControllerimp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar('Address Name', context, 4),
+      appBar: customAppBar('Address Name'.tr, context, 4),
       body: GetBuilder<AddressControllerimp>(
         builder: (controller) => WillPopScope(
           onWillPop: () => controller.willPopAddress(),
@@ -28,14 +28,14 @@ class AddAddressName extends GetView<AddressControllerimp> {
                     child: Column(
                       children: [
                         TitledTextField(
-                          label: 'Address Name',
-                          hint: 'Enter address name here...',
+                          label: 'Address Name'.tr,
+                          hint: 'Enter address name here...'.tr,
                           onChanged: (val) => controller.handleAddressAdd(),
                           textEditingController: controller.adNameController,
                         ),
                         TitledTextField(
-                          label: 'Address Phone Number',
-                          hint: 'Enter address Phone Number here...',
+                          label: 'Address Phone Number'.tr,
+                          hint: 'Enter address Phone Number here...'.tr,
                           onChanged: (val) => controller.handleAddressAdd(),
                           textEditingController: controller.adNumberController,
                           keyboardType: TextInputType.phone,
@@ -47,8 +47,8 @@ class AddAddressName extends GetView<AddressControllerimp> {
                       condition: controller.canAddAddress,
                       onPressed: () => controller.saveAddress(),
                       text: controller.editIndex == null
-                          ? 'Add Address'
-                          : 'Edit Address'),
+                          ? 'Add address'.tr
+                          : 'Edit Address'.tr),
                 ],
               ),
             ),

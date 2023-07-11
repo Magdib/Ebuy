@@ -1,6 +1,6 @@
 import 'package:ebuy/Controller/Home/SettingsControllers/GiftCardController.dart';
 import 'package:ebuy/core/class/HandlingDataRequest.dart';
-import 'package:ebuy/core/constant/AppWords.dart';
+import 'package:ebuy/core/function/UiFunctions/Dialogs/AppWebsiteDialog.dart';
 import 'package:ebuy/routes.dart';
 import 'package:ebuy/view/Widgets/Home/Settings/GiftCardWidgets/GiftCardHelpCard.dart';
 import 'package:ebuy/view/Widgets/Home/Settings/GiftCardWidgets/GiftCardsCard.dart';
@@ -18,7 +18,7 @@ class GiftCardsVoucherPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Gift cards & voucher',
+          'Gift cards & voucher'.tr,
           style: Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 20),
         ),
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -45,12 +45,12 @@ class GiftCardsVoucherPage extends StatelessWidget {
                               icon: Icons.card_giftcard,
                               onTap: () =>
                                   Get.toNamed(AppRoutes.giftCardsPageRoute),
-                              text: 'Gift cards',
+                              text: 'Gift cards'.tr,
                             ),
                             GiftCardsCard(
-                                text: 'Gift voucher',
+                                text: 'Gift voucher'.tr,
                                 icon: FontAwesomeIcons.gift,
-                                onTap: () => print(AppWords.websiteWord))
+                                onTap: () => appWebSiteDialog())
                           ],
                         ),
                         const SizedBox(

@@ -13,7 +13,7 @@ class UsersDetailes extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'My details',
+          'My details'.tr,
           style: Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 20),
         ),
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -34,16 +34,16 @@ class UsersDetailes extends StatelessWidget {
                   child: Column(
                     children: [
                       TitledTextField(
-                        hint: 'Enter user name here...',
-                        label: 'User Name',
+                        hint: 'Enter user name here...'.tr,
+                        label: 'User Name'.tr,
                         obscure: false,
                         textEditingController: controller.userNameController,
                         onChanged: (val) => controller.saveButtonState(),
                         validator: (val) => controller.vaildateUserName(val!),
                       ),
                       TitledTextField(
-                        hint: 'Enter password here...',
-                        label: 'Password',
+                        hint: 'Enter Password'.tr,
+                        label: 'Password'.tr,
                         obscure: true,
                         textEditingController: controller.passwordController,
                         onChanged: (val) => controller.saveButtonState(),
@@ -56,7 +56,7 @@ class UsersDetailes extends StatelessWidget {
                   builder: (controller) => CustomConditionButton(
                       condition: controller.canSaveChanges,
                       onPressed: () => controller.saveDetailes(),
-                      text: 'Save changes'),
+                      text: 'Save changes'.tr),
                 )
               ],
             ),

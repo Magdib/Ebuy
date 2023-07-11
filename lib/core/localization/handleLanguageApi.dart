@@ -3,6 +3,8 @@ import 'package:ebuy/data/model/CartModels/CartModel.dart';
 import 'package:ebuy/data/model/HomePageModels/BannersModel.dart';
 import 'package:ebuy/data/model/HomePageModels/BrandsModel.dart';
 import 'package:ebuy/data/model/HomePageModels/itemsModel.dart';
+import 'package:ebuy/data/model/ProductModels/OrdersMode.dart';
+import 'package:ebuy/data/model/favouriteModel/favouriteModel.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -23,7 +25,7 @@ bool getLanguage() {
   return isenglish;
 }
 
-String handlePorductsLanguage(
+String handleProductsLanguage(
     TranslationType translationType, Products product) {
   bool isenglish = getLanguage();
   switch (translationType) {
@@ -46,6 +48,16 @@ String handlePorductsLanguage(
 String handleCartLanguage(CartModel cartproduct) {
   bool isenglish = getLanguage();
   return isenglish == true ? cartproduct.itemsName! : cartproduct.itemsNameAr!;
+}
+
+String handleFavouriteLanguage(Favourite favProduct) {
+  bool isenglish = getLanguage();
+  return isenglish == true ? favProduct.itemsName! : favProduct.itemsNameAr!;
+}
+
+String handleOrdersLanguage(OrdersModel order) {
+  bool isenglish = getLanguage();
+  return isenglish == true ? order.itemsName! : order.itemsNameAr!;
 }
 
 handleBannersLanguage(TranslationType translationType, Banners banner) {

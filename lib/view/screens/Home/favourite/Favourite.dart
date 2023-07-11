@@ -16,7 +16,7 @@ class FavouritePage extends GetView<MainContrllerImp> {
       appBar: AppBar(
         elevation: 0,
         title: Text(
-          'Saved Items',
+          'Saved Items'.tr,
           style: Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 20),
         ),
         centerTitle: true,

@@ -12,7 +12,6 @@ import 'package:ebuy/view/screens/Home/favourite/Favourite.dart';
 import 'package:ebuy/view/screens/Home/HomePage/NewTrends.dart';
 import 'package:ebuy/view/screens/Home/Settings/AccountPages/AccountPage.dart';
 import 'package:ebuy/view/screens/Home/Settings/AccountPages/AddressPages/AddressBook.dart';
-import 'package:ebuy/view/screens/Home/Settings/AccountPages/Contactpage.dart';
 import 'package:ebuy/view/screens/Home/Settings/AccountPages/OrdersPages/OrdersPage.dart';
 import 'package:ebuy/view/screens/Home/Settings/AccountPages/PaymentPages/PaymentMethods.dart';
 import 'package:ebuy/view/screens/Home/Settings/AccountPages/ContactUs.dart';
@@ -138,10 +137,6 @@ List<GetPage<dynamic>>? routes = [
   GetPage(
     name: AppRoutes.accountPageRoute,
     page: () => const AccountPage(),
-  ),
-  GetPage(
-    name: AppRoutes.contactPageRoute,
-    page: () => const ContactPage(),
   ),
   GetPage(
       name: AppRoutes.paymentPageRoute,

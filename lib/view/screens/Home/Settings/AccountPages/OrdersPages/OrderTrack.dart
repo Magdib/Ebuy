@@ -1,10 +1,10 @@
 import 'package:ebuy/Controller/Home/SettingsControllers/OrdersController.dart';
 import 'package:ebuy/core/constant/Colors.dart';
 import 'package:ebuy/data/dataSource/Static/UINumbers.dart';
-import 'package:ebuy/data/dataSource/Static/static.dart';
 import 'package:ebuy/routes.dart';
 import 'package:ebuy/view/Widgets/CustomPackages/IconStepper.dart';
 import 'package:ebuy/view/Widgets/Home/Settings/OrdersWidgets/OrdersCard.dart';
+import 'package:ebuy/view/Widgets/Home/Settings/OrdersWidgets/OrdersRichText.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,7 +16,7 @@ class OrderTrackPage extends GetView<OrdersControllerimp> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'My orders',
+          'My orders'.tr,
           style: Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 20),
         ),
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -75,8 +75,8 @@ class OrderTrackPage extends GetView<OrdersControllerimp> {
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: 4,
-                    separatorBuilder: (context, index) => const SizedBox(
-                      height: 55,
+                    separatorBuilder: (context, index) => SizedBox(
+                      height: controller.isEnglish == true ? 55 : 45,
                     ),
                     itemBuilder: (context, index) =>
                         OrdersRichText(index: index),
@@ -87,42 +87,6 @@ class OrderTrackPage extends GetView<OrdersControllerimp> {
           )
         ],
       ),
-    );
-  }
-}
-
-class OrdersRichText extends GetView<OrdersControllerimp> {
-  const OrdersRichText({
-    required this.index,
-    super.key,
-  });
-  final int index;
-
-  @override
-  Widget build(BuildContext context) {
-    return RichText(
-      text: TextSpan(children: <TextSpan>[
-        TextSpan(
-          text: '${controller.ordersTrackText[index]}\n',
-          style: index <=
-                  int.parse(controller.ordersDetailesList[0].ordersStatus!)
-              ? Theme.of(context).textTheme.headline2!.copyWith(fontSize: 18)
-              : Theme.of(context).textTheme.headline6!.copyWith(fontSize: 18),
-        ),
-        TextSpan(
-          text:
-              index <= int.parse(controller.ordersDetailesList[0].ordersStatus!)
-                  ? controller.orderStatusTime[index]
-                  : notDoneOrdersStatus[index - 1],
-          style: index <=
-                  int.parse(controller.ordersDetailesList[0].ordersStatus!)
-              ? Theme.of(context)
-                  .textTheme
-                  .bodyText1!
-                  .copyWith(fontSize: 15, height: 1.5)
-              : Theme.of(context).textTheme.headline6!.copyWith(fontSize: 15),
-        )
-      ]),
     );
   }
 }

@@ -1,6 +1,6 @@
 import 'package:ebuy/Controller/authControllers/SignUpController.dart';
 import 'package:ebuy/core/class/HandlingDataRequest.dart';
-import 'package:ebuy/core/constant/AppWords.dart';
+import 'package:ebuy/core/function/UiFunctions/Dialogs/AppWebsiteDialog.dart';
 import 'package:ebuy/core/function/UiFunctions/customAppBar.dart';
 
 import 'package:ebuy/data/dataSource/Static/UINumbers.dart';
@@ -78,7 +78,7 @@ class Signup extends StatelessWidget {
                           const SizedBox(height: 40),
                           const EmailLikedListView(),
                           InkWell(
-                            onTap: () => print(AppWords.websiteWord),
+                            onTap: () => appWebSiteDialog(),
                             child: Text(
                               'Tell me more about these'.tr,
                               style: Theme.of(context)
@@ -97,7 +97,7 @@ class Signup extends StatelessWidget {
                           ),
                           const SizedBox(height: 7.5),
                           InkWell(
-                            onTap: () => print(AppWords.websiteWord),
+                            onTap: () => appWebSiteDialog(),
                             child: Text(
                               'Terms and Conditions & Privacy Policy'.tr,
                               style: Theme.of(context)

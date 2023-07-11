@@ -1,6 +1,6 @@
-import 'package:ebuy/core/constant/AppWords.dart';
 import 'package:ebuy/core/constant/Colors.dart';
 import 'package:ebuy/core/constant/Images.dart';
+import 'package:ebuy/core/function/UiFunctions/Dialogs/AppWebsiteDialog.dart';
 import 'package:ebuy/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -32,7 +32,7 @@ class NoGiftCardPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  'You have no card yet',
+                  'You have no card yet'.tr,
                   style: Theme.of(context)
                       .textTheme
                       .bodyText1!
@@ -44,7 +44,8 @@ class NoGiftCardPage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30),
                   child: Text(
-                    'You currently have no cards linked to your account.\nGet started by see redeeming or buying\none now.',
+                    'You currently have no cards linked to your account.\nGet started by see redeeming or buying\none now.'
+                        .tr,
                     style: Theme.of(context)
                         .textTheme
                         .headline6!
@@ -56,17 +57,17 @@ class NoGiftCardPage extends StatelessWidget {
                   height: 40,
                 ),
                 CustomButton(
-                    text: 'Add gift cards ',
+                    text: 'Add gift card '.tr,
                     onPressed: () =>
                         Get.toNamed(AppRoutes.addGiftCardPageRoute)),
                 const SizedBox(
                   height: 15,
                 ),
                 CustomButton(
-                    text: 'Buy gift voucher',
+                    text: 'Buy gift voucher'.tr,
                     color: AppColors.white,
                     textColor: AppColors.primaryColor,
-                    onPressed: () => print(AppWords.websiteWord)),
+                    onPressed: () => appWebSiteDialog()),
               ],
             )),
         const SizedBox(

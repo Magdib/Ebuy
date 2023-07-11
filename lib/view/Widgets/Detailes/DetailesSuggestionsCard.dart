@@ -52,7 +52,7 @@ class DetailesSuggestionsCard extends StatelessWidget {
                 bottom: 40,
                 left: 10,
                 child: Text(
-                  handlePorductsLanguage(TranslationType.itemsName,
+                  handleProductsLanguage(TranslationType.itemsName,
                       controller.similarProducts[index]),
                   style: Theme.of(context)
                       .textTheme

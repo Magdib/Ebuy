@@ -64,7 +64,7 @@ class ProductsPageGridView extends GetView<HomePageControllerImp> {
                 bottom: 55,
                 left: 20,
                 child: Text(
-                  handlePorductsLanguage(
+                  handleProductsLanguage(
                       TranslationType.itemsName, productsList[index]),
                   style: Theme.of(context)
                       .textTheme

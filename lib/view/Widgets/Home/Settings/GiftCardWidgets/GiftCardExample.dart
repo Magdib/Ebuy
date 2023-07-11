@@ -3,6 +3,7 @@ import 'package:ebuy/core/constant/Images.dart';
 import 'package:ebuy/data/dataSource/Static/UINumbers.dart';
 import 'package:ebuy/view/Widgets/shared/CustomContainer.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class GiftCardExample extends StatelessWidget {
   const GiftCardExample({
@@ -24,7 +25,7 @@ class GiftCardExample extends StatelessWidget {
             children: [
               Text(
                 giftCardValue == null
-                    ? 'Back of Gift Card'
+                    ? 'Back of Gift Card'.tr
                     : "\$ $giftCardValue",
                 style: Theme.of(context).textTheme.headline6,
               ),

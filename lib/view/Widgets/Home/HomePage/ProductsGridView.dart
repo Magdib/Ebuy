@@ -59,7 +59,7 @@ class ProductsGridView extends GetView<HomePageControllerImp> {
                   bottom: 40,
                   left: 20,
                   child: Text(
-                    handlePorductsLanguage(TranslationType.catDetailes,
+                    handleProductsLanguage(TranslationType.catDetailes,
                         controller.homeProducts[index]),
                     style: Theme.of(context).textTheme.bodyText1,
                   ),
@@ -68,7 +68,7 @@ class ProductsGridView extends GetView<HomePageControllerImp> {
                   bottom: 15,
                   left: 20,
                   child: Text(
-                    handlePorductsLanguage(
+                    handleProductsLanguage(
                         TranslationType.mainPW, controller.homeProducts[index]),
                     style: Theme.of(context)
                         .textTheme

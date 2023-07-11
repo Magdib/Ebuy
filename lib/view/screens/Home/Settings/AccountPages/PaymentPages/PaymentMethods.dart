@@ -1,8 +1,9 @@
 import 'package:ebuy/Controller/Home/SettingsControllers/PaymentController.dart';
 import 'package:ebuy/core/class/HandlingDataRequest.dart';
-import 'package:ebuy/core/constant/AppWords.dart';
 import 'package:ebuy/core/constant/Images.dart';
+import 'package:ebuy/core/function/UiFunctions/Dialogs/AppWebsiteDialog.dart';
 import 'package:ebuy/core/function/UiFunctions/PaymentImage.dart';
+import 'package:ebuy/core/localization/HandlePosition.dart';
 import 'package:ebuy/routes.dart';
 import 'package:ebuy/view/Widgets/Home/Cart/checkOut/payment/NoPaymentCard.dart';
 import 'package:ebuy/view/Widgets/shared/CustomContainer.dart';
@@ -18,7 +19,7 @@ class PaymentMethods extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            'Add payment',
+            'Add payment'.tr,
             style:
                 Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 20),
           ),
@@ -38,7 +39,8 @@ class PaymentMethods extends StatelessWidget {
                         Text(
                           controller.paymentList.isEmpty
                               ? 'You curently have no saved paymend method. Get stard by adding one.'
-                              : "you can add paymend method from down below",
+                                  .tr
+                              : "you can add paymend method from down below".tr,
                           style: Theme.of(context)
                               .textTheme
                               .headline6!
@@ -52,8 +54,7 @@ class PaymentMethods extends StatelessWidget {
                             height: 140,
                             margin: const EdgeInsets.symmetric(vertical: 15),
                             child: ListView.separated(
-                                padding: const EdgeInsets.only(
-                                    top: 30, left: 10, bottom: 20),
+                                padding: handleEdgeInsets(30, 20, 15, 0),
                                 physics: const NeverScrollableScrollPhysics(),
                                 shrinkWrap: true,
                                 scrollDirection: Axis.horizontal,
@@ -87,7 +88,7 @@ class PaymentMethods extends StatelessWidget {
                                     ),
                                 itemCount: 3)),
                         Text(
-                          'Need help with these options?',
+                          'Need help with these options?'.tr,
                           style: Theme.of(context)
                               .textTheme
                               .headline6!
@@ -99,7 +100,7 @@ class PaymentMethods extends StatelessWidget {
                         CustomContainer(
                           padding: const EdgeInsets.only(top: 5, bottom: 15),
                           child: GestureDetector(
-                            onTap: () => print(AppWords.websiteWord),
+                            onTap: () => appWebSiteDialog(),
                             child: SizedBox(
                               height: 38,
                               child: ListTile(
@@ -108,7 +109,7 @@ class PaymentMethods extends StatelessWidget {
                                   minVerticalPadding: 0,
                                   dense: true,
                                   title: Text(
-                                    'What is 4 eassy payments with Klarna?',
+                                    'What is 4 eassy payments with Klarna?'.tr,
                                     style:
                                         Theme.of(context).textTheme.bodyText1,
                                   ),
@@ -120,10 +121,11 @@ class PaymentMethods extends StatelessWidget {
                     )
                   : CustomPage(
                       svgImage: AppImagesAssets.noAddressImage,
-                      title: 'You need a billing address',
+                      title: 'You need a billing address'.tr,
                       subtitle:
-                          'You currently have no saved address.Without one, you won\'t able to add a new payment method.',
-                      buttonText: 'Add new address',
+                          'You currently have no saved address.Without one, you won\'t able to add a new payment method.'
+                              .tr,
+                      buttonText: 'Add new address'.tr,
                       isSpaced: true,
                       onPressed: () =>
                           Get.offNamed(AppRoutes.addressPageRoute))),

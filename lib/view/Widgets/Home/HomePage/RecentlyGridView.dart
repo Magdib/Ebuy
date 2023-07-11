@@ -28,7 +28,9 @@ class RecentlyGridView extends GetView<HomePageControllerImp> {
                     crossAxisCount: 2,
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 60),
-                itemCount: controller.recentProduct.length,
+                itemCount: controller.recentProduct.length < 2
+                    ? controller.recentProduct.length
+                    : 2,
                 padding: const EdgeInsets.only(bottom: 80),
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
@@ -74,7 +76,7 @@ class RecentlyGridView extends GetView<HomePageControllerImp> {
                                               )),
                                         ),
                                         Text(
-                                          handlePorductsLanguage(
+                                          handleProductsLanguage(
                                               TranslationType.description,
                                               controller.recentProduct[index]),
                                           style: Theme.of(context)

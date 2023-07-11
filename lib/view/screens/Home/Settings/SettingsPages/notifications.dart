@@ -11,7 +11,7 @@ class NotificationsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Notifications',
+          'Notifications'.tr,
           style: Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 20),
         ),
         centerTitle: true,
@@ -33,7 +33,7 @@ class NotificationsPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Sales and promotions',
+                        'Sales and promotions'.tr,
                         style: Theme.of(context).textTheme.bodyText1,
                       ),
                       GetBuilder<AccountControllerImp>(
@@ -47,7 +47,8 @@ class NotificationsPage extends StatelessWidget {
                 height: 20,
               ),
               Text(
-                'You can changes your communication preferences, including email and SMS, from My account ',
+                'when it\'s enabled you will get notifications about new products and many more things'
+                    .tr,
                 style: Theme.of(context)
                     .textTheme
                     .headline6!

@@ -13,7 +13,7 @@ class GiftCardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: customAppBar("Gift Cards", context, 4),
+        appBar: customAppBar("Gift cards".tr, context, 4),
         body: GetBuilder<GiftCardControllerimp>(
           builder: (controller) => HandlingDataRequest(
             onPressed: () => controller.getGiftCards(),
@@ -43,7 +43,7 @@ class GiftCardPage extends StatelessWidget {
                     ),
                   ),
                   CustomButton(
-                      text: "Add gift card",
+                      text: "Add gift card ".tr,
                       onPressed: () =>
                           Get.toNamed(AppRoutes.addGiftCardPageRoute))
                 ],

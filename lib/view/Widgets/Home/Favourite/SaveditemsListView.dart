@@ -3,6 +3,7 @@ import 'package:ebuy/core/class/HandlingDataRequest.dart';
 import 'package:ebuy/core/constant/Colors.dart';
 import 'package:ebuy/core/constant/Server.dart';
 import 'package:ebuy/core/function/UiFunctions/StringToColors.dart';
+import 'package:ebuy/core/localization/handleLanguageApi.dart';
 import 'package:ebuy/data/model/favouriteModel/favouriteModel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -60,7 +61,7 @@ class SaveditemsListView extends StatelessWidget {
                               height: 35,
                             ),
                             Text(
-                              favouriteList[index].itemsName!,
+                              handleFavouriteLanguage(favouriteList[index]),
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyText1!
@@ -72,7 +73,7 @@ class SaveditemsListView extends StatelessWidget {
                             Row(
                               children: [
                                 Text(
-                                  'Color:   ',
+                                  'Color:   '.tr,
                                   style: Theme.of(context)
                                       .textTheme
                                       .headline6!
@@ -92,14 +93,14 @@ class SaveditemsListView extends StatelessWidget {
                               height: 5,
                             ),
                             Text(
-                              'Size:  ${favouriteList[index].itemsSize}',
+                              '${"Size:  ".tr}${favouriteList[index].itemsSize!.tr}',
                               style: Theme.of(context)
                                   .textTheme
                                   .headline6!
                                   .copyWith(fontSize: 14),
                             ),
-                            const SizedBox(
-                              height: 20,
+                            SizedBox(
+                              height: controller.isEnglish == true ? 20 : 5,
                             ),
                             Text(
                               '\$${favouriteList[index].itemsPrice}',

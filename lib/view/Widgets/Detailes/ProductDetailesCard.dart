@@ -28,7 +28,7 @@ class ProductDetailesCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  handlePorductsLanguage(
+                  handleProductsLanguage(
                       TranslationType.itemsName, controller.product),
                   style: Theme.of(context)
                       .textTheme

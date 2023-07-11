@@ -19,7 +19,7 @@ class AddAddressMap extends GetView<AddressControllerimp> {
         ),
         appBar: AppBar(
             title: Text(
-              'Address Location',
+              'Address Location'.tr,
               style:
                   Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 20),
             ),
@@ -28,7 +28,7 @@ class AddAddressMap extends GetView<AddressControllerimp> {
             actions: [
               TextButton(
                   onPressed: () => controller.saveLocation(),
-                  child: Text('Save',
+                  child: Text('Save'.tr,
                       style: Theme.of(context).textTheme.headline2))
             ]),
         body: WillPopScope(

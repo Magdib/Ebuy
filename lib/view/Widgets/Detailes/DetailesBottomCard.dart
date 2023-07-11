@@ -52,7 +52,7 @@ class DetailesBottomCard extends GetView<DetailesControllerImp> {
                     height: 40,
                   ),
                   Text(
-                      handlePorductsLanguage(
+                      handleProductsLanguage(
                           TranslationType.itemsName, controller.product),
                       style: Theme.of(context).textTheme.bodyText1!),
                   controller.isEnglish == true

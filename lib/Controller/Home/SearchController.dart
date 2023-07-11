@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 import '../../data/model/HomePageModels/BannersModel.dart';
 
 abstract class SearchController extends GetxController {
+  void defineLists();
   void getSearchData();
   void searchingProducts();
   void goToProduct(int index, BuildContext context);
@@ -32,54 +33,62 @@ class SearchControllerImp extends SearchController
   late String categoryName;
   bool showTabBar = true;
   late bool isEnglish;
-  List<Tab> tabs = [
-    Tab(
-      text: "Women".tr,
-    ),
-    Tab(
-      text: "Men".tr,
-    )
-  ];
-  List<Banners> womenBanners = [
-    Banners(
-      bannerImage: 'WomenNewIn.png',
-      bannerTitle: 'NEW IN'.tr,
-    ),
-    Banners(
-      bannerImage: 'WomenClothing.png',
-      bannerTitle: 'CLOTHING'.tr,
-    ),
-    Banners(
-      bannerImage: 'WomenShoes.png',
-      bannerTitle: 'SHOES'.tr,
-    ),
-    Banners(
-      bannerImage: 'WomenAccessories.png',
-      bannerTitle: 'ACCESSORIES'.tr,
-    )
-  ];
-  List<Banners> menBanners = [
-    Banners(
-      bannerImage: 'MenNewIn.png',
-      bannerTitle: 'NEW IN'.tr,
-    ),
-    Banners(
-      bannerImage: 'MenClothing.png',
-      bannerTitle: 'CLOTHING'.tr,
-    ),
-    Banners(
-      bannerImage: 'MenShoes.png',
-      bannerTitle: 'SHOES'.tr,
-    ),
-    Banners(
-      bannerImage: 'MenAccessories.png',
-      bannerTitle: 'ACCESSORIES'.tr,
-    )
-  ];
+  late List<Tab> tabs;
+  late List<Banners> womenBanners;
+  late List<Banners> menBanners;
+
+  @override
+  void defineLists() {
+    tabs = [
+      Tab(
+        text: "Women".tr,
+      ),
+      Tab(
+        text: "Men".tr,
+      )
+    ];
+    menBanners = [
+      Banners(
+        bannerImage: 'MenNewIn.png',
+        bannerTitle: 'NEW IN'.tr,
+      ),
+      Banners(
+        bannerImage: 'MenClothing.png',
+        bannerTitle: 'CLOTHING'.tr,
+      ),
+      Banners(
+        bannerImage: 'MenShoes.png',
+        bannerTitle: 'SHOES'.tr,
+      ),
+      Banners(
+        bannerImage: 'MenAccessories.png',
+        bannerTitle: 'ACCESSORIES'.tr,
+      )
+    ];
+    womenBanners = [
+      Banners(
+        bannerImage: 'WomenNewIn.png',
+        bannerTitle: 'NEW IN'.tr,
+      ),
+      Banners(
+        bannerImage: 'WomenClothing.png',
+        bannerTitle: 'CLOTHING'.tr,
+      ),
+      Banners(
+        bannerImage: 'WomenShoes.png',
+        bannerTitle: 'SHOES'.tr,
+      ),
+      Banners(
+        bannerImage: 'WomenAccessories.png',
+        bannerTitle: 'ACCESSORIES'.tr,
+      )
+    ];
+  }
 
   @override
   void getSearchData() {
     isEnglish = getLanguage();
+    defineLists();
     banners.clear();
     HomePageControllerImp homeController = Get.find();
     if (homeController.statusRequest == StatusRequest.offlinefailure) {

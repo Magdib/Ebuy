@@ -52,7 +52,7 @@ class HandleSearchState extends GetView<SearchControllerImp> {
                             const EdgeInsets.symmetric(horizontal: 10.0),
                         minLeadingWidth: 20,
                         title: Text(
-                          handlePorductsLanguage(TranslationType.itemsName,
+                          handleProductsLanguage(TranslationType.itemsName,
                               controller.searchProducts[index]),
                           style: Theme.of(context).textTheme.bodyText1,
                         ),

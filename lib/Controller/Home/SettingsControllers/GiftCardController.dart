@@ -48,13 +48,13 @@ class GiftCardControllerimp extends GiftCardController {
   @override
   validateLongDigit(String val) {
     if (val.length != 16) {
-      return 'Must be 16 Digit';
+      return 'Must be 16 Digit'.tr;
     }
     if (val.contains('-') ||
         val.contains('.') ||
         val.contains(',') ||
         val.contains(' ')) {
-      return 'Must not contain any . - , or white spaces';
+      return 'Must not contain any . - , or white spaces'.tr;
     }
     return null;
   }
@@ -62,13 +62,13 @@ class GiftCardControllerimp extends GiftCardController {
   @override
   validateShortDigit(String val) {
     if (val.length != 4) {
-      return 'Must be 4 Digit';
+      return 'Must be 4 Digit'.tr;
     }
     if (val.contains('-') ||
         val.contains('.') ||
         val.contains(',') ||
         val.contains(' ')) {
-      return 'Must not contain any . - , or white spaces';
+      return 'Must not contain any . - , or white spaces'.tr;
     }
     return null;
   }
@@ -79,7 +79,8 @@ class GiftCardControllerimp extends GiftCardController {
     if (formData.validate() &&
         giftCards
             .where((card) =>
-                card.cardShortDigit!.contains(shortDigitController.text))
+                card.cardShortDigit!.contains(shortDigitController.text) &&
+                card.cardLongDigit!.contains(longDigitController.text))
             .isEmpty) {
       checkStatusRequest = StatusRequest.loading;
       update();
@@ -94,21 +95,28 @@ class GiftCardControllerimp extends GiftCardController {
           List tempCard = response['data'];
           giftCards.addAll(tempCard.map((e) => GiftCardModel.fromJson(e)));
           Get.back();
-          succesSnackBar('Done.',
-              'Gift card have been added successfully to your account');
+          succesSnackBar('Done.'.tr,
+              'Gift card have been added successfully to your account'.tr);
 
           if (anyGiftCard == false) {
             anyGiftCard = true;
           }
         } else {
-          errorSnackBar("No Card", "There is no gift card with this codes");
+          errorSnackBar(
+              "No Card".tr, "There is no gift card with this codes".tr);
           checkStatusRequest = StatusRequest.failure;
         }
       }
       update();
-    } else {
-      errorSnackBar('Card already exist!',
-          'the gift card you are trying to add already exist in your gift cards page');
+    } else if (giftCards
+        .where((card) =>
+            card.cardShortDigit!.contains(shortDigitController.text) &&
+            card.cardLongDigit!.contains(longDigitController.text))
+        .isNotEmpty) {
+      errorSnackBar(
+          'Card already exist!'.tr,
+          'the gift card you are trying to add already exist in your gift cards page'
+              .tr);
     }
   }
 

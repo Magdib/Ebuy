@@ -81,14 +81,16 @@ class AddressControllerimp extends AddressController {
     bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
     LocationPermission permission = await Geolocator.checkPermission();
     if (!serviceEnabled) {
-      errorSnackBar(
-          'Error has occure', 'Please enable location service and try again');
+      errorSnackBar('Error has occure'.tr,
+          'Please enable location service and try again'.tr);
     } else {
       if (permission == LocationPermission.denied) {
         permission = await Geolocator.requestPermission();
       } else if (permission == LocationPermission.deniedForever) {
-        errorSnackBar('Error has occure',
-            'Location permissions are permanently denied, we cannot request permissions.');
+        errorSnackBar(
+            'Error has occure'.tr,
+            'Location permissions are permanently denied, we cannot request permissions.'
+                .tr);
       } else {
         Position userPosition;
         userPosition = await Geolocator.getCurrentPosition();
@@ -118,8 +120,10 @@ class AddressControllerimp extends AddressController {
           cameraPosition.target.latitude, cameraPosition.target.longitude);
       Get.offNamed(AppRoutes.addAddressNamePageRoute);
     } on Exception catch (_) {
-      errorSnackBar('Something went wrong!',
-          'it\'s maybe Because of slow internet connection or you have choosen wrong location');
+      errorSnackBar(
+          'Something went wrong!'.tr,
+          'it\'s maybe Because of slow internet connection or you have choosen wrong location'
+              .tr);
     }
   }
 
@@ -170,10 +174,11 @@ class AddressControllerimp extends AddressController {
             }
           }
           Get.back();
-          succesSnackBar('Done.', 'Your address have been added successfully');
+          succesSnackBar(
+              'Done.'.tr, 'Your address have been added successfully'.tr);
         } else {
-          errorSnackBar('Something went wrong!',
-              'it\'s maybe Because of slow internet connection');
+          errorSnackBar('Something went wrong!'.tr,
+              'it\'s maybe Because of slow internet connection'.tr);
         }
       }
     } else {
@@ -207,11 +212,12 @@ class AddressControllerimp extends AddressController {
             }
           }
           Get.back();
-          succesSnackBar('Done.', 'Your address have been edited successfully');
+          succesSnackBar(
+              'Done.'.tr, 'Your address have been edited successfully'.tr);
           editIndex = null;
         } else {
-          errorSnackBar('Something went wrong!',
-              'it\'s maybe Because of slow internet connection');
+          errorSnackBar('Something went wrong!'.tr,
+              'it\'s maybe Because of slow internet connection'.tr);
         }
       }
     }
@@ -253,10 +259,11 @@ class AddressControllerimp extends AddressController {
           }
         }
 
-        succesSnackBar('Done.', 'Your address have been deleted successfully');
+        succesSnackBar(
+            'Done.'.tr, 'Your address have been deleted successfully'.tr);
       } else {
-        errorSnackBar('Something went wrong!',
-            'it\'s maybe Because of slow internet connection');
+        errorSnackBar('Something went wrong!'.tr,
+            'it\'s maybe Because of slow internet connection'.tr);
       }
     }
     update();

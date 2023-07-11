@@ -18,7 +18,7 @@ class GiftCardHelpCard extends GetView<AccountControllerImp> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Need help with these options?',
+              'Need help with these options?'.tr,
               style:
                   Theme.of(context).textTheme.headline6!.copyWith(fontSize: 14),
             ),

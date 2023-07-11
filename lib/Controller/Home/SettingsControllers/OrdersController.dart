@@ -1,6 +1,7 @@
 import 'package:ebuy/core/class/enums.dart';
 import 'package:ebuy/core/constant/Colors.dart';
 import 'package:ebuy/core/function/handleData.dart';
+import 'package:ebuy/core/localization/handleLanguageApi.dart';
 import 'package:ebuy/data/dataSource/Static/HiveKeys.dart';
 import 'package:ebuy/data/dataSource/remote/cart/OrdersData.dart';
 import 'package:ebuy/data/model/ProductModels/OrdersMode.dart';
@@ -18,18 +19,23 @@ abstract class OrdersController extends GetxController {
 class OrdersControllerimp extends OrdersController
     with GetSingleTickerProviderStateMixin {
   List<String> ordersTrackText = [
-    'Placed order',
-    'Delivery to shipping units',
-    'Orders are being shipped',
-    'Delivered successfully'
+    'Placed order'.tr,
+    'Delivery to shipping units'.tr,
+    'Orders are being shipped'.tr,
+    'Delivered successfully'.tr
   ];
-  List<Tab> tabsList = const [
+  List<Tab> tabsList = [
     Tab(
-      text: 'Pending orders',
+      text: 'Pending orders'.tr,
     ),
     Tab(
-      text: 'Past orders',
+      text: 'Past orders'.tr,
     )
+  ];
+  List<String> notDoneOrdersStatus = [
+    "Not delivired to shipping units yet".tr,
+    "Not shipped yet".tr,
+    "Not delivired yet".tr
   ];
   late List<Icon> orderTrackIcons;
   late List<String?> orderStatusTime = [];
@@ -42,7 +48,7 @@ class OrdersControllerimp extends OrdersController
   List<OrdersModel> uiOrdersList = [];
   List<OrdersModel> ordersDetailesList = [];
   List<OrdersModel> pastOrdersList = [];
-
+  bool isEnglish = getLanguage();
   @override
   void getOrders() async {
     var response = await ordersData.getOrders(authBox.get(HiveKeys.userid));
@@ -59,7 +65,7 @@ class OrdersControllerimp extends OrdersController
               order.ordersId == uiOrdersList[i].ordersId &&
               order.itemsName != uiOrdersList[i].itemsName);
           if (index != -1) {
-            uiOrdersList[i].itemsName = "More than one product";
+            uiOrdersList[i].itemsName = "More than one product".tr;
             uiOrdersList.removeAt(index);
           }
         }
@@ -112,9 +118,6 @@ class OrdersControllerimp extends OrdersController
       ordersDetailesList[0].ordersSdatetime,
       ordersDetailesList[0].ordersDdatetime
     ];
-    for (int i = 0; i < orderStatusTime.length; i++) {
-      print(orderStatusTime[i]);
-    }
   }
 
   @override

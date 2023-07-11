@@ -196,7 +196,7 @@ class DetailesControllerImp extends DetailesController {
     Share.shareXFiles(
       [XFile(image.path)],
       text:
-          "${handlePorductsLanguage(TranslationType.itemsName, product)}\n ${'price is:'.tr} ${product.itemsPrice}\$",
+          "${handleProductsLanguage(TranslationType.itemsName, product)}\n ${'price is:'.tr} ${product.itemsPrice}\$",
     );
   }
 

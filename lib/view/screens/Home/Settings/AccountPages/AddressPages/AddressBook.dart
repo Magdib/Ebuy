@@ -129,7 +129,7 @@ class AddressBook extends StatelessWidget {
                                 ),
                               ),
                               CustomButton(
-                                  text: 'Add Address'.tr,
+                                  text: 'Add address'.tr,
                                   onPressed: () => Get.toNamed(
                                       AppRoutes.addAddressMapPageRoute))
                             ],

@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:ebuy/Controller/Home/MainPageController.dart';
 import 'package:ebuy/core/class/enums.dart';
-import 'package:ebuy/core/constant/AppWords.dart';
 import 'package:ebuy/core/constant/CustomIcons.dart';
+import 'package:ebuy/core/function/UiFunctions/Dialogs/AppWebsiteDialog.dart';
 import 'package:ebuy/core/function/UiFunctions/SnackBars.dart';
 import 'package:ebuy/core/function/handleData.dart';
 import 'package:ebuy/data/dataSource/remote/auth/AuthEditData.dart';
@@ -21,6 +21,7 @@ import '../../../data/model/authModels/AccountFListModel.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 abstract class AccountController extends GetxController {
+  void listsDefine();
   openWhatsUp();
   void signOut();
   void updateImage(String type);
@@ -44,72 +45,88 @@ class AccountControllerImp extends AccountController {
   late TextEditingController passwordController;
   GlobalKey<FormState> detailesFormState = GlobalKey<FormState>();
   late bool sendNotificatios;
-  bool canSaveChanges = true;
+  bool canSaveChanges = false;
   late bool isEnglish;
   bool isLanguageChanging = false;
 
   late List<AccountFListModel> accountPageUpperList;
-  List<AccountListModel> accountPageLowerList = [
-    AccountListModel(
-        leadingIcon: Icons.square,
-        text: 'My details'.tr,
-        page: AppRoutes.usersDetailesPageRoute),
-    AccountListModel(
-        leadingIcon: Icons.location_on_rounded,
-        text: 'Address book'.tr,
-        page: AppRoutes.addressPageRoute),
-    AccountListModel(
-        leadingIcon: Icons.credit_card,
-        text: 'Payment methods'.tr,
-        page: AppRoutes.paymentPageRoute),
-    AccountListModel(
-        leadingIcon: CustomIcons.personIcon,
-        text: 'Social accounts'.tr,
-        page: AppRoutes.accountPageRoute)
-  ];
-  List<AccountFListModel> accountpageList = [
-    AccountFListModel(
-        leadingIcon: Icons.circle,
-        text: 'Need help?',
-        onTap: () => print('Help page must be a website Page')),
-    AccountFListModel(
-        leadingIcon: FontAwesomeIcons.mobile,
-        text: 'Tell us what you think of Ebuy',
-        onTap: () => print('Open App Page on GooglePlay Store'))
-  ];
+  late List<AccountListModel> accountPageLowerList;
+  late List<AccountFListModel> accountpageList;
+  late List<AccountFListModel> settingsList;
+  late List<AccountFListModel> giftCardList;
+  @override
+  void listsDefine() {
+    giftCardList = [
+      AccountFListModel(
+          text: 'What is a Gift Card?'.tr, onTap: () => appWebSiteDialog()),
+      AccountFListModel(
+          text: 'What is a Gift Voucher?'.tr, onTap: () => appWebSiteDialog()),
+      AccountFListModel(
+          text: 'Gift card/ Voucher FAQs'.tr, onTap: () => appWebSiteDialog())
+    ];
+    settingsList = [
+      AccountFListModel(
+          leadingIcon: Icons.notifications,
+          text: 'Notifications'.tr,
+          onTap: () => Get.toNamed(AppRoutes.notificationsPageRoute)),
+      AccountFListModel(
+          leadingIcon: Icons.language,
+          text: 'Language'.tr,
+          onTap: () => Get.toNamed(AppRoutes.languagePageRoute)),
+      AccountFListModel(
+          leadingIcon: Icons.lock,
+          text: 'Terms & Conditions'.tr,
+          onTap: () => appWebSiteDialog()),
+    ];
+    accountpageList = [
+      AccountFListModel(
+          leadingIcon: Icons.circle,
+          text: 'Need help?'.tr,
+          onTap: () => appWebSiteDialog()),
+      AccountFListModel(
+          leadingIcon: FontAwesomeIcons.mobile,
+          text: 'Tell us what you think of Ebuy'.tr,
+          onTap: () => appWebSiteDialog())
+    ];
+    accountPageUpperList = [
+      AccountFListModel(
+          leadingIcon: CustomIcons.boxIcon,
+          text: 'My orders'.tr,
+          onTap: () => Get.toNamed(AppRoutes.ordersPageRoute)),
+      AccountFListModel(
+        leadingIcon: CustomIcons.meetingIcon,
+        text: 'Contact us'.tr,
+        onTap: () => openWhatsUp(),
+      )
+    ];
+    accountPageLowerList = [
+      AccountListModel(
+          leadingIcon: Icons.square,
+          text: 'My details'.tr,
+          page: AppRoutes.usersDetailesPageRoute),
+      AccountListModel(
+          leadingIcon: Icons.location_on_rounded,
+          text: 'Address book'.tr,
+          page: AppRoutes.addressPageRoute),
+      AccountListModel(
+          leadingIcon: Icons.credit_card,
+          text: 'Payment methods'.tr,
+          page: AppRoutes.paymentPageRoute),
+      AccountListModel(
+          leadingIcon: CustomIcons.personIcon,
+          text: 'Social accounts'.tr,
+          page: AppRoutes.accountPageRoute)
+    ];
+  }
 
-  List<AccountFListModel> settingsList = [
-    AccountFListModel(
-        leadingIcon: Icons.notifications,
-        text: 'Notifications'.tr,
-        onTap: () => Get.toNamed(AppRoutes.notificationsPageRoute)),
-    AccountFListModel(
-        leadingIcon: Icons.language,
-        text: 'Language'.tr,
-        onTap: () => Get.toNamed(AppRoutes.languagePageRoute)),
-    AccountFListModel(
-        leadingIcon: Icons.lock,
-        text: 'Terms & Conditions'.tr,
-        onTap: () => print('Terms & Conditions must be a website Page')),
-  ];
-  List<AccountFListModel> giftCardList = [
-    AccountFListModel(
-        text: 'What is a Gift Card?', onTap: () => print(AppWords.websiteWord)),
-    AccountFListModel(
-        text: 'What is a Gift Voucher?',
-        onTap: () => print(AppWords.websiteWord)),
-    AccountFListModel(
-        text: 'Gift card/ Voucher FAQs',
-        onTap: () => print(AppWords.websiteWord))
-  ];
   @override
   openWhatsUp() async {
     String url = "whatsapp://send?phone=+963937386785";
     if (await canLaunchUrl(Uri.parse(url))) {
       await launchUrl(Uri.parse(url));
     } else {
-      errorSnackBar(
-          "whatsapp no installed", "Please install whatsapp and try again");
+      errorSnackBar("whatsapp is not installed".tr,
+          "Please install whatsapp and try again".tr);
     }
   }
 
@@ -166,10 +183,10 @@ class AccountControllerImp extends AccountController {
   @override
   vaildateUserName(String val) {
     if (val.isEmpty) {
-      return "User Name can't be empty";
+      return "User Name can't be empty".tr;
     }
     if (val.length < 4) {
-      return 'Please write your name correctly';
+      return 'Please write your name correctly'.tr;
     }
     return null;
   }
@@ -212,10 +229,10 @@ class AccountControllerImp extends AccountController {
           Get.back();
           authBox.put(HiveKeys.username, userNameController.text);
           succesSnackBar(
-              "Done.", "your detailes have been edited successfully");
+              "Done.".tr, "your detailes have been edited successfully".tr);
         } else {
           errorSnackBar(
-              "Error".tr, "New detailes can't be same as the previous one");
+              "Error".tr, "New detailes can't be same as the previous one".tr);
         }
       }
       update();
@@ -241,7 +258,9 @@ class AccountControllerImp extends AccountController {
         : newLocale = const Locale('ar');
     MainContrllerImp mainContrllerImp = Get.find();
     mainContrllerImp.languageChanged();
-    Get.updateLocale(newLocale);
+
+    await Get.updateLocale(newLocale);
+    listsDefine();
     await Future.delayed(const Duration(milliseconds: 1500));
     isLanguageChanging = false;
     update();
@@ -249,17 +268,7 @@ class AccountControllerImp extends AccountController {
 
   @override
   void onInit() {
-    accountPageUpperList = [
-      AccountFListModel(
-          leadingIcon: CustomIcons.boxIcon,
-          text: 'My orders'.tr,
-          onTap: () => Get.toNamed(AppRoutes.ordersPageRoute)),
-      AccountFListModel(
-        leadingIcon: CustomIcons.meetingIcon,
-        text: 'Contact us'.tr,
-        onTap: () => openWhatsUp(),
-      )
-    ];
+    listsDefine();
 
     userName = authBox.get(HiveKeys.username);
     passwordController = TextEditingController();

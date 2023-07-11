@@ -56,7 +56,7 @@ class NewTrendItemsGridView extends StatelessWidget {
                   bottom: 55,
                   left: 20,
                   child: Text(
-                    handlePorductsLanguage(TranslationType.itemsName,
+                    handleProductsLanguage(TranslationType.itemsName,
                         controller.sortedProducts[index]),
                     style: Theme.of(context)
                         .textTheme

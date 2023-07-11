@@ -1,5 +1,6 @@
 import 'package:ebuy/Controller/Home/CartController.dart';
 import 'package:ebuy/core/constant/ArgumentsNames.dart';
+import 'package:ebuy/core/function/UiFunctions/Dialogs/AppWebsiteDialog.dart';
 import 'package:ebuy/core/function/UiFunctions/SnackBars.dart';
 import 'package:ebuy/core/function/getCountryData.dart';
 import 'package:ebuy/core/function/handleHiveNullState.dart';
@@ -17,7 +18,6 @@ import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:jiffy/jiffy.dart';
 import '../../core/class/enums.dart';
-import '../../core/constant/AppWords.dart';
 import '../../core/constant/Colors.dart';
 import '../../core/function/handleData.dart';
 import '../../data/dataSource/Static/HiveKeys.dart';
@@ -436,10 +436,8 @@ class CheckOutControllerimp extends CheckOutController {
 
     pageController = PageController();
     voucherController = TextEditingController();
-    returnspolicies = TapGestureRecognizer()
-      ..onTap = () => print(AppWords.websiteWord);
-    termsPrivacy = TapGestureRecognizer()
-      ..onTap = () => print(AppWords.websiteWord);
+    returnspolicies = TapGestureRecognizer()..onTap = () => appWebSiteDialog();
+    termsPrivacy = TapGestureRecognizer()..onTap = () => appWebSiteDialog();
 
     super.onInit();
   }

@@ -77,8 +77,10 @@ class PaymentControllerimp extends PaymentController {
     expiryDateTime = DateTime(selectedYear, selectedMonth);
     if (expiryDateTime!.month < DateTime.now().month &&
         expiryDateTime!.year == DateTime.now().year) {
-      errorSnackBar('Wrong Date',
-          'The expiry date is invalid please enter valid date and try again');
+      errorSnackBar(
+          'Wrong Date'.tr,
+          'The expiry date is invalid please enter valid date and try again'
+              .tr);
     } else {
       expiryDate = DateTime(selectedYear, selectedMonth)
           .toString()
@@ -183,7 +185,7 @@ class PaymentControllerimp extends PaymentController {
         paymentList.removeAt(editIndex!);
         resetPayment();
         succesSnackBar(
-            "Done.", "Payment Method have been deleted successfully");
+            "Done.".tr, "Payment Method have been deleted successfully".tr);
         update();
       }
     }
@@ -236,9 +238,9 @@ class PaymentControllerimp extends PaymentController {
         paymentList.addAll(tempPayment.map((e) => PaymentModel.fromJson(e)));
         isEditing == false
             ? succesSnackBar(
-                "Done.", "Payment Method have been added successfully")
+                "Done.".tr, "Payment Method have been added successfully".tr)
             : succesSnackBar(
-                "Done.", "Payment Method have been edited successfully");
+                "Done.".tr, "Payment Method have been edited successfully".tr);
       }
     }
     update();

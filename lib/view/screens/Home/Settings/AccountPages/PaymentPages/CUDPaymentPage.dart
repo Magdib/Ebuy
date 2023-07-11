@@ -18,7 +18,7 @@ class CUDPaymentPage extends GetView<PaymentControllerimp> {
       appBar: controller.editIndex != null
           ? AppBar(
               title: Text(
-                "Edit Payment",
+                "Edit Payment".tr,
                 style: Theme.of(context)
                     .textTheme
                     .bodyText1!
@@ -47,8 +47,8 @@ class CUDPaymentPage extends GetView<PaymentControllerimp> {
                   right: 10),
               children: [
                 TitledTextField(
-                  label: 'Card number',
-                  hint: 'Enter card number',
+                  label: 'Card number'.tr,
+                  hint: 'Enter card number here...'.tr,
                   obscure: false,
                   keyboardType: TextInputType.number,
                   onChanged: (val) => controller.handleSavePayment(),
@@ -58,7 +58,7 @@ class CUDPaymentPage extends GetView<PaymentControllerimp> {
                   height: 10,
                 ),
                 Text(
-                  'Expiry date',
+                  'Expiry date'.tr,
                   style: Theme.of(context)
                       .textTheme
                       .headline6!
@@ -80,7 +80,7 @@ class CUDPaymentPage extends GetView<PaymentControllerimp> {
                       builder: (controller) => Text(
                         controller.expiryDate != null
                             ? '${controller.expiryDate}'
-                            : 'MM / YY',
+                            : 'MM / YY'.tr,
                         style: Theme.of(context).textTheme.bodyText1,
                       ),
                     ),
@@ -91,8 +91,8 @@ class CUDPaymentPage extends GetView<PaymentControllerimp> {
                   ),
                 ),
                 TitledTextField(
-                  label: 'Name on card',
-                  hint: 'Enter name on card',
+                  label: 'Name on card'.tr,
+                  hint: 'Enter name on card here...'.tr,
                   obscure: false,
                   onChanged: (val) => controller.handleSavePayment(),
                   textEditingController: controller.cardNameController,
@@ -102,7 +102,7 @@ class CUDPaymentPage extends GetView<PaymentControllerimp> {
                 ),
                 GetBuilder<PaymentControllerimp>(
                   builder: (controller) => CustomConditionButton(
-                      text: 'Save card',
+                      text: 'Save card'.tr,
                       condition: controller.canSaveCard,
                       onPressed: () => controller.savePayment()),
                 ),

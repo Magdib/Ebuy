@@ -68,7 +68,7 @@ class ReviewsPage extends StatelessWidget {
                             ),
                           )
                         : Text(
-                            "No reviews",
+                            "No reviews".tr,
                             style: Theme.of(context).textTheme.bodyText1,
                           ),
                   ],

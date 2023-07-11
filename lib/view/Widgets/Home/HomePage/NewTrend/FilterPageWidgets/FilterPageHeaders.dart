@@ -1,10 +1,7 @@
 import 'package:ebuy/Controller/Home/FilterPageController.dart';
+import 'package:ebuy/core/constant/Colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../../../../core/constant/Colors.dart';
-
-import '../../../../../../core/theme/theme.dart';
 
 class FilterPageHeaders extends GetView<FilterPageControllerimp> {
   const FilterPageHeaders({

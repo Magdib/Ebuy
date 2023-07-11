@@ -2,6 +2,7 @@ import 'package:ebuy/Controller/Home/HomePageController.dart';
 import 'package:ebuy/Controller/Home/MainPageController.dart';
 import 'package:ebuy/core/class/enums.dart';
 import 'package:ebuy/core/function/handleData.dart';
+import 'package:ebuy/core/localization/handleLanguageApi.dart';
 import 'package:ebuy/data/dataSource/Static/HiveKeys.dart';
 import 'package:ebuy/data/model/HomePageModels/itemsModel.dart';
 import 'package:ebuy/data/model/favouriteModel/favouriteModel.dart';
@@ -24,12 +25,7 @@ abstract class FavouriteController extends GetxController {
 
 class FavouriteControllerImp extends FavouriteController
     with GetSingleTickerProviderStateMixin {
-  final List<Tab> tabs = [
-    const Tab(text: "All Items"),
-    const Tab(
-      text: "Recents",
-    )
-  ];
+  late List<Tab> tabs;
   TabController? tabController;
   PageController? pageController;
   Box authBox = Hive.box(HiveBoxes.authBox);
@@ -37,8 +33,16 @@ class FavouriteControllerImp extends FavouriteController
   StatusRequest statusRequest = StatusRequest.loading;
   List<Favourite> favouriteItems = [];
   List<Favourite> favouriteRecents = [];
+  late bool isEnglish;
   @override
   getData(bool showLoading) async {
+    isEnglish = getLanguage();
+    tabs = [
+      Tab(text: "All Items".tr),
+      Tab(
+        text: "Recents".tr,
+      )
+    ];
     if (showLoading == true) {
       statusRequest = StatusRequest.loading;
       update();
@@ -100,9 +104,9 @@ class FavouriteControllerImp extends FavouriteController
 
   @override
   void onInit() {
+    getData(false);
     tabController = TabController(length: tabs.length, vsync: this);
     pageController = PageController();
-    getData(false);
 
     super.onInit();
   }

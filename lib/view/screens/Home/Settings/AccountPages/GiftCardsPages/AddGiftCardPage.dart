@@ -14,7 +14,7 @@ class AddGiftCardPage extends GetView<GiftCardControllerimp> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Add gift cards ',
+          'Add gift card '.tr,
           style: Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 20),
         ),
         centerTitle: true,
@@ -35,7 +35,8 @@ class AddGiftCardPage extends GetView<GiftCardControllerimp> {
                     child: ListView(
                       children: [
                         Text(
-                          'Enter the long number and scratch off the panel on your card to reveal your pin as shown below.',
+                          'Enter the long number and scratch off the panel on your card to reveal your pin as shown below.'
+                              .tr,
                           style: Theme.of(context)
                               .textTheme
                               .headline6!
@@ -49,8 +50,8 @@ class AddGiftCardPage extends GetView<GiftCardControllerimp> {
                           height: 15,
                         ),
                         TitledTextField(
-                            label: '16-Digit Code',
-                            hint: 'Enter 16-Digit Code',
+                            label: '16-Digit Code'.tr,
+                            hint: 'Enter 16-Digit Code'.tr,
                             obscure: false,
                             keyboardType: TextInputType.number,
                             textEditingController:
@@ -58,8 +59,8 @@ class AddGiftCardPage extends GetView<GiftCardControllerimp> {
                             validator: (val) =>
                                 controller.validateLongDigit(val!)),
                         TitledTextField(
-                            label: '4-Digit Pin',
-                            hint: 'Enter 4-Digit Code',
+                            label: '4-Digit Pin'.tr,
+                            hint: 'Enter 4-Digit Code'.tr,
                             obscure: false,
                             keyboardType: TextInputType.number,
                             textEditingController:
@@ -71,7 +72,7 @@ class AddGiftCardPage extends GetView<GiftCardControllerimp> {
                   ),
                 ),
                 CustomButton(
-                    text: 'Add gift cards ',
+                    text: 'Add gift card '.tr,
                     onPressed: () => controller.addGiftCard())
               ],
             ),

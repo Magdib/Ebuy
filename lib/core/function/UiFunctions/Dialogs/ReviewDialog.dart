@@ -78,5 +78,5 @@ reviewDialog(
                   : () => controller.saveReview(true)
               : () {}),
       cancel: DialogButton(
-          title: "Cancle".tr, onPressed: () => controller.willPopReview()));
+          title: "Cancel".tr, onPressed: () => controller.willPopReview()));
 }

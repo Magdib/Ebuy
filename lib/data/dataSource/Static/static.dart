@@ -32,8 +32,3 @@ const List<String> payMethods = [
   AppImagesAssets.americanExpress,
   AppImagesAssets.klarna
 ];
-List<String> notDoneOrdersStatus = [
-  "Not delivired to shipping units yet",
-  "Not shipped yet",
-  "Not delivired yet"
-];
