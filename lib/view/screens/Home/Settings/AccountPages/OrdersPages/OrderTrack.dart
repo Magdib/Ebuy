@@ -71,13 +71,14 @@ class OrderTrackPage extends GetView<OrdersControllerimp> {
                 child: SizedBox(
                   width: UINumber.deviceWidth / 1.5,
                   child: ListView.separated(
-                    padding: const EdgeInsets.only(top: 10),
+                    padding: const EdgeInsets.only(top: 15),
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: 4,
                     separatorBuilder: (context, index) => SizedBox(
-                      height: controller.isEnglish == true ? 55 : 45,
-                    ),
+                        height: controller.isEnglish == true
+                            ? (65 - (index * 5))
+                            : (45 - (index * 5))),
                     itemBuilder: (context, index) =>
                         OrdersRichText(index: index),
                   ),

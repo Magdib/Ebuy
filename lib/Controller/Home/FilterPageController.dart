@@ -50,6 +50,7 @@ class FilterPageControllerimp extends FilterPageController {
     List<String> categoriesArabic = ["الكل"];
     List<String> categoriesEnglish = ["All"];
     for (int i = 0; i < categories.length; i++) {
+      print(categories.length);
       categoriesEnglish.add(categories[i].categoriesName!);
       categoriesArabic.add(categories[i].categoriesNameAr!);
     }
@@ -88,9 +89,17 @@ class FilterPageControllerimp extends FilterPageController {
   @override
   void changeFilterValue(String value, int index) {
     filterValues[index] = value;
-    for (int i = 0; i < filterValues.length; i++) {
-      if (filterValues[i] == "") {
-        filterValues[i] = "All";
+    if (isEnglish == true) {
+      for (int i = 0; i < filterValues.length; i++) {
+        if (filterValues[i] == "") {
+          filterValues[i] = "All";
+        }
+      }
+    } else {
+      for (int i = 0; i < filterValues.length; i++) {
+        if (filterValues[i] == "") {
+          filterValues[i] = "الكل";
+        }
       }
     }
     Get.back();

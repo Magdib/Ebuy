@@ -1,6 +1,6 @@
+import 'package:ebuy/core/localization/HandlePosition.dart';
+import 'package:ebuy/data/dataSource/Static/UINumbers.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../data/dataSource/Static/UINumbers.dart';
 
 class FavouriteCard extends StatelessWidget {
   const FavouriteCard({
@@ -14,7 +14,7 @@ class FavouriteCard extends StatelessWidget {
         width: UINumber.deviceWidth,
         child: Card(
           elevation: 10,
-          margin: const EdgeInsets.only(top: 20, left: 46, right: 5),
+          margin: handleEdgeInsets(20, 0, 46, 5),
           child: Padding(
             padding: EdgeInsets.only(left: UINumber.deviceWidth / 1.7, top: 85),
           ),

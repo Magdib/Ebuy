@@ -76,47 +76,50 @@ class GiftCardControllerimp extends GiftCardController {
   @override
   void addGiftCard() async {
     FormState formData = formState.currentState!;
-    if (formData.validate() &&
-        giftCards
-            .where((card) =>
-                card.cardShortDigit!.contains(shortDigitController.text) &&
-                card.cardLongDigit!.contains(longDigitController.text))
-            .isEmpty) {
-      checkStatusRequest = StatusRequest.loading;
-      update();
-      var response = await giftCardData.checkGiftCard(shortDigitController.text,
-          longDigitController.text, authBox.get(HiveKeys.userid));
-      checkStatusRequest = handlingData(response);
-      if (checkStatusRequest == StatusRequest.success) {
-        if (response['status'] == "success") {
-          shortDigitController.clear();
-          longDigitController.clear();
-          giftCards.clear();
-          List tempCard = response['data'];
-          giftCards.addAll(tempCard.map((e) => GiftCardModel.fromJson(e)));
-          Get.back();
-          succesSnackBar('Done.'.tr,
-              'Gift card have been added successfully to your account'.tr);
+    if (formData.validate()) {
+      if (giftCards
+          .where((card) =>
+              card.cardShortDigit!.contains(shortDigitController.text) &&
+              card.cardLongDigit!.contains(longDigitController.text))
+          .isEmpty) {
+        checkStatusRequest = StatusRequest.loading;
+        update();
+        var response = await giftCardData.checkGiftCard(
+            shortDigitController.text,
+            longDigitController.text,
+            authBox.get(HiveKeys.userid));
+        checkStatusRequest = handlingData(response);
+        if (checkStatusRequest == StatusRequest.success) {
+          if (response['status'] == "success") {
+            shortDigitController.clear();
+            longDigitController.clear();
+            giftCards.clear();
+            List tempCard = response['data'];
+            giftCards.addAll(tempCard.map((e) => GiftCardModel.fromJson(e)));
+            Get.back();
+            succesSnackBar('Done.'.tr,
+                'Gift card have been added successfully to your account'.tr);
 
-          if (anyGiftCard == false) {
-            anyGiftCard = true;
+            if (anyGiftCard == false) {
+              anyGiftCard = true;
+            }
+          } else {
+            errorSnackBar(
+                "No Card".tr, "There is no gift card with this codes".tr);
+            checkStatusRequest = StatusRequest.failure;
           }
-        } else {
-          errorSnackBar(
-              "No Card".tr, "There is no gift card with this codes".tr);
-          checkStatusRequest = StatusRequest.failure;
         }
+      } else if (giftCards
+          .where((card) =>
+              card.cardShortDigit!.contains(shortDigitController.text) &&
+              card.cardLongDigit!.contains(longDigitController.text))
+          .isNotEmpty) {
+        errorSnackBar(
+            'Card already exist!'.tr,
+            'the gift card you are trying to add already exist in your gift cards page'
+                .tr);
       }
       update();
-    } else if (giftCards
-        .where((card) =>
-            card.cardShortDigit!.contains(shortDigitController.text) &&
-            card.cardLongDigit!.contains(longDigitController.text))
-        .isNotEmpty) {
-      errorSnackBar(
-          'Card already exist!'.tr,
-          'the gift card you are trying to add already exist in your gift cards page'
-              .tr);
     }
   }
 

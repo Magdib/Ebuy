@@ -738,7 +738,7 @@ class AppWords {
     'Social accounts': 'الحسابات',
     "whatsapp is not installed": "واتساب غير مثبت",
     "Please install whatsapp and try again":
-        "رجاءً  قم بتثبيت الواتساب وأعد المحاولة",
+        "رجاءً قم بتثبيت الواتساب وأعد المحاولة",
 
     'Sales and promotions': 'المبيعات والمنتجات الرائجة',
     'when it\'s enabled you will get notifications about new products and many more things':

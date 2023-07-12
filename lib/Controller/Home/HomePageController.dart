@@ -89,6 +89,8 @@ class HomePageControllerImp extends HomePageController {
           sortedProducts.clear();
           savedItems.clear();
           recentProduct.clear();
+          newProducts.clear();
+          categories.clear();
           newTrend.clear();
           brands.clear();
           userStyle.clear();
@@ -145,34 +147,35 @@ class HomePageControllerImp extends HomePageController {
 
   @override
   sortProducts(int index) {
-    productsSort[index].choosenSort = true;
-    productsSort[lastSortIndex].choosenSort = false;
-    lastSortIndex = index;
-    switch (index) {
-      case 0:
-        sortedProducts = newTrend;
-        break;
-      case 1:
-        sortedProducts = newProducts;
-        break;
-      case 2:
-        sortedProducts = products;
-        sortedProducts.sort(
-          (a, b) => double.parse(b.itemsPrice!)
-              .compareTo(double.parse(a.itemsPrice!)),
-        );
-        break;
-      case 3:
-        sortedProducts = products;
-        sortedProducts.sort(
-          (a, b) => double.parse(a.itemsPrice!)
-              .compareTo(double.parse(b.itemsPrice!)),
-        );
-        break;
-      default:
+    if (lastSortIndex != index) {
+      productsSort[index].choosenSort = true;
+      productsSort[lastSortIndex].choosenSort = false;
+      lastSortIndex = index;
+      switch (index) {
+        case 0:
+          sortedProducts = newTrend;
+          break;
+        case 1:
+          sortedProducts = newProducts;
+          break;
+        case 2:
+          sortedProducts = products;
+          sortedProducts.sort(
+            (a, b) => double.parse(b.itemsPrice!)
+                .compareTo(double.parse(a.itemsPrice!)),
+          );
+          break;
+        case 3:
+          sortedProducts = products;
+          sortedProducts.sort(
+            (a, b) => double.parse(a.itemsPrice!)
+                .compareTo(double.parse(b.itemsPrice!)),
+          );
+          break;
+        default:
+      }
+      update();
     }
-    update();
-
     Get.back();
   }
 
